@@ -3,7 +3,9 @@
   <entry>
     <title>SSR+WS+VNET—_Tunnel隧道加密节点搭建</title>
     <url>/2020/05/01/SSR-WS-VNET%E2%80%94-Tunnel%E9%9A%A7%E9%81%93%E5%8A%A0%E5%AF%86%E8%8A%82%E7%82%B9%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[<p>1：在国外VPS{服务端}SERVER安装Vnet_Tunnel，脚本如下：</p>
+    <content><![CDATA[<iframe width="560" height="315" src="https://www.youtube.com/embed/GyatcDOtyAI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<p>1：在国外VPS{服务端}SERVER安装Vnet_Tunnel，脚本如下：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install zip unzip</span><br><span class="line">wget -N --no-check-certificate <span class="string">"https://github.com/siemenstutorials/Vnet_tunnel/raw/master/tunnel.zip"</span> &amp;&amp; unzip tunnel.zip &amp;&amp; chmod -R +x ./*</span><br></pre></td></tr></table></figure>
 <p>2：让Vnet_Tunnel后台运行，脚本如下：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nohup ./server &gt;&gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
@@ -32,7 +34,9 @@
   <entry>
     <title>Trojan+v2ray+SSR单VPS共存</title>
     <url>/2020/05/02/Trojan-v2ray-SSR%E5%8D%95VPS%E5%85%B1%E5%AD%98/</url>
-    <content><![CDATA[<p>准备工具：域名1个/VPS一台<br>视频教程：<a href="">YouTube</a><br>1:域名解析到VPS；解析要充分，以便全球生效！</p>
+    <content><![CDATA[<iframe width="560" height="315" src="https://www.youtube.com/embed/hSqO8ppMYyc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h1 id="准备工具：域名1个-VPS一台"><a href="#准备工具：域名1个-VPS一台" class="headerlink" title="准备工具：域名1个/VPS一台"></a>准备工具：域名1个/VPS一台</h1><p>视频教程：<a href="https://youtu.be/hSqO8ppMYyc" target="_blank" rel="noopener">YouTube</a><br>1:域名解析到VPS；解析要充分，以便全球生效！</p>
 <p>2：安装BBR PLUS加速（可选）</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget <span class="string">"https://github.com/chiakge/Linux-NetSpeed/raw/master/tcp.sh"</span> &amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh</span><br></pre></td></tr></table></figure>
 <p>3:大神atrandys一键安装Trojan脚本：<br>若提示无wget,则运行：</p>
