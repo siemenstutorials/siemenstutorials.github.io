@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>SSR+WS+VNET—_Tunnel隧道加密节点搭建</title>
-    <url>/2020/05/01/SSR-WS-VNET%E2%80%94-Tunnel%E9%9A%A7%E9%81%93%E5%8A%A0%E5%AF%86%E8%8A%82%E7%82%B9%E6%90%AD%E5%BB%BA/</url>
+    <url>/posts/21643.html</url>
     <content><![CDATA[<h1 id="SSR-WS-VNET—-Tunnel隧道加密节点搭建"><a href="#SSR-WS-VNET—-Tunnel隧道加密节点搭建" class="headerlink" title="SSR+WS+VNET—_Tunnel隧道加密节点搭建"></a><center>SSR+WS+VNET—_Tunnel隧道加密节点搭建</center></h1><iframe width="560" height="315" src="https://www.youtube.com/embed/GyatcDOtyAI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <p>1：在国外VPS{服务端}SERVER安装Vnet_Tunnel，脚本如下：</p>
@@ -32,13 +32,10 @@
   </entry>
   <entry>
     <title>Trojan+v2ray+SSR单VPS共存</title>
-    <url>/2020/05/02/Trojan-v2ray-SSR%E5%8D%95VPS%E5%85%B1%E5%AD%98/</url>
+    <url>/posts/46908.html</url>
     <content><![CDATA[<iframe width="560" height="315" src="https://www.youtube.com/embed/hSqO8ppMYyc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-# <center>Trojan+v2ray+SSR单VPS共存</center>
- 准备工具：域名1个/VPS一台(CentOS7)
-视频教程：[YouTube](https://youtu.be/hSqO8ppMYyc)
-1:域名解析到VPS；解析要充分，以便全球生效！
 
+<h1 id="Trojan-v2ray-SSR单VPS共存"><a href="#Trojan-v2ray-SSR单VPS共存" class="headerlink" title="Trojan+v2ray+SSR单VPS共存"></a><center>Trojan+v2ray+SSR单VPS共存</center></h1><p> 准备工具：域名1个/VPS一台(CentOS7)<br>视频教程：<a href="https://youtu.be/hSqO8ppMYyc" target="_blank" rel="noopener">YouTube</a><br>1:域名解析到VPS；解析要充分，以便全球生效！</p>
 <p>2：安装BBR PLUS加速（可选）</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget <span class="string">"https://github.com/chiakge/Linux-NetSpeed/raw/master/tcp.sh"</span> &amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh</span><br></pre></td></tr></table></figure>
 <p>3:大神atrandys一键安装Trojan脚本：<br>若提示无wget,则运行：</p>
