@@ -41,37 +41,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Trojan+v2ray+SSR单VPS共存</title>
-    <url>/posts/46908.html</url>
-    <content><![CDATA[<iframe width="560" height="315" src="https://www.youtube.com/embed/hSqO8ppMYyc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<h1 id="Trojan-v2ray-SSR单VPS共存"><a href="#Trojan-v2ray-SSR单VPS共存" class="headerlink" title="Trojan+v2ray+SSR单VPS共存"></a><center>Trojan+v2ray+SSR单VPS共存</center></h1><p> 准备工具：域名1个/VPS一台(CentOS7)<br>视频教程：<a href="https://youtu.be/hSqO8ppMYyc" target="_blank" rel="noopener">YouTube</a><br>1:域名解析到VPS；解析要充分，以便全球生效！</p>
-<p>2：安装BBR PLUS加速（可选）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget <span class="string">"https://github.com/chiakge/Linux-NetSpeed/raw/master/tcp.sh"</span> &amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh</span><br></pre></td></tr></table></figure>
-<p>3:大神atrandys一键安装Trojan脚本：<br>若提示无wget,则运行：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install wget</span><br></pre></td></tr></table></figure>
-<p>然后再运行下面Docker版Trojan一键安装脚本:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -O https://raw.githubusercontent.com/atrandys/trojan/master/trojan_install.sh &amp;&amp; chmod +x trojan_install.sh &amp;&amp; ./trojan_install.sh</span><br></pre></td></tr></table></figure>
-<p>4：运行大神Docker的UI管理Portainer一键脚本：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">--name ui --restart=always lihaixin/portainer:me</span><br></pre></td></tr></table></figure>
-<p>5：浏览器运行<a href="https://VPS_IP:9000;设置密码并创建帐户，然后选择local。">https://VPS_IP:9000;设置密码并创建帐户，然后选择local。</a></p>
-<p>6:在容器containers中可以看到安装的Trojan；在App Templates中可以选择V2ray、SSR、Brook等代理程序</p>
-<p>8：客户端下载<br><a href="https://drive.google.com/open?id=1m9b6n9KnWI40octuo6IWAWqWdWxseLLk" target="_blank" rel="noopener">SS客户端</a><br><a href="https://drive.google.com/open?id=15sRZ7Sf9CVO0IdELNEvgD7xLxCxMqUVO" target="_blank" rel="noopener">V2ray客户端下载</a></p>
-<h1 id="星际云网络速"><a href="#星际云网络速" class="headerlink" title="星际云网络速"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络速</a></h1><h2 id="Trojan科学上网节点搭建视频教程"><a href="#Trojan科学上网节点搭建视频教程" class="headerlink" title="Trojan科学上网节点搭建视频教程"></a><a href="https://youtu.be/esr4bDuZj34" target="_blank" rel="noopener">Trojan科学上网节点搭建视频教程</a></h2><h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
-      <categories>
-        <category>科学上网</category>
-        <category>V2ray</category>
-        <category>Trojan</category>
-        <category>SSR</category>
-      </categories>
-      <tags>
-        <tag>V2ray</tag>
-        <tag>Trojan</tag>
-        <tag>SSR</tag>
-        <tag>Brook</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>利用Caddy完美实现Trojan与V2ray共存</title>
     <url>/posts/47385.html</url>
     <content><![CDATA[<h1 id="利用Caddy完美实现Trojan与V2ray共存"><a href="#利用Caddy完美实现Trojan与V2ray共存" class="headerlink" title="利用Caddy完美实现Trojan与V2ray共存"></a><center>利用Caddy完美实现Trojan与V2ray共存</center></h1><h2 id="视频教程"><a href="#视频教程" class="headerlink" title="视频教程"></a><center><a href="https://youtu.be/YuZ4TEayfGw" target="_blank" rel="noopener">视频教程</a></center></h2><p>1：准备工具域名1个；VPS一个（系统镜像ubuntu16.0+）;<br>请先将域名解析至VPS,并确定解析成功后再进行搭建。</p>
@@ -104,6 +73,37 @@
       </tags>
   </entry>
   <entry>
+    <title>Trojan+v2ray+SSR单VPS共存</title>
+    <url>/posts/46908.html</url>
+    <content><![CDATA[<iframe width="560" height="315" src="https://www.youtube.com/embed/hSqO8ppMYyc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h1 id="Trojan-v2ray-SSR单VPS共存"><a href="#Trojan-v2ray-SSR单VPS共存" class="headerlink" title="Trojan+v2ray+SSR单VPS共存"></a><center>Trojan+v2ray+SSR单VPS共存</center></h1><p> 准备工具：域名1个/VPS一台(CentOS7)<br>视频教程：<a href="https://youtu.be/hSqO8ppMYyc" target="_blank" rel="noopener">YouTube</a><br>1:域名解析到VPS；解析要充分，以便全球生效！</p>
+<p>2：安装BBR PLUS加速（可选）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget <span class="string">"https://github.com/chiakge/Linux-NetSpeed/raw/master/tcp.sh"</span> &amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh</span><br></pre></td></tr></table></figure>
+<p>3:大神atrandys一键安装Trojan脚本：<br>若提示无wget,则运行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install wget</span><br></pre></td></tr></table></figure>
+<p>然后再运行下面Docker版Trojan一键安装脚本:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -O https://raw.githubusercontent.com/atrandys/trojan/master/trojan_install.sh &amp;&amp; chmod +x trojan_install.sh &amp;&amp; ./trojan_install.sh</span><br></pre></td></tr></table></figure>
+<p>4：运行大神Docker的UI管理Portainer一键脚本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">--name ui --restart=always lihaixin/portainer:me</span><br></pre></td></tr></table></figure>
+<p>5：浏览器运行<a href="https://VPS_IP:9000;设置密码并创建帐户，然后选择local。">https://VPS_IP:9000;设置密码并创建帐户，然后选择local。</a></p>
+<p>6:在容器containers中可以看到安装的Trojan；在App Templates中可以选择V2ray、SSR、Brook等代理程序</p>
+<p>8：客户端下载<br><a href="https://drive.google.com/open?id=1m9b6n9KnWI40octuo6IWAWqWdWxseLLk" target="_blank" rel="noopener">SS客户端</a><br><a href="https://drive.google.com/open?id=15sRZ7Sf9CVO0IdELNEvgD7xLxCxMqUVO" target="_blank" rel="noopener">V2ray客户端下载</a></p>
+<h1 id="星际云网络速"><a href="#星际云网络速" class="headerlink" title="星际云网络速"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络速</a></h1><h2 id="Trojan科学上网节点搭建视频教程"><a href="#Trojan科学上网节点搭建视频教程" class="headerlink" title="Trojan科学上网节点搭建视频教程"></a><a href="https://youtu.be/esr4bDuZj34" target="_blank" rel="noopener">Trojan科学上网节点搭建视频教程</a></h2><h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
+      <categories>
+        <category>科学上网</category>
+        <category>V2ray</category>
+        <category>Trojan</category>
+        <category>SSR</category>
+      </categories>
+      <tags>
+        <tag>V2ray</tag>
+        <tag>Trojan</tag>
+        <tag>SSR</tag>
+        <tag>Brook</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>谷歌云Root密码登陆开启设置</title>
     <url>/posts/4f91a256.html</url>
     <content><![CDATA[<h1 id="谷歌云Root密码登陆开启设置"><a href="#谷歌云Root密码登陆开启设置" class="headerlink" title="谷歌云Root密码登陆开启设置"></a><center>谷歌云Root密码登陆开启设置</center></h1><p>方法一：<br>1:创建谷歌云实例然后点击SSH连接VM实例.</p>
@@ -123,15 +123,13 @@
 <p>Ubuntu系统采用以下命令：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sed -i <span class="string">'s/#PermitRootLogin prohibit-password/PermitRootLogin yes/g'</span> /etc/ssh/sshd_config</span><br><span class="line">sed -i <span class="string">'s/PasswordAuthentication no/PasswordAuthentication yes/g'</span> /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
 <p>然后利用reboot重启VM实例即可.</p>
-]]></content>
+<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
       <categories>
         <category>VPS</category>
       </categories>
       <tags>
         <tag>谷歌云</tag>
-        <tag>Putty</tag>
-        <tag>xshell</tag>
-        <tag>winscp</tag>
+        <tag>VPS</tag>
       </tags>
   </entry>
 </search>
