@@ -103,4 +103,35 @@
         <tag>Trojan</tag>
       </tags>
   </entry>
+  <entry>
+    <title>谷歌云Root密码登陆开启设置</title>
+    <url>/posts/4f91a256.html</url>
+    <content><![CDATA[<h1 id="谷歌云Root密码登陆开启设置"><a href="#谷歌云Root密码登陆开启设置" class="headerlink" title="谷歌云Root密码登陆开启设置"></a><center>谷歌云Root密码登陆开启设置</center></h1><p>1:创建谷歌云实例然后点击SSH连接VM实例.</p>
+<p>2:输入以下命令获取Root权限：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo -i</span><br></pre></td></tr></table></figure>
+<p>3:编辑sshd_config文件，输入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+<p>然后修改以下两项参数：<br>  3.1 修改PermitRootLogin，将no改为为yes；<br>  3.2 修改passwordAuthentication，将no改为yes<br>注：要输入i变成insert状态才可编辑；修改好后输入键盘ESC，然后输入：wq完成。<br>4:确认修改结果</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+<p>5:设置Root登陆密码<br>输入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">passwd root</span><br></pre></td></tr></table></figure>
+<p>6：重启sshd服务</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service sshd restart</span><br></pre></td></tr></table></figure>
+<p>7:接下来你就可以用winscp/Putty/xshell利用root和密码进行连接谷歌云了</p>
+<p>其它方法：<br>CentOS和Debian利用以下命令开启：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sed -i <span class="string">'s/PermitRootLogin no/PermitRootLogin yes/g'</span> /etc/ssh/sshd_config</span><br><span class="line">sed -i <span class="string">'s/PasswordAuthentication no/PasswordAuthentication yes/g'</span> /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+<p>Ubuntu系统采用以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sed -i <span class="string">'s/#PermitRootLogin prohibit-password/PermitRootLogin yes/g'</span> /etc/ssh/sshd_config</span><br><span class="line">sed -i <span class="string">'s/PasswordAuthentication no/PasswordAuthentication yes/g'</span> /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+<p>然后利用reboot重启VM实例即可.</p>
+]]></content>
+      <categories>
+        <category>VPS</category>
+      </categories>
+      <tags>
+        <tag>谷歌云，VPS</tag>
+        <tag>Putty</tag>
+        <tag>xshell</tag>
+        <tag>winscp</tag>
+      </tags>
+  </entry>
 </search>
