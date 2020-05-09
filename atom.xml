@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://siemenstutorials.github.io/"/>
-  <updated>2020-05-09T14:39:48.216Z</updated>
+  <updated>2020-05-09T15:33:03.768Z</updated>
   <id>https://siemenstutorials.github.io/</id>
   
   <author>
@@ -15,6 +15,38 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Github Action Openwrt固件自动编译教程</title>
+    <link href="https://siemenstutorials.github.io/posts/21b7e26f.html"/>
+    <id>https://siemenstutorials.github.io/posts/21b7e26f.html</id>
+    <published>2020-05-09T12:52:11.000Z</published>
+    <updated>2020-05-09T15:33:03.768Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Github-Action-Openwrt固件自动编译教程"><a href="#Github-Action-Openwrt固件自动编译教程" class="headerlink" title="Github Action Openwrt固件自动编译教程"></a><center>Github Action Openwrt固件自动编译教程</center></h1><h2 id="视频教程"><a href="#视频教程" class="headerlink" title="视频教程"></a><center><a href="https://youtu.be/YoVhsQDdldA" target="_blank" rel="noopener">视频教程</a></center></h2><p>1:根据<a href="https://github.com/coolsnowwolf/lede" target="_blank" rel="noopener">L大</a>的源码仓库指导步骤，利用 Ubuntu 18 LTS x64的VPS获取对应路由器型号的.config文件。</p><p>2:利用的源码仓<a href="https://github.com/P3TERX/Actions-OpenWrt" target="_blank" rel="noopener">P3TERX</a>导入.config文件启动GitHub Action自动云编译。</p><p>3:进入 P3TERX/Actions-OpenWrt 项目页面，点击 Use this template 。</p><p>4:填写仓库名称，然后点击Create repository from template按钮。经过几秒钟的等待，页面会跳转到新建的仓库，然后点击Create new file按钮。<br>5：然后文件名填写为.config，把生成的.config 文件的内容复制粘贴到下面的文本框中.</p><p>最后等待2-3小时前往Github Action下载压缩包固件使用即可。</p><p>本文参考：<br><a href="https://github.com/coolsnowwolf/lede" target="_blank" rel="noopener">L大</a><br><a href="https://p3terx.com/archives/build-openwrt-with-github-actions.html" target="_blank" rel="noopener">P3TERX</a></p><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Github-Action-Openwrt固件自动编译教程&quot;&gt;&lt;a href=&quot;#Github-Action-Openwrt固件自动编译教程&quot; class=&quot;headerlink&quot; title=&quot;Github Action Openwrt固件自动编译教程&quot;&gt;&lt;/a
+      
+    
+    </summary>
+    
+    
+      <category term="OpenWrt" scheme="https://siemenstutorials.github.io/categories/OpenWrt/"/>
+    
+    
+      <category term="路由器" scheme="https://siemenstutorials.github.io/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/"/>
+    
+      <category term="openwrt" scheme="https://siemenstutorials.github.io/tags/openwrt/"/>
+    
+      <category term="软路由固件" scheme="https://siemenstutorials.github.io/tags/%E8%BD%AF%E8%B7%AF%E7%94%B1%E5%9B%BA%E4%BB%B6/"/>
+    
+      <category term="固件编译" scheme="https://siemenstutorials.github.io/tags/%E5%9B%BA%E4%BB%B6%E7%BC%96%E8%AF%91/"/>
+    
+  </entry>
   
   <entry>
     <title>如何删除GitHub仓库的所用commit</title>
