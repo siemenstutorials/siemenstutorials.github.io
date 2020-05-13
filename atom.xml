@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://siemenstutorials.github.io/"/>
-  <updated>2020-05-09T15:35:00.169Z</updated>
+  <updated>2020-05-13T15:08:11.777Z</updated>
   <id>https://siemenstutorials.github.io/</id>
   
   <author>
@@ -15,6 +15,42 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2020年如何编译自带SSRPLUS的OpenWrt软路由固件</title>
+    <link href="https://siemenstutorials.github.io/posts/a46d8958.html"/>
+    <id>https://siemenstutorials.github.io/posts/a46d8958.html</id>
+    <published>2020-05-13T14:50:15.000Z</published>
+    <updated>2020-05-13T15:08:11.777Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件"><a href="#L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件" class="headerlink" title="L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件"></a><center>L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件</center></h1><p>若是第一次编译请先了解如何制作生成.config文件以及如何应用Github Actions,<a href="https://siemenstutorials.github.io/posts/21b7e26f.html">详见上篇博文</a>;<br>在此基础上你便可以开始你的编译之旅了！</p><p>1：在你的第一次编译基础上，打开Workeflow里的yml文件，找到如下URL，并将URL更换成如下链接：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">REPO_URL: https://github.com/hikelin19871112/lede.git</span><br><span class="line">REPO_BRANCH: master</span><br></pre></td></tr></table></figure><p>2：然后点击Commit</p><p>3:然后切换到Actions编译就开始了，大约2小时后即可下载OpenWrt固件了！</p><p>4：<a href="https://drive.google.com/open?id=1mtxDbNwZzKUGpUgoHHkSkaDY6jwL2zxP" target="_blank" rel="noopener">树莓派4b Openwrt固件下载</a></p><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件&quot;&gt;&lt;a href=&quot;#L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件&quot; class=&quot;headerlink&quot; title=&quot;L大删除SSRP
+      
+    
+    </summary>
+    
+    
+      <category term="Openwrt" scheme="https://siemenstutorials.github.io/categories/Openwrt/"/>
+    
+      <category term="固件编译" scheme="https://siemenstutorials.github.io/categories/Openwrt/%E5%9B%BA%E4%BB%B6%E7%BC%96%E8%AF%91/"/>
+    
+    
+      <category term="软路由" scheme="https://siemenstutorials.github.io/tags/%E8%BD%AF%E8%B7%AF%E7%94%B1/"/>
+    
+      <category term="ssrplus" scheme="https://siemenstutorials.github.io/tags/ssrplus/"/>
+    
+      <category term="Trojan" scheme="https://siemenstutorials.github.io/tags/Trojan/"/>
+    
+      <category term="V2ray" scheme="https://siemenstutorials.github.io/tags/V2ray/"/>
+    
+      <category term="科学上网" scheme="https://siemenstutorials.github.io/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
+    
+  </entry>
   
   <entry>
     <title>Github Action Openwrt固件自动编译教程</title>
@@ -130,9 +166,9 @@
       <category term="Trojan" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/Trojan/"/>
     
     
-      <category term="V2ray" scheme="https://siemenstutorials.github.io/tags/V2ray/"/>
-    
       <category term="Trojan" scheme="https://siemenstutorials.github.io/tags/Trojan/"/>
+    
+      <category term="V2ray" scheme="https://siemenstutorials.github.io/tags/V2ray/"/>
     
   </entry>
   
@@ -164,9 +200,9 @@
       <category term="SSR" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/SSR/"/>
     
     
-      <category term="V2ray" scheme="https://siemenstutorials.github.io/tags/V2ray/"/>
-    
       <category term="Trojan" scheme="https://siemenstutorials.github.io/tags/Trojan/"/>
+    
+      <category term="V2ray" scheme="https://siemenstutorials.github.io/tags/V2ray/"/>
     
       <category term="SSR" scheme="https://siemenstutorials.github.io/tags/SSR/"/>
     
