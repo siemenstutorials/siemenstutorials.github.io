@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://siemenstutorials.github.io/"/>
-  <updated>2020-05-13T15:08:11.777Z</updated>
+  <updated>2020-05-14T11:04:49.861Z</updated>
   <id>https://siemenstutorials.github.io/</id>
   
   <author>
@@ -15,6 +15,40 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SSR/TROJAN/V2RAY客户端下载汇总</title>
+    <link href="https://siemenstutorials.github.io/posts/f9792ba.html"/>
+    <id>https://siemenstutorials.github.io/posts/f9792ba.html</id>
+    <published>2020-05-14T10:46:49.000Z</published>
+    <updated>2020-05-14T11:04:49.861Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="SSR-TROJAN-V2RAY科学上网客户端下载"><a href="#SSR-TROJAN-V2RAY科学上网客户端下载" class="headerlink" title="SSR+TROJAN+V2RAY科学上网客户端下载"></a><center>SSR+TROJAN+V2RAY科学上网客户端下载</center></h1><p>1:SSR客户端<br><a href="https://www.xjycloud.xyz/ssr-download/ssr-win.7z" target="_blank" rel="noopener">Windows客户端</a><br><a href="https://www.xjycloud.xyz/ssr-download/ssr-mac.dmg" target="_blank" rel="noopener">MACOS客户端</a><br>2:Trojan客户端<br><a href="https://github.com/trojan-gfw/trojan/releases/download/v1.15.1/trojan-1.15.1-win.zip" target="_blank" rel="noopener">Windows客户端</a><br><a href="https://github.com/trojan-gfw/trojan/releases/download/v1.15.1/trojan-1.15.1-macos.zip" target="_blank" rel="noopener">MACOS客户端</a><br>3:V2RAY客户端<br><a href="https://github.com/v2ray/v2ray-core/releases/download/v4.23.1/v2ray-openbsd-64.zip" target="_blank" rel="noopener">Windows</a><br><a href="https://github.com/v2ray/v2ray-core/releases/download/v4.23.1/v2ray-openbsd-32.zip" target="_blank" rel="noopener">MACOS客户端</a></p><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;SSR-TROJAN-V2RAY科学上网客户端下载&quot;&gt;&lt;a href=&quot;#SSR-TROJAN-V2RAY科学上网客户端下载&quot; class=&quot;headerlink&quot; title=&quot;SSR+TROJAN+V2RAY科学上网客户端下载&quot;&gt;&lt;/a&gt;&lt;center&gt;SSR
+      
+    
+    </summary>
+    
+    
+      <category term="科学上网" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
+    
+      <category term="客户端" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/%E5%AE%A2%E6%88%B7%E7%AB%AF/"/>
+    
+    
+      <category term="Trojan" scheme="https://siemenstutorials.github.io/tags/Trojan/"/>
+    
+      <category term="V2ray" scheme="https://siemenstutorials.github.io/tags/V2ray/"/>
+    
+      <category term="科学上网" scheme="https://siemenstutorials.github.io/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
+    
+      <category term="SSR" scheme="https://siemenstutorials.github.io/tags/SSR/"/>
+    
+  </entry>
   
   <entry>
     <title>2020年如何编译自带SSRPLUS的OpenWrt软路由固件</title>
