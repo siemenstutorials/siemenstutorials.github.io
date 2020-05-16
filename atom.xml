@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://siemenstutorials.github.io/"/>
-  <updated>2020-05-16T10:36:40.536Z</updated>
+  <updated>2020-05-16T10:40:32.037Z</updated>
   <id>https://siemenstutorials.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://siemenstutorials.github.io/posts/8b0dfdea.html"/>
     <id>https://siemenstutorials.github.io/posts/8b0dfdea.html</id>
     <published>2020-05-16T10:20:39.000Z</published>
-    <updated>2020-05-16T10:36:40.536Z</updated>
+    <updated>2020-05-16T10:40:32.037Z</updated>
     
-    <content type="html"><![CDATA[<p>逗比SSR一键安装脚本：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ssr.sh &amp;&amp; chmod +x ssr.sh &amp;&amp; bash ssr.sh</span><br></pre></td></tr></table></figure><p>秋水逸冰四合一脚本：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh</span><br><span class="line">chmod +x shadowsocks-all.sh</span><br><span class="line">./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log</span><br></pre></td></tr></table></figure><p>BBR_PLUS一键安装脚本：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate -O tcp.sh https://github.com/cx9208/Linux-NetSpeed/raw/master/tcp.sh &amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh</span><br></pre></td></tr></table></figure><p>安装注意事项：<br>若提示wget not found请先根据系统运行如下命令：<br>CentOS：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install wget</span><br></pre></td></tr></table></figure><p>Ubuntu/Debian：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get -y install wget</span><br></pre></td></tr></table></figure><h2 id="最便谊的2-99-月-1T流量VPS购买地址-https-portal-thestack-net-aff-php-aff-641"><a href="#最便谊的2-99-月-1T流量VPS购买地址-https-portal-thestack-net-aff-php-aff-641" class="headerlink" title="[最便谊的2.99$/月-1T流量VPS购买地址](https://portal.thestack.net/aff.php?aff=641"></a>[最便谊的2.99$/月-1T流量VPS购买地址](<a href="https://portal.thestack.net/aff.php?aff=641" target="_blank" rel="noopener">https://portal.thestack.net/aff.php?aff=641</a></h2><p>)</p><h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
+    <content type="html"><![CDATA[<p>逗比SSR一键安装脚本：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ssr.sh &amp;&amp; chmod +x ssr.sh &amp;&amp; bash ssr.sh</span><br></pre></td></tr></table></figure><p>秋水逸冰四合一脚本：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh</span><br><span class="line">chmod +x shadowsocks-all.sh</span><br><span class="line">./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log</span><br></pre></td></tr></table></figure><p>BBR_PLUS一键安装脚本：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate -O tcp.sh https://github.com/cx9208/Linux-NetSpeed/raw/master/tcp.sh &amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh</span><br></pre></td></tr></table></figure><p>安装注意事项：<br>若提示wget not found请先根据系统运行如下命令：<br>CentOS：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install wget</span><br></pre></td></tr></table></figure><p>Ubuntu/Debian：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get -y install wget</span><br></pre></td></tr></table></figure><h2 id="最便谊的2-99-月-1T流量VPS购买地址"><a href="#最便谊的2-99-月-1T流量VPS购买地址" class="headerlink" title="最便谊的2.99$/月-1T流量VPS购买地址"></a><a href="https://portal.thestack.net/aff.php?aff=641" target="_blank" rel="noopener">最便谊的2.99$/月-1T流量VPS购买地址</a></h2><h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
     
     <summary type="html">
     
@@ -296,9 +296,9 @@
     
       <category term="V2ray" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/V2ray/"/>
     
-      <category term="Trojan" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/Trojan/"/>
-    
       <category term="SSR" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/SSR/"/>
+    
+      <category term="Trojan" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/Trojan/"/>
     
     
       <category term="SSR" scheme="https://siemenstutorials.github.io/tags/SSR/"/>
@@ -334,9 +334,9 @@
     
       <category term="V2ray" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/V2ray/"/>
     
-      <category term="Trojan" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/Trojan/"/>
-    
       <category term="SSR" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/SSR/"/>
+    
+      <category term="Trojan" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/Trojan/"/>
     
     
       <category term="科学上网" scheme="https://siemenstutorials.github.io/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
