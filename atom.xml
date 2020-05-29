@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://siemenstutorials.github.io/"/>
-  <updated>2020-05-21T16:42:46.714Z</updated>
+  <updated>2020-05-29T13:33:31.791Z</updated>
   <id>https://siemenstutorials.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CentOS7利用firewall流量转发-实现TCP/UDP中转加速</title>
+    <link href="https://siemenstutorials.github.io/posts/9b74aaac.html"/>
+    <id>https://siemenstutorials.github.io/posts/9b74aaac.html</id>
+    <published>2020-05-29T13:13:12.000Z</published>
+    <updated>2020-05-29T13:33:31.791Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="CentOS7-利用firewall流量转发-实现TCP-UDP中转加速"><a href="#CentOS7-利用firewall流量转发-实现TCP-UDP中转加速" class="headerlink" title="CentOS7 利用firewall流量转发-实现TCP/UDP中转加速"></a><center>CentOS7 利用firewall流量转发-实现TCP/UDP中转加速</center></h1><p>支持系统:CentOS7或以上</p><p>原理：<br>客户端[server]————中转服务器（VPS/NAT）安装firewall———落地服务器<br>1：在centos7上安装firewall</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install firewalld -y</span><br></pre></td></tr></table></figure><p>相关命令：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">systemctl start firewalld <span class="comment">##开启防火墙</span></span><br><span class="line">systemctl stop firewalld <span class="comment">##关闭防火墙</span></span><br><span class="line">firewall-cmd --reload <span class="comment">##重启防火墙</span></span><br><span class="line">systemctl status firewalld <span class="comment">##查看防火墙状态</span></span><br><span class="line">systemctl <span class="built_in">enable</span> firewalld <span class="comment">##设置开启启动</span></span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld <span class="comment">##禁用开机启动</span></span><br><span class="line">firewall-cmd --list-ports <span class="comment">##查看开放的端口</span></span><br><span class="line">firewall-cmd --zone=public --add-port=8080/tcp --permanent <span class="comment">##开放指定端口（此处为开放8080，可替换为指定端口号），开放后需重启防火墙生效</span></span><br><span class="line">firewall-cmd --zone=public --remove-port=8080/tcp --permanent <span class="comment">##关闭指定端口（此处为关闭8080，可替换为指定端口号）</span></span><br></pre></td></tr></table></figure><p>2:开启路由转发</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">'net.ipv4.ip_forward = 1'</span> &gt;&gt; /etc/sysctl.conf</span><br></pre></td></tr></table></figure><p>运行以下命令使其生效</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl -p</span><br></pre></td></tr></table></figure><p>3：开启流量伪装功能</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --permanent --add-masquerade</span><br></pre></td></tr></table></figure><p>4:转发端口设置<br>若是全端口机器可无视此步；NAT机参照以下开启端口</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --add-port=开放端口号/tcp --permanent <span class="comment">#开启TCP流量端口</span></span><br><span class="line">firewall-cmd --add-port=开放端口号/udp --permanent <span class="comment">#开启UDP流量端口</span></span><br></pre></td></tr></table></figure><p>5：端口流量转发<br>假设监听端口为8080端口；远程端口为8090；被转发IP为8.8.8.8<br>则运行以下命令：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --add-forward-port=port=8080:proto=tcp:toaddr=8.8.8.8:toport=8090 --permanent <span class="comment">#开启TCP流量转发</span></span><br><span class="line">firewall-cmd --add-forward-port=port=8080:proto=udp:toaddr=8.8.8.8:toport=8090--permanent <span class="comment">#开启UDP流量转发</span></span><br></pre></td></tr></table></figure><p>6:重载设置使其生效<br>运行如下命令：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure><p>7:firewall默认的配置文件路径是/etc/firewalld/zones/public.xml</p><h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;CentOS7-利用firewall流量转发-实现TCP-UDP中转加速&quot;&gt;&lt;a href=&quot;#CentOS7-利用firewall流量转发-实现TCP-UDP中转加速&quot; class=&quot;headerlink&quot; title=&quot;CentOS7 利用firewall流量
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>OpenWrt/Lede软路由FRP内网穿透从无到有完整教程</title>
@@ -326,9 +348,9 @@
     
       <category term="V2ray" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/V2ray/"/>
     
-      <category term="SSR" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/SSR/"/>
-    
       <category term="Trojan" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/Trojan/"/>
+    
+      <category term="SSR" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/SSR/"/>
     
     
       <category term="Trojan" scheme="https://siemenstutorials.github.io/tags/Trojan/"/>
@@ -364,9 +386,9 @@
     
       <category term="V2ray" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/V2ray/"/>
     
-      <category term="SSR" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/SSR/"/>
-    
       <category term="Trojan" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/Trojan/"/>
+    
+      <category term="SSR" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/SSR/"/>
     
     
       <category term="科学上网" scheme="https://siemenstutorials.github.io/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
