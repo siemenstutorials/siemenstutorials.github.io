@@ -1,6 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>2020年如何编译自带SSRPLUS的OpenWrt软路由固件</title>
+    <url>/posts/a46d8958.html</url>
+    <content><![CDATA[<h1 id="L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件"><a href="#L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件" class="headerlink" title="L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件"></a><center>L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件</center></h1><p>若是第一次编译请先了解如何制作生成.config文件以及如何应用Github Actions,<a href="https://siemenstutorials.github.io/posts/21b7e26f.html">详见上篇博文</a>;<br>在此基础上你便可以开始你的编译之旅了！</p>
+<p>1：在你的第一次编译基础上，打开Workeflow里的yml文件，找到如下URL，并将URL更换成如下链接：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">REPO_URL: https://github.com/hikelin19871112/lede.git</span><br><span class="line">REPO_BRANCH: master</span><br></pre></td></tr></table></figure>
+<p>2：然后点击Commit</p>
+<p>3:然后切换到Actions编译就开始了，大约2小时后即可下载OpenWrt固件了！</p>
+<p>4：<a href="https://drive.google.com/open?id=1mtxDbNwZzKUGpUgoHHkSkaDY6jwL2zxP" target="_blank" rel="noopener">树莓派4b Openwrt固件下载</a></p>
+<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
+      <categories>
+        <category>Openwrt</category>
+        <category>固件编译</category>
+      </categories>
+      <tags>
+        <tag>软路由</tag>
+        <tag>ssrplus</tag>
+        <tag>Trojan</tag>
+        <tag>V2ray</tag>
+        <tag>科学上网</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NAT VPS阿里云DDNS动态域名绑定</title>
+    <url>/posts/ee769b01.html</url>
+    <content><![CDATA[<h1 id="NAT-VPS阿里云DDNS动态域名绑定"><a href="#NAT-VPS阿里云DDNS动态域名绑定" class="headerlink" title="NAT VPS阿里云DDNS动态域名绑定"></a><center>NAT VPS阿里云DDNS动态域名绑定</center></h1><p><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">视频教程</a></p>
+<p>根据系统安装依赖：<br>1:centOS安装依赖</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y wget curl cronie</span><br></pre></td></tr></table></figure>
+<p>1.1 Debain/ubuntu依赖安装：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt-get install -y wget curl cron</span><br></pre></td></tr></table></figure>
+<p>2：安装DDNS脚本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -O /usr/sbin/AliDDNS-v2.0.sh https://github.com/siemenstutorials/ALIDDNSV2.0/raw/master/AliDDNSv2.sh</span><br></pre></td></tr></table></figure>
+<p>3：赋予权限</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chmod +x /usr/sbin/AliDDNS-v2.0.sh</span><br></pre></td></tr></table></figure>
+<p>4：运行AliDDNS 工具</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/usr/sbin/AliDDNS-v2.0.sh</span><br></pre></td></tr></table></figure>
+<p>5：选择1进行配置；<br><img src="/images/5.jpg" alt><br><img src="/images/6.jpg" alt><br>并按提示进行输入域名<br>6：登陆阿里云DNS添加A记录：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">记录类型：A</span><br><span class="line">主机记录：[请填写你的二级域名]</span><br><span class="line">解析线路：默认</span><br><span class="line">记录值：127.0.0.1 (或者随便填写一个IP地址)</span><br><span class="line">TTL： [请根据实际需要选择合适的TTL]</span><br><span class="line">同步默认线路：是 (勾选)</span><br></pre></td></tr></table></figure>
+<p>7：新建用户并分配如下权限<br><a href="https://ram.console.aliyun.com" target="_blank" rel="noopener">创建子用户</a><br>给用户添加权限:<br> AliyunDNSReadOnlyAccess(只读访问云解析(DNS)的权限) 和 AliyunDNSFullAccess(管理云解析(DNS)的权限) </p>
+<p><a href="https://blog.ilemonrain.com/linux/aliddns-v2.html" target="_blank" rel="noopener">以上脚本源于互联网</a></p>
+<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
+      <tags>
+        <tag>ddns</tag>
+        <tag>阿里云</tag>
+        <tag>NAT</tag>
+        <tag>VPS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Github Action Openwrt固件自动编译教程</title>
+    <url>/posts/21b7e26f.html</url>
+    <content><![CDATA[<h1 id="Github-Action-Openwrt固件自动编译教程"><a href="#Github-Action-Openwrt固件自动编译教程" class="headerlink" title="Github Action Openwrt固件自动编译教程"></a><center>Github Action Openwrt固件自动编译教程</center></h1><h2 id="视频教程"><a href="#视频教程" class="headerlink" title="视频教程"></a><center><a href="https://youtu.be/YoVhsQDdldA" target="_blank" rel="noopener">视频教程</a></center></h2><p>1:根据<a href="https://github.com/coolsnowwolf/lede" target="_blank" rel="noopener">L大</a>的源码仓库指导步骤，利用 Ubuntu 18 LTS x64的VPS获取对应路由器型号的.config文件。</p>
+<p>2:利用的源码仓<a href="https://github.com/P3TERX/Actions-OpenWrt" target="_blank" rel="noopener">P3TERX</a>导入.config文件启动GitHub Action自动云编译。</p>
+<p>3:进入 P3TERX/Actions-OpenWrt 项目页面，点击 Use this template 。</p>
+<p>4:填写仓库名称，然后点击Create repository from template按钮。经过几秒钟的等待，页面会跳转到新建的仓库，然后点击Create new file按钮。<br>5：然后文件名填写为.config，把生成的.config 文件的内容复制粘贴到下面的文本框中.</p>
+<p>最后等待2-3小时前往Github Action下载压缩包固件使用即可。</p>
+<p>本文参考：<br><a href="https://github.com/coolsnowwolf/lede" target="_blank" rel="noopener">L大</a><br><a href="https://p3terx.com/archives/build-openwrt-with-github-actions.html" target="_blank" rel="noopener">P3TERX</a></p>
+<h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
+      <categories>
+        <category>OpenWrt</category>
+      </categories>
+      <tags>
+        <tag>路由器</tag>
+        <tag>openwrt</tag>
+        <tag>软路由固件</tag>
+        <tag>固件编译</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CentOS7利用firewall流量转发-实现TCP/UDP中转加速</title>
     <url>/posts/9b74aaac.html</url>
     <content><![CDATA[<h1 id="CentOS7-利用firewall流量转发-实现TCP-UDP中转加速"><a href="#CentOS7-利用firewall流量转发-实现TCP-UDP中转加速" class="headerlink" title="CentOS7 利用firewall流量转发-实现TCP/UDP中转加速"></a><center>CentOS7 利用firewall流量转发-实现TCP/UDP中转加速</center></h1><p>支持系统:CentOS7或以上</p>
@@ -24,45 +92,50 @@
 <h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
   </entry>
   <entry>
-    <title>Github Action Openwrt固件自动编译教程</title>
-    <url>/posts/21b7e26f.html</url>
-    <content><![CDATA[<h1 id="Github-Action-Openwrt固件自动编译教程"><a href="#Github-Action-Openwrt固件自动编译教程" class="headerlink" title="Github Action Openwrt固件自动编译教程"></a><center>Github Action Openwrt固件自动编译教程</center></h1><h2 id="视频教程"><a href="#视频教程" class="headerlink" title="视频教程"></a><center><a href="https://youtu.be/YoVhsQDdldA" target="_blank" rel="noopener">视频教程</a></center></h2><p>1:根据<a href="https://github.com/coolsnowwolf/lede" target="_blank" rel="noopener">L大</a>的源码仓库指导步骤，利用 Ubuntu 18 LTS x64的VPS获取对应路由器型号的.config文件。</p>
-<p>2:利用的源码仓<a href="https://github.com/P3TERX/Actions-OpenWrt" target="_blank" rel="noopener">P3TERX</a>导入.config文件启动GitHub Action自动云编译。</p>
-<p>3:进入 P3TERX/Actions-OpenWrt 项目页面，点击 Use this template 。</p>
-<p>4:填写仓库名称，然后点击Create repository from template按钮。经过几秒钟的等待，页面会跳转到新建的仓库，然后点击Create new file按钮。<br>5：然后文件名填写为.config，把生成的.config 文件的内容复制粘贴到下面的文本框中.</p>
-<p>最后等待2-3小时前往Github Action下载压缩包固件使用即可。</p>
-<p>本文参考：<br><a href="https://github.com/coolsnowwolf/lede" target="_blank" rel="noopener">L大</a><br><a href="https://p3terx.com/archives/build-openwrt-with-github-actions.html" target="_blank" rel="noopener">P3TERX</a></p>
-<h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
+    <title>Trojan+v2ray+SSR单VPS共存</title>
+    <url>/posts/46908.html</url>
+    <content><![CDATA[<iframe width="560" height="315" src="https://www.youtube.com/embed/hSqO8ppMYyc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h1 id="Trojan-v2ray-SSR单VPS共存"><a href="#Trojan-v2ray-SSR单VPS共存" class="headerlink" title="Trojan+v2ray+SSR单VPS共存"></a><center>Trojan+v2ray+SSR单VPS共存</center></h1><p> 准备工具：域名1个/VPS一台(CentOS7)<br>视频教程：<a href="https://youtu.be/hSqO8ppMYyc" target="_blank" rel="noopener">YouTube</a><br>1:域名解析到VPS；解析要充分，以便全球生效！</p>
+<p>2：安装BBR PLUS加速（可选）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget <span class="string">"https://github.com/chiakge/Linux-NetSpeed/raw/master/tcp.sh"</span> &amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh</span><br></pre></td></tr></table></figure>
+<p>3:大神atrandys一键安装Trojan脚本：<br>若提示无wget,则运行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install wget</span><br></pre></td></tr></table></figure>
+<p>然后再运行下面Docker版Trojan一键安装脚本:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -O https://raw.githubusercontent.com/atrandys/trojan/master/trojan_install.sh &amp;&amp; chmod +x trojan_install.sh &amp;&amp; ./trojan_install.sh</span><br></pre></td></tr></table></figure>
+<p>4：运行大神Docker的UI管理Portainer一键脚本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">--name ui --restart=always lihaixin/portainer:me</span><br></pre></td></tr></table></figure>
+<p>5：浏览器运行<a href="https://VPS_IP:9000;设置密码并创建帐户，然后选择local。">https://VPS_IP:9000;设置密码并创建帐户，然后选择local。</a></p>
+<p>6:在容器containers中可以看到安装的Trojan；在App Templates中可以选择V2ray、SSR、Brook等代理程序</p>
+<p>8：客户端下载<br><a href="https://drive.google.com/open?id=1m9b6n9KnWI40octuo6IWAWqWdWxseLLk" target="_blank" rel="noopener">SS客户端</a><br><a href="https://drive.google.com/open?id=15sRZ7Sf9CVO0IdELNEvgD7xLxCxMqUVO" target="_blank" rel="noopener">V2ray客户端下载</a></p>
+<h1 id="星际云网络速"><a href="#星际云网络速" class="headerlink" title="星际云网络速"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络速</a></h1><h2 id="Trojan科学上网节点搭建视频教程"><a href="#Trojan科学上网节点搭建视频教程" class="headerlink" title="Trojan科学上网节点搭建视频教程"></a><a href="https://youtu.be/esr4bDuZj34" target="_blank" rel="noopener">Trojan科学上网节点搭建视频教程</a></h2><h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
       <categories>
-        <category>OpenWrt</category>
+        <category>科学上网</category>
+        <category>V2ray</category>
+        <category>SSR</category>
+        <category>Trojan</category>
       </categories>
       <tags>
-        <tag>路由器</tag>
-        <tag>openwrt</tag>
-        <tag>软路由固件</tag>
-        <tag>固件编译</tag>
+        <tag>Trojan</tag>
+        <tag>V2ray</tag>
+        <tag>SSR</tag>
+        <tag>Brook</tag>
       </tags>
   </entry>
   <entry>
-    <title>2020年如何编译自带SSRPLUS的OpenWrt软路由固件</title>
-    <url>/posts/a46d8958.html</url>
-    <content><![CDATA[<h1 id="L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件"><a href="#L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件" class="headerlink" title="L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件"></a><center>L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件</center></h1><p>若是第一次编译请先了解如何制作生成.config文件以及如何应用Github Actions,<a href="https://siemenstutorials.github.io/posts/21b7e26f.html">详见上篇博文</a>;<br>在此基础上你便可以开始你的编译之旅了！</p>
-<p>1：在你的第一次编译基础上，打开Workeflow里的yml文件，找到如下URL，并将URL更换成如下链接：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">REPO_URL: https://github.com/hikelin19871112/lede.git</span><br><span class="line">REPO_BRANCH: master</span><br></pre></td></tr></table></figure>
-<p>2：然后点击Commit</p>
-<p>3:然后切换到Actions编译就开始了，大约2小时后即可下载OpenWrt固件了！</p>
-<p>4：<a href="https://drive.google.com/open?id=1mtxDbNwZzKUGpUgoHHkSkaDY6jwL2zxP" target="_blank" rel="noopener">树莓派4b Openwrt固件下载</a></p>
+    <title>SSR/TROJAN/V2RAY客户端下载汇总</title>
+    <url>/posts/f9792ba.html</url>
+    <content><![CDATA[<h1 id="SSR-TROJAN-V2RAY科学上网客户端下载"><a href="#SSR-TROJAN-V2RAY科学上网客户端下载" class="headerlink" title="SSR+TROJAN+V2RAY科学上网客户端下载"></a><center>SSR+TROJAN+V2RAY科学上网客户端下载</center></h1><p>1:SSR客户端<br><a href="https://www.xjycloud.xyz/ssr-download/ssr-win.7z" target="_blank" rel="noopener">Windows客户端</a><br><a href="https://www.xjycloud.xyz/ssr-download/ssr-mac.dmg" target="_blank" rel="noopener">MACOS客户端</a><br>2:Trojan客户端<br><a href="https://github.com/trojan-gfw/trojan/releases/download/v1.15.1/trojan-1.15.1-win.zip" target="_blank" rel="noopener">Windows客户端</a><br><a href="https://github.com/trojan-gfw/trojan/releases/download/v1.15.1/trojan-1.15.1-macos.zip" target="_blank" rel="noopener">MACOS客户端</a><br>3:V2RAY客户端<br><a href="https://github.com/v2ray/v2ray-core/releases/download/v4.23.1/v2ray-openbsd-64.zip" target="_blank" rel="noopener">Windows</a><br><a href="https://github.com/v2ray/v2ray-core/releases/download/v4.23.1/v2ray-openbsd-32.zip" target="_blank" rel="noopener">MACOS客户端</a></p>
 <h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
       <categories>
-        <category>Openwrt</category>
-        <category>固件编译</category>
+        <category>科学上网</category>
+        <category>客户端</category>
       </categories>
       <tags>
-        <tag>软路由</tag>
-        <tag>ssrplus</tag>
         <tag>Trojan</tag>
         <tag>V2ray</tag>
         <tag>科学上网</tag>
+        <tag>SSR</tag>
       </tags>
   </entry>
   <entry>
@@ -87,53 +160,6 @@
       <tags>
         <tag>openwrt</tag>
         <tag>frp</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SSR/TROJAN/V2RAY客户端下载汇总</title>
-    <url>/posts/f9792ba.html</url>
-    <content><![CDATA[<h1 id="SSR-TROJAN-V2RAY科学上网客户端下载"><a href="#SSR-TROJAN-V2RAY科学上网客户端下载" class="headerlink" title="SSR+TROJAN+V2RAY科学上网客户端下载"></a><center>SSR+TROJAN+V2RAY科学上网客户端下载</center></h1><p>1:SSR客户端<br><a href="https://www.xjycloud.xyz/ssr-download/ssr-win.7z" target="_blank" rel="noopener">Windows客户端</a><br><a href="https://www.xjycloud.xyz/ssr-download/ssr-mac.dmg" target="_blank" rel="noopener">MACOS客户端</a><br>2:Trojan客户端<br><a href="https://github.com/trojan-gfw/trojan/releases/download/v1.15.1/trojan-1.15.1-win.zip" target="_blank" rel="noopener">Windows客户端</a><br><a href="https://github.com/trojan-gfw/trojan/releases/download/v1.15.1/trojan-1.15.1-macos.zip" target="_blank" rel="noopener">MACOS客户端</a><br>3:V2RAY客户端<br><a href="https://github.com/v2ray/v2ray-core/releases/download/v4.23.1/v2ray-openbsd-64.zip" target="_blank" rel="noopener">Windows</a><br><a href="https://github.com/v2ray/v2ray-core/releases/download/v4.23.1/v2ray-openbsd-32.zip" target="_blank" rel="noopener">MACOS客户端</a></p>
-<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
-      <categories>
-        <category>科学上网</category>
-        <category>客户端</category>
-      </categories>
-      <tags>
-        <tag>Trojan</tag>
-        <tag>V2ray</tag>
-        <tag>科学上网</tag>
-        <tag>SSR</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Trojan+v2ray+SSR单VPS共存</title>
-    <url>/posts/46908.html</url>
-    <content><![CDATA[<iframe width="560" height="315" src="https://www.youtube.com/embed/hSqO8ppMYyc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<h1 id="Trojan-v2ray-SSR单VPS共存"><a href="#Trojan-v2ray-SSR单VPS共存" class="headerlink" title="Trojan+v2ray+SSR单VPS共存"></a><center>Trojan+v2ray+SSR单VPS共存</center></h1><p> 准备工具：域名1个/VPS一台(CentOS7)<br>视频教程：<a href="https://youtu.be/hSqO8ppMYyc" target="_blank" rel="noopener">YouTube</a><br>1:域名解析到VPS；解析要充分，以便全球生效！</p>
-<p>2：安装BBR PLUS加速（可选）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget <span class="string">"https://github.com/chiakge/Linux-NetSpeed/raw/master/tcp.sh"</span> &amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh</span><br></pre></td></tr></table></figure>
-<p>3:大神atrandys一键安装Trojan脚本：<br>若提示无wget,则运行：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install wget</span><br></pre></td></tr></table></figure>
-<p>然后再运行下面Docker版Trojan一键安装脚本:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -O https://raw.githubusercontent.com/atrandys/trojan/master/trojan_install.sh &amp;&amp; chmod +x trojan_install.sh &amp;&amp; ./trojan_install.sh</span><br></pre></td></tr></table></figure>
-<p>4：运行大神Docker的UI管理Portainer一键脚本：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">--name ui --restart=always lihaixin/portainer:me</span><br></pre></td></tr></table></figure>
-<p>5：浏览器运行<a href="https://VPS_IP:9000;设置密码并创建帐户，然后选择local。">https://VPS_IP:9000;设置密码并创建帐户，然后选择local。</a></p>
-<p>6:在容器containers中可以看到安装的Trojan；在App Templates中可以选择V2ray、SSR、Brook等代理程序</p>
-<p>8：客户端下载<br><a href="https://drive.google.com/open?id=1m9b6n9KnWI40octuo6IWAWqWdWxseLLk" target="_blank" rel="noopener">SS客户端</a><br><a href="https://drive.google.com/open?id=15sRZ7Sf9CVO0IdELNEvgD7xLxCxMqUVO" target="_blank" rel="noopener">V2ray客户端下载</a></p>
-<h1 id="星际云网络速"><a href="#星际云网络速" class="headerlink" title="星际云网络速"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络速</a></h1><h2 id="Trojan科学上网节点搭建视频教程"><a href="#Trojan科学上网节点搭建视频教程" class="headerlink" title="Trojan科学上网节点搭建视频教程"></a><a href="https://youtu.be/esr4bDuZj34" target="_blank" rel="noopener">Trojan科学上网节点搭建视频教程</a></h2><h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
-      <categories>
-        <category>科学上网</category>
-        <category>SSR</category>
-        <category>V2ray</category>
-        <category>Trojan</category>
-      </categories>
-      <tags>
-        <tag>Trojan</tag>
-        <tag>V2ray</tag>
-        <tag>SSR</tag>
-        <tag>Brook</tag>
       </tags>
   </entry>
   <entry>
@@ -167,45 +193,13 @@
 <h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
       <categories>
         <category>科学上网</category>
-        <category>SSR</category>
         <category>V2ray</category>
+        <category>SSR</category>
         <category>Trojan</category>
       </categories>
       <tags>
         <tag>科学上网</tag>
         <tag>SSR隧道加密</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>利用Caddy完美实现Trojan与V2ray共存</title>
-    <url>/posts/47385.html</url>
-    <content><![CDATA[<h1 id="利用Caddy完美实现Trojan与V2ray共存"><a href="#利用Caddy完美实现Trojan与V2ray共存" class="headerlink" title="利用Caddy完美实现Trojan与V2ray共存"></a><center>利用Caddy完美实现Trojan与V2ray共存</center></h1><h2 id="视频教程"><a href="#视频教程" class="headerlink" title="视频教程"></a><center><a href="https://youtu.be/YuZ4TEayfGw" target="_blank" rel="noopener">视频教程</a></center></h2><p>1：准备工具域名1个；VPS一个（系统镜像ubuntu16.0+）;<br>请先将域名解析至VPS,并确定解析成功后再进行搭建。</p>
-<p>2：安装Docker与Docker Compose；<br>Docker安装脚本：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt-get update</span><br><span class="line">apt-get install docker.io</span><br></pre></td></tr></table></figure>
-<p>Docker Compose安装脚本：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">docker-compose --version</span><br></pre></td></tr></table></figure>
-<p>3:Git工具安装以及源码下载：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt-get install git</span><br></pre></td></tr></table></figure>
-<p>源码下载</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/maidoudouo/V2ray_Trojan_Docker</span><br></pre></td></tr></table></figure>
-<p>4：域名设置<br>进入目录</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> V2ray_Trojan_Docker</span><br></pre></td></tr></table></figure>
-<p>然后启动设置</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./OneKeySet.sh</span><br></pre></td></tr></table></figure>
-<p>5：启动Docker<br>运行脚本</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
-<p>6：配置信息查看：<br>vi info.txt</p>
-<p>若要修改配置信息请先cd V2ray_Trojan_Docker；<br>1：在caddy/Caddyfile中修改Caddy修改域名；<br>2：在v2ray/config.json中修改V2Ray的UUID；<br>3：在trojan/config/config.json中修改Trojan的密码、证书路径、域名。</p>
-<p>(本文脚本源于<a href="https://github.com/maidoudouo/V2ray_Trojan_Docker" target="_blank" rel="noopener">maidoudouo</a>;在此感谢大神的辛勤付出)</p>
-<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
-      <categories>
-        <category>科学上网</category>
-        <category>V2ray</category>
-        <category>Trojan</category>
-      </categories>
-      <tags>
-        <tag>Trojan</tag>
-        <tag>V2ray</tag>
       </tags>
   </entry>
   <entry>
@@ -259,6 +253,38 @@
       </tags>
   </entry>
   <entry>
+    <title>利用Caddy完美实现Trojan与V2ray共存</title>
+    <url>/posts/47385.html</url>
+    <content><![CDATA[<h1 id="利用Caddy完美实现Trojan与V2ray共存"><a href="#利用Caddy完美实现Trojan与V2ray共存" class="headerlink" title="利用Caddy完美实现Trojan与V2ray共存"></a><center>利用Caddy完美实现Trojan与V2ray共存</center></h1><h2 id="视频教程"><a href="#视频教程" class="headerlink" title="视频教程"></a><center><a href="https://youtu.be/YuZ4TEayfGw" target="_blank" rel="noopener">视频教程</a></center></h2><p>1：准备工具域名1个；VPS一个（系统镜像ubuntu16.0+）;<br>请先将域名解析至VPS,并确定解析成功后再进行搭建。</p>
+<p>2：安装Docker与Docker Compose；<br>Docker安装脚本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt-get update</span><br><span class="line">apt-get install docker.io</span><br></pre></td></tr></table></figure>
+<p>Docker Compose安装脚本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">docker-compose --version</span><br></pre></td></tr></table></figure>
+<p>3:Git工具安装以及源码下载：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt-get install git</span><br></pre></td></tr></table></figure>
+<p>源码下载</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/maidoudouo/V2ray_Trojan_Docker</span><br></pre></td></tr></table></figure>
+<p>4：域名设置<br>进入目录</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> V2ray_Trojan_Docker</span><br></pre></td></tr></table></figure>
+<p>然后启动设置</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./OneKeySet.sh</span><br></pre></td></tr></table></figure>
+<p>5：启动Docker<br>运行脚本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+<p>6：配置信息查看：<br>vi info.txt</p>
+<p>若要修改配置信息请先cd V2ray_Trojan_Docker；<br>1：在caddy/Caddyfile中修改Caddy修改域名；<br>2：在v2ray/config.json中修改V2Ray的UUID；<br>3：在trojan/config/config.json中修改Trojan的密码、证书路径、域名。</p>
+<p>(本文脚本源于<a href="https://github.com/maidoudouo/V2ray_Trojan_Docker" target="_blank" rel="noopener">maidoudouo</a>;在此感谢大神的辛勤付出)</p>
+<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
+      <categories>
+        <category>科学上网</category>
+        <category>V2ray</category>
+        <category>Trojan</category>
+      </categories>
+      <tags>
+        <tag>Trojan</tag>
+        <tag>V2ray</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>科学上网SSR VPS搭建一键安装脚本合辑</title>
     <url>/posts/8b0dfdea.html</url>
     <content><![CDATA[<p>逗比SSR一键安装脚本：</p>
@@ -281,31 +307,6 @@
         <tag>SSR</tag>
         <tag>一键安装脚本</tag>
         <tag>SSR节点搭建</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>NAT VPS阿里云DDNS动态域名绑定</title>
-    <url>/posts/ee769b01.html</url>
-    <content><![CDATA[<h1 id="NAT-VPS阿里云DDNS动态域名绑定"><a href="#NAT-VPS阿里云DDNS动态域名绑定" class="headerlink" title="NAT VPS阿里云DDNS动态域名绑定"></a><center>NAT VPS阿里云DDNS动态域名绑定</center></h1><p>根据系统安装依赖：<br>1:centOS安装依赖</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y wget curl cronie</span><br></pre></td></tr></table></figure>
-<p>1.1 Debain/ubuntu依赖安装：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt-get install -y wget curl cron</span><br></pre></td></tr></table></figure>
-<p>2：安装DDNS脚本</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -O /usr/sbin/AliDDNS-v2.0.sh https://ilemonrain.com/download/shell/AliDDNSv2.sh</span><br></pre></td></tr></table></figure>
-<p>3：赋予权限</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chmod +x /usr/sbin/AliDDNS-v2.0.sh</span><br></pre></td></tr></table></figure>
-<p>4：运行AliDDNS 工具</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/usr/sbin/AliDDNS-v2.0.sh</span><br></pre></td></tr></table></figure>
-<p>5：选择1进行配置；<br><img src="/images/5.jpg" alt><br><img src="/images/6.jpg" alt><br>并按提示进行输入域名<br>6：登陆阿里云DNS添加A记录：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">记录类型：A</span><br><span class="line">主机记录：[请填写你的二级域名]</span><br><span class="line">解析线路：默认</span><br><span class="line">记录值：127.0.0.1 (或者随便填写一个IP地址)</span><br><span class="line">TTL： [请根据实际需要选择合适的TTL]</span><br><span class="line">同步默认线路：是 (勾选)</span><br></pre></td></tr></table></figure>
-<p>7：新建用户并分配如下权限<br><a href="https://ram.console.aliyun.com" target="_blank" rel="noopener">创建子用户</a><br>给用户添加权限:<br> AliyunDNSReadOnlyAccess(只读访问云解析(DNS)的权限) 和 AliyunDNSFullAccess(管理云解析(DNS)的权限) </p>
-<p><a href="https://blog.ilemonrain.com/linux/aliddns-v2.html" target="_blank" rel="noopener">以上脚本源于互联网</a></p>
-]]></content>
-      <tags>
-        <tag>ddns</tag>
-        <tag>阿里云</tag>
-        <tag>NAT</tag>
-        <tag>VPS</tag>
       </tags>
   </entry>
   <entry>
