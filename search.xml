@@ -23,6 +23,73 @@
       </tags>
   </entry>
   <entry>
+    <title>CentOS7利用firewall流量转发-实现TCP/UDP中转加速</title>
+    <url>/posts/9b74aaac.html</url>
+    <content><![CDATA[<h1 id="CentOS7-利用firewall流量转发-实现TCP-UDP中转加速"><a href="#CentOS7-利用firewall流量转发-实现TCP-UDP中转加速" class="headerlink" title="CentOS7 利用firewall流量转发-实现TCP/UDP中转加速"></a><center>CentOS7 利用firewall流量转发-实现TCP/UDP中转加速</center></h1><p>支持系统:CentOS7或以上</p>
+<p>原理：<br>客户端[server]————中转服务器（VPS/NAT）安装firewall———落地服务器<br>1：在centos7上安装firewall</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install firewalld -y</span><br></pre></td></tr></table></figure>
+<p>相关命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl start firewalld <span class="comment">##开启防火墙</span></span><br><span class="line">systemctl stop firewalld <span class="comment">##关闭防火墙</span></span><br><span class="line">firewall-cmd --reload <span class="comment">##重启防火墙</span></span><br><span class="line">systemctl status firewalld <span class="comment">##查看防火墙状态</span></span><br><span class="line">systemctl <span class="built_in">enable</span> firewalld <span class="comment">##设置开启启动</span></span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld <span class="comment">##禁用开机启动</span></span><br><span class="line">firewall-cmd --list-ports <span class="comment">##查看开放的端口</span></span><br><span class="line">firewall-cmd --zone=public --add-port=8080/tcp --permanent <span class="comment">##开放指定端口（此处为开放8080，可替换为指定端口号），开放后需重启防火墙生效</span></span><br><span class="line">firewall-cmd --zone=public --remove-port=8080/tcp --permanent <span class="comment">##关闭指定端口（此处为关闭8080，可替换为指定端口号）</span></span><br></pre></td></tr></table></figure>
+<p>2:开启路由转发</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">'net.ipv4.ip_forward = 1'</span> &gt;&gt; /etc/sysctl.conf</span><br></pre></td></tr></table></figure>
+<p>运行以下命令使其生效</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
+<p>3：开启流量伪装功能</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --permanent --add-masquerade</span><br></pre></td></tr></table></figure>
+<p>4:转发端口设置<br>若是全端口机器可无视此步；NAT机参照以下开启端口</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --add-port=开放端口号/tcp --permanent <span class="comment">#开启TCP流量端口</span></span><br><span class="line">firewall-cmd --add-port=开放端口号/udp --permanent <span class="comment">#开启UDP流量端口</span></span><br></pre></td></tr></table></figure>
+<p>5：端口流量转发<br>假设监听端口为8080端口；远程端口为8090；被转发IP为8.8.8.8<br>则运行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --add-forward-port=port=8080:proto=tcp:toaddr=8.8.8.8:toport=8090 --permanent <span class="comment">#开启TCP流量转发</span></span><br><span class="line">firewall-cmd --add-forward-port=port=8080:proto=udp:toaddr=8.8.8.8:toport=8090--permanent <span class="comment">#开启UDP流量转发</span></span><br></pre></td></tr></table></figure>
+<p>6:重载设置使其生效<br>运行如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+<p>7:firewall默认的配置文件路径是/etc/firewalld/zones/public.xml</p>
+<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
+  </entry>
+  <entry>
+    <title>Github Action Openwrt固件自动编译教程</title>
+    <url>/posts/21b7e26f.html</url>
+    <content><![CDATA[<h1 id="Github-Action-Openwrt固件自动编译教程"><a href="#Github-Action-Openwrt固件自动编译教程" class="headerlink" title="Github Action Openwrt固件自动编译教程"></a><center>Github Action Openwrt固件自动编译教程</center></h1><h2 id="视频教程"><a href="#视频教程" class="headerlink" title="视频教程"></a><center><a href="https://youtu.be/YoVhsQDdldA" target="_blank" rel="noopener">视频教程</a></center></h2><p>1:根据<a href="https://github.com/coolsnowwolf/lede" target="_blank" rel="noopener">L大</a>的源码仓库指导步骤，利用 Ubuntu 18 LTS x64的VPS获取对应路由器型号的.config文件。</p>
+<p>2:利用的源码仓<a href="https://github.com/P3TERX/Actions-OpenWrt" target="_blank" rel="noopener">P3TERX</a>导入.config文件启动GitHub Action自动云编译。</p>
+<p>3:进入 P3TERX/Actions-OpenWrt 项目页面，点击 Use this template 。</p>
+<p>4:填写仓库名称，然后点击Create repository from template按钮。经过几秒钟的等待，页面会跳转到新建的仓库，然后点击Create new file按钮。<br>5：然后文件名填写为.config，把生成的.config 文件的内容复制粘贴到下面的文本框中.</p>
+<p>最后等待2-3小时前往Github Action下载压缩包固件使用即可。</p>
+<p>本文参考：<br><a href="https://github.com/coolsnowwolf/lede" target="_blank" rel="noopener">L大</a><br><a href="https://p3terx.com/archives/build-openwrt-with-github-actions.html" target="_blank" rel="noopener">P3TERX</a></p>
+<h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
+      <categories>
+        <category>OpenWrt</category>
+      </categories>
+      <tags>
+        <tag>路由器</tag>
+        <tag>openwrt</tag>
+        <tag>软路由固件</tag>
+        <tag>固件编译</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OpenWrt/Lede软路由FRP内网穿透从无到有完整教程</title>
+    <url>/posts/93a83708.html</url>
+    <content><![CDATA[<h1 id="OpenWrt-Lede软路由FRP内网穿透从无到有完整教程"><a href="#OpenWrt-Lede软路由FRP内网穿透从无到有完整教程" class="headerlink" title="OpenWrt/Lede软路由FRP内网穿透从无到有完整教程"></a><Center>OpenWrt/Lede软路由FRP内网穿透从无到有完整教程</Center></h1><center>[视频教程](https://youtu.be/jeDKfijKNuc)</center>
+
+<p>1:OPENWRT软路由插件安装<br>下载Frps和Frpc.ipk文件以及luci-app-frpc</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">https://github.com/kuoruan/openwrt-frp/releases</span><br><span class="line">https://github.com/kuoruan/luci-app-frpc/releases</span><br></pre></td></tr></table></figure>
+<p>2:利用Winscp上传第1步下载的4个插件<br>然后进入tmp目录<br>cd /tmp<br>然后运行opkg install ***.ipk文件<br>3：准备一个域名并运行VPS然后利用一键安装命令安装frp<br>一键Frp安装脚本如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/MvsCode/frps-onekey/master/install-frps.sh -O ./install-frps.sh</span><br><span class="line">chmod 700 ./install-frps.sh</span><br><span class="line">./install-frps.sh install</span><br></pre></td></tr></table></figure>
+<p>Aliyun</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://code.aliyun.com/MvsCode/frps-onekey/raw/master/install-frps.sh -O ./install-frps.sh</span><br><span class="line">chmod 700 ./install-frps.sh</span><br><span class="line">./install-frps.sh install</span><br></pre></td></tr></table></figure>
+<p>其余相关命令：<br>Uninstall（卸载）<br>./install-frps.sh uninstall<br>Update（更新）<br>./install-frps.sh update<br>Server management（服务管理器）<br>Usage: /etc/init.d/frps {start|stop|restart|status|config|version}<br>4：输入域名，解析域名</p>
+<p>5：在OpenWrt里设置Frp，启动服务，设置http、端口、本地IP。</p>
+<p>6：以上设置发后即可以用域名访问OpenWrt/Lede软路由.</p>
+<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
+      <categories>
+        <category>Openwrt</category>
+        <category>Frp</category>
+      </categories>
+      <tags>
+        <tag>openwrt</tag>
+        <tag>frp</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>NAT VPS阿里云DDNS动态域名绑定</title>
     <url>/posts/ee769b01.html</url>
     <content><![CDATA[<h1 id="NAT-VPS阿里云DDNS动态域名绑定"><a href="#NAT-VPS阿里云DDNS动态域名绑定" class="headerlink" title="NAT VPS阿里云DDNS动态域名绑定"></a><center>NAT VPS阿里云DDNS动态域名绑定</center></h1><p><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">视频教程</a></p>
@@ -49,80 +116,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Github Action Openwrt固件自动编译教程</title>
-    <url>/posts/21b7e26f.html</url>
-    <content><![CDATA[<h1 id="Github-Action-Openwrt固件自动编译教程"><a href="#Github-Action-Openwrt固件自动编译教程" class="headerlink" title="Github Action Openwrt固件自动编译教程"></a><center>Github Action Openwrt固件自动编译教程</center></h1><h2 id="视频教程"><a href="#视频教程" class="headerlink" title="视频教程"></a><center><a href="https://youtu.be/YoVhsQDdldA" target="_blank" rel="noopener">视频教程</a></center></h2><p>1:根据<a href="https://github.com/coolsnowwolf/lede" target="_blank" rel="noopener">L大</a>的源码仓库指导步骤，利用 Ubuntu 18 LTS x64的VPS获取对应路由器型号的.config文件。</p>
-<p>2:利用的源码仓<a href="https://github.com/P3TERX/Actions-OpenWrt" target="_blank" rel="noopener">P3TERX</a>导入.config文件启动GitHub Action自动云编译。</p>
-<p>3:进入 P3TERX/Actions-OpenWrt 项目页面，点击 Use this template 。</p>
-<p>4:填写仓库名称，然后点击Create repository from template按钮。经过几秒钟的等待，页面会跳转到新建的仓库，然后点击Create new file按钮。<br>5：然后文件名填写为.config，把生成的.config 文件的内容复制粘贴到下面的文本框中.</p>
-<p>最后等待2-3小时前往Github Action下载压缩包固件使用即可。</p>
-<p>本文参考：<br><a href="https://github.com/coolsnowwolf/lede" target="_blank" rel="noopener">L大</a><br><a href="https://p3terx.com/archives/build-openwrt-with-github-actions.html" target="_blank" rel="noopener">P3TERX</a></p>
-<h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
-      <categories>
-        <category>OpenWrt</category>
-      </categories>
-      <tags>
-        <tag>路由器</tag>
-        <tag>openwrt</tag>
-        <tag>软路由固件</tag>
-        <tag>固件编译</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CentOS7利用firewall流量转发-实现TCP/UDP中转加速</title>
-    <url>/posts/9b74aaac.html</url>
-    <content><![CDATA[<h1 id="CentOS7-利用firewall流量转发-实现TCP-UDP中转加速"><a href="#CentOS7-利用firewall流量转发-实现TCP-UDP中转加速" class="headerlink" title="CentOS7 利用firewall流量转发-实现TCP/UDP中转加速"></a><center>CentOS7 利用firewall流量转发-实现TCP/UDP中转加速</center></h1><p>支持系统:CentOS7或以上</p>
-<p>原理：<br>客户端[server]————中转服务器（VPS/NAT）安装firewall———落地服务器<br>1：在centos7上安装firewall</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install firewalld -y</span><br></pre></td></tr></table></figure>
-<p>相关命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl start firewalld <span class="comment">##开启防火墙</span></span><br><span class="line">systemctl stop firewalld <span class="comment">##关闭防火墙</span></span><br><span class="line">firewall-cmd --reload <span class="comment">##重启防火墙</span></span><br><span class="line">systemctl status firewalld <span class="comment">##查看防火墙状态</span></span><br><span class="line">systemctl <span class="built_in">enable</span> firewalld <span class="comment">##设置开启启动</span></span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld <span class="comment">##禁用开机启动</span></span><br><span class="line">firewall-cmd --list-ports <span class="comment">##查看开放的端口</span></span><br><span class="line">firewall-cmd --zone=public --add-port=8080/tcp --permanent <span class="comment">##开放指定端口（此处为开放8080，可替换为指定端口号），开放后需重启防火墙生效</span></span><br><span class="line">firewall-cmd --zone=public --remove-port=8080/tcp --permanent <span class="comment">##关闭指定端口（此处为关闭8080，可替换为指定端口号）</span></span><br></pre></td></tr></table></figure>
-<p>2:开启路由转发</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">'net.ipv4.ip_forward = 1'</span> &gt;&gt; /etc/sysctl.conf</span><br></pre></td></tr></table></figure>
-<p>运行以下命令使其生效</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
-<p>3：开启流量伪装功能</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --permanent --add-masquerade</span><br></pre></td></tr></table></figure>
-<p>4:转发端口设置<br>若是全端口机器可无视此步；NAT机参照以下开启端口</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --add-port=开放端口号/tcp --permanent <span class="comment">#开启TCP流量端口</span></span><br><span class="line">firewall-cmd --add-port=开放端口号/udp --permanent <span class="comment">#开启UDP流量端口</span></span><br></pre></td></tr></table></figure>
-<p>5：端口流量转发<br>假设监听端口为8080端口；远程端口为8090；被转发IP为8.8.8.8<br>则运行以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --add-forward-port=port=8080:proto=tcp:toaddr=8.8.8.8:toport=8090 --permanent <span class="comment">#开启TCP流量转发</span></span><br><span class="line">firewall-cmd --add-forward-port=port=8080:proto=udp:toaddr=8.8.8.8:toport=8090--permanent <span class="comment">#开启UDP流量转发</span></span><br></pre></td></tr></table></figure>
-<p>6:重载设置使其生效<br>运行如下命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
-<p>7:firewall默认的配置文件路径是/etc/firewalld/zones/public.xml</p>
-<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
-  </entry>
-  <entry>
-    <title>Trojan+v2ray+SSR单VPS共存</title>
-    <url>/posts/46908.html</url>
-    <content><![CDATA[<iframe width="560" height="315" src="https://www.youtube.com/embed/hSqO8ppMYyc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<h1 id="Trojan-v2ray-SSR单VPS共存"><a href="#Trojan-v2ray-SSR单VPS共存" class="headerlink" title="Trojan+v2ray+SSR单VPS共存"></a><center>Trojan+v2ray+SSR单VPS共存</center></h1><p> 准备工具：域名1个/VPS一台(CentOS7)<br>视频教程：<a href="https://youtu.be/hSqO8ppMYyc" target="_blank" rel="noopener">YouTube</a><br>1:域名解析到VPS；解析要充分，以便全球生效！</p>
-<p>2：安装BBR PLUS加速（可选）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget <span class="string">"https://github.com/chiakge/Linux-NetSpeed/raw/master/tcp.sh"</span> &amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh</span><br></pre></td></tr></table></figure>
-<p>3:大神atrandys一键安装Trojan脚本：<br>若提示无wget,则运行：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install wget</span><br></pre></td></tr></table></figure>
-<p>然后再运行下面Docker版Trojan一键安装脚本:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -O https://raw.githubusercontent.com/atrandys/trojan/master/trojan_install.sh &amp;&amp; chmod +x trojan_install.sh &amp;&amp; ./trojan_install.sh</span><br></pre></td></tr></table></figure>
-<p>4：运行大神Docker的UI管理Portainer一键脚本：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">--name ui --restart=always lihaixin/portainer:me</span><br></pre></td></tr></table></figure>
-<p>5：浏览器运行<a href="https://VPS_IP:9000;设置密码并创建帐户，然后选择local。">https://VPS_IP:9000;设置密码并创建帐户，然后选择local。</a></p>
-<p>6:在容器containers中可以看到安装的Trojan；在App Templates中可以选择V2ray、SSR、Brook等代理程序</p>
-<p>8：客户端下载<br><a href="https://drive.google.com/open?id=1m9b6n9KnWI40octuo6IWAWqWdWxseLLk" target="_blank" rel="noopener">SS客户端</a><br><a href="https://drive.google.com/open?id=15sRZ7Sf9CVO0IdELNEvgD7xLxCxMqUVO" target="_blank" rel="noopener">V2ray客户端下载</a></p>
-<h1 id="星际云网络速"><a href="#星际云网络速" class="headerlink" title="星际云网络速"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络速</a></h1><h2 id="Trojan科学上网节点搭建视频教程"><a href="#Trojan科学上网节点搭建视频教程" class="headerlink" title="Trojan科学上网节点搭建视频教程"></a><a href="https://youtu.be/esr4bDuZj34" target="_blank" rel="noopener">Trojan科学上网节点搭建视频教程</a></h2><h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
-      <categories>
-        <category>科学上网</category>
-        <category>V2ray</category>
-        <category>SSR</category>
-        <category>Trojan</category>
-      </categories>
-      <tags>
-        <tag>Trojan</tag>
-        <tag>V2ray</tag>
-        <tag>SSR</tag>
-        <tag>Brook</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>SSR/TROJAN/V2RAY客户端下载汇总</title>
     <url>/posts/f9792ba.html</url>
     <content><![CDATA[<h1 id="SSR-TROJAN-V2RAY科学上网客户端下载"><a href="#SSR-TROJAN-V2RAY科学上网客户端下载" class="headerlink" title="SSR+TROJAN+V2RAY科学上网客户端下载"></a><center>SSR+TROJAN+V2RAY科学上网客户端下载</center></h1><p>1:SSR客户端<br><a href="https://www.xjycloud.xyz/ssr-download/ssr-win.7z" target="_blank" rel="noopener">Windows客户端</a><br><a href="https://www.xjycloud.xyz/ssr-download/ssr-mac.dmg" target="_blank" rel="noopener">MACOS客户端</a><br>2:Trojan客户端<br><a href="https://github.com/trojan-gfw/trojan/releases/download/v1.15.1/trojan-1.15.1-win.zip" target="_blank" rel="noopener">Windows客户端</a><br><a href="https://github.com/trojan-gfw/trojan/releases/download/v1.15.1/trojan-1.15.1-macos.zip" target="_blank" rel="noopener">MACOS客户端</a><br>3:V2RAY客户端<br><a href="https://github.com/v2ray/v2ray-core/releases/download/v4.23.1/v2ray-openbsd-64.zip" target="_blank" rel="noopener">Windows</a><br><a href="https://github.com/v2ray/v2ray-core/releases/download/v4.23.1/v2ray-openbsd-32.zip" target="_blank" rel="noopener">MACOS客户端</a></p>
@@ -136,30 +129,6 @@
         <tag>V2ray</tag>
         <tag>科学上网</tag>
         <tag>SSR</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>OpenWrt/Lede软路由FRP内网穿透从无到有完整教程</title>
-    <url>/posts/93a83708.html</url>
-    <content><![CDATA[<h1 id="OpenWrt-Lede软路由FRP内网穿透从无到有完整教程"><a href="#OpenWrt-Lede软路由FRP内网穿透从无到有完整教程" class="headerlink" title="OpenWrt/Lede软路由FRP内网穿透从无到有完整教程"></a><Center>OpenWrt/Lede软路由FRP内网穿透从无到有完整教程</Center></h1><center>[视频教程](https://youtu.be/jeDKfijKNuc)</center>
-
-<p>1:OPENWRT软路由插件安装<br>下载Frps和Frpc.ipk文件以及luci-app-frpc</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">https://github.com/kuoruan/openwrt-frp/releases</span><br><span class="line">https://github.com/kuoruan/luci-app-frpc/releases</span><br></pre></td></tr></table></figure>
-<p>2:利用Winscp上传第1步下载的4个插件<br>然后进入tmp目录<br>cd /tmp<br>然后运行opkg install ***.ipk文件<br>3：准备一个域名并运行VPS然后利用一键安装命令安装frp<br>一键Frp安装脚本如下：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/MvsCode/frps-onekey/master/install-frps.sh -O ./install-frps.sh</span><br><span class="line">chmod 700 ./install-frps.sh</span><br><span class="line">./install-frps.sh install</span><br></pre></td></tr></table></figure>
-<p>Aliyun</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://code.aliyun.com/MvsCode/frps-onekey/raw/master/install-frps.sh -O ./install-frps.sh</span><br><span class="line">chmod 700 ./install-frps.sh</span><br><span class="line">./install-frps.sh install</span><br></pre></td></tr></table></figure>
-<p>其余相关命令：<br>Uninstall（卸载）<br>./install-frps.sh uninstall<br>Update（更新）<br>./install-frps.sh update<br>Server management（服务管理器）<br>Usage: /etc/init.d/frps {start|stop|restart|status|config|version}<br>4：输入域名，解析域名</p>
-<p>5：在OpenWrt里设置Frp，启动服务，设置http、端口、本地IP。</p>
-<p>6：以上设置发后即可以用域名访问OpenWrt/Lede软路由.</p>
-<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
-      <categories>
-        <category>Openwrt</category>
-        <category>Frp</category>
-      </categories>
-      <tags>
-        <tag>openwrt</tag>
-        <tag>frp</tag>
       </tags>
   </entry>
   <entry>
@@ -193,13 +162,84 @@
 <h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
       <categories>
         <category>科学上网</category>
-        <category>V2ray</category>
         <category>SSR</category>
+        <category>V2ray</category>
         <category>Trojan</category>
       </categories>
       <tags>
         <tag>科学上网</tag>
         <tag>SSR隧道加密</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Trojan-Go+Cloudflare拯救被墙VPS IP</title>
+    <url>/posts/3cf5eae.html</url>
+    <content><![CDATA[<h1 id="Trojan-Go-CDN-Cloudflare-拯救被墙VPS-IP"><a href="#Trojan-Go-CDN-Cloudflare-拯救被墙VPS-IP" class="headerlink" title="Trojan-Go+CDN(Cloudflare)拯救被墙VPS IP"></a><center>Trojan-Go+CDN(Cloudflare)拯救被墙VPS IP</center></h1><p><a href="https://github.com/p4gefau1t/trojan-go" target="_blank" rel="noopener">Trojan-Go项目地址</a><br><a href="https://p4gefau1t.github.io/trojan-go" target="_blank" rel="noopener">Trojan-Go官方文档</a><br>搭建教程：<br>1：准备工具:VPS一台（系统镜像CentOS7）/域名1个<br>2：解析域名至VPS<br>方法：登陆Cloudflare添加域名生成NS1与NS2；然后将NS1与NS2复制至域名服务商的DNS处完成解析绑定；最后将SSL/TLS设成Full (strict)——这一步很重要。<br>注：若证书要使用CF进行申请，请不要将CF云朵点成黄色，否则无法成功！！！<br>3：用xshell连接VPS；关闭防火墙；</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br></pre></td></tr></table></figure>
+<p>4：下载Trojan-Go脚本并解压：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -N --no-check-certificate https://github.com/p4gefau1t/trojan-go/releases/download/v0.6.0/trojan-go-linux-amd64.zip &amp;&amp; unzip trojan-go-linux-amd64.zip</span><br></pre></td></tr></table></figure>
+<p>进入example目录运行如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> example</span><br><span class="line">mv * ../</span><br></pre></td></tr></table></figure>
+<p>5:配置证书（证书有效期一般为3个月）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo ./trojan-go -autocert request</span><br></pre></td></tr></table></figure>
+<p>根据提示输入域名邮箱生成证书文件server.crt与server.key</p>
+<p>注：证书到期后，更请新运行如下命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo ./trojan-go -autocert renew</span><br></pre></td></tr></table></figure>
+<p>6：编辑服务端server.json文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi server.json</span><br></pre></td></tr></table></figure>
+<p>将参数更改成如下配置：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"run_type"</span>: <span class="string">"server"</span>,</span><br><span class="line">  <span class="string">"local_addr"</span>: <span class="string">"0.0.0.0"</span>,</span><br><span class="line">  <span class="string">"local_port"</span>: 443,</span><br><span class="line">  <span class="string">"remote_addr"</span>: <span class="string">"127.0.0.1"</span>,</span><br><span class="line">  <span class="string">"remote_port"</span>: 80,</span><br><span class="line">  <span class="string">"log_level"</span>: 1,</span><br><span class="line">  <span class="string">"log_file"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="string">"password"</span>: [</span><br><span class="line"><span class="string">"siemenstutorials（自行设定密码）"</span>],</span><br><span class="line">  <span class="string">"buffer_size"</span>: 32,</span><br><span class="line">  <span class="string">"dns"</span>: [],</span><br><span class="line">  <span class="string">"disable_http_check"</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="string">"ssl"</span>: &#123;</span><br><span class="line">    <span class="string">"verify"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">"verify_hostname"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">"cert"</span>: <span class="string">"server.crt(证书名)"</span>,</span><br><span class="line">    <span class="string">"key"</span>: <span class="string">"server.key(证书名)"</span>,</span><br><span class="line">    <span class="string">"key_password"</span>: <span class="string">""</span>,</span><br><span class="line">    <span class="string">"cipher"</span>: <span class="string">""</span>,</span><br><span class="line">    <span class="string">"cipher_tls13"</span>: <span class="string">""</span>,</span><br><span class="line">    <span class="string">"curves"</span>: <span class="string">""</span>,</span><br><span class="line">    <span class="string">"prefer_server_cipher"</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">"sni"</span>: <span class="string">"www.siemenstutorials.tk(请替换)"</span>,</span><br><span class="line">    <span class="string">"alpn"</span>: [</span><br><span class="line">      <span class="string">"http/1.1"</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="string">"session_ticket"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">"reuse_session"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">"plain_http_response"</span>: <span class="string">""</span>,</span><br><span class="line">    <span class="string">"fallback_port"</span>: 0,</span><br><span class="line">    <span class="string">"fingerprint"</span>: <span class="string">"firefox"</span>,</span><br><span class="line">    <span class="string">"serve_plain_text"</span>: <span class="literal">false</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"tcp"</span>: &#123;</span><br><span class="line">    <span class="string">"no_delay"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">"keep_alive"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">"reuse_port"</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">"prefer_ipv4"</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">"fast_open"</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">"fast_open_qlen"</span>: 20</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"mux"</span>: &#123;</span><br><span class="line">    <span class="string">"enabled"</span>: <span class="literal">true</span>, <span class="comment">#默认faluse</span></span><br><span class="line">    <span class="string">"concurrency"</span>: 8,</span><br><span class="line">    <span class="string">"idle_timeout"</span>: 60</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"router"</span>: &#123;</span><br><span class="line">    <span class="string">"enabled"</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">"bypass"</span>: [],</span><br><span class="line">    <span class="string">"proxy"</span>: [],</span><br><span class="line">    <span class="string">"block"</span>: [],</span><br><span class="line">    <span class="string">"default_policy"</span>: <span class="string">"proxy"</span>,</span><br><span class="line">    <span class="string">"domain_strategy"</span>: <span class="string">"as_is"</span>,</span><br><span class="line">    <span class="string">"geoip"</span>: <span class="string">"geoip.dat"</span>,</span><br><span class="line">    <span class="string">"geosite"</span>: <span class="string">"geosite.dat"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"websocket"</span>: &#123;</span><br><span class="line">    <span class="string">"enabled"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">"path"</span>: <span class="string">"/trojan（请自行设置路径）"</span>,</span><br><span class="line">    <span class="string">"hostname"</span>: <span class="string">"www.siemenstutorials.tk(请替换)"</span>,</span><br><span class="line">    <span class="string">"obfuscation_password"</span>: <span class="string">""</span>,</span><br><span class="line">    <span class="string">"double_tls"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">"ssl"</span>: &#123;</span><br><span class="line">      <span class="string">"verify"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="string">"verify_hostname"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="string">"cert"</span>: <span class="string">"server.crt（设置）"</span>,</span><br><span class="line">      <span class="string">"key"</span>: <span class="string">"server.key（设置）"</span>,</span><br><span class="line">      <span class="string">"key_password"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="string">"prefer_server_cipher"</span>: <span class="literal">false</span>,</span><br><span class="line">      <span class="string">"sni"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="string">"session_ticket"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="string">"reuse_session"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="string">"plain_http_response"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="string">"key_log"</span>: <span class="string">""</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"transport_plugin"</span>: &#123;</span><br><span class="line">    <span class="string">"enabled"</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">"type"</span>: <span class="string">""</span>,</span><br><span class="line">    <span class="string">"command"</span>: <span class="string">""</span>,</span><br><span class="line">    <span class="string">"plugin_option"</span>: <span class="string">""</span>,</span><br><span class="line">    <span class="string">"arg"</span>: [],</span><br><span class="line">    <span class="string">"env"</span>: []</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"forward_proxy"</span>: &#123;</span><br><span class="line">    <span class="string">"enabled"</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">"proxy_addr"</span>: <span class="string">""</span>,</span><br><span class="line">    <span class="string">"proxy_port"</span>: 0,</span><br><span class="line">    <span class="string">"username"</span>: <span class="string">""</span>,</span><br><span class="line">    <span class="string">"password"</span>: <span class="string">""</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"mysql"</span>: &#123;</span><br><span class="line">    <span class="string">"enabled"</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">"server_addr"</span>: <span class="string">"localhost"</span>,</span><br><span class="line">    <span class="string">"server_port"</span>: 3306,</span><br><span class="line">    <span class="string">"database"</span>: <span class="string">""</span>,</span><br><span class="line">    <span class="string">"username"</span>: <span class="string">""</span>,</span><br><span class="line">    <span class="string">"password"</span>: <span class="string">""</span>,</span><br><span class="line">    <span class="string">"check_rate"</span>: 60</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"redis"</span>: &#123;</span><br><span class="line">    <span class="string">"enabled"</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">"server_addr"</span>: <span class="string">"localhost"</span>,</span><br><span class="line">    <span class="string">"server_port"</span>: 6379,</span><br><span class="line">    <span class="string">"password"</span>: <span class="string">""</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"api"</span>: &#123;</span><br><span class="line">    <span class="string">"enabled"</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">"api_addr"</span>: <span class="string">""</span>,</span><br><span class="line">    <span class="string">"api_port"</span>: 0,</span><br><span class="line">    <span class="string">"api_tls"</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">"ssl"</span>: &#123;</span><br><span class="line">      <span class="string">"cert"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="string">"key"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="string">"key_password"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="string">"client_cert"</span>: []</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>7：编辑client.json文件：<br>vi client.json<br>修改后参数如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"run_type"</span>: <span class="string">"client"</span>,</span><br><span class="line">    <span class="string">"local_addr"</span>: <span class="string">"127.0.0.1"</span>,</span><br><span class="line">    <span class="string">"local_port"</span>: 1080,</span><br><span class="line">    <span class="string">"remote_addr"</span>: <span class="string">"www.siemenstutorials.tk"</span>,</span><br><span class="line">    <span class="string">"remote_port"</span>: 443,</span><br><span class="line">    <span class="string">"password"</span>: [</span><br><span class="line">        <span class="string">"siemenstutorials"</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="string">"ssl"</span>: &#123;</span><br><span class="line">        <span class="string">"sni"</span>: <span class="string">"www.siemenstutorials.tk"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"mux"</span> :&#123;</span><br><span class="line">        <span class="string">"enabled"</span>: <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"router"</span>:&#123;</span><br><span class="line">        <span class="string">"enabled"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="string">"bypass"</span>: [</span><br><span class="line">            <span class="string">"geoip:cn"</span>,</span><br><span class="line">            <span class="string">"geoip:private"</span>,</span><br><span class="line">            <span class="string">"geosite:cn"</span>,</span><br><span class="line">            <span class="string">"geosite:geolocation-cn"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">"block"</span>: [</span><br><span class="line">            <span class="string">"geosite:category-ads"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">"proxy"</span>: [</span><br><span class="line">            <span class="string">"geosite:geolocation-!cn"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">"default_policy"</span>: <span class="string">"proxy"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注：输入i进入insert状态进行修改；输入ESC后再输入 :wq退出编辑</p>
+<p>8：连通性测试：<br>在VPS端输入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./trojan-go -config ./server.json</span><br></pre></td></tr></table></figure>
+<p>在本地windows客户端Trojan-Qt5进行设置参数；<a href="https://github.com/Trojan-Qt5/Trojan-Qt5/" target="_blank" rel="noopener">Trojan-Qt5下载</a><br>添加Trojan节点<br>设置参数见下图：<br>！<a href="/images/7.jpg"></a></p>
+<p>9：确认正常访问YT后设置服务端后台无日志运行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nohup ./trojan-go -config ./server.json &amp;</span><br></pre></td></tr></table></figure>
+<p>END</p>
+<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
+      <categories>
+        <category>科学上网</category>
+        <category>Trojan</category>
+      </categories>
+      <tags>
+        <tag>Trojan</tag>
+        <tag>VPS</tag>
+        <tag>Trojan-GO</tag>
+        <tag>CDN</tag>
+        <tag>Cloudflare</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Trojan+v2ray+SSR单VPS共存</title>
+    <url>/posts/46908.html</url>
+    <content><![CDATA[<iframe width="560" height="315" src="https://www.youtube.com/embed/hSqO8ppMYyc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h1 id="Trojan-v2ray-SSR单VPS共存"><a href="#Trojan-v2ray-SSR单VPS共存" class="headerlink" title="Trojan+v2ray+SSR单VPS共存"></a><center>Trojan+v2ray+SSR单VPS共存</center></h1><p> 准备工具：域名1个/VPS一台(CentOS7)<br>视频教程：<a href="https://youtu.be/hSqO8ppMYyc" target="_blank" rel="noopener">YouTube</a><br>1:域名解析到VPS；解析要充分，以便全球生效！</p>
+<p>2：安装BBR PLUS加速（可选）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget <span class="string">"https://github.com/chiakge/Linux-NetSpeed/raw/master/tcp.sh"</span> &amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh</span><br></pre></td></tr></table></figure>
+<p>3:大神atrandys一键安装Trojan脚本：<br>若提示无wget,则运行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install wget</span><br></pre></td></tr></table></figure>
+<p>然后再运行下面Docker版Trojan一键安装脚本:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -O https://raw.githubusercontent.com/atrandys/trojan/master/trojan_install.sh &amp;&amp; chmod +x trojan_install.sh &amp;&amp; ./trojan_install.sh</span><br></pre></td></tr></table></figure>
+<p>4：运行大神Docker的UI管理Portainer一键脚本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">--name ui --restart=always lihaixin/portainer:me</span><br></pre></td></tr></table></figure>
+<p>5：浏览器运行<a href="https://VPS_IP:9000;设置密码并创建帐户，然后选择local。">https://VPS_IP:9000;设置密码并创建帐户，然后选择local。</a></p>
+<p>6:在容器containers中可以看到安装的Trojan；在App Templates中可以选择V2ray、SSR、Brook等代理程序</p>
+<p>8：客户端下载<br><a href="https://drive.google.com/open?id=1m9b6n9KnWI40octuo6IWAWqWdWxseLLk" target="_blank" rel="noopener">SS客户端</a><br><a href="https://drive.google.com/open?id=15sRZ7Sf9CVO0IdELNEvgD7xLxCxMqUVO" target="_blank" rel="noopener">V2ray客户端下载</a></p>
+<h1 id="星际云网络速"><a href="#星际云网络速" class="headerlink" title="星际云网络速"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络速</a></h1><h2 id="Trojan科学上网节点搭建视频教程"><a href="#Trojan科学上网节点搭建视频教程" class="headerlink" title="Trojan科学上网节点搭建视频教程"></a><a href="https://youtu.be/esr4bDuZj34" target="_blank" rel="noopener">Trojan科学上网节点搭建视频教程</a></h2><h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
+      <categories>
+        <category>科学上网</category>
+        <category>SSR</category>
+        <category>V2ray</category>
+        <category>Trojan</category>
+      </categories>
+      <tags>
+        <tag>Trojan</tag>
+        <tag>V2ray</tag>
+        <tag>SSR</tag>
+        <tag>Brook</tag>
       </tags>
   </entry>
   <entry>
