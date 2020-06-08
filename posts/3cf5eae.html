@@ -87,8 +87,9 @@
 <meta property="og:url" content="https://siemenstutorials.github.io/posts/3cf5eae.html">
 <meta property="og:site_name" content="SiemensTutorials">
 <meta property="og:description" content="Trojan-Go+CDN(Cloudflare)拯救被墙VPS IPTrojan-Go项目地址Trojan-Go官方文档搭建教程：1：准备工具:VPS一台（系统镜像CentOS7）&#x2F;域名1个2：解析域名至VPS方法：登陆Cloudflare添加域名生成NS1与NS2；然后将NS1与NS2复制至域名服务商的DNS处完成解析绑定；最后将SSL&#x2F;TLS设成Full (strict)——这一步很重要。注">
+<meta property="og:image" content="https://siemenstutorials.github.io/images/7.jpg">
 <meta property="article:published_time" content="2020-06-06T14:15:00.000Z">
-<meta property="article:modified_time" content="2020-06-06T15:47:07.934Z">
+<meta property="article:modified_time" content="2020-06-08T17:15:31.424Z">
 <meta property="article:author" content="SiemensTutorials">
 <meta property="article:tag" content="Trojan">
 <meta property="article:tag" content="VPS">
@@ -96,6 +97,7 @@
 <meta property="article:tag" content="CDN">
 <meta property="article:tag" content="Cloudflare">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://siemenstutorials.github.io/images/7.jpg">
 
 
 
@@ -403,9 +405,10 @@
 <p>注：输入i进入insert状态进行修改；输入ESC后再输入 :wq退出编辑</p>
 <p>8：连通性测试：<br>在VPS端输入</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./trojan-go -config ./server.json</span><br></pre></td></tr></table></figure>
-<p>在本地windows客户端Trojan-Qt5进行设置参数；<a href="https://github.com/Trojan-Qt5/Trojan-Qt5/" target="_blank" rel="noopener">Trojan-Qt5下载</a><br>添加Trojan节点<br>设置参数见下图：<br>！<a href="/images/7.jpg"></a></p>
+<p>在本地windows客户端Trojan-Qt5进行设置参数；<a href="https://github.com/Trojan-Qt5/Trojan-Qt5/" target="_blank" rel="noopener">Trojan-Qt5下载</a><br>添加Trojan节点<br>设置参数见下图：<br><img src="/images/7.jpg" alt></p>
 <p>9：确认正常访问YT后设置服务端后台无日志运行：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup ./trojan-go -config ./server.json &amp;</span><br></pre></td></tr></table></figure>
+<p>注意：若要实现开机自动重启请选择ubuntu和Debian系统;因CentOS7经测试无法自动运行。<br>Ubuntu<br>apt-get install nginx<br>apt install unzip</p>
 <p>END</p>
 <h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>
       
