@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://siemenstutorials.github.io/"/>
-  <updated>2020-06-21T01:12:42.386Z</updated>
+  <updated>2020-06-22T16:21:45.625Z</updated>
   <id>https://siemenstutorials.github.io/</id>
   
   <author>
@@ -15,6 +15,40 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SSPANEL 后端端口偏移食用方法</title>
+    <link href="https://siemenstutorials.github.io/posts/f6ab28ab.html"/>
+    <id>https://siemenstutorials.github.io/posts/f6ab28ab.html</id>
+    <published>2020-06-22T16:12:24.000Z</published>
+    <updated>2020-06-22T16:21:45.625Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="SSPANEL-后端端口偏移食用方法"><a href="#SSPANEL-后端端口偏移食用方法" class="headerlink" title="SSPANEL 后端端口偏移食用方法"></a><center>SSPANEL 后端端口偏移食用方法</center></h1><p>以下以CentOS7为例<br>1:Docker安装</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -sSL https://get.docker.com/ | sh</span><br><span class="line">service docker restart</span><br><span class="line">`</span><br></pre></td></tr></table></figure><p>2:全端口偏移</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name=自定义名字 -e NODE_ID=节点ID -e API_INTERFACE=modwebapi -e WEBAPI_URL=https://siemenstutorial.tk -e WEBAPI_TOKEN=密码 --network=host --<span class="built_in">log</span>-opt max-size=50m --<span class="built_in">log</span>-opt max-file=3 --restart=always fanvinga/docker-ssrmu</span><br></pre></td></tr></table></figure><p>2.1:单端口偏移</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name=name(自定义) -e NODE_ID=节点ID -e API_INTERFACE=modwebapi -e WEBAPI_URL=https://siemenstutorial.tk -e SPEEDTEST=0 -e WEBAPI_TOKEN=密码 --<span class="built_in">log</span>-opt max-size=50m --<span class="built_in">log</span>-opt max-file=3 -p 偏移后端口:承载端口/tcp -p 偏移后端口:承载端口/udp --restart=always fanvinga/docker-ssrmu</span><br></pre></td></tr></table></figure><p>3:关闭防火墙</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br></pre></td></tr></table></figure><p>END</p><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;SSPANEL-后端端口偏移食用方法&quot;&gt;&lt;a href=&quot;#SSPANEL-后端端口偏移食用方法&quot; class=&quot;headerlink&quot; title=&quot;SSPANEL 后端端口偏移食用方法&quot;&gt;&lt;/a&gt;&lt;center&gt;SSPANEL 后端端口偏移食用方法&lt;/cent
+      
+    
+    </summary>
+    
+    
+      <category term="SSPANEL" scheme="https://siemenstutorials.github.io/categories/SSPANEL/"/>
+    
+      <category term="端口偏移" scheme="https://siemenstutorials.github.io/categories/SSPANEL/%E7%AB%AF%E5%8F%A3%E5%81%8F%E7%A7%BB/"/>
+    
+    
+      <category term="sspanel" scheme="https://siemenstutorials.github.io/tags/sspanel/"/>
+    
+      <category term="ssr" scheme="https://siemenstutorials.github.io/tags/ssr/"/>
+    
+      <category term="v2ray" scheme="https://siemenstutorials.github.io/tags/v2ray/"/>
+    
+      <category term="shadowsocks" scheme="https://siemenstutorials.github.io/tags/shadowsocks/"/>
+    
+  </entry>
   
   <entry>
     <title>SSPANEL Brook SSR中转节点搭建</title>
@@ -438,9 +472,9 @@
     
       <category term="科学上网" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
     
-      <category term="V2ray" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/V2ray/"/>
-    
       <category term="Trojan" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/Trojan/"/>
+    
+      <category term="V2ray" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/V2ray/"/>
     
     
       <category term="Trojan" scheme="https://siemenstutorials.github.io/tags/Trojan/"/>
@@ -470,11 +504,11 @@
     
       <category term="科学上网" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
     
-      <category term="SSR" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/SSR/"/>
+      <category term="Trojan" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/Trojan/"/>
     
       <category term="V2ray" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/V2ray/"/>
     
-      <category term="Trojan" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/Trojan/"/>
+      <category term="SSR" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/SSR/"/>
     
     
       <category term="Trojan" scheme="https://siemenstutorials.github.io/tags/Trojan/"/>
@@ -508,11 +542,11 @@
     
       <category term="科学上网" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
     
-      <category term="SSR" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/SSR/"/>
+      <category term="Trojan" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/Trojan/"/>
     
       <category term="V2ray" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/V2ray/"/>
     
-      <category term="Trojan" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/Trojan/"/>
+      <category term="SSR" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/SSR/"/>
     
     
       <category term="科学上网" scheme="https://siemenstutorials.github.io/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
