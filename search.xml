@@ -23,26 +23,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Github Action Openwrt固件自动编译教程</title>
-    <url>/posts/21b7e26f.html</url>
-    <content><![CDATA[<h1 id="Github-Action-Openwrt固件自动编译教程"><a href="#Github-Action-Openwrt固件自动编译教程" class="headerlink" title="Github Action Openwrt固件自动编译教程"></a><center>Github Action Openwrt固件自动编译教程</center></h1><h2 id="视频教程"><a href="#视频教程" class="headerlink" title="视频教程"></a><center><a href="https://youtu.be/YoVhsQDdldA" target="_blank" rel="noopener">视频教程</a></center></h2><p>1:根据<a href="https://github.com/coolsnowwolf/lede" target="_blank" rel="noopener">L大</a>的源码仓库指导步骤，利用 Ubuntu 18 LTS x64的VPS获取对应路由器型号的.config文件。</p>
-<p>2:利用的源码仓<a href="https://github.com/P3TERX/Actions-OpenWrt" target="_blank" rel="noopener">P3TERX</a>导入.config文件启动GitHub Action自动云编译。</p>
-<p>3:进入 P3TERX/Actions-OpenWrt 项目页面，点击 Use this template 。</p>
-<p>4:填写仓库名称，然后点击Create repository from template按钮。经过几秒钟的等待，页面会跳转到新建的仓库，然后点击Create new file按钮。<br>5：然后文件名填写为.config，把生成的.config 文件的内容复制粘贴到下面的文本框中.</p>
-<p>最后等待2-3小时前往Github Action下载压缩包固件使用即可。</p>
-<p>本文参考：<br><a href="https://github.com/coolsnowwolf/lede" target="_blank" rel="noopener">L大</a><br><a href="https://p3terx.com/archives/build-openwrt-with-github-actions.html" target="_blank" rel="noopener">P3TERX</a></p>
-<h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
-      <categories>
-        <category>OpenWrt</category>
-      </categories>
-      <tags>
-        <tag>路由器</tag>
-        <tag>openwrt</tag>
-        <tag>软路由固件</tag>
-        <tag>固件编译</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CentOS7利用firewall流量转发-实现TCP/UDP中转加速</title>
     <url>/posts/9b74aaac.html</url>
     <content><![CDATA[<h1 id="CentOS7-利用firewall流量转发-实现TCP-UDP中转加速"><a href="#CentOS7-利用firewall流量转发-实现TCP-UDP中转加速" class="headerlink" title="CentOS7 利用firewall流量转发-实现TCP/UDP中转加速"></a><center>CentOS7 利用firewall流量转发-实现TCP/UDP中转加速</center></h1><p>支持系统:CentOS7或以上</p>
@@ -64,6 +44,70 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
 <p>7:firewall默认的配置文件路径是/etc/firewalld/zones/public.xml</p>
 <h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
+  </entry>
+  <entry>
+    <title>Github Action Openwrt固件自动编译教程</title>
+    <url>/posts/21b7e26f.html</url>
+    <content><![CDATA[<h1 id="Github-Action-Openwrt固件自动编译教程"><a href="#Github-Action-Openwrt固件自动编译教程" class="headerlink" title="Github Action Openwrt固件自动编译教程"></a><center>Github Action Openwrt固件自动编译教程</center></h1><h2 id="视频教程"><a href="#视频教程" class="headerlink" title="视频教程"></a><center><a href="https://youtu.be/YoVhsQDdldA" target="_blank" rel="noopener">视频教程</a></center></h2><p>1:根据<a href="https://github.com/coolsnowwolf/lede" target="_blank" rel="noopener">L大</a>的源码仓库指导步骤，利用 Ubuntu 18 LTS x64的VPS获取对应路由器型号的.config文件。</p>
+<p>2:利用的源码仓<a href="https://github.com/P3TERX/Actions-OpenWrt" target="_blank" rel="noopener">P3TERX</a>导入.config文件启动GitHub Action自动云编译。</p>
+<p>3:进入 P3TERX/Actions-OpenWrt 项目页面，点击 Use this template 。</p>
+<p>4:填写仓库名称，然后点击Create repository from template按钮。经过几秒钟的等待，页面会跳转到新建的仓库，然后点击Create new file按钮。<br>5：然后文件名填写为.config，把生成的.config 文件的内容复制粘贴到下面的文本框中.</p>
+<p>最后等待2-3小时前往Github Action下载压缩包固件使用即可。</p>
+<p>本文参考：<br><a href="https://github.com/coolsnowwolf/lede" target="_blank" rel="noopener">L大</a><br><a href="https://p3terx.com/archives/build-openwrt-with-github-actions.html" target="_blank" rel="noopener">P3TERX</a></p>
+<h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
+      <categories>
+        <category>OpenWrt</category>
+      </categories>
+      <tags>
+        <tag>路由器</tag>
+        <tag>openwrt</tag>
+        <tag>软路由固件</tag>
+        <tag>固件编译</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Gost Docker布署加密隧道节点</title>
+    <url>/posts/e7b2c577.html</url>
+    <content><![CDATA[<p><a href="https://www.youtube.com/siemenstutorials" target="_blank" rel="noopener">更多视频教程</a><br>1:docker-compose安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -L <span class="string">"https://github.com/docker/compose/releases/download/1.26.0/docker-compose-<span class="variable">$(uname -s)</span>-<span class="variable">$(uname -m)</span>"</span> -o /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">ln -s /usr/<span class="built_in">local</span>/bin/docker-compose /usr/bin/docker-compose</span><br></pre></td></tr></table></figure>
+<p>2：docker-compose版本查询</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose --version</span><br></pre></td></tr></table></figure>
+<p>3：创建GOST文件夹并进入Gost</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir gost</span><br><span class="line"><span class="built_in">cd</span> gost</span><br></pre></td></tr></table></figure>
+<p>4:在Gost文件夹里创建docker-compose.yml</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi docker-compose.yml</span><br></pre></td></tr></table></figure>
+<p>5：docker-compose.yml设置</p>
+<p>5.1 转发功能【实现与Iptables/Brook一样的功能】<br>      使用案例若国外节点的是V2ray+ws+tls则可以采用此种方法减少性能损耗<br>转发docker-compose.yml配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">version: <span class="string">"3"</span></span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  redirect:</span><br><span class="line">    image: ginuerzh/gost</span><br><span class="line">    restart: always</span><br><span class="line">    network_mode: <span class="string">"host"</span></span><br><span class="line">    <span class="built_in">command</span>:</span><br><span class="line">      - <span class="string">"-L=tcp://:国内（VPS/NATIP/落地IP:SSR/V2ray端口"</span></span><br><span class="line">      - <span class="string">"-L=udp://:国内(VPS/NAT)IP/落地IP:SSR/v2ray端口"</span></span><br><span class="line">    logging:</span><br><span class="line">      options:</span><br><span class="line">        max-size: <span class="string">"10m"</span></span><br><span class="line">        max-file: <span class="string">"3"</span></span><br></pre></td></tr></table></figure>
+<p>然后运行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<p>5.2 Gost加密隧道搭建docker-compose.yml配置文件设置</p>
+<p>中转机（<a href="https://scr.la/EzYTxqBz" target="_blank" rel="noopener">NAT购买地址</a>）：<br><a href="https://tinyurl.com/smtvds" target="_blank" rel="noopener">VDS购买地址</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">version: <span class="string">"3"</span></span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  tls:</span><br><span class="line">    image: ginuerzh/gost</span><br><span class="line">    restart: always</span><br><span class="line">    network_mode: <span class="string">"host"</span></span><br><span class="line">    <span class="built_in">command</span>:</span><br><span class="line">      - <span class="string">"-L=tcp://:Port"</span></span><br><span class="line">      - <span class="string">"-L=udp://:Port"</span></span><br><span class="line">      - <span class="string">"-F=forward+mtls://落地IP:转发端口?mbind=true"</span></span><br><span class="line">    logging:</span><br><span class="line">      options:</span><br><span class="line">        max-size: <span class="string">"10m"</span></span><br><span class="line">        max-file: <span class="string">"3"</span></span><br></pre></td></tr></table></figure>
+<p>落地机：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">version: <span class="string">"3"</span></span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  redirect:</span><br><span class="line">    image: ginuerzh/gost</span><br><span class="line">    restart: always</span><br><span class="line">    network_mode: <span class="string">"host"</span></span><br><span class="line">    <span class="built_in">command</span>:</span><br><span class="line">      - <span class="string">"-L=mtls://:转发端口/127.0.0.1:SSR/V2ray"</span></span><br><span class="line">    logging:</span><br><span class="line">      options:</span><br><span class="line">        max-size: <span class="string">"10m"</span></span><br><span class="line">        max-file: <span class="string">"3"</span></span><br></pre></td></tr></table></figure>
+<p>启动请运行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+
+<p>加密转发模式可任选其一：<br>1：forward+mtls<br>2：relay+tls<br>3：relay+mwss</p>
+<p>注VPS重启会导致加密转发失效，若要自动启动不失效请参考<a href="https://youtu.be/AqQUm8fZKso" target="_blank" rel="noopener">视频教程</a><br>或请重新运行以下命令启动隧道转发</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service docker restart</span><br><span class="line">systemctl start docker</span><br><span class="line">systemctl daemon-reload</span><br></pre></td></tr></table></figure>
+<p>[END]</p>
+<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
+      <categories>
+        <category>Gost</category>
+        <category>Docker</category>
+      </categories>
+      <tags>
+        <tag>Gost</tag>
+        <tag>ssr</tag>
+        <tag>v2ray</tag>
+        <tag>trojan</tag>
+        <tag>iptable</tag>
+        <tag>brook</tag>
+      </tags>
   </entry>
   <entry>
     <title>Gost不惧VPS重启-开机自动启动服务搭建方法</title>
@@ -103,6 +147,30 @@
       </tags>
   </entry>
   <entry>
+    <title>OpenWrt/Lede软路由FRP内网穿透从无到有完整教程</title>
+    <url>/posts/93a83708.html</url>
+    <content><![CDATA[<h1 id="OpenWrt-Lede软路由FRP内网穿透从无到有完整教程"><a href="#OpenWrt-Lede软路由FRP内网穿透从无到有完整教程" class="headerlink" title="OpenWrt/Lede软路由FRP内网穿透从无到有完整教程"></a><Center>OpenWrt/Lede软路由FRP内网穿透从无到有完整教程</Center></h1><center>[视频教程](https://youtu.be/jeDKfijKNuc)</center>
+
+<p>1:OPENWRT软路由插件安装<br>下载Frps和Frpc.ipk文件以及luci-app-frpc</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">https://github.com/kuoruan/openwrt-frp/releases</span><br><span class="line">https://github.com/kuoruan/luci-app-frpc/releases</span><br></pre></td></tr></table></figure>
+<p>2:利用Winscp上传第1步下载的4个插件<br>然后进入tmp目录<br>cd /tmp<br>然后运行opkg install ***.ipk文件<br>3：准备一个域名并运行VPS然后利用一键安装命令安装frp<br>一键Frp安装脚本如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/MvsCode/frps-onekey/master/install-frps.sh -O ./install-frps.sh</span><br><span class="line">chmod 700 ./install-frps.sh</span><br><span class="line">./install-frps.sh install</span><br></pre></td></tr></table></figure>
+<p>Aliyun</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://code.aliyun.com/MvsCode/frps-onekey/raw/master/install-frps.sh -O ./install-frps.sh</span><br><span class="line">chmod 700 ./install-frps.sh</span><br><span class="line">./install-frps.sh install</span><br></pre></td></tr></table></figure>
+<p>其余相关命令：<br>Uninstall（卸载）<br>./install-frps.sh uninstall<br>Update（更新）<br>./install-frps.sh update<br>Server management（服务管理器）<br>Usage: /etc/init.d/frps {start|stop|restart|status|config|version}<br>4：输入域名，解析域名</p>
+<p>5：在OpenWrt里设置Frp，启动服务，设置http、端口、本地IP。</p>
+<p>6：以上设置发后即可以用域名访问OpenWrt/Lede软路由.</p>
+<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
+      <categories>
+        <category>Openwrt</category>
+        <category>Frp</category>
+      </categories>
+      <tags>
+        <tag>openwrt</tag>
+        <tag>frp</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>NAT VPS阿里云DDNS动态域名绑定</title>
     <url>/posts/ee769b01.html</url>
     <content><![CDATA[<h1 id="NAT-VPS阿里云DDNS动态域名绑定"><a href="#NAT-VPS阿里云DDNS动态域名绑定" class="headerlink" title="NAT VPS阿里云DDNS动态域名绑定"></a><center>NAT VPS阿里云DDNS动态域名绑定</center></h1><p><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">视频教程</a></p>
@@ -138,6 +206,62 @@
       </tags>
   </entry>
   <entry>
+    <title>SSPANEL Brook SSR中转节点搭建</title>
+    <url>/posts/239d0dcf.html</url>
+    <content><![CDATA[<h1 id="SSPANEL-Brook-SSR中转节点搭建"><a href="#SSPANEL-Brook-SSR中转节点搭建" class="headerlink" title="SSPANEL Brook SSR中转节点搭建"></a><center>SSPANEL Brook SSR中转节点搭建</center></h1><p>1:国内NAT/VPS安装Brook</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /root &amp;&amp; mkdir brook &amp;&amp; <span class="built_in">cd</span> brook</span><br></pre></td></tr></table></figure>
+<p>2:获取Brook最新版本(可选：也可以直接前往<a href="https://github.com/txthinking/brook/releases/" target="_blank" rel="noopener">项目</a>地址下载最新版本)</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brook_ver=$(wget -qO- <span class="string">"https://github.com/txthinking/brook/tags"</span>| grep <span class="string">"/txthinking/brook/releases/tag/"</span>| head -n 1| awk -F <span class="string">"/tag/"</span> <span class="string">'&#123;print $2&#125;'</span>| sed <span class="string">'s/\"&gt;//'</span>) &amp;&amp; <span class="built_in">echo</span> <span class="variable">$&#123;brook_ver&#125;</span></span><br><span class="line">`</span><br></pre></td></tr></table></figure>
+<p>下载Brook并赋予权限</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -N --no-check-certificate <span class="string">"https://github.com/txthinking/brook/releases/download/<span class="variable">$&#123;brook_ver&#125;</span>/brook"</span></span><br><span class="line">chmod +x brook</span><br></pre></td></tr></table></figure>
+<p>3：brook支持单端口转发和多端口转发<br>监听端口888，被转发（落地/国外VIPS）IP:1.1.1.1 端口：999<br>3.1单端口转发</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nohup ./brook relay -l :888 -r 1.1.1.1:999 &gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<p>3.2多端口转发<br>监听端口888，被转发（落地/国外VIPS）IP:1.1.1.1 端口：999<br>监听端口889，被转发（落地/国外VIPS）IP:2.2.2.2 端口：998<br>监听端口887，被转发（落地/国外VIPS）IP:3.3.3.3 端口：997</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nohup ./brook relays -l <span class="string">":888 1.1.1.1:999"</span> -l <span class="string">":889 2.2.2.2:998"</span> -l <span class="string">":887 3.3.3.3:997"</span> &gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<p>END</p>
+<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
+  </entry>
+  <entry>
+    <title>SSR+WS+VNET—_Tunnel隧道加密节点搭建</title>
+    <url>/posts/21643.html</url>
+    <content><![CDATA[<h1 id="SSR-WS-VNET—-Tunnel隧道加密节点搭建"><a href="#SSR-WS-VNET—-Tunnel隧道加密节点搭建" class="headerlink" title="SSR+WS+VNET—_Tunnel隧道加密节点搭建"></a><center>SSR+WS+VNET—_Tunnel隧道加密节点搭建</center></h1><iframe width="560" height="315" src="https://www.youtube.com/embed/GyatcDOtyAI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<p>1：在国外VPS{服务端}SERVER安装Vnet_Tunnel，脚本如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install zip unzip</span><br><span class="line">wget -N --no-check-certificate <span class="string">"https://github.com/siemenstutorials/Vnet_tunnel/raw/master/tunnel.zip"</span> &amp;&amp; unzip tunnel.zip &amp;&amp; chmod -R +x ./*</span><br></pre></td></tr></table></figure>
+<p>2：让Vnet_Tunnel后台运行，脚本如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nohup ./server &gt;&gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<p>3：Server后台面板登陆：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">server服务器IP:8081/resources/add_server.html</span><br></pre></td></tr></table></figure>
+<p>4:在国内VPS{客户端}Client安装Vnet_Tunnel，服本如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install zip unzip</span><br><span class="line">wget -N --no-check-certificate <span class="string">"https://github.com/siemenstutorials/Vnet_tunnel/raw/master/tunnel.zip"</span> &amp;&amp; unzip tunnel.zip &amp;&amp; chmod -R +x ./*</span><br></pre></td></tr></table></figure>
+<p>5:后台运行Client,运行如下脚本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nohup ./client &gt;&gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<p>6:开启防火墙流量转发：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl  start   firewalld.service</span><br></pre></td></tr></table></figure>
+<p>7:开启路由转发功能和流量伪装:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> 1 &gt; /proc/sys/net/ipv4/ip_forward</span><br><span class="line">sysctl -p</span><br><span class="line">firewall-cmd --zone=public --permanent --add-masquerade</span><br></pre></td></tr></table></figure>
+<p>8:开启端口</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --add-port=1112/tcp --permanent</span><br><span class="line">firewall-cmd --add-port=nat端口/tcp --permanent</span><br></pre></td></tr></table></figure>
+<p>9：将NAT端口流量转发至1112</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --add-forward-port=port=nat端口:proto=tcp:toaddr=nat内网ip:toport=1112 --permanent</span><br></pre></td></tr></table></figure>
+<p>10:重载防火墙</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+<p>11:后台面板登陆：<br>服务器IP:NAT指定外部通讯端口/resources/add_client.html</p>
+<p>12:NAT TUNNEL服务端设置好后切记得关闭防火墙否则无法FQ<br>防火墙关闭命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br></pre></td></tr></table></figure>
+<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
+      <categories>
+        <category>科学上网</category>
+        <category>V2ray</category>
+        <category>SSR</category>
+        <category>Trojan</category>
+      </categories>
+      <tags>
+        <tag>科学上网</tag>
+        <tag>SSR隧道加密</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SSPANEL 后端端口偏移食用方法</title>
     <url>/posts/f6ab28ab.html</url>
     <content><![CDATA[<h1 id="SSPANEL-后端端口偏移食用方法"><a href="#SSPANEL-后端端口偏移食用方法" class="headerlink" title="SSPANEL 后端端口偏移食用方法"></a><center>SSPANEL 后端端口偏移食用方法</center></h1><p>以下以CentOS7为例<br>1:Docker安装</p>
@@ -155,66 +279,10 @@
         <category>端口偏移</category>
       </categories>
       <tags>
-        <tag>sspanel</tag>
         <tag>ssr</tag>
         <tag>v2ray</tag>
+        <tag>sspanel</tag>
         <tag>shadowsocks</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SSPANEL Brook SSR中转节点搭建</title>
-    <url>/posts/239d0dcf.html</url>
-    <content><![CDATA[<h1 id="SSPANEL-Brook-SSR中转节点搭建"><a href="#SSPANEL-Brook-SSR中转节点搭建" class="headerlink" title="SSPANEL Brook SSR中转节点搭建"></a><center>SSPANEL Brook SSR中转节点搭建</center></h1><p>1:国内NAT/VPS安装Brook</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /root &amp;&amp; mkdir brook &amp;&amp; <span class="built_in">cd</span> brook</span><br></pre></td></tr></table></figure>
-<p>2:获取Brook最新版本(可选：也可以直接前往<a href="https://github.com/txthinking/brook/releases/" target="_blank" rel="noopener">项目</a>地址下载最新版本)</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brook_ver=$(wget -qO- <span class="string">"https://github.com/txthinking/brook/tags"</span>| grep <span class="string">"/txthinking/brook/releases/tag/"</span>| head -n 1| awk -F <span class="string">"/tag/"</span> <span class="string">'&#123;print $2&#125;'</span>| sed <span class="string">'s/\"&gt;//'</span>) &amp;&amp; <span class="built_in">echo</span> <span class="variable">$&#123;brook_ver&#125;</span></span><br><span class="line">`</span><br></pre></td></tr></table></figure>
-<p>下载Brook并赋予权限</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -N --no-check-certificate <span class="string">"https://github.com/txthinking/brook/releases/download/<span class="variable">$&#123;brook_ver&#125;</span>/brook"</span></span><br><span class="line">chmod +x brook</span><br></pre></td></tr></table></figure>
-<p>3：brook支持单端口转发和多端口转发<br>监听端口888，被转发（落地/国外VIPS）IP:1.1.1.1 端口：999<br>3.1单端口转发</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nohup ./brook relay -l :888 -r 1.1.1.1:999 &gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
-<p>3.2多端口转发<br>监听端口888，被转发（落地/国外VIPS）IP:1.1.1.1 端口：999<br>监听端口889，被转发（落地/国外VIPS）IP:2.2.2.2 端口：998<br>监听端口887，被转发（落地/国外VIPS）IP:3.3.3.3 端口：997</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nohup ./brook relays -l <span class="string">":888 1.1.1.1:999"</span> -l <span class="string">":889 2.2.2.2:998"</span> -l <span class="string">":887 3.3.3.3:997"</span> &gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
-<p>END</p>
-<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
-  </entry>
-  <entry>
-    <title>OpenWrt/Lede软路由FRP内网穿透从无到有完整教程</title>
-    <url>/posts/93a83708.html</url>
-    <content><![CDATA[<h1 id="OpenWrt-Lede软路由FRP内网穿透从无到有完整教程"><a href="#OpenWrt-Lede软路由FRP内网穿透从无到有完整教程" class="headerlink" title="OpenWrt/Lede软路由FRP内网穿透从无到有完整教程"></a><Center>OpenWrt/Lede软路由FRP内网穿透从无到有完整教程</Center></h1><center>[视频教程](https://youtu.be/jeDKfijKNuc)</center>
-
-<p>1:OPENWRT软路由插件安装<br>下载Frps和Frpc.ipk文件以及luci-app-frpc</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">https://github.com/kuoruan/openwrt-frp/releases</span><br><span class="line">https://github.com/kuoruan/luci-app-frpc/releases</span><br></pre></td></tr></table></figure>
-<p>2:利用Winscp上传第1步下载的4个插件<br>然后进入tmp目录<br>cd /tmp<br>然后运行opkg install ***.ipk文件<br>3：准备一个域名并运行VPS然后利用一键安装命令安装frp<br>一键Frp安装脚本如下：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/MvsCode/frps-onekey/master/install-frps.sh -O ./install-frps.sh</span><br><span class="line">chmod 700 ./install-frps.sh</span><br><span class="line">./install-frps.sh install</span><br></pre></td></tr></table></figure>
-<p>Aliyun</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://code.aliyun.com/MvsCode/frps-onekey/raw/master/install-frps.sh -O ./install-frps.sh</span><br><span class="line">chmod 700 ./install-frps.sh</span><br><span class="line">./install-frps.sh install</span><br></pre></td></tr></table></figure>
-<p>其余相关命令：<br>Uninstall（卸载）<br>./install-frps.sh uninstall<br>Update（更新）<br>./install-frps.sh update<br>Server management（服务管理器）<br>Usage: /etc/init.d/frps {start|stop|restart|status|config|version}<br>4：输入域名，解析域名</p>
-<p>5：在OpenWrt里设置Frp，启动服务，设置http、端口、本地IP。</p>
-<p>6：以上设置发后即可以用域名访问OpenWrt/Lede软路由.</p>
-<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
-      <categories>
-        <category>Openwrt</category>
-        <category>Frp</category>
-      </categories>
-      <tags>
-        <tag>openwrt</tag>
-        <tag>frp</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SSR/TROJAN/V2RAY客户端下载汇总</title>
-    <url>/posts/f9792ba.html</url>
-    <content><![CDATA[<h1 id="SSR-TROJAN-V2RAY科学上网客户端下载"><a href="#SSR-TROJAN-V2RAY科学上网客户端下载" class="headerlink" title="SSR+TROJAN+V2RAY科学上网客户端下载"></a><center>SSR+TROJAN+V2RAY科学上网客户端下载</center></h1><p>1:SSR客户端<br><a href="https://www.xjycloud.xyz/ssr-download/ssr-win.7z" target="_blank" rel="noopener">Windows客户端</a><br><a href="https://www.xjycloud.xyz/ssr-download/ssr-mac.dmg" target="_blank" rel="noopener">MACOS客户端</a><br>2:Trojan客户端<br><a href="https://github.com/trojan-gfw/trojan/releases/download/v1.15.1/trojan-1.15.1-win.zip" target="_blank" rel="noopener">Windows客户端</a><br><a href="https://github.com/trojan-gfw/trojan/releases/download/v1.15.1/trojan-1.15.1-macos.zip" target="_blank" rel="noopener">MACOS客户端</a><br>3:V2RAY客户端<br><a href="https://github.com/v2ray/v2ray-core/releases/download/v4.23.1/v2ray-openbsd-64.zip" target="_blank" rel="noopener">Windows</a><br><a href="https://github.com/v2ray/v2ray-core/releases/download/v4.23.1/v2ray-openbsd-32.zip" target="_blank" rel="noopener">MACOS客户端</a></p>
-<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
-      <categories>
-        <category>科学上网</category>
-        <category>客户端</category>
-      </categories>
-      <tags>
-        <tag>Trojan</tag>
-        <tag>V2ray</tag>
-        <tag>科学上网</tag>
-        <tag>SSR</tag>
       </tags>
   </entry>
   <entry>
@@ -259,46 +327,6 @@
       </tags>
   </entry>
   <entry>
-    <title>SSR+WS+VNET—_Tunnel隧道加密节点搭建</title>
-    <url>/posts/21643.html</url>
-    <content><![CDATA[<h1 id="SSR-WS-VNET—-Tunnel隧道加密节点搭建"><a href="#SSR-WS-VNET—-Tunnel隧道加密节点搭建" class="headerlink" title="SSR+WS+VNET—_Tunnel隧道加密节点搭建"></a><center>SSR+WS+VNET—_Tunnel隧道加密节点搭建</center></h1><iframe width="560" height="315" src="https://www.youtube.com/embed/GyatcDOtyAI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<p>1：在国外VPS{服务端}SERVER安装Vnet_Tunnel，脚本如下：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install zip unzip</span><br><span class="line">wget -N --no-check-certificate <span class="string">"https://github.com/siemenstutorials/Vnet_tunnel/raw/master/tunnel.zip"</span> &amp;&amp; unzip tunnel.zip &amp;&amp; chmod -R +x ./*</span><br></pre></td></tr></table></figure>
-<p>2：让Vnet_Tunnel后台运行，脚本如下：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nohup ./server &gt;&gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
-<p>3：Server后台面板登陆：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">server服务器IP:8081/resources/add_server.html</span><br></pre></td></tr></table></figure>
-<p>4:在国内VPS{客户端}Client安装Vnet_Tunnel，服本如下：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install zip unzip</span><br><span class="line">wget -N --no-check-certificate <span class="string">"https://github.com/siemenstutorials/Vnet_tunnel/raw/master/tunnel.zip"</span> &amp;&amp; unzip tunnel.zip &amp;&amp; chmod -R +x ./*</span><br></pre></td></tr></table></figure>
-<p>5:后台运行Client,运行如下脚本：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nohup ./client &gt;&gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
-<p>6:开启防火墙流量转发：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl  start   firewalld.service</span><br></pre></td></tr></table></figure>
-<p>7:开启路由转发功能和流量伪装:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> 1 &gt; /proc/sys/net/ipv4/ip_forward</span><br><span class="line">sysctl -p</span><br><span class="line">firewall-cmd --zone=public --permanent --add-masquerade</span><br></pre></td></tr></table></figure>
-<p>8:开启端口</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --add-port=1112/tcp --permanent</span><br><span class="line">firewall-cmd --add-port=nat端口/tcp --permanent</span><br></pre></td></tr></table></figure>
-<p>9：将NAT端口流量转发至1112</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --add-forward-port=port=nat端口:proto=tcp:toaddr=nat内网ip:toport=1112 --permanent</span><br></pre></td></tr></table></figure>
-<p>10:重载防火墙</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
-<p>11:后台面板登陆：<br>服务器IP:NAT指定外部通讯端口/resources/add_client.html</p>
-<p>12:NAT TUNNEL服务端设置好后切记得关闭防火墙否则无法FQ<br>防火墙关闭命令</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br></pre></td></tr></table></figure>
-<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
-      <categories>
-        <category>科学上网</category>
-        <category>Trojan</category>
-        <category>V2ray</category>
-        <category>SSR</category>
-      </categories>
-      <tags>
-        <tag>科学上网</tag>
-        <tag>SSR隧道加密</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Trojan+v2ray+SSR单VPS共存</title>
     <url>/posts/46908.html</url>
     <content><![CDATA[<iframe width="560" height="315" src="https://www.youtube.com/embed/hSqO8ppMYyc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -318,15 +346,31 @@
 <h1 id="星际云网络速"><a href="#星际云网络速" class="headerlink" title="星际云网络速"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络速</a></h1><h2 id="Trojan科学上网节点搭建视频教程"><a href="#Trojan科学上网节点搭建视频教程" class="headerlink" title="Trojan科学上网节点搭建视频教程"></a><a href="https://youtu.be/esr4bDuZj34" target="_blank" rel="noopener">Trojan科学上网节点搭建视频教程</a></h2><h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
       <categories>
         <category>科学上网</category>
-        <category>Trojan</category>
         <category>V2ray</category>
         <category>SSR</category>
+        <category>Trojan</category>
       </categories>
       <tags>
         <tag>Trojan</tag>
         <tag>V2ray</tag>
         <tag>SSR</tag>
         <tag>Brook</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SSR/TROJAN/V2RAY客户端下载汇总</title>
+    <url>/posts/f9792ba.html</url>
+    <content><![CDATA[<h1 id="SSR-TROJAN-V2RAY科学上网客户端下载"><a href="#SSR-TROJAN-V2RAY科学上网客户端下载" class="headerlink" title="SSR+TROJAN+V2RAY科学上网客户端下载"></a><center>SSR+TROJAN+V2RAY科学上网客户端下载</center></h1><p>1:SSR客户端<br><a href="https://www.xjycloud.xyz/ssr-download/ssr-win.7z" target="_blank" rel="noopener">Windows客户端</a><br><a href="https://www.xjycloud.xyz/ssr-download/ssr-mac.dmg" target="_blank" rel="noopener">MACOS客户端</a><br>2:Trojan客户端<br><a href="https://github.com/trojan-gfw/trojan/releases/download/v1.15.1/trojan-1.15.1-win.zip" target="_blank" rel="noopener">Windows客户端</a><br><a href="https://github.com/trojan-gfw/trojan/releases/download/v1.15.1/trojan-1.15.1-macos.zip" target="_blank" rel="noopener">MACOS客户端</a><br>3:V2RAY客户端<br><a href="https://github.com/v2ray/v2ray-core/releases/download/v4.23.1/v2ray-openbsd-64.zip" target="_blank" rel="noopener">Windows</a><br><a href="https://github.com/v2ray/v2ray-core/releases/download/v4.23.1/v2ray-openbsd-32.zip" target="_blank" rel="noopener">MACOS客户端</a></p>
+<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
+      <categories>
+        <category>科学上网</category>
+        <category>客户端</category>
+      </categories>
+      <tags>
+        <tag>Trojan</tag>
+        <tag>V2ray</tag>
+        <tag>科学上网</tag>
+        <tag>SSR</tag>
       </tags>
   </entry>
   <entry>
@@ -353,12 +397,36 @@
 <h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
       <categories>
         <category>科学上网</category>
-        <category>Trojan</category>
         <category>V2ray</category>
+        <category>Trojan</category>
       </categories>
       <tags>
         <tag>Trojan</tag>
         <tag>V2ray</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何删除GitHub仓库的所用commit</title>
+    <url>/posts/4a1536ed.html</url>
+    <content><![CDATA[<h1 id="如何删除GitHub仓库的所用commit"><a href="#如何删除GitHub仓库的所用commit" class="headerlink" title="如何删除GitHub仓库的所用commit"></a><center>如何删除GitHub仓库的所用commit</center></h1><p>因个人的需要有时候的误提交可能会有多余的commit,这时候如何删除commit就是一个很D疼的事；今天看到一个大神写了这个教程，特copy至此作为个人工作的一些记录以作备查，在此感谢大神<a href="https://p3terx.com/archives/github-warehouse-cleaning-delete-all-commit-records.html" target="_blank" rel="noopener">P3TERX</a></p>
+<p>1：新建一个空白分支</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout --orphan latest_branch</span><br></pre></td></tr></table></figure>
+<p>2:添加所有文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add -A</span><br></pre></td></tr></table></figure>
+<p>3:提交</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git commit -am <span class="string">"."</span></span><br></pre></td></tr></table></figure>
+<p>4：强制删除旧的分支，如果是 master</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -D master</span><br></pre></td></tr></table></figure>
+<p>5：将当前分支重命名为 master</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -m master</span><br></pre></td></tr></table></figure>
+<p>6：强制推送到远程仓库</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push -f origin master</span><br></pre></td></tr></table></figure>
+<p>7:至此您将获得全新干净的仓库<br>本文内容源自<a href="https://p3terx.com/archives/github-warehouse-cleaning-delete-all-commit-records.html" target="_blank" rel="noopener">P3TERX</a></p>
+]]></content>
+      <tags>
+        <tag>Github</tag>
+        <tag>commit</tag>
+        <tag>master</tag>
       </tags>
   </entry>
   <entry>
@@ -388,6 +456,31 @@
       </tags>
   </entry>
   <entry>
+    <title>科学上网SSR VPS搭建一键安装脚本合辑</title>
+    <url>/posts/8b0dfdea.html</url>
+    <content><![CDATA[<p>逗比SSR一键安装脚本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ssr.sh &amp;&amp; chmod +x ssr.sh &amp;&amp; bash ssr.sh</span><br></pre></td></tr></table></figure>
+<p>秋水逸冰四合一脚本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh</span><br><span class="line">chmod +x shadowsocks-all.sh</span><br><span class="line">./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log</span><br></pre></td></tr></table></figure>
+<p>BBR_PLUS一键安装脚本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget --no-check-certificate -O tcp.sh https://github.com/cx9208/Linux-NetSpeed/raw/master/tcp.sh &amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh</span><br></pre></td></tr></table></figure>
+<p>安装注意事项：<br>若提示wget not found请先根据系统运行如下命令：<br>CentOS：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install wget</span><br></pre></td></tr></table></figure>
+<p>Ubuntu/Debian：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt-get -y install wget</span><br></pre></td></tr></table></figure>
+
+<h2 id="最便谊的2-99-月-1T流量VPS购买地址"><a href="#最便谊的2-99-月-1T流量VPS购买地址" class="headerlink" title="最便谊的2.99$/月-1T流量VPS购买地址"></a><a href="https://portal.thestack.net/aff.php?aff=641" target="_blank" rel="noopener">最便谊的2.99$/月-1T流量VPS购买地址</a></h2><h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
+      <categories>
+        <category>科学上网</category>
+        <category>SSR</category>
+      </categories>
+      <tags>
+        <tag>SSR</tag>
+        <tag>一键安装脚本</tag>
+        <tag>SSR节点搭建</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>谷歌云Root密码登陆开启设置</title>
     <url>/posts/4f91a256.html</url>
     <content><![CDATA[<h1 id="谷歌云Root密码登陆开启设置"><a href="#谷歌云Root密码登陆开启设置" class="headerlink" title="谷歌云Root密码登陆开启设置"></a><center>谷歌云Root密码登陆开启设置</center></h1><p>方法一：<br>1:创建谷歌云实例然后点击SSH连接VM实例.</p>
@@ -414,55 +507,6 @@
       <tags>
         <tag>VPS</tag>
         <tag>谷歌云</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>科学上网SSR VPS搭建一键安装脚本合辑</title>
-    <url>/posts/8b0dfdea.html</url>
-    <content><![CDATA[<p>逗比SSR一键安装脚本：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ssr.sh &amp;&amp; chmod +x ssr.sh &amp;&amp; bash ssr.sh</span><br></pre></td></tr></table></figure>
-<p>秋水逸冰四合一脚本：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh</span><br><span class="line">chmod +x shadowsocks-all.sh</span><br><span class="line">./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log</span><br></pre></td></tr></table></figure>
-<p>BBR_PLUS一键安装脚本：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget --no-check-certificate -O tcp.sh https://github.com/cx9208/Linux-NetSpeed/raw/master/tcp.sh &amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh</span><br></pre></td></tr></table></figure>
-<p>安装注意事项：<br>若提示wget not found请先根据系统运行如下命令：<br>CentOS：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install wget</span><br></pre></td></tr></table></figure>
-<p>Ubuntu/Debian：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt-get -y install wget</span><br></pre></td></tr></table></figure>
-
-<h2 id="最便谊的2-99-月-1T流量VPS购买地址"><a href="#最便谊的2-99-月-1T流量VPS购买地址" class="headerlink" title="最便谊的2.99$/月-1T流量VPS购买地址"></a><a href="https://portal.thestack.net/aff.php?aff=641" target="_blank" rel="noopener">最便谊的2.99$/月-1T流量VPS购买地址</a></h2><h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
-      <categories>
-        <category>科学上网</category>
-        <category>SSR</category>
-      </categories>
-      <tags>
-        <tag>SSR</tag>
-        <tag>一键安装脚本</tag>
-        <tag>SSR节点搭建</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何删除GitHub仓库的所用commit</title>
-    <url>/posts/4a1536ed.html</url>
-    <content><![CDATA[<h1 id="如何删除GitHub仓库的所用commit"><a href="#如何删除GitHub仓库的所用commit" class="headerlink" title="如何删除GitHub仓库的所用commit"></a><center>如何删除GitHub仓库的所用commit</center></h1><p>因个人的需要有时候的误提交可能会有多余的commit,这时候如何删除commit就是一个很D疼的事；今天看到一个大神写了这个教程，特copy至此作为个人工作的一些记录以作备查，在此感谢大神<a href="https://p3terx.com/archives/github-warehouse-cleaning-delete-all-commit-records.html" target="_blank" rel="noopener">P3TERX</a></p>
-<p>1：新建一个空白分支</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout --orphan latest_branch</span><br></pre></td></tr></table></figure>
-<p>2:添加所有文件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add -A</span><br></pre></td></tr></table></figure>
-<p>3:提交</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git commit -am <span class="string">"."</span></span><br></pre></td></tr></table></figure>
-<p>4：强制删除旧的分支，如果是 master</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -D master</span><br></pre></td></tr></table></figure>
-<p>5：将当前分支重命名为 master</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -m master</span><br></pre></td></tr></table></figure>
-<p>6：强制推送到远程仓库</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push -f origin master</span><br></pre></td></tr></table></figure>
-<p>7:至此您将获得全新干净的仓库<br>本文内容源自<a href="https://p3terx.com/archives/github-warehouse-cleaning-delete-all-commit-records.html" target="_blank" rel="noopener">P3TERX</a></p>
-]]></content>
-      <tags>
-        <tag>Github</tag>
-        <tag>commit</tag>
-        <tag>master</tag>
       </tags>
   </entry>
 </search>
