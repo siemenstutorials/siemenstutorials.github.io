@@ -1,29 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>CentOS7利用firewall流量转发-实现TCP/UDP中转加速</title>
-    <url>/posts/9b74aaac.html</url>
-    <content><![CDATA[<h1 id="CentOS7-利用firewall流量转发-实现TCP-UDP中转加速"><a href="#CentOS7-利用firewall流量转发-实现TCP-UDP中转加速" class="headerlink" title="CentOS7 利用firewall流量转发-实现TCP/UDP中转加速"></a><center>CentOS7 利用firewall流量转发-实现TCP/UDP中转加速</center></h1><p>支持系统:CentOS7或以上</p>
-<p>原理：<br>客户端[server]————中转服务器（VPS/NAT）安装firewall———落地服务器<br>1：在centos7上安装firewall</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install firewalld -y</span><br></pre></td></tr></table></figure>
-<p>相关命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl start firewalld <span class="comment">##开启防火墙</span></span><br><span class="line">systemctl stop firewalld <span class="comment">##关闭防火墙</span></span><br><span class="line">firewall-cmd --reload <span class="comment">##重启防火墙</span></span><br><span class="line">systemctl status firewalld <span class="comment">##查看防火墙状态</span></span><br><span class="line">systemctl <span class="built_in">enable</span> firewalld <span class="comment">##设置开启启动</span></span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld <span class="comment">##禁用开机启动</span></span><br><span class="line">firewall-cmd --list-ports <span class="comment">##查看开放的端口</span></span><br><span class="line">firewall-cmd --zone=public --add-port=8080/tcp --permanent <span class="comment">##开放指定端口（此处为开放8080，可替换为指定端口号），开放后需重启防火墙生效</span></span><br><span class="line">firewall-cmd --zone=public --remove-port=8080/tcp --permanent <span class="comment">##关闭指定端口（此处为关闭8080，可替换为指定端口号）</span></span><br></pre></td></tr></table></figure>
-<p>2:开启路由转发</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">'net.ipv4.ip_forward = 1'</span> &gt;&gt; /etc/sysctl.conf</span><br></pre></td></tr></table></figure>
-<p>运行以下命令使其生效</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
-<p>3：开启流量伪装功能</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --permanent --add-masquerade</span><br></pre></td></tr></table></figure>
-<p>4:转发端口设置<br>若是全端口机器可无视此步；NAT机参照以下开启端口</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --add-port=开放端口号/tcp --permanent <span class="comment">#开启TCP流量端口</span></span><br><span class="line">firewall-cmd --add-port=开放端口号/udp --permanent <span class="comment">#开启UDP流量端口</span></span><br></pre></td></tr></table></figure>
-<p>5：端口流量转发<br>假设监听端口为8080端口；远程端口为8090；被转发IP为8.8.8.8<br>则运行以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --add-forward-port=port=8080:proto=tcp:toaddr=8.8.8.8:toport=8090 --permanent <span class="comment">#开启TCP流量转发</span></span><br><span class="line">firewall-cmd --add-forward-port=port=8080:proto=udp:toaddr=8.8.8.8:toport=8090--permanent <span class="comment">#开启UDP流量转发</span></span><br></pre></td></tr></table></figure>
-<p>6:重载设置使其生效<br>运行如下命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
-<p>7:firewall默认的配置文件路径是/etc/firewalld/zones/public.xml</p>
-<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
-  </entry>
-  <entry>
     <title>2020年如何编译自带SSRPLUS的OpenWrt软路由固件</title>
     <url>/posts/a46d8958.html</url>
     <content><![CDATA[<h1 id="L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件"><a href="#L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件" class="headerlink" title="L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件"></a><center>L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件</center></h1><p>若是第一次编译请先了解如何制作生成.config文件以及如何应用Github Actions,<a href="https://siemenstutorials.github.io/posts/21b7e26f.html">详见上篇博文</a>;<br>在此基础上你便可以开始你的编译之旅了！</p>
@@ -66,41 +43,27 @@
       </tags>
   </entry>
   <entry>
-    <title>Gost不惧VPS重启-开机自动启动服务搭建方法</title>
-    <url>/posts/c1a6fb57.html</url>
-    <content><![CDATA[<h1 id="Gost不惧VPS重启-开机自动启动服务搭建方法"><a href="#Gost不惧VPS重启-开机自动启动服务搭建方法" class="headerlink" title="Gost不惧VPS重启-开机自动启动服务搭建方法"></a><center>Gost不惧VPS重启-开机自动启动服务搭建方法</center></h1><p>1：服务端SSR一键安装脚本：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh</span><br><span class="line">chmod +x shadowsocks-all.sh</span><br><span class="line">./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log</span><br></pre></td></tr></table></figure>
-<p>【注意记录你的SSR端口号】<br>2：在客户端VPS上安装Gost服务：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -N --no-check-certificate https://github.com/ginuerzh/gost/releases/download/v2.11.1/gost-linux-amd64-2.11.1.gz &amp;&amp; gzip -d gost-linux-amd64-2.11.1.gz</span><br><span class="line">mv gost-linux-amd64-2.11.1 gost</span><br><span class="line">chmod +x gost</span><br></pre></td></tr></table></figure>
-<p>2.1:编辑config.json<br>vi config.json<br>在对应的服务端写入配置文件：<br>客户端<br>模式：mtls+relay TCP+UDP转发</p>
-<p>{<br>    “Debug”: false,<br>    “Retries”: 0,<br>    “ServeNodes”: [],<br>    “ChainNodes”: [],<br>    “Routes”: [<br>        {<br>            “ServeNodes”: [ “udp://:1567” ],<br>            “ChainNodes”: [ “relay+mtls://45.134.147.201:2334” ]<br>        },<br>        {<br>            “ServeNodes”: [ “tcp://:1567” ],<br>            “ChainNodes”: [ “relay+mtls://45.134.147.201:2334” ]<br>        },<br>        {}<br>    ]<br>}</p>
-<p>2.2:运行以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir /etc/gost</span><br><span class="line">cp /root/config.json /etc/gost/</span><br><span class="line">cp /root/gost /usr/bin/</span><br><span class="line">chmod +x /usr/bin/gost</span><br></pre></td></tr></table></figure>
-<p>2.3:在目录/lib/systemd/system/创建gost.service<br>vi /lib/systemd/system/gost.service<br>并写入以系统进程文件:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Gost</span><br><span class="line">After=network.target</span><br><span class="line">Wants=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">User=root</span><br><span class="line">ExecStart=/usr/bin/gost -C /etc/gost/config.json</span><br><span class="line">Type=simple</span><br><span class="line">KillMode=control-group</span><br><span class="line">Restart=always</span><br><span class="line">RestartSec=10s</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
-<p>2.4:最后让服务生效运行以下命令</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl <span class="built_in">enable</span> gost.service</span><br><span class="line">systemctl start gost.service</span><br><span class="line">systemctl status gost.service</span><br></pre></td></tr></table></figure>
-<p>3：服务端安装gost</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -N --no-check-certificate https://github.com/ginuerzh/gost/releases/download/v2.11.1/gost-linux-amd64-2.11.1.gz &amp;&amp; gzip -d gost-linux-amd64-2.11.1.gz</span><br><span class="line">mv gost-linux-amd64-2.11.1 gost</span><br><span class="line">chmod +x gost</span><br></pre></td></tr></table></figure>
-<p>4:服务端模式mtls配置文件：</p>
-<p>{<br>    “Debug”: false,<br>    “Retries”: 0,<br>    “ServeNodes”: [],<br>    “ChainNodes”: [],<br>    “Routes”: [<br>        {<br>            “ServeNodes”: [ “relay+mtls://:2334/127.0.0.1:15802” ],<br>            “ChainNodes”: []<br>        },<br>        {}<br>    ]<br>}</p>
-<p>mkdir /etc/gost<br>cp /root/config.json /etc/gost/<br>cp /root/gost /usr/bin/<br>chmod +x /usr/bin/gost</p>
-<p>gost.service</p>
-<p>在目录/lib/systemd/system/创建gost.service并写入以下文件<br>vi /lib/systemd/system/gost.service</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Gost</span><br><span class="line">After=network.target</span><br><span class="line">Wants=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">User=root</span><br><span class="line">ExecStart=/usr/bin/gost -C /etc/gost/config.json</span><br><span class="line">Type=simple</span><br><span class="line">KillMode=control-group</span><br><span class="line">Restart=always</span><br><span class="line">RestartSec=10s</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl <span class="built_in">enable</span> gost.service</span><br><span class="line">systemctl start gost.service</span><br><span class="line">systemctl status gost.service</span><br></pre></td></tr></table></figure>
-<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
-      <categories>
-        <category>Gost</category>
-        <category>中转</category>
-      </categories>
-      <tags>
-        <tag>Trojan</tag>
-        <tag>V2ray</tag>
-        <tag>GOST</tag>
-        <tag>SSR</tag>
-        <tag>隧道中转</tag>
-      </tags>
+    <title>CentOS7利用firewall流量转发-实现TCP/UDP中转加速</title>
+    <url>/posts/9b74aaac.html</url>
+    <content><![CDATA[<h1 id="CentOS7-利用firewall流量转发-实现TCP-UDP中转加速"><a href="#CentOS7-利用firewall流量转发-实现TCP-UDP中转加速" class="headerlink" title="CentOS7 利用firewall流量转发-实现TCP/UDP中转加速"></a><center>CentOS7 利用firewall流量转发-实现TCP/UDP中转加速</center></h1><p>支持系统:CentOS7或以上</p>
+<p>原理：<br>客户端[server]————中转服务器（VPS/NAT）安装firewall———落地服务器<br>1：在centos7上安装firewall</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install firewalld -y</span><br></pre></td></tr></table></figure>
+<p>相关命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl start firewalld <span class="comment">##开启防火墙</span></span><br><span class="line">systemctl stop firewalld <span class="comment">##关闭防火墙</span></span><br><span class="line">firewall-cmd --reload <span class="comment">##重启防火墙</span></span><br><span class="line">systemctl status firewalld <span class="comment">##查看防火墙状态</span></span><br><span class="line">systemctl <span class="built_in">enable</span> firewalld <span class="comment">##设置开启启动</span></span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld <span class="comment">##禁用开机启动</span></span><br><span class="line">firewall-cmd --list-ports <span class="comment">##查看开放的端口</span></span><br><span class="line">firewall-cmd --zone=public --add-port=8080/tcp --permanent <span class="comment">##开放指定端口（此处为开放8080，可替换为指定端口号），开放后需重启防火墙生效</span></span><br><span class="line">firewall-cmd --zone=public --remove-port=8080/tcp --permanent <span class="comment">##关闭指定端口（此处为关闭8080，可替换为指定端口号）</span></span><br></pre></td></tr></table></figure>
+<p>2:开启路由转发</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">'net.ipv4.ip_forward = 1'</span> &gt;&gt; /etc/sysctl.conf</span><br></pre></td></tr></table></figure>
+<p>运行以下命令使其生效</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
+<p>3：开启流量伪装功能</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --permanent --add-masquerade</span><br></pre></td></tr></table></figure>
+<p>4:转发端口设置<br>若是全端口机器可无视此步；NAT机参照以下开启端口</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --add-port=开放端口号/tcp --permanent <span class="comment">#开启TCP流量端口</span></span><br><span class="line">firewall-cmd --add-port=开放端口号/udp --permanent <span class="comment">#开启UDP流量端口</span></span><br></pre></td></tr></table></figure>
+<p>5：端口流量转发<br>假设监听端口为8080端口；远程端口为8090；被转发IP为8.8.8.8<br>则运行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --add-forward-port=port=8080:proto=tcp:toaddr=8.8.8.8:toport=8090 --permanent <span class="comment">#开启TCP流量转发</span></span><br><span class="line">firewall-cmd --add-forward-port=port=8080:proto=udp:toaddr=8.8.8.8:toport=8090--permanent <span class="comment">#开启UDP流量转发</span></span><br></pre></td></tr></table></figure>
+<p>6:重载设置使其生效<br>运行如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+<p>7:firewall默认的配置文件路径是/etc/firewalld/zones/public.xml</p>
+<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
   </entry>
   <entry>
     <title>Gost Docker布署加密隧道节点</title>
@@ -150,6 +113,43 @@
       </tags>
   </entry>
   <entry>
+    <title>Gost不惧VPS重启-开机自动启动服务搭建方法</title>
+    <url>/posts/c1a6fb57.html</url>
+    <content><![CDATA[<h1 id="Gost不惧VPS重启-开机自动启动服务搭建方法"><a href="#Gost不惧VPS重启-开机自动启动服务搭建方法" class="headerlink" title="Gost不惧VPS重启-开机自动启动服务搭建方法"></a><center>Gost不惧VPS重启-开机自动启动服务搭建方法</center></h1><p>1：服务端SSR一键安装脚本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh</span><br><span class="line">chmod +x shadowsocks-all.sh</span><br><span class="line">./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log</span><br></pre></td></tr></table></figure>
+<p>【注意记录你的SSR端口号】<br>2：在客户端VPS上安装Gost服务：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -N --no-check-certificate https://github.com/ginuerzh/gost/releases/download/v2.11.1/gost-linux-amd64-2.11.1.gz &amp;&amp; gzip -d gost-linux-amd64-2.11.1.gz</span><br><span class="line">mv gost-linux-amd64-2.11.1 gost</span><br><span class="line">chmod +x gost</span><br></pre></td></tr></table></figure>
+<p>2.1:编辑config.json<br>vi config.json<br>在对应的服务端写入配置文件：<br>客户端<br>模式：mtls+relay TCP+UDP转发</p>
+<p>{<br>    “Debug”: false,<br>    “Retries”: 0,<br>    “ServeNodes”: [],<br>    “ChainNodes”: [],<br>    “Routes”: [<br>        {<br>            “ServeNodes”: [ “udp://:1567” ],<br>            “ChainNodes”: [ “relay+mtls://45.134.147.201:2334” ]<br>        },<br>        {<br>            “ServeNodes”: [ “tcp://:1567” ],<br>            “ChainNodes”: [ “relay+mtls://45.134.147.201:2334” ]<br>        },<br>        {}<br>    ]<br>}</p>
+<p>2.2:运行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir /etc/gost</span><br><span class="line">cp /root/config.json /etc/gost/</span><br><span class="line">cp /root/gost /usr/bin/</span><br><span class="line">chmod +x /usr/bin/gost</span><br></pre></td></tr></table></figure>
+<p>2.3:在目录/lib/systemd/system/创建gost.service<br>vi /lib/systemd/system/gost.service<br>并写入以系统进程文件:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Gost</span><br><span class="line">After=network.target</span><br><span class="line">Wants=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">User=root</span><br><span class="line">ExecStart=/usr/bin/gost -C /etc/gost/config.json</span><br><span class="line">Type=simple</span><br><span class="line">KillMode=control-group</span><br><span class="line">Restart=always</span><br><span class="line">RestartSec=10s</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<p>2.4:最后让服务生效运行以下命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl <span class="built_in">enable</span> gost.service</span><br><span class="line">systemctl start gost.service</span><br><span class="line">systemctl status gost.service</span><br></pre></td></tr></table></figure>
+<p>3：服务端安装gost</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -N --no-check-certificate https://github.com/ginuerzh/gost/releases/download/v2.11.1/gost-linux-amd64-2.11.1.gz &amp;&amp; gzip -d gost-linux-amd64-2.11.1.gz</span><br><span class="line">mv gost-linux-amd64-2.11.1 gost</span><br><span class="line">chmod +x gost</span><br></pre></td></tr></table></figure>
+<p>4:服务端模式mtls配置文件：</p>
+<p>{<br>    “Debug”: false,<br>    “Retries”: 0,<br>    “ServeNodes”: [],<br>    “ChainNodes”: [],<br>    “Routes”: [<br>        {<br>            “ServeNodes”: [ “relay+mtls://:2334/127.0.0.1:15802” ],<br>            “ChainNodes”: []<br>        },<br>        {}<br>    ]<br>}</p>
+<p>mkdir /etc/gost<br>cp /root/config.json /etc/gost/<br>cp /root/gost /usr/bin/<br>chmod +x /usr/bin/gost</p>
+<p>gost.service</p>
+<p>在目录/lib/systemd/system/创建gost.service并写入以下文件<br>vi /lib/systemd/system/gost.service</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Gost</span><br><span class="line">After=network.target</span><br><span class="line">Wants=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">User=root</span><br><span class="line">ExecStart=/usr/bin/gost -C /etc/gost/config.json</span><br><span class="line">Type=simple</span><br><span class="line">KillMode=control-group</span><br><span class="line">Restart=always</span><br><span class="line">RestartSec=10s</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl <span class="built_in">enable</span> gost.service</span><br><span class="line">systemctl start gost.service</span><br><span class="line">systemctl status gost.service</span><br></pre></td></tr></table></figure>
+<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
+      <categories>
+        <category>Gost</category>
+        <category>中转</category>
+      </categories>
+      <tags>
+        <tag>Trojan</tag>
+        <tag>V2ray</tag>
+        <tag>GOST</tag>
+        <tag>SSR</tag>
+        <tag>隧道中转</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>NAT VPS阿里云DDNS动态域名绑定</title>
     <url>/posts/ee769b01.html</url>
     <content><![CDATA[<h1 id="NAT-VPS阿里云DDNS动态域名绑定"><a href="#NAT-VPS阿里云DDNS动态域名绑定" class="headerlink" title="NAT VPS阿里云DDNS动态域名绑定"></a><center>NAT VPS阿里云DDNS动态域名绑定</center></h1><p><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">视频教程</a></p>
@@ -182,6 +182,46 @@
         <tag>阿里云</tag>
         <tag>NAT</tag>
         <tag>VPS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Nginx转发流量转发实现ssr/v2ray/trojan流量中转</title>
+    <url>/posts/bdb9b495.html</url>
+    <content><![CDATA[<h1 id="Nginx转发流量转发——搭建SSR-V2RAY-TROJAN中转节点"><a href="#Nginx转发流量转发——搭建SSR-V2RAY-TROJAN中转节点" class="headerlink" title="Nginx转发流量转发——搭建SSR/V2RAY/TROJAN中转节点"></a>Nginx转发流量转发——搭建SSR/V2RAY/TROJAN中转节点</h1><p>1:Nginx安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y epel-release &amp;&amp; yum install -y nginx</span><br></pre></td></tr></table></figure>
+<p>2:设置Nginx配置文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi /etc/nginx/nginx.conf</span><br></pre></td></tr></table></figure>
+<p>然后输入转发配置：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># For more information on configuration, see:</span></span><br><span class="line"><span class="comment">#   * Official English Documentation: http://nginx.org/en/docs/</span></span><br><span class="line"><span class="comment">#   * Official Russian Documentation: http://nginx.org/ru/docs/</span></span><br><span class="line"></span><br><span class="line">user nginx;</span><br><span class="line">worker_processes auto;</span><br><span class="line">error_log /var/<span class="built_in">log</span>/nginx/error.log;</span><br><span class="line">pid /run/nginx.pid;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Load dynamic modules. See /usr/share/doc/nginx/README.dynamic.</span></span><br><span class="line">include /usr/share/nginx/modules/*.conf;</span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections 1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 转发配置</span></span><br><span class="line">stream &#123;</span><br><span class="line">    server &#123;</span><br><span class="line">        listen 端口号;  <span class="comment"># 1-65535的任意一个数字，无需与境外服务器的端口号相同</span></span><br><span class="line">        proxy_pass 国外ip:国外端口号; <span class="comment"># 用境外ip和端口号替换</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 转发配置结束</span></span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    log_format  main  <span class="string">'$remote_addr - $remote_user [$time_local] "$request" '</span></span><br><span class="line">                      <span class="string">'$status $body_bytes_sent "$http_referer" '</span></span><br><span class="line">                      <span class="string">'"$http_user_agent" "$http_x_forwarded_for"'</span>;</span><br><span class="line"></span><br><span class="line">    access_log  /var/<span class="built_in">log</span>/nginx/access.log  main;</span><br><span class="line"></span><br><span class="line">    sendfile            on;</span><br><span class="line">    tcp_nopush          on;</span><br><span class="line">    tcp_nodelay         on;</span><br><span class="line">    keepalive_timeout   65;</span><br><span class="line">    types_hash_max_size 2048;</span><br><span class="line">    ....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3：用 nginx -t 检查配置情况</p>
+<p>4：设置开机启动nginx</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ystemctl <span class="built_in">enable</span> nginx &amp;&amp; systemctl start nginx</span><br></pre></td></tr></table></figure>
+<p>5:查看Nginx运行状态</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ss -ntlp| grep -i nginx</span><br></pre></td></tr></table></figure>
+
+<p>6：禁止selinux</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sed -i <span class="string">'s/SELINUX=enforcing/SELINUX=permissive/g'</span> /etc/selinux/config</span><br><span class="line">setenforce 0</span><br></pre></td></tr></table></figure>
+<p>7：检查防火墙状态并开放端口</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --state</span><br></pre></td></tr></table></figure>
+<p>输出running<br>请运处以下命令放行端口：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --permanent --add-port=nginx配置的端口号/tcp</span><br><span class="line">fireawll-cmd --reload</span><br></pre></td></tr></table></figure>
+<p>如何降低国外VPS IP被墙风险</p>
+<p>1：启动防火墙</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> firewalld &amp;&amp; systemctl start firewalld</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>删除之前放行过的ss/ssr/v2ray等端口（如果配置过）：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --permanent --remove-port=端口/tcp</span><br></pre></td></tr></table></figure></li>
+<li>仅允许国内ip连接该服务器：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --permanent --add-source=国内ip/32</span><br><span class="line">fireawll-cmd --reload</span><br></pre></td></tr></table></figure>
+【gfw探测你的vps，除了ssh、网站等常用端口，ss/ssr/v2ray的端口直接无法连接，被墙概率自然就降低了。】</li>
+</ol>
+]]></content>
+      <categories>
+        <category>SSR，中转节点搭建</category>
+      </categories>
+      <tags>
+        <tag>Trojan</tag>
+        <tag>ssr</tag>
+        <tag>中转节点</tag>
+        <tag>V2ray流量中转</tag>
       </tags>
   </entry>
   <entry>
@@ -346,37 +386,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Trojan+v2ray+SSR单VPS共存</title>
-    <url>/posts/46908.html</url>
-    <content><![CDATA[<iframe width="560" height="315" src="https://www.youtube.com/embed/hSqO8ppMYyc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<h1 id="Trojan-v2ray-SSR单VPS共存"><a href="#Trojan-v2ray-SSR单VPS共存" class="headerlink" title="Trojan+v2ray+SSR单VPS共存"></a><center>Trojan+v2ray+SSR单VPS共存</center></h1><p> 准备工具：域名1个/VPS一台(CentOS7)<br>视频教程：<a href="https://youtu.be/hSqO8ppMYyc" target="_blank" rel="noopener">YouTube</a><br>1:域名解析到VPS；解析要充分，以便全球生效！</p>
-<p>2：安装BBR PLUS加速（可选）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget <span class="string">"https://github.com/chiakge/Linux-NetSpeed/raw/master/tcp.sh"</span> &amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh</span><br></pre></td></tr></table></figure>
-<p>3:大神atrandys一键安装Trojan脚本：<br>若提示无wget,则运行：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install wget</span><br></pre></td></tr></table></figure>
-<p>然后再运行下面Docker版Trojan一键安装脚本:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -O https://raw.githubusercontent.com/atrandys/trojan/master/trojan_install.sh &amp;&amp; chmod +x trojan_install.sh &amp;&amp; ./trojan_install.sh</span><br></pre></td></tr></table></figure>
-<p>4：运行大神Docker的UI管理Portainer一键脚本：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">--name ui --restart=always lihaixin/portainer:me</span><br></pre></td></tr></table></figure>
-<p>5：浏览器运行<a href="https://VPS_IP:9000;设置密码并创建帐户，然后选择local。">https://VPS_IP:9000;设置密码并创建帐户，然后选择local。</a></p>
-<p>6:在容器containers中可以看到安装的Trojan；在App Templates中可以选择V2ray、SSR、Brook等代理程序</p>
-<p>8：客户端下载<br><a href="https://drive.google.com/open?id=1m9b6n9KnWI40octuo6IWAWqWdWxseLLk" target="_blank" rel="noopener">SS客户端</a><br><a href="https://drive.google.com/open?id=15sRZ7Sf9CVO0IdELNEvgD7xLxCxMqUVO" target="_blank" rel="noopener">V2ray客户端下载</a></p>
-<h1 id="星际云网络速"><a href="#星际云网络速" class="headerlink" title="星际云网络速"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络速</a></h1><h2 id="Trojan科学上网节点搭建视频教程"><a href="#Trojan科学上网节点搭建视频教程" class="headerlink" title="Trojan科学上网节点搭建视频教程"></a><a href="https://youtu.be/esr4bDuZj34" target="_blank" rel="noopener">Trojan科学上网节点搭建视频教程</a></h2><h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
-      <categories>
-        <category>科学上网</category>
-        <category>V2ray</category>
-        <category>Trojan</category>
-        <category>SSR</category>
-      </categories>
-      <tags>
-        <tag>Trojan</tag>
-        <tag>V2ray</tag>
-        <tag>SSR</tag>
-        <tag>Brook</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>利用Caddy完美实现Trojan与V2ray共存</title>
     <url>/posts/47385.html</url>
     <content><![CDATA[<h1 id="利用Caddy完美实现Trojan与V2ray共存"><a href="#利用Caddy完美实现Trojan与V2ray共存" class="headerlink" title="利用Caddy完美实现Trojan与V2ray共存"></a><center>利用Caddy完美实现Trojan与V2ray共存</center></h1><h2 id="视频教程"><a href="#视频教程" class="headerlink" title="视频教程"></a><center><a href="https://youtu.be/YuZ4TEayfGw" target="_blank" rel="noopener">视频教程</a></center></h2><p>1：准备工具域名1个；VPS一个（系统镜像ubuntu16.0+）;<br>请先将域名解析至VPS,并确定解析成功后再进行搭建。</p>
@@ -432,6 +441,37 @@
         <tag>固件编译</tag>
         <tag>RT-ACRH17</tag>
         <tag>ShadowsocksR Plus+</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Trojan+v2ray+SSR单VPS共存</title>
+    <url>/posts/46908.html</url>
+    <content><![CDATA[<iframe width="560" height="315" src="https://www.youtube.com/embed/hSqO8ppMYyc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h1 id="Trojan-v2ray-SSR单VPS共存"><a href="#Trojan-v2ray-SSR单VPS共存" class="headerlink" title="Trojan+v2ray+SSR单VPS共存"></a><center>Trojan+v2ray+SSR单VPS共存</center></h1><p> 准备工具：域名1个/VPS一台(CentOS7)<br>视频教程：<a href="https://youtu.be/hSqO8ppMYyc" target="_blank" rel="noopener">YouTube</a><br>1:域名解析到VPS；解析要充分，以便全球生效！</p>
+<p>2：安装BBR PLUS加速（可选）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget <span class="string">"https://github.com/chiakge/Linux-NetSpeed/raw/master/tcp.sh"</span> &amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh</span><br></pre></td></tr></table></figure>
+<p>3:大神atrandys一键安装Trojan脚本：<br>若提示无wget,则运行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install wget</span><br></pre></td></tr></table></figure>
+<p>然后再运行下面Docker版Trojan一键安装脚本:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -O https://raw.githubusercontent.com/atrandys/trojan/master/trojan_install.sh &amp;&amp; chmod +x trojan_install.sh &amp;&amp; ./trojan_install.sh</span><br></pre></td></tr></table></figure>
+<p>4：运行大神Docker的UI管理Portainer一键脚本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">--name ui --restart=always lihaixin/portainer:me</span><br></pre></td></tr></table></figure>
+<p>5：浏览器运行<a href="https://VPS_IP:9000;设置密码并创建帐户，然后选择local。">https://VPS_IP:9000;设置密码并创建帐户，然后选择local。</a></p>
+<p>6:在容器containers中可以看到安装的Trojan；在App Templates中可以选择V2ray、SSR、Brook等代理程序</p>
+<p>8：客户端下载<br><a href="https://drive.google.com/open?id=1m9b6n9KnWI40octuo6IWAWqWdWxseLLk" target="_blank" rel="noopener">SS客户端</a><br><a href="https://drive.google.com/open?id=15sRZ7Sf9CVO0IdELNEvgD7xLxCxMqUVO" target="_blank" rel="noopener">V2ray客户端下载</a></p>
+<h1 id="星际云网络速"><a href="#星际云网络速" class="headerlink" title="星际云网络速"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络速</a></h1><h2 id="Trojan科学上网节点搭建视频教程"><a href="#Trojan科学上网节点搭建视频教程" class="headerlink" title="Trojan科学上网节点搭建视频教程"></a><a href="https://youtu.be/esr4bDuZj34" target="_blank" rel="noopener">Trojan科学上网节点搭建视频教程</a></h2><h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
+      <categories>
+        <category>科学上网</category>
+        <category>V2ray</category>
+        <category>Trojan</category>
+        <category>SSR</category>
+      </categories>
+      <tags>
+        <tag>Trojan</tag>
+        <tag>V2ray</tag>
+        <tag>SSR</tag>
+        <tag>Brook</tag>
       </tags>
   </entry>
   <entry>
