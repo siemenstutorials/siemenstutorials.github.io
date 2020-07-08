@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://siemenstutorials.github.io/"/>
-  <updated>2020-07-04T09:47:58.775Z</updated>
+  <updated>2020-07-05T15:30:46.859Z</updated>
   <id>https://siemenstutorials.github.io/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>国内NAT如何提升速度下载Github脚本</title>
+    <link href="https://siemenstutorials.github.io/posts/5c352cb9.html"/>
+    <id>https://siemenstutorials.github.io/posts/5c352cb9.html</id>
+    <published>2020-07-05T15:24:51.000Z</published>
+    <updated>2020-07-05T15:30:46.859Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="国内NAT如何提升速度下载Github脚本"><a href="#国内NAT如何提升速度下载Github脚本" class="headerlink" title="国内NAT如何提升速度下载Github脚本"></a><center>国内NAT如何提升速度下载Github脚本</center></h1><p>1：根据Github拉取源码的域名对应查询最快的IP</p><p>````bash</p><ol><li>github.com</li><li>assets-cdn.github.com</li><li>github.global.ssl.fastly.net</li><li>codeload.github.com</li><li>raw.githubusercontent.com<pre><code class="bash">查询网址：https://www.ipaddress.com/</code></pre></li></ol><p>2：利用vi命令将host文件进行修改<br>vi /etc/hosts</p><p>在hosts文件中加入以下ip 域名；如：<br>IP github.com<br>IP raw.githubusercontent.com<br>3：然后保存退出即可正常下载了！</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;国内NAT如何提升速度下载Github脚本&quot;&gt;&lt;a href=&quot;#国内NAT如何提升速度下载Github脚本&quot; class=&quot;headerlink&quot; title=&quot;国内NAT如何提升速度下载Github脚本&quot;&gt;&lt;/a&gt;&lt;center&gt;国内NAT如何提升速度下载Gi
+      
+    
+    </summary>
+    
+    
+    
+      <category term="NAT" scheme="https://siemenstutorials.github.io/tags/NAT/"/>
+    
+      <category term="GitHub" scheme="https://siemenstutorials.github.io/tags/GitHub/"/>
+    
+      <category term="脚本下载" scheme="https://siemenstutorials.github.io/tags/%E8%84%9A%E6%9C%AC%E4%B8%8B%E8%BD%BD/"/>
+    
+      <category term="速度慢" scheme="https://siemenstutorials.github.io/tags/%E9%80%9F%E5%BA%A6%E6%85%A2/"/>
+    
+  </entry>
   
   <entry>
     <title>Nginx转发流量转发实现ssr/v2ray/trojan流量中转</title>
