@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://siemenstutorials.github.io/"/>
-  <updated>2020-07-26T08:56:53.450Z</updated>
+  <updated>2020-07-26T09:16:52.982Z</updated>
   <id>https://siemenstutorials.github.io/</id>
   
   <author>
@@ -17,11 +17,35 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>利用Nginx实现流量中转和节点负载均衡</title>
+    <link href="https://siemenstutorials.github.io/posts/7b41dba4.html"/>
+    <id>https://siemenstutorials.github.io/posts/7b41dba4.html</id>
+    <published>2020-07-26T08:59:50.000Z</published>
+    <updated>2020-07-26T09:16:52.982Z</updated>
+    
+    <content type="html"><![CDATA[<center>利用Nginx进行流量中转并实现负载均衡-一种解决断流方案</center><p>食用工具：<a href="https://olvps.com/aff.php?aff=501" target="_blank" rel="noopener">NAT机</a>一台;VPS（ABC）3台；视频中采用系统镜像为:centOS7<br>【注意：搭建之前可以对你的VPS进行域名绑定；特别是动态VPS的必须用域名进行中转】</p><p>1:关闭所有VPS的防火墙</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld.service</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld.service</span><br></pre></td></tr></table></figure><p>2:在NAT机上安装Nginx</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y epel-release &amp;&amp; yum install -y nginx</span><br></pre></td></tr></table></figure><p>3：启动Nginx</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start nginx.service</span><br></pre></td></tr></table></figure><p>4:新建tcp.d文件夹并在文件夹中创建转发配置文件</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /etc/nginx/tcp.d/</span><br><span class="line">vi /etc/nginx/tcp.d/zf.conf</span><br></pre></td></tr></table></figure><p>5:输入配置信息；示例如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">stream&#123;</span><br><span class="line">    upstream tcpssh &#123;</span><br><span class="line">               server  IP(域名A):端口; </span><br><span class="line">               server  IP(域名B):端口;</span><br><span class="line">               server  IP(域名C):端口; </span><br><span class="line">    &#125;</span><br><span class="line">    server&#123;</span><br><span class="line">        listen NAT/VPS外部端口;</span><br><span class="line">        listen NAT/VPS外部端口 udp;</span><br><span class="line">        proxy_pass tcpssh;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>6：修改Nginx配置文件</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/nginx/</span><br><span class="line">vi nginx.conf</span><br></pre></td></tr></table></figure><p>并在配置文件中添加以下内容</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include /etc/nginx/tcp.d/*.conf;</span><br></pre></td></tr></table></figure><p>7：利用用 nginx -t 命令可以检查配置是否成功</p><p>8：设置开机启动nginx</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> nginx &amp;&amp; systemctl start nginx</span><br></pre></td></tr></table></figure><p>9：查看Nginx运行状态</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ss -ntlp| grep -i nginx</span><br></pre></td></tr></table></figure><p>10：若有需要须重启Nginx运行如下命令</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart nginx</span><br><span class="line">service nginx restart</span><br></pre></td></tr></table></figure><p>11：若要定时重启可添加定时任务<br>执行 crontab -e命令</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 */12 * * * systemctl restart nginx</span><br></pre></td></tr></table></figure><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></center></h1>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;center&gt;利用Nginx进行流量中转并实现负载均衡-一种解决断流方案&lt;/center&gt;
+
+&lt;p&gt;食用工具：&lt;a href=&quot;https://olvps.com/aff.php?aff=501&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;NAT机&lt;/a&gt;一
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>高级中继节点搭建转发脚本合辑</title>
     <link href="https://siemenstutorials.github.io/posts/b866de03.html"/>
     <id>https://siemenstutorials.github.io/posts/b866de03.html</id>
     <published>2020-07-26T08:28:15.000Z</published>
-    <updated>2020-07-26T08:56:53.450Z</updated>
+    <updated>2020-07-26T08:57:18.889Z</updated>
     
     <content type="html"><![CDATA[<center>SSR/V2RAY/TROJAN高级中继节点搭建转发脚本合辑</center><p>1:iptables转发</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO natcfg.sh http://arloor.com/sh/iptablesUtils/natcfg.sh &amp;&amp; bash natcfg.sh</span><br></pre></td></tr></table></figure><p>或</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO natcfg.sh https://raw.githubusercontent.com/arloor/iptablesUtils/master/natcfg.sh &amp;&amp; bash natcfg.sh</span><br></pre></td></tr></table></figure><p><a href="https://github.com/arloor/iptablesUtils" target="_blank" rel="noopener">项目地址</a><br>逗比版本：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubiBackup/doubi/master/iptables-pf.sh &amp;&amp; chmod +x iptables-pf.sh &amp;&amp; bash iptables-pf.sh</span><br></pre></td></tr></table></figure><p>运行命令</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./iptables-pf.sh</span><br></pre></td></tr></table></figure><p>2：Socat转发脚本<br>【逗比版】</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubiBackup/doubi/master/socat.sh &amp;&amp; chmod +x socat.sh &amp;&amp; bash socat.sh</span><br><span class="line">./socat.sh</span><br></pre></td></tr></table></figure><p>或</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://www.moerats.com/usr/shell/socat.sh &amp;&amp; bash socat.sh</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate https://www.moerats.com/usr/shell/socat.sh &amp;&amp; bash socat.sh</span><br></pre></td></tr></table></figure><p>3:SSR脚本合集</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh</span><br><span class="line">chmod +x shadowsocks-all.sh</span><br><span class="line">./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log</span><br></pre></td></tr></table></figure><p>逗比SSR</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubiBackup/doubi/master/ssr.sh &amp;&amp; chmod +x ssr.sh &amp;&amp; bash ssr.sh</span><br></pre></td></tr></table></figure><p>4.BBRPLUS</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate -O tcp.sh https://github.com/cx9208/Linux-NetSpeed/raw/master/tcp.sh &amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh</span><br></pre></td></tr></table></figure><p>[END]</p><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
     
@@ -597,52 +621,14 @@
     
       <category term="科学上网" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
     
-      <category term="V2ray" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/V2ray/"/>
-    
       <category term="Trojan" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/Trojan/"/>
+    
+      <category term="V2ray" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/V2ray/"/>
     
     
       <category term="Trojan" scheme="https://siemenstutorials.github.io/tags/Trojan/"/>
     
       <category term="V2ray" scheme="https://siemenstutorials.github.io/tags/V2ray/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Trojan+v2ray+SSR单VPS共存</title>
-    <link href="https://siemenstutorials.github.io/posts/46908.html"/>
-    <id>https://siemenstutorials.github.io/posts/46908.html</id>
-    <published>2020-05-02T01:08:41.000Z</published>
-    <updated>2020-05-04T23:38:28.057Z</updated>
-    
-    <content type="html"><![CDATA[<iframe width="560" height="315" src="https://www.youtube.com/embed/hSqO8ppMYyc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><h1 id="Trojan-v2ray-SSR单VPS共存"><a href="#Trojan-v2ray-SSR单VPS共存" class="headerlink" title="Trojan+v2ray+SSR单VPS共存"></a><center>Trojan+v2ray+SSR单VPS共存</center></h1><p> 准备工具：域名1个/VPS一台(CentOS7)<br>视频教程：<a href="https://youtu.be/hSqO8ppMYyc" target="_blank" rel="noopener">YouTube</a><br>1:域名解析到VPS；解析要充分，以便全球生效！</p><p>2：安装BBR PLUS加速（可选）</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget <span class="string">"https://github.com/chiakge/Linux-NetSpeed/raw/master/tcp.sh"</span> &amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh</span><br></pre></td></tr></table></figure><p>3:大神atrandys一键安装Trojan脚本：<br>若提示无wget,则运行：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install wget</span><br></pre></td></tr></table></figure><p>然后再运行下面Docker版Trojan一键安装脚本:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -O https://raw.githubusercontent.com/atrandys/trojan/master/trojan_install.sh &amp;&amp; chmod +x trojan_install.sh &amp;&amp; ./trojan_install.sh</span><br></pre></td></tr></table></figure><p>4：运行大神Docker的UI管理Portainer一键脚本：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">--name ui --restart=always lihaixin/portainer:me</span><br></pre></td></tr></table></figure><p>5：浏览器运行<a href="https://VPS_IP:9000;设置密码并创建帐户，然后选择local。">https://VPS_IP:9000;设置密码并创建帐户，然后选择local。</a></p><p>6:在容器containers中可以看到安装的Trojan；在App Templates中可以选择V2ray、SSR、Brook等代理程序</p><p>8：客户端下载<br><a href="https://drive.google.com/open?id=1m9b6n9KnWI40octuo6IWAWqWdWxseLLk" target="_blank" rel="noopener">SS客户端</a><br><a href="https://drive.google.com/open?id=15sRZ7Sf9CVO0IdELNEvgD7xLxCxMqUVO" target="_blank" rel="noopener">V2ray客户端下载</a></p><h1 id="星际云网络速"><a href="#星际云网络速" class="headerlink" title="星际云网络速"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络速</a></h1><h2 id="Trojan科学上网节点搭建视频教程"><a href="#Trojan科学上网节点搭建视频教程" class="headerlink" title="Trojan科学上网节点搭建视频教程"></a><a href="https://youtu.be/esr4bDuZj34" target="_blank" rel="noopener">Trojan科学上网节点搭建视频教程</a></h2><h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/hSqO8ppMYyc&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-m
-      
-    
-    </summary>
-    
-    
-      <category term="科学上网" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
-    
-      <category term="V2ray" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/V2ray/"/>
-    
-      <category term="Trojan" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/Trojan/"/>
-    
-      <category term="SSR" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/SSR/"/>
-    
-    
-      <category term="Trojan" scheme="https://siemenstutorials.github.io/tags/Trojan/"/>
-    
-      <category term="V2ray" scheme="https://siemenstutorials.github.io/tags/V2ray/"/>
-    
-      <category term="SSR" scheme="https://siemenstutorials.github.io/tags/SSR/"/>
-    
-      <category term="Brook" scheme="https://siemenstutorials.github.io/tags/Brook/"/>
     
   </entry>
   
