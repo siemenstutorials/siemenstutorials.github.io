@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://siemenstutorials.github.io/"/>
-  <updated>2020-07-08T14:04:12.374Z</updated>
+  <updated>2020-07-26T08:56:53.450Z</updated>
   <id>https://siemenstutorials.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>高级中继节点搭建转发脚本合辑</title>
+    <link href="https://siemenstutorials.github.io/posts/b866de03.html"/>
+    <id>https://siemenstutorials.github.io/posts/b866de03.html</id>
+    <published>2020-07-26T08:28:15.000Z</published>
+    <updated>2020-07-26T08:56:53.450Z</updated>
+    
+    <content type="html"><![CDATA[<center>SSR/V2RAY/TROJAN高级中继节点搭建转发脚本合辑</center><p>1:iptables转发</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO natcfg.sh http://arloor.com/sh/iptablesUtils/natcfg.sh &amp;&amp; bash natcfg.sh</span><br></pre></td></tr></table></figure><p>或</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO natcfg.sh https://raw.githubusercontent.com/arloor/iptablesUtils/master/natcfg.sh &amp;&amp; bash natcfg.sh</span><br></pre></td></tr></table></figure><p><a href="https://github.com/arloor/iptablesUtils" target="_blank" rel="noopener">项目地址</a><br>逗比版本：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubiBackup/doubi/master/iptables-pf.sh &amp;&amp; chmod +x iptables-pf.sh &amp;&amp; bash iptables-pf.sh</span><br></pre></td></tr></table></figure><p>运行命令</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./iptables-pf.sh</span><br></pre></td></tr></table></figure><p>2：Socat转发脚本<br>【逗比版】</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubiBackup/doubi/master/socat.sh &amp;&amp; chmod +x socat.sh &amp;&amp; bash socat.sh</span><br><span class="line">./socat.sh</span><br></pre></td></tr></table></figure><p>或</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://www.moerats.com/usr/shell/socat.sh &amp;&amp; bash socat.sh</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate https://www.moerats.com/usr/shell/socat.sh &amp;&amp; bash socat.sh</span><br></pre></td></tr></table></figure><p>3:SSR脚本合集</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh</span><br><span class="line">chmod +x shadowsocks-all.sh</span><br><span class="line">./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log</span><br></pre></td></tr></table></figure><p>逗比SSR</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubiBackup/doubi/master/ssr.sh &amp;&amp; chmod +x ssr.sh &amp;&amp; bash ssr.sh</span><br></pre></td></tr></table></figure><p>4.BBRPLUS</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate -O tcp.sh https://github.com/cx9208/Linux-NetSpeed/raw/master/tcp.sh &amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh</span><br></pre></td></tr></table></figure><p>[END]</p><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;center&gt;SSR/V2RAY/TROJAN高级中继节点搭建转发脚本合辑&lt;/center&gt;
+
+&lt;p&gt;1:iptables转发&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>国内NAT如何提升速度下载Github脚本</title>
@@ -70,9 +95,9 @@
     
       <category term="Trojan" scheme="https://siemenstutorials.github.io/tags/Trojan/"/>
     
-      <category term="中转节点" scheme="https://siemenstutorials.github.io/tags/%E4%B8%AD%E8%BD%AC%E8%8A%82%E7%82%B9/"/>
-    
       <category term="ssr" scheme="https://siemenstutorials.github.io/tags/ssr/"/>
+    
+      <category term="中转节点" scheme="https://siemenstutorials.github.io/tags/%E4%B8%AD%E8%BD%AC%E8%8A%82%E7%82%B9/"/>
     
       <category term="V2ray流量中转" scheme="https://siemenstutorials.github.io/tags/V2ray%E6%B5%81%E9%87%8F%E4%B8%AD%E8%BD%AC/"/>
     
@@ -102,9 +127,9 @@
       <category term="Docker" scheme="https://siemenstutorials.github.io/categories/Gost/Docker/"/>
     
     
-      <category term="ssr" scheme="https://siemenstutorials.github.io/tags/ssr/"/>
-    
       <category term="Gost" scheme="https://siemenstutorials.github.io/tags/Gost/"/>
+    
+      <category term="ssr" scheme="https://siemenstutorials.github.io/tags/ssr/"/>
     
       <category term="v2ray" scheme="https://siemenstutorials.github.io/tags/v2ray/"/>
     
@@ -618,40 +643,6 @@
       <category term="SSR" scheme="https://siemenstutorials.github.io/tags/SSR/"/>
     
       <category term="Brook" scheme="https://siemenstutorials.github.io/tags/Brook/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SSR+WS+VNET—_Tunnel隧道加密节点搭建</title>
-    <link href="https://siemenstutorials.github.io/posts/21643.html"/>
-    <id>https://siemenstutorials.github.io/posts/21643.html</id>
-    <published>2020-05-01T15:49:40.000Z</published>
-    <updated>2020-05-04T23:39:51.906Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="SSR-WS-VNET—-Tunnel隧道加密节点搭建"><a href="#SSR-WS-VNET—-Tunnel隧道加密节点搭建" class="headerlink" title="SSR+WS+VNET—_Tunnel隧道加密节点搭建"></a><center>SSR+WS+VNET—_Tunnel隧道加密节点搭建</center></h1><iframe width="560" height="315" src="https://www.youtube.com/embed/GyatcDOtyAI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><p>1：在国外VPS{服务端}SERVER安装Vnet_Tunnel，脚本如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install zip unzip</span><br><span class="line">wget -N --no-check-certificate <span class="string">"https://github.com/siemenstutorials/Vnet_tunnel/raw/master/tunnel.zip"</span> &amp;&amp; unzip tunnel.zip &amp;&amp; chmod -R +x ./*</span><br></pre></td></tr></table></figure><p>2：让Vnet_Tunnel后台运行，脚本如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup ./server &gt;&gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure><p>3：Server后台面板登陆：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">server服务器IP:8081/resources/add_server.html</span><br></pre></td></tr></table></figure><p>4:在国内VPS{客户端}Client安装Vnet_Tunnel，服本如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install zip unzip</span><br><span class="line">wget -N --no-check-certificate <span class="string">"https://github.com/siemenstutorials/Vnet_tunnel/raw/master/tunnel.zip"</span> &amp;&amp; unzip tunnel.zip &amp;&amp; chmod -R +x ./*</span><br></pre></td></tr></table></figure><p>5:后台运行Client,运行如下脚本：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup ./client &gt;&gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure><p>6:开启防火墙流量转发：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl  start   firewalld.service</span><br></pre></td></tr></table></figure><p>7:开启路由转发功能和流量伪装:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> 1 &gt; /proc/sys/net/ipv4/ip_forward</span><br><span class="line">sysctl -p</span><br><span class="line">firewall-cmd --zone=public --permanent --add-masquerade</span><br></pre></td></tr></table></figure><p>8:开启端口</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --add-port=1112/tcp --permanent</span><br><span class="line">firewall-cmd --add-port=nat端口/tcp --permanent</span><br></pre></td></tr></table></figure><p>9：将NAT端口流量转发至1112</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --add-forward-port=port=nat端口:proto=tcp:toaddr=nat内网ip:toport=1112 --permanent</span><br></pre></td></tr></table></figure><p>10:重载防火墙</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure><p>11:后台面板登陆：<br>服务器IP:NAT指定外部通讯端口/resources/add_client.html</p><p>12:NAT TUNNEL服务端设置好后切记得关闭防火墙否则无法FQ<br>防火墙关闭命令</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br></pre></td></tr></table></figure><h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;SSR-WS-VNET—-Tunnel隧道加密节点搭建&quot;&gt;&lt;a href=&quot;#SSR-WS-VNET—-Tunnel隧道加密节点搭建&quot; class=&quot;headerlink&quot; title=&quot;SSR+WS+VNET—_Tunnel隧道加密节点搭建&quot;&gt;&lt;/a&gt;&lt;cent
-      
-    
-    </summary>
-    
-    
-      <category term="科学上网" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
-    
-      <category term="V2ray" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/V2ray/"/>
-    
-      <category term="Trojan" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/Trojan/"/>
-    
-      <category term="SSR" scheme="https://siemenstutorials.github.io/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/SSR/"/>
-    
-    
-      <category term="科学上网" scheme="https://siemenstutorials.github.io/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
-    
-      <category term="SSR隧道加密" scheme="https://siemenstutorials.github.io/tags/SSR%E9%9A%A7%E9%81%93%E5%8A%A0%E5%AF%86/"/>
     
   </entry>
   
