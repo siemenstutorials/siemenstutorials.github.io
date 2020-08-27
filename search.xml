@@ -740,4 +740,16 @@ CentOS系统:
 <p>[END]</p>
 <h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
   </entry>
+  <entry>
+    <title>科学上网VLESS+WS+TLS+Nginx一键安装脚本</title>
+    <url>/posts/bd4de8a8.html</url>
+    <content><![CDATA[<h1 id="VLESS-WS-TLS-Nginx一键安装脚本"><a href="#VLESS-WS-TLS-Nginx一键安装脚本" class="headerlink" title="VLESS+WS+TLS+Nginx一键安装脚本"></a><center>VLESS+WS+TLS+Nginx一键安装脚本</center></h1><p>搭建工具：域名+VPS+(CloudFlare可选)<br>系统镜像：Debian9</p>
+<p>1:安装依赖</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt update -y  <span class="comment">#非必须</span></span><br></pre></td></tr></table></figure>
+<p>2:一键安装脚本<br><a href="https://github.com/wulabing/V2Ray_ws-tls_bash_onekey/tree/dev" target="_blank" rel="noopener">项目地址</a><br>安装脚本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -N --no-check-certificate -q -O install.sh <span class="string">"https://raw.githubusercontent.com/wulabing/V2Ray_ws-tls_bash_onekey/dev/install.sh"</span> &amp;&amp; chmod +x install.sh &amp;&amp; bash install.sh</span><br></pre></td></tr></table></figure>
+<p>3:输入域名根据提示进行安装即可</p>
+<p>4：客户端下载<br>[VLESS/V2ray客户端下载]<br>(<a href="https://github.com/2dust/v2rayN/releases/tag/3.21" target="_blank" rel="noopener">https://github.com/2dust/v2rayN/releases/tag/3.21</a>)<br>[VLESS/V2ray内核下载]<br>(<a href="https://github.com/v2fly/v2ray-core/releases" target="_blank" rel="noopener">https://github.com/v2fly/v2ray-core/releases</a>)<br>注意两个压缩包下载后合并至一个文件内进行使用</p>
+]]></content>
+  </entry>
 </search>

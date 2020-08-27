@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://siemenstutorials.github.io/"/>
-  <updated>2020-08-22T16:13:36.088Z</updated>
+  <updated>2020-08-27T14:56:06.754Z</updated>
   <id>https://siemenstutorials.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>科学上网VLESS+WS+TLS+Nginx一键安装脚本</title>
+    <link href="https://siemenstutorials.github.io/posts/bd4de8a8.html"/>
+    <id>https://siemenstutorials.github.io/posts/bd4de8a8.html</id>
+    <published>2020-08-27T14:30:06.000Z</published>
+    <updated>2020-08-27T14:56:06.754Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="VLESS-WS-TLS-Nginx一键安装脚本"><a href="#VLESS-WS-TLS-Nginx一键安装脚本" class="headerlink" title="VLESS+WS+TLS+Nginx一键安装脚本"></a><center>VLESS+WS+TLS+Nginx一键安装脚本</center></h1><p>搭建工具：域名+VPS+(CloudFlare可选)<br>系统镜像：Debian9</p><p>1:安装依赖</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt update -y  <span class="comment">#非必须</span></span><br></pre></td></tr></table></figure><p>2:一键安装脚本<br><a href="https://github.com/wulabing/V2Ray_ws-tls_bash_onekey/tree/dev" target="_blank" rel="noopener">项目地址</a><br>安装脚本：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate -q -O install.sh <span class="string">"https://raw.githubusercontent.com/wulabing/V2Ray_ws-tls_bash_onekey/dev/install.sh"</span> &amp;&amp; chmod +x install.sh &amp;&amp; bash install.sh</span><br></pre></td></tr></table></figure><p>3:输入域名根据提示进行安装即可</p><p>4：客户端下载<br>[VLESS/V2ray客户端下载]<br>(<a href="https://github.com/2dust/v2rayN/releases/tag/3.21" target="_blank" rel="noopener">https://github.com/2dust/v2rayN/releases/tag/3.21</a>)<br>[VLESS/V2ray内核下载]<br>(<a href="https://github.com/v2fly/v2ray-core/releases" target="_blank" rel="noopener">https://github.com/v2fly/v2ray-core/releases</a>)<br>注意两个压缩包下载后合并至一个文件内进行使用</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;VLESS-WS-TLS-Nginx一键安装脚本&quot;&gt;&lt;a href=&quot;#VLESS-WS-TLS-Nginx一键安装脚本&quot; class=&quot;headerlink&quot; title=&quot;VLESS+WS+TLS+Nginx一键安装脚本&quot;&gt;&lt;/a&gt;&lt;center&gt;VLESS+
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>2020年最新V2RAY+WS+TLS+NGinx搭建教程</title>
@@ -588,34 +610,6 @@ Centos系统
       <category term="软路由固件" scheme="https://siemenstutorials.github.io/tags/%E8%BD%AF%E8%B7%AF%E7%94%B1%E5%9B%BA%E4%BB%B6/"/>
     
       <category term="固件编译" scheme="https://siemenstutorials.github.io/tags/%E5%9B%BA%E4%BB%B6%E7%BC%96%E8%AF%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何删除GitHub仓库的所用commit</title>
-    <link href="https://siemenstutorials.github.io/posts/4a1536ed.html"/>
-    <id>https://siemenstutorials.github.io/posts/4a1536ed.html</id>
-    <published>2020-05-08T12:58:53.000Z</published>
-    <updated>2020-05-09T14:39:48.216Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="如何删除GitHub仓库的所用commit"><a href="#如何删除GitHub仓库的所用commit" class="headerlink" title="如何删除GitHub仓库的所用commit"></a><center>如何删除GitHub仓库的所用commit</center></h1><p>因个人的需要有时候的误提交可能会有多余的commit,这时候如何删除commit就是一个很D疼的事；今天看到一个大神写了这个教程，特copy至此作为个人工作的一些记录以作备查，在此感谢大神<a href="https://p3terx.com/archives/github-warehouse-cleaning-delete-all-commit-records.html" target="_blank" rel="noopener">P3TERX</a></p><p>1：新建一个空白分支</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout --orphan latest_branch</span><br></pre></td></tr></table></figure><p>2:添加所有文件</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add -A</span><br></pre></td></tr></table></figure><p>3:提交</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -am <span class="string">"."</span></span><br></pre></td></tr></table></figure><p>4：强制删除旧的分支，如果是 master</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -D master</span><br></pre></td></tr></table></figure><p>5：将当前分支重命名为 master</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -m master</span><br></pre></td></tr></table></figure><p>6：强制推送到远程仓库</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -f origin master</span><br></pre></td></tr></table></figure><p>7:至此您将获得全新干净的仓库<br>本文内容源自<a href="https://p3terx.com/archives/github-warehouse-cleaning-delete-all-commit-records.html" target="_blank" rel="noopener">P3TERX</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;如何删除GitHub仓库的所用commit&quot;&gt;&lt;a href=&quot;#如何删除GitHub仓库的所用commit&quot; class=&quot;headerlink&quot; title=&quot;如何删除GitHub仓库的所用commit&quot;&gt;&lt;/a&gt;&lt;center&gt;如何删除GitHub仓库的所用
-      
-    
-    </summary>
-    
-    
-    
-      <category term="Github" scheme="https://siemenstutorials.github.io/tags/Github/"/>
-    
-      <category term="commit" scheme="https://siemenstutorials.github.io/tags/commit/"/>
-    
-      <category term="master" scheme="https://siemenstutorials.github.io/tags/master/"/>
     
   </entry>
   
