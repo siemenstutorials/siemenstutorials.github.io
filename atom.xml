@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://siemenstutorials.github.io/"/>
-  <updated>2020-08-27T15:09:57.811Z</updated>
+  <updated>2020-09-02T15:34:54.764Z</updated>
   <id>https://siemenstutorials.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>V2ray+Docker-compose+Caddy搭建教程</title>
+    <link href="https://siemenstutorials.github.io/posts/d56ad2f5.html"/>
+    <id>https://siemenstutorials.github.io/posts/d56ad2f5.html</id>
+    <published>2020-09-02T15:01:38.000Z</published>
+    <updated>2020-09-02T15:34:54.764Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="V2ray-Docker-compose-Caddy搭建教程——V2ray科学上网节点搭建新方式"><a href="#V2ray-Docker-compose-Caddy搭建教程——V2ray科学上网节点搭建新方式" class="headerlink" title="V2ray+Docker-compose+Caddy搭建教程——V2ray科学上网节点搭建新方式"></a>V2ray+Docker-compose+Caddy搭建教程——V2ray科学上网节点搭建新方式</h1><p>1.Docker安装</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -sSL https://get.docker.com | bash</span><br><span class="line">service docker restart</span><br></pre></td></tr></table></figure><p>2.docker -compose安装：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -L <span class="string">"https://github.com/docker/compose/releases/download/1.26.0/docker-compose-<span class="variable">$(uname -s)</span>-<span class="variable">$(uname -m)</span>"</span> -o /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">ln -s /usr/<span class="built_in">local</span>/bin/docker-compose /usr/bin/docker-compose</span><br></pre></td></tr></table></figure><p>3.创建log文件同时在log目录下创建Caddy和V2ray文件夹</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p config data <span class="built_in">log</span>/caddy <span class="built_in">log</span>/v2ray</span><br></pre></td></tr></table></figure><p>4:配置V2ray配置文件config.json：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi config.json</span><br></pre></td></tr></table></figure><p>配置修改成如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> <span class="string">"log"</span>: &#123;</span><br><span class="line">  <span class="string">"loglevel"</span>: <span class="string">"warning"</span>,</span><br><span class="line">  <span class="string">"access"</span>: <span class="string">"/var/log/v2ray/access.log"</span>,</span><br><span class="line">  <span class="string">"error"</span>: <span class="string">"/var/log/v2ray/error.log"</span></span><br><span class="line"> &#125;,</span><br><span class="line">  <span class="string">"inbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"port"</span>: 端口自定义须与Caddy对应,</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"vmess"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;</span><br><span class="line">        <span class="string">"clients"</span>: [</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="string">"id"</span>: <span class="string">"UUID自行替换"</span>,</span><br><span class="line">            <span class="string">"alterId"</span>: 64</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"streamSettings"</span>: &#123;</span><br><span class="line">        <span class="string">"network"</span>: <span class="string">"ws"</span>,</span><br><span class="line">        <span class="string">"wsSettings"</span>: &#123;</span><br><span class="line">        <span class="string">"path"</span>: <span class="string">"/ray"</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"outbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"freedom"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>5.配置docker-compose.yml</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">version: <span class="string">'3'</span></span><br><span class="line">services:</span><br><span class="line">  v2ray:</span><br><span class="line">    image: v2fly/v2fly-core</span><br><span class="line">    container_name: v2ray</span><br><span class="line">    volumes: </span><br><span class="line">      - ./config.json:/etc/v2ray/config.json</span><br><span class="line">      - ./<span class="built_in">log</span>/v2ray:/var/<span class="built_in">log</span>/v2ray</span><br><span class="line">      - /etc/timezone:/etc/timezone:ro</span><br><span class="line">      - /etc/localtime:/etc/localtime:ro</span><br><span class="line">    expose: </span><br><span class="line">      - <span class="string">"端口须与V2ray配置端口一致"</span></span><br><span class="line">  caddy:</span><br><span class="line">    image: caddy</span><br><span class="line">    container_name: caddy</span><br><span class="line">    volumes: </span><br><span class="line">      - ./Caddyfile:/etc/caddy/Caddyfile</span><br><span class="line">      - ./data:/data</span><br><span class="line">      - ./<span class="built_in">log</span>/caddy:/var/<span class="built_in">log</span>/caddy</span><br><span class="line">      - ./config:/config</span><br><span class="line">      - /etc/timezone:/etc/timezone:ro</span><br><span class="line">      - /etc/localtime:/etc/localtime:ro</span><br><span class="line">    ports: </span><br><span class="line">      - <span class="string">"443:443"</span></span><br></pre></td></tr></table></figure><p>6.创建Caddyfile并配置：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">域名</span><br><span class="line">&#123; </span><br><span class="line">  <span class="built_in">log</span> &#123;</span><br><span class="line">    output file /var/<span class="built_in">log</span>/caddy/caddy.log</span><br><span class="line">  &#125;</span><br><span class="line">  tls you@gmail.com</span><br><span class="line">  @websockets &#123;</span><br><span class="line">    header Connection Upgrade</span><br><span class="line">    header Upgrade websocket</span><br><span class="line">  &#125;</span><br><span class="line">  reverse_proxy @websockets v2ray://v2ray:端口与V2ray配置信息相同</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>7.启动<br>docker-compose up -d</p><p>8.设置开机启动<br>sudo systemctl start docker<br>sudo systemctl enable docker</p><p><a href="https://myssl.com" target="_blank" rel="noopener">证书SSL证书评级</a></p><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="星云网络加速-年付4K机场"><a href="#星云网络加速-年付4K机场" class="headerlink" title="星云网络加速|年付4K机场"></a><a href="https://www.xjycloud.pw" target="_blank" rel="noopener">星云网络加速|年付4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;V2ray-Docker-compose-Caddy搭建教程——V2ray科学上网节点搭建新方式&quot;&gt;&lt;a href=&quot;#V2ray-Docker-compose-Caddy搭建教程——V2ray科学上网节点搭建新方式&quot; class=&quot;headerlink&quot; tit
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>科学上网VLESS+WS+TLS+Nginx一键安装脚本</title>
@@ -578,38 +600,6 @@ Centos系统
       <category term="V2ray" scheme="https://siemenstutorials.github.io/tags/V2ray/"/>
     
       <category term="科学上网" scheme="https://siemenstutorials.github.io/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Github Action Openwrt固件自动编译教程</title>
-    <link href="https://siemenstutorials.github.io/posts/21b7e26f.html"/>
-    <id>https://siemenstutorials.github.io/posts/21b7e26f.html</id>
-    <published>2020-05-09T12:52:11.000Z</published>
-    <updated>2020-05-09T15:35:00.169Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Github-Action-Openwrt固件自动编译教程"><a href="#Github-Action-Openwrt固件自动编译教程" class="headerlink" title="Github Action Openwrt固件自动编译教程"></a><center>Github Action Openwrt固件自动编译教程</center></h1><h2 id="视频教程"><a href="#视频教程" class="headerlink" title="视频教程"></a><center><a href="https://youtu.be/YoVhsQDdldA" target="_blank" rel="noopener">视频教程</a></center></h2><p>1:根据<a href="https://github.com/coolsnowwolf/lede" target="_blank" rel="noopener">L大</a>的源码仓库指导步骤，利用 Ubuntu 18 LTS x64的VPS获取对应路由器型号的.config文件。</p><p>2:利用的源码仓<a href="https://github.com/P3TERX/Actions-OpenWrt" target="_blank" rel="noopener">P3TERX</a>导入.config文件启动GitHub Action自动云编译。</p><p>3:进入 P3TERX/Actions-OpenWrt 项目页面，点击 Use this template 。</p><p>4:填写仓库名称，然后点击Create repository from template按钮。经过几秒钟的等待，页面会跳转到新建的仓库，然后点击Create new file按钮。<br>5：然后文件名填写为.config，把生成的.config 文件的内容复制粘贴到下面的文本框中.</p><p>最后等待2-3小时前往Github Action下载压缩包固件使用即可。</p><p>本文参考：<br><a href="https://github.com/coolsnowwolf/lede" target="_blank" rel="noopener">L大</a><br><a href="https://p3terx.com/archives/build-openwrt-with-github-actions.html" target="_blank" rel="noopener">P3TERX</a></p><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;Github-Action-Openwrt固件自动编译教程&quot;&gt;&lt;a href=&quot;#Github-Action-Openwrt固件自动编译教程&quot; class=&quot;headerlink&quot; title=&quot;Github Action Openwrt固件自动编译教程&quot;&gt;&lt;/a
-      
-    
-    </summary>
-    
-    
-      <category term="OpenWrt" scheme="https://siemenstutorials.github.io/categories/OpenWrt/"/>
-    
-    
-      <category term="路由器" scheme="https://siemenstutorials.github.io/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/"/>
-    
-      <category term="openwrt" scheme="https://siemenstutorials.github.io/tags/openwrt/"/>
-    
-      <category term="软路由固件" scheme="https://siemenstutorials.github.io/tags/%E8%BD%AF%E8%B7%AF%E7%94%B1%E5%9B%BA%E4%BB%B6/"/>
-    
-      <category term="固件编译" scheme="https://siemenstutorials.github.io/tags/%E5%9B%BA%E4%BB%B6%E7%BC%96%E8%AF%91/"/>
     
   </entry>
   
