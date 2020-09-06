@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://siemenstutorials.github.io/"/>
-  <updated>2020-09-02T15:34:54.764Z</updated>
+  <updated>2020-09-06T05:26:28.920Z</updated>
   <id>https://siemenstutorials.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>V2Fly/V2ray Docker版官方搭建教程</title>
+    <link href="https://siemenstutorials.github.io/posts/27024d5e.html"/>
+    <id>https://siemenstutorials.github.io/posts/27024d5e.html</id>
+    <published>2020-09-06T05:12:22.000Z</published>
+    <updated>2020-09-06T05:26:28.920Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="V2Fly-V2ray-Docker版官方搭建教程"><a href="#V2Fly-V2ray-Docker版官方搭建教程" class="headerlink" title="V2Fly/V2ray Docker版官方搭建教程"></a><center>V2Fly/V2ray Docker版官方搭建教程</center></h1><p>1：Docker安装<br>CentOS系统</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y docker</span><br></pre></td></tr></table></figure><p>debian系统</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install -y docker</span><br></pre></td></tr></table></figure><p>2：拉取V2ray官方镜像</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull v2ray/official</span><br></pre></td></tr></table></figure><p>3:在etc目录下创建V2ray文件夹</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /etc/v2ray</span><br></pre></td></tr></table></figure><p>4:进入V2ray文件夹并创建config.json配置文件</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi config.json</span><br></pre></td></tr></table></figure><p>TCP+VMESS配置文件如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"log"</span>: &#123;</span><br><span class="line">    <span class="string">"access"</span>: <span class="string">"/var/log/v2ray/access.log"</span>,</span><br><span class="line">    <span class="string">"error"</span>: <span class="string">"/var/log/v2ray/error.log"</span>,</span><br><span class="line">    <span class="string">"loglevel"</span>: <span class="string">"warning"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"dns"</span>: &#123;&#125;,</span><br><span class="line">  <span class="string">"stats"</span>: &#123;&#125;,</span><br><span class="line">  <span class="string">"inbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"port"</span>: 自定义端口,</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"vmess"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;</span><br><span class="line">        <span class="string">"clients"</span>: [</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="string">"id"</span>: <span class="string">"[UUID自定义](https://www.uuidgenerator.net/)"</span>,</span><br><span class="line">            <span class="string">"alterId"</span>: 32</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"tag"</span>: <span class="string">"in-0"</span>,</span><br><span class="line">      <span class="string">"streamSettings"</span>: &#123;</span><br><span class="line">        <span class="string">"network"</span>: <span class="string">"tcp"</span>,</span><br><span class="line">        <span class="string">"security"</span>: <span class="string">"none"</span>,</span><br><span class="line">        <span class="string">"tcpSettings"</span>: &#123;&#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"outbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"tag"</span>: <span class="string">"direct"</span>,</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"freedom"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"tag"</span>: <span class="string">"blocked"</span>,</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"blackhole"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"routing"</span>: &#123;</span><br><span class="line">    <span class="string">"domainStrategy"</span>: <span class="string">"AsIs"</span>,</span><br><span class="line">    <span class="string">"rules"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"type"</span>: <span class="string">"field"</span>,</span><br><span class="line">        <span class="string">"ip"</span>: [</span><br><span class="line">          <span class="string">"geoip:private"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">"outboundTag"</span>: <span class="string">"blocked"</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"policy"</span>: &#123;&#125;,</span><br><span class="line">  <span class="string">"reverse"</span>: &#123;&#125;,</span><br><span class="line">  <span class="string">"transport"</span>: &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>5：启动Docker容器</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -d --name v2ray -v /etc/v2ray:/etc/v2ray -p 8888:8888 v2ray/official v2ray -config=/etc/v2ray/config.json</span><br></pre></td></tr></table></figure><p>6:容器列表查看</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container ls</span><br></pre></td></tr></table></figure><p>7：启动和停止V2ray</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker container start v2ray //启动V2ray</span><br><span class="line">docker container stop v2ray //停止V2ray</span><br><span class="line">docker container restart v2ray //重启V2ray</span><br></pre></td></tr></table></figure><p>若要升级镜像请按如下命令操作：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker container stop v2ray</span><br><span class="line">docker container rm v2ray</span><br><span class="line">docker pull v2ray/official</span><br><span class="line">docker run -it -d --name v2ray -v /etc/v2ray:/etc/v2ray -p 8888:8888 v2ray/official v2ray -config=/etc/v2ray/config.json</span><br></pre></td></tr></table></figure><p>END</p><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场-注册就送50G免费流量"><a href="#星际云网络加速-免费节点机场-注册就送50G免费流量" class="headerlink" title="星际云网络加速|免费节点机场-注册就送50G免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a>-注册就送50G免费流量</h1><h1 id="星云网络加速-年付4K机场"><a href="#星云网络加速-年付4K机场" class="headerlink" title="星云网络加速|年付4K机场"></a><a href="https://www.xjycloud.pw" target="_blank" rel="noopener">星云网络加速|年付4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;V2Fly-V2ray-Docker版官方搭建教程&quot;&gt;&lt;a href=&quot;#V2Fly-V2ray-Docker版官方搭建教程&quot; class=&quot;headerlink&quot; title=&quot;V2Fly/V2ray Docker版官方搭建教程&quot;&gt;&lt;/a&gt;&lt;center&gt;V2F
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>V2ray+Docker-compose+Caddy搭建教程</title>
@@ -210,9 +232,9 @@ Centos系统
     
       <category term="Trojan" scheme="https://siemenstutorials.github.io/tags/Trojan/"/>
     
-      <category term="ssr" scheme="https://siemenstutorials.github.io/tags/ssr/"/>
-    
       <category term="中转节点" scheme="https://siemenstutorials.github.io/tags/%E4%B8%AD%E8%BD%AC%E8%8A%82%E7%82%B9/"/>
+    
+      <category term="ssr" scheme="https://siemenstutorials.github.io/tags/ssr/"/>
     
       <category term="V2ray流量中转" scheme="https://siemenstutorials.github.io/tags/V2ray%E6%B5%81%E9%87%8F%E4%B8%AD%E8%BD%AC/"/>
     
@@ -242,9 +264,9 @@ Centos系统
       <category term="Docker" scheme="https://siemenstutorials.github.io/categories/Gost/Docker/"/>
     
     
-      <category term="Gost" scheme="https://siemenstutorials.github.io/tags/Gost/"/>
-    
       <category term="ssr" scheme="https://siemenstutorials.github.io/tags/ssr/"/>
+    
+      <category term="Gost" scheme="https://siemenstutorials.github.io/tags/Gost/"/>
     
       <category term="v2ray" scheme="https://siemenstutorials.github.io/tags/v2ray/"/>
     
@@ -564,42 +586,6 @@ Centos系统
       <category term="科学上网" scheme="https://siemenstutorials.github.io/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
     
       <category term="SSR" scheme="https://siemenstutorials.github.io/tags/SSR/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2020年如何编译自带SSRPLUS的OpenWrt软路由固件</title>
-    <link href="https://siemenstutorials.github.io/posts/a46d8958.html"/>
-    <id>https://siemenstutorials.github.io/posts/a46d8958.html</id>
-    <published>2020-05-13T14:50:15.000Z</published>
-    <updated>2020-05-13T15:08:11.777Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件"><a href="#L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件" class="headerlink" title="L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件"></a><center>L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件</center></h1><p>若是第一次编译请先了解如何制作生成.config文件以及如何应用Github Actions,<a href="https://siemenstutorials.github.io/posts/21b7e26f.html">详见上篇博文</a>;<br>在此基础上你便可以开始你的编译之旅了！</p><p>1：在你的第一次编译基础上，打开Workeflow里的yml文件，找到如下URL，并将URL更换成如下链接：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">REPO_URL: https://github.com/hikelin19871112/lede.git</span><br><span class="line">REPO_BRANCH: master</span><br></pre></td></tr></table></figure><p>2：然后点击Commit</p><p>3:然后切换到Actions编译就开始了，大约2小时后即可下载OpenWrt固件了！</p><p>4：<a href="https://drive.google.com/open?id=1mtxDbNwZzKUGpUgoHHkSkaDY6jwL2zxP" target="_blank" rel="noopener">树莓派4b Openwrt固件下载</a></p><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件&quot;&gt;&lt;a href=&quot;#L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件&quot; class=&quot;headerlink&quot; title=&quot;L大删除SSRP
-      
-    
-    </summary>
-    
-    
-      <category term="Openwrt" scheme="https://siemenstutorials.github.io/categories/Openwrt/"/>
-    
-      <category term="固件编译" scheme="https://siemenstutorials.github.io/categories/Openwrt/%E5%9B%BA%E4%BB%B6%E7%BC%96%E8%AF%91/"/>
-    
-    
-      <category term="软路由" scheme="https://siemenstutorials.github.io/tags/%E8%BD%AF%E8%B7%AF%E7%94%B1/"/>
-    
-      <category term="ssrplus" scheme="https://siemenstutorials.github.io/tags/ssrplus/"/>
-    
-      <category term="Trojan" scheme="https://siemenstutorials.github.io/tags/Trojan/"/>
-    
-      <category term="V2ray" scheme="https://siemenstutorials.github.io/tags/V2ray/"/>
-    
-      <category term="科学上网" scheme="https://siemenstutorials.github.io/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
     
   </entry>
   
