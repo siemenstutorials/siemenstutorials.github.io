@@ -81,16 +81,18 @@
 
 
 
-<meta name="description" content="V2Fly&#x2F;V2ray Docker版官方搭建教程1：Docker安装CentOS系统 1yum install -y docker debian系统 123apt-get install -y dockercurl -sSL https:&#x2F;&#x2F;get.docker.com | bashservice docker restart 2：拉取V2ray官方镜像 1docker pull v2ray&#x2F;o">
+<meta name="description" content="2020最新V2Fly&#x2F;V2ray web管理面板搭建 面板项目地址V2Fly项目地址 1:安装前准备域名1个；VPS一台(这里用谷歌云);系统镜像:CENTOS72：设定xshell进行root密码登陆，避免SSH经常断连 12sed -i &#39;s&#x2F;PermitRootLogin no&#x2F;PermitRootLogin yes&#x2F;g&#39; &#x2F;etc&#x2F;ssh&#x2F;sshd_configsed -i &#39;s&#x2F;Pas">
 <meta property="og:type" content="article">
-<meta property="og:title" content="V2Fly&#x2F;V2ray Docker版官方搭建教程">
-<meta property="og:url" content="https://siemenstutorials.github.io/posts/27024d5e.html">
+<meta property="og:title" content="2020最新V2Fly&#x2F;V2ray web管理面板搭建">
+<meta property="og:url" content="https://siemenstutorials.github.io/posts/46d8ebb9.html">
 <meta property="og:site_name" content="SiemensTutorials">
-<meta property="og:description" content="V2Fly&#x2F;V2ray Docker版官方搭建教程1：Docker安装CentOS系统 1yum install -y docker debian系统 123apt-get install -y dockercurl -sSL https:&#x2F;&#x2F;get.docker.com | bashservice docker restart 2：拉取V2ray官方镜像 1docker pull v2ray&#x2F;o">
-<meta property="article:published_time" content="2020-09-06T05:12:22.000Z">
-<meta property="article:modified_time" content="2020-09-06T06:34:53.010Z">
+<meta property="og:description" content="2020最新V2Fly&#x2F;V2ray web管理面板搭建 面板项目地址V2Fly项目地址 1:安装前准备域名1个；VPS一台(这里用谷歌云);系统镜像:CENTOS72：设定xshell进行root密码登陆，避免SSH经常断连 12sed -i &#39;s&#x2F;PermitRootLogin no&#x2F;PermitRootLogin yes&#x2F;g&#39; &#x2F;etc&#x2F;ssh&#x2F;sshd_configsed -i &#39;s&#x2F;Pas">
+<meta property="og:image" content="https://siemenstutorials.github.io/images/webmanage.png">
+<meta property="article:published_time" content="2020-09-12T05:50:18.000Z">
+<meta property="article:modified_time" content="2020-09-12T06:59:12.421Z">
 <meta property="article:author" content="SiemensTutorials">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://siemenstutorials.github.io/images/webmanage.png">
 
 
 
@@ -120,7 +122,7 @@
 
 
 
-  <link rel="canonical" href="https://siemenstutorials.github.io/posts/27024d5e.html"/>
+  <link rel="canonical" href="https://siemenstutorials.github.io/posts/46d8ebb9.html"/>
 
 
 
@@ -129,7 +131,7 @@
 <script data-ad-client="ca-pub-5926565534384990" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <meta name="generator" content="Hexo 4.2.0"></head>
 
-  <title>V2Fly/V2ray Docker版官方搭建教程 | SiemensTutorials</title>
+  <title>2020最新V2Fly/V2ray web管理面板搭建 | SiemensTutorials</title>
   
 
 
@@ -267,7 +269,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://siemenstutorials.github.io/posts/27024d5e.html">
+    <link itemprop="mainEntityOfPage" href="https://siemenstutorials.github.io/posts/46d8ebb9.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="SiemensTutorials">
@@ -284,7 +286,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">V2Fly/V2ray Docker版官方搭建教程</h1>
+          <h1 class="post-title" itemprop="name headline">2020最新V2Fly/V2ray web管理面板搭建</h1>
         
 
         <div class="post-meta">
@@ -296,8 +298,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-06T13:12:22+08:00">
-                2020-09-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-12T13:50:18+08:00">
+                2020-09-12
               </time>
             
 
@@ -315,8 +317,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/posts/27024d5e.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/posts/27024d5e.html" itemprop="commentsCount"></span>
+                <a href="/posts/46d8ebb9.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/posts/46d8ebb9.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -349,27 +351,52 @@
       
 
       
-        <h1 id="V2Fly-V2ray-Docker版官方搭建教程"><a href="#V2Fly-V2ray-Docker版官方搭建教程" class="headerlink" title="V2Fly/V2ray Docker版官方搭建教程"></a><center>V2Fly/V2ray Docker版官方搭建教程</center></h1><p>1：Docker安装<br>CentOS系统</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y docker</span><br></pre></td></tr></table></figure>
-<p>debian系统</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt-get install -y docker</span><br><span class="line">curl -sSL https://get.docker.com | bash</span><br><span class="line">service docker restart</span><br></pre></td></tr></table></figure>
-<p>2：拉取V2ray官方镜像</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull v2ray/official</span><br></pre></td></tr></table></figure>
-<p>3:在etc目录下创建V2ray文件夹</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /etc/v2ray</span><br></pre></td></tr></table></figure>
+        <h1 id="2020最新V2Fly-V2ray-web管理面板搭建"><a href="#2020最新V2Fly-V2ray-web管理面板搭建" class="headerlink" title="2020最新V2Fly/V2ray web管理面板搭建"></a><center>2020最新V2Fly/V2ray web管理面板搭建</center></h1><p><img src="/images/webmanage.png" alt></p>
+<p><a href="https://github.com/master-coder-ll/v2ray-web-manager" target="_blank" rel="noopener">面板项目地址</a><br><a href="https://github.com/v2fly/fhs-install-v2ray" target="_blank" rel="noopener">V2Fly项目地址</a></p>
+<p>1:安装前准备<br>域名1个；VPS一台(这里用谷歌云);系统镜像:CENTOS7<br>2：设定xshell进行root密码登陆，避免SSH经常断连</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">'s/PermitRootLogin no/PermitRootLogin yes/g'</span> /etc/ssh/sshd_config</span><br><span class="line">sed -i <span class="string">'s/PasswordAuthentication no/PasswordAuthentication yes/g'</span> /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+<p>设定密码<br>passwd root<br>重启sshd服务<br>service sshd restart<br>3：开始安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br><span class="line">yum makecache</span><br><span class="line">yum install epel-release</span><br><span class="line">yum install vim nginx java-1.8.0-openjdk wget unzip -y</span><br></pre></td></tr></table></figure>
+<p><a href="https://github.com/v2fly/fhs-install-v2ray" target="_blank" rel="noopener">安装V2ray</a><br>3:配置Nginx</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/nginx/conf.d</span><br><span class="line">vi v2ray-manager.conf</span><br></pre></td></tr></table></figure>
 
-<p>4:进入V2ray文件夹并创建config.json配置文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi config.json</span><br></pre></td></tr></table></figure>
-<p>TCP+VMESS配置文件如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"log"</span>: &#123;</span><br><span class="line">    <span class="string">"access"</span>: <span class="string">"/var/log/v2ray/access.log"</span>,</span><br><span class="line">    <span class="string">"error"</span>: <span class="string">"/var/log/v2ray/error.log"</span>,</span><br><span class="line">    <span class="string">"loglevel"</span>: <span class="string">"warning"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"dns"</span>: &#123;&#125;,</span><br><span class="line">  <span class="string">"stats"</span>: &#123;&#125;,</span><br><span class="line">  <span class="string">"inbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"port"</span>: 自定义端口,</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"vmess"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;</span><br><span class="line">        <span class="string">"clients"</span>: [</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="string">"id"</span>: <span class="string">"[UUID自定义](https://www.uuidgenerator.net/)"</span>,</span><br><span class="line">            <span class="string">"alterId"</span>: 32</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"tag"</span>: <span class="string">"in-0"</span>,</span><br><span class="line">      <span class="string">"streamSettings"</span>: &#123;</span><br><span class="line">        <span class="string">"network"</span>: <span class="string">"tcp"</span>,</span><br><span class="line">        <span class="string">"security"</span>: <span class="string">"none"</span>,</span><br><span class="line">        <span class="string">"tcpSettings"</span>: &#123;&#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"outbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"tag"</span>: <span class="string">"direct"</span>,</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"freedom"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"tag"</span>: <span class="string">"blocked"</span>,</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"blackhole"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"routing"</span>: &#123;</span><br><span class="line">    <span class="string">"domainStrategy"</span>: <span class="string">"AsIs"</span>,</span><br><span class="line">    <span class="string">"rules"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"type"</span>: <span class="string">"field"</span>,</span><br><span class="line">        <span class="string">"ip"</span>: [</span><br><span class="line">          <span class="string">"geoip:private"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">"outboundTag"</span>: <span class="string">"blocked"</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"policy"</span>: &#123;&#125;,</span><br><span class="line">  <span class="string">"reverse"</span>: &#123;&#125;,</span><br><span class="line">  <span class="string">"transport"</span>: &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>5：启动Docker容器</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -d --name v2ray -v /etc/v2ray:/etc/v2ray -p 8888:8888 v2ray/official v2ray -config=/etc/v2ray/config.json</span><br></pre></td></tr></table></figure>
-<p>6:容器列表查看</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container ls</span><br></pre></td></tr></table></figure>
-<p>7：启动和停止V2ray</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker container start v2ray //启动V2ray</span><br><span class="line">docker container stop v2ray //停止V2ray</span><br><span class="line">docker container restart v2ray //重启V2ray</span><br></pre></td></tr></table></figure>
-<p>若要升级镜像请按如下命令操作：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker container stop v2ray</span><br><span class="line">docker container rm v2ray</span><br><span class="line">docker pull v2ray/official</span><br><span class="line">docker run -it -d --name v2ray -v /etc/v2ray:/etc/v2ray -p 8888:8888 v2ray/official v2ray -config=/etc/v2ray/config.json</span><br></pre></td></tr></table></figure>
+
+<p>systemctl start nginx<br>nginx -s reload<br>systemctl status nginx.service</p>
+<p>6:创建目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /opt/jar -p</span><br><span class="line"><span class="built_in">cd</span> /opt/jar</span><br></pre></td></tr></table></figure>
+<p>下载releases包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget -c https://glare.now.sh/master-coder-ll/v2ray-web-manager/admin -O admin.jar</span><br><span class="line">wget -c https://glare.now.sh/master-coder-ll/v2ray-manager-console/dist -O dist.zip</span><br><span class="line">wget -c https://glare.now.sh/master-coder-ll/v2ray-web-manager/v2ray-proxy -O v2ray-proxy.jar</span><br></pre></td></tr></table></figure>
+<p>解压前端到web文件夹<br>unzip dist.zip  -d web</p>
+<p>4.下载管理配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget -c --no-check-certificate https://raw.githubusercontent.com/master-coder-ll/v2ray-web-manager/master/conf/admin.yaml</span><br><span class="line">wget -c --no-check-certificate https://raw.githubusercontent.com/master-coder-ll/v2ray-web-manager/master/conf/proxy.yaml</span><br><span class="line">wget -c --no-check-certificate https://raw.githubusercontent.com/master-coder-ll/v2ray-web-manager/master/conf/config.json</span><br></pre></td></tr></table></figure>
+<p>修改admin.yaml与proxy.yaml</p>
+<p>5:配置V2ray</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /opt/jar/config.json /etc/v2ray/</span><br></pre></td></tr></table></figure>
+<p>重启v2ray</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service v2ray stop</span><br><span class="line">service v2ray start</span><br></pre></td></tr></table></figure>
+<p>6.运行JAVA<br>创建默认数据库目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /opt/jar/db -p</span><br></pre></td></tr></table></figure>
+<p>运行admin</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar -Xms40m -Xmx40m -XX:MaxDirectMemorySize=10M -XX:MaxMetaspaceSize=80m  /opt/jar/admin.jar --spring.config.location=/opt/jar/admin.yaml &gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<p>运行V2ray-proxy</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar -Xms40m -Xmx40m -XX:MaxDirectMemorySize=10M -XX:MaxMetaspaceSize=80m /opt/jar/v2ray-proxy.jar --spring.config.location=/opt/jar/proxy.yaml &gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<p>7.日志查看</p>
+<h1 id="查看admin日志"><a href="#查看admin日志" class="headerlink" title="查看admin日志"></a>查看admin日志</h1><p>tail -100f /opt/jar/logs/admin.log</p>
+<h1 id="查看admin的错误日志-version-gt-v3-1-5"><a href="#查看admin的错误日志-version-gt-v3-1-5" class="headerlink" title="查看admin的错误日志(version &gt; v3.1.5)"></a>查看admin的错误日志(version &gt; v3.1.5)</h1><p>tail -100f /opt/jar/logs/admin.log.ERROR</p>
+<h1 id="查看-v2ray-proxy日志"><a href="#查看-v2ray-proxy日志" class="headerlink" title="查看 v2ray-proxy日志"></a>查看 v2ray-proxy日志</h1><p>tail -100f /opt/jar/logs/v2ray-proxy.log</p>
+<h1 id="查看v2ray-proxy的错误日志-version-gt-v3-1-5"><a href="#查看v2ray-proxy的错误日志-version-gt-v3-1-5" class="headerlink" title="查看v2ray-proxy的错误日志(version &gt; v3.1.5)"></a>查看v2ray-proxy的错误日志(version &gt; v3.1.5)</h1><p>tail -100f /opt/jar/logs/v2ray-proxy.log.ERROR</p>
+<h1 id="ctrl-c-退出查看日志"><a href="#ctrl-c-退出查看日志" class="headerlink" title="ctrl+c 退出查看日志"></a>ctrl+c 退出查看日志</h1><p>布署常见错误解决方案：<br>502报错<br>重新运行以下命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar -Xms100m -Xmx100m -XX:MaxDirectMemorySize=10M -XX:MaxMetaspaceSize=80m  /opt/jar/admin.jar --spring.config.location=/opt/jar/admin.yaml &gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setsebool httpd_can_network_connect 1</span><br></pre></td></tr></table></figure>
+<p>如何设置开机自启JAVA进程<br>1：Create v2panel-start.sh</p>
+<p>vi /opt/jar/v2panel-start.sh</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">nohup java -jar -Xmx40m -XX:MaxDirectMemorySize=8M -XX:MaxMetaspaceSize=80m /opt/jar/admin.jar --spring.config.location=/opt/jar/admin.yaml &gt; /dev/null 2&gt;&amp;1 &amp;</span><br><span class="line"><span class="built_in">echo</span> $! &gt; /var/run/v2ray-admin.pid</span><br><span class="line">nohup java -jar -Xmx40m -XX:MaxDirectMemorySize=8M -XX:MaxMetaspaceSize=48m /opt/jar/v2ray-proxy.jar --spring.config.location=/opt/jar/proxy.yaml &gt; /dev/null 2&gt;&amp;1 &amp;</span><br><span class="line"><span class="built_in">echo</span> $! &gt; /var/run/v2ray-proxy.pid</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x /opt/jar/v2panel-start.sh</span><br></pre></td></tr></table></figure>
+<p>2：Create v2panel-stop.sh<br>vi /opt/jar/v2panel-stop.sh</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">PID1=<span class="variable">$&#123;cat /var/run/v2ray-admin.pid&#125;</span></span><br><span class="line"><span class="built_in">kill</span> -15 <span class="variable">$PID1</span></span><br><span class="line">PID2=<span class="variable">$&#123;cat /var/run/v2ray-proxy.pid&#125;</span></span><br><span class="line"><span class="built_in">kill</span> -15 <span class="variable">$PID2</span></span><br></pre></td></tr></table></figure>
+<p>3：Register v2panel service<br>vi /etc/systemd/system/v2panel.service</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=v2ray-web-manager</span><br><span class="line">After=network.target network-online.target nss-lookup.target mysql.service mariadb.service mysqld.service</span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">StandardError=journal</span><br><span class="line">ExecStart=/opt/jar/v2panel-start.sh</span><br><span class="line">ExecStop=/opt/jar/v2panel-stop.sh</span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<p>4：启动管理脚本<br>Set autostart<br>systemctl enable v2panel<br>Start service<br>systemctl start v2panel<br>Stop service<br>systemctl stop v2panel</p>
 <p>END</p>
 <h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场-注册就送50G免费流量"><a href="#星际云网络加速-免费节点机场-注册就送50G免费流量" class="headerlink" title="星际云网络加速|免费节点机场-注册就送50G免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a>-注册就送50G免费流量</h1><h1 id="星云网络加速-年付4K机场"><a href="#星云网络加速-年付4K机场" class="headerlink" title="星云网络加速|年付4K机场"></a><a href="https://www.xjycloud.pw" target="_blank" rel="noopener">星云网络加速|年付4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>
       
@@ -391,7 +418,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://siemenstutorials.github.io/posts/27024d5e.html" title="V2Fly/V2ray Docker版官方搭建教程">https://siemenstutorials.github.io/posts/27024d5e.html</a>
+    <a href="https://siemenstutorials.github.io/posts/46d8ebb9.html" title="2020最新V2Fly/V2ray web管理面板搭建">https://siemenstutorials.github.io/posts/46d8ebb9.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -413,8 +440,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/d56ad2f5.html" rel="next" title="V2ray+Docker-compose+Caddy搭建教程">
-                <i class="fa fa-chevron-left"></i> V2ray+Docker-compose+Caddy搭建教程
+              <a href="/posts/27024d5e.html" rel="next" title="V2Fly/V2ray Docker版官方搭建教程">
+                <i class="fa fa-chevron-left"></i> V2Fly/V2ray Docker版官方搭建教程
               </a>
             
           </div>
@@ -422,10 +449,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/posts/46d8ebb9.html" rel="prev" title="2020最新V2Fly/V2ray web管理面板搭建">
-                2020最新V2Fly/V2ray web管理面板搭建 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -609,7 +632,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#V2Fly-V2ray-Docker版官方搭建教程"><span class="nav-number">1.</span> <span class="nav-text">V2Fly&#x2F;V2ray Docker版官方搭建教程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SiemensTutorials"><span class="nav-number">2.</span> <span class="nav-text">SiemensTutorials</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#星际云网络加速-免费节点机场-注册就送50G免费流量"><span class="nav-number">3.</span> <span class="nav-text">星际云网络加速|免费节点机场-注册就送50G免费流量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#星云网络加速-年付4K机场"><span class="nav-number">4.</span> <span class="nav-text">星云网络加速|年付4K机场</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NETFLIX奈飞合租车"><span class="nav-number">5.</span> <span class="nav-text">NETFLIX奈飞合租车</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2020最新V2Fly-V2ray-web管理面板搭建"><span class="nav-number">1.</span> <span class="nav-text">2020最新V2Fly&#x2F;V2ray web管理面板搭建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看admin日志"><span class="nav-number">2.</span> <span class="nav-text">查看admin日志</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看admin的错误日志-version-gt-v3-1-5"><span class="nav-number">3.</span> <span class="nav-text">查看admin的错误日志(version &gt; v3.1.5)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看-v2ray-proxy日志"><span class="nav-number">4.</span> <span class="nav-text">查看 v2ray-proxy日志</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看v2ray-proxy的错误日志-version-gt-v3-1-5"><span class="nav-number">5.</span> <span class="nav-text">查看v2ray-proxy的错误日志(version &gt; v3.1.5)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ctrl-c-退出查看日志"><span class="nav-number">6.</span> <span class="nav-text">ctrl+c 退出查看日志</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SiemensTutorials"><span class="nav-number">7.</span> <span class="nav-text">SiemensTutorials</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#星际云网络加速-免费节点机场-注册就送50G免费流量"><span class="nav-number">8.</span> <span class="nav-text">星际云网络加速|免费节点机场-注册就送50G免费流量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#星云网络加速-年付4K机场"><span class="nav-number">9.</span> <span class="nav-text">星云网络加速|年付4K机场</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NETFLIX奈飞合租车"><span class="nav-number">10.</span> <span class="nav-text">NETFLIX奈飞合租车</span></a></li></ol></div>
             
 
           </div>
