@@ -89,7 +89,7 @@
 <meta property="og:description" content="2020最新V2Fly&#x2F;V2ray web管理面板搭建 面板项目地址V2Fly项目地址官方推荐方法一：1:安装前准备域名1个；VPS一台(这里用谷歌云);系统镜像:CENTOS72：设定xshell进行root密码登陆，避免SSH经常断连 12sed -i &#39;s&#x2F;PermitRootLogin no&#x2F;PermitRootLogin yes&#x2F;g&#39; &#x2F;etc&#x2F;ssh&#x2F;sshd_configsed -i">
 <meta property="og:image" content="https://siemenstutorials.github.io/images/webmanage.png">
 <meta property="article:published_time" content="2020-09-12T05:50:18.000Z">
-<meta property="article:modified_time" content="2020-09-13T10:19:47.188Z">
+<meta property="article:modified_time" content="2020-09-13T10:26:07.239Z">
 <meta property="article:author" content="SiemensTutorials">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://siemenstutorials.github.io/images/webmanage.png">
@@ -369,7 +369,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget -c --no-check-certificate https://raw.githubusercontent.com/master-coder-ll/v2ray-web-manager/master/conf/admin.yaml</span><br><span class="line">wget -c --no-check-certificate https://raw.githubusercontent.com/master-coder-ll/v2ray-web-manager/master/conf/proxy.yaml</span><br><span class="line">wget -c --no-check-certificate https://raw.githubusercontent.com/master-coder-ll/v2ray-web-manager/master/conf/config.json</span><br></pre></td></tr></table></figure>
 <p>修改admin.yaml与proxy.yaml</p>
 <p>5:配置V2ray</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /opt/jar/config.json /etc/v2ray/</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /opt/jar/config.json /usr/<span class="built_in">local</span>/etc/v2ray/</span><br></pre></td></tr></table></figure>
 <p>重启v2ray</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service v2ray stop</span><br><span class="line">service v2ray start</span><br></pre></td></tr></table></figure>
 <p>6.运行JAVA<br>创建默认数据库目录</p>
