@@ -1,6 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>2020年如何编译自带SSRPLUS的OpenWrt软路由固件</title>
+    <url>/posts/a46d8958.html</url>
+    <content><![CDATA[<h1 id="L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件"><a href="#L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件" class="headerlink" title="L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件"></a><center>L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件</center></h1><p>若是第一次编译请先了解如何制作生成.config文件以及如何应用Github Actions,<a href="https://siemenstutorials.github.io/posts/21b7e26f.html">详见上篇博文</a>;<br>在此基础上你便可以开始你的编译之旅了！</p>
+<p>1：在你的第一次编译基础上，打开Workeflow里的yml文件，找到如下URL，并将URL更换成如下链接：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">REPO_URL: https://github.com/hikelin19871112/lede.git</span><br><span class="line">REPO_BRANCH: master</span><br></pre></td></tr></table></figure>
+<p>2：然后点击Commit</p>
+<p>3:然后切换到Actions编译就开始了，大约2小时后即可下载OpenWrt固件了！</p>
+<p>4：<a href="https://drive.google.com/open?id=1mtxDbNwZzKUGpUgoHHkSkaDY6jwL2zxP" target="_blank" rel="noopener">树莓派4b Openwrt固件下载</a></p>
+<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
+      <categories>
+        <category>Openwrt</category>
+        <category>固件编译</category>
+      </categories>
+      <tags>
+        <tag>软路由</tag>
+        <tag>ssrplus</tag>
+        <tag>Trojan</tag>
+        <tag>V2ray</tag>
+        <tag>科学上网</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2020最新V2Fly/V2ray web管理面板搭建</title>
+    <url>/posts/46d8ebb9.html</url>
+    <content><![CDATA[<h1 id="2020最新V2Fly-V2ray-web管理面板搭建"><a href="#2020最新V2Fly-V2ray-web管理面板搭建" class="headerlink" title="2020最新V2Fly/V2ray web管理面板搭建"></a><center>2020最新V2Fly/V2ray web管理面板搭建</center></h1><p><img src="/images/webmanage.png" alt></p>
+<h1 id="视频搭建教程"><a href="#视频搭建教程" class="headerlink" title="视频搭建教程"></a><a href="https://youtu.be/6keREZI1LXw" target="_blank" rel="noopener">视频搭建教程</a></h1><p><a href="https://github.com/master-coder-ll/v2ray-web-manager" target="_blank" rel="noopener">面板项目地址</a><br><a href="https://github.com/v2fly/fhs-install-v2ray" target="_blank" rel="noopener">V2Fly项目地址</a><br>官方推荐方法一：<br>1:安装前准备<br>域名1个；VPS一台(这里用谷歌云);系统镜像:CENTOS7<br>2：设定xshell进行root密码登陆，避免SSH经常断连</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sed -i <span class="string">'s/PermitRootLogin no/PermitRootLogin yes/g'</span> /etc/ssh/sshd_config</span><br><span class="line">sed -i <span class="string">'s/PasswordAuthentication no/PasswordAuthentication yes/g'</span> /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+<p>设定密码<br>passwd root<br>重启sshd服务<br>service sshd restart<br>3：开始安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum update</span><br><span class="line">yum makecache</span><br><span class="line">yum install epel-release</span><br><span class="line">yum install vim nginx java-1.8.0-openjdk wget unzip -y</span><br></pre></td></tr></table></figure>
+<p><a href="https://github.com/v2fly/fhs-install-v2ray" target="_blank" rel="noopener">安装V2ray</a><br>3:配置Nginx</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/nginx/conf.d</span><br><span class="line">vi v2ray-manager.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">  listen 80;</span><br><span class="line">  server_name 127.0.0.1; <span class="comment">#修改为自己的IP/域名</span></span><br><span class="line">  root /opt/jar/web;</span><br><span class="line">                </span><br><span class="line">  location /api &#123;</span><br><span class="line">    proxy_pass http://127.0.0.1:9091/;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  location /ws/ &#123;</span><br><span class="line">    proxy_redirect off;</span><br><span class="line">    proxy_pass http://127.0.0.1:8081;</span><br><span class="line">    proxy_http_version 1.1;</span><br><span class="line">    proxy_set_header Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">    proxy_set_header Connection <span class="string">"upgrade"</span>;</span><br><span class="line">    proxy_set_header Host <span class="variable">$http_host</span>;</span><br><span class="line">    proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">    proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">  &#125; </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>systemctl start nginx<br>nginx -s reload<br>systemctl status nginx.service</p>
+<p>6:创建目录</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir /opt/jar -p</span><br><span class="line"><span class="built_in">cd</span> /opt/jar</span><br></pre></td></tr></table></figure>
+<p>下载releases包</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -c https://glare.now.sh/master-coder-ll/v2ray-web-manager/admin -O admin.jar</span><br><span class="line">wget -c https://glare.now.sh/master-coder-ll/v2ray-manager-console/dist -O dist.zip</span><br><span class="line">wget -c https://glare.now.sh/master-coder-ll/v2ray-web-manager/v2ray-proxy -O v2ray-proxy.jar</span><br></pre></td></tr></table></figure>
+<p>解压前端到web文件夹<br>unzip dist.zip  -d web</p>
+<p>4.下载管理配置文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -c --no-check-certificate https://raw.githubusercontent.com/master-coder-ll/v2ray-web-manager/master/conf/admin.yaml</span><br><span class="line">wget -c --no-check-certificate https://raw.githubusercontent.com/master-coder-ll/v2ray-web-manager/master/conf/proxy.yaml</span><br><span class="line">wget -c --no-check-certificate https://raw.githubusercontent.com/master-coder-ll/v2ray-web-manager/master/conf/config.json</span><br></pre></td></tr></table></figure>
+<p>修改admin.yaml与proxy.yaml</p>
+<p>5:配置V2ray</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cp /opt/jar/config.json /usr/<span class="built_in">local</span>/etc/v2ray/</span><br></pre></td></tr></table></figure>
+<p>重启v2ray</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service v2ray stop</span><br><span class="line">service v2ray start</span><br></pre></td></tr></table></figure>
+<p>6.运行JAVA<br>创建默认数据库目录</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir /opt/jar/db -p</span><br></pre></td></tr></table></figure>
+<p>运行admin</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nohup java -jar -Xms40m -Xmx40m -XX:MaxDirectMemorySize=10M -XX:MaxMetaspaceSize=80m  /opt/jar/admin.jar --spring.config.location=/opt/jar/admin.yaml &gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<p>运行V2ray-proxy</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nohup java -jar -Xms40m -Xmx40m -XX:MaxDirectMemorySize=10M -XX:MaxMetaspaceSize=80m /opt/jar/v2ray-proxy.jar --spring.config.location=/opt/jar/proxy.yaml &gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<p>7.日志查看</p>
+<h1 id="查看admin日志"><a href="#查看admin日志" class="headerlink" title="查看admin日志"></a>查看admin日志</h1><p>tail -100f /opt/jar/logs/admin.log</p>
+<h1 id="查看admin的错误日志-version-gt-v3-1-5"><a href="#查看admin的错误日志-version-gt-v3-1-5" class="headerlink" title="查看admin的错误日志(version &gt; v3.1.5)"></a>查看admin的错误日志(version &gt; v3.1.5)</h1><p>tail -100f /opt/jar/logs/admin.log.ERROR</p>
+<h1 id="查看-v2ray-proxy日志"><a href="#查看-v2ray-proxy日志" class="headerlink" title="查看 v2ray-proxy日志"></a>查看 v2ray-proxy日志</h1><p>tail -100f /opt/jar/logs/v2ray-proxy.log</p>
+<h1 id="查看v2ray-proxy的错误日志-version-gt-v3-1-5"><a href="#查看v2ray-proxy的错误日志-version-gt-v3-1-5" class="headerlink" title="查看v2ray-proxy的错误日志(version &gt; v3.1.5)"></a>查看v2ray-proxy的错误日志(version &gt; v3.1.5)</h1><p>tail -100f /opt/jar/logs/v2ray-proxy.log.ERROR</p>
+<h1 id="ctrl-c-退出查看日志"><a href="#ctrl-c-退出查看日志" class="headerlink" title="ctrl+c 退出查看日志"></a>ctrl+c 退出查看日志</h1><p>布署常见错误解决方案：<br>502报错<br>重新运行以下命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nohup java -jar -Xms100m -Xmx100m -XX:MaxDirectMemorySize=10M -XX:MaxMetaspaceSize=80m  /opt/jar/admin.jar --spring.config.location=/opt/jar/admin.yaml &gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">setsebool httpd_can_network_connect 1</span><br></pre></td></tr></table></figure>
+<p>搭建完后节点无法上网请校准时间</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">date -R</span><br><span class="line">timedatectl <span class="built_in">set</span>-local-rtc 1</span><br><span class="line">timedatectl <span class="built_in">set</span>-timezone Asia/Shanghai</span><br></pre></td></tr></table></figure>
+<p>如何设置开机自启JAVA进程<br>1：Create v2panel-start.sh</p>
+<p>vi /opt/jar/v2panel-start.sh</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">nohup java -jar -Xmx40m -XX:MaxDirectMemorySize=8M -XX:MaxMetaspaceSize=80m /opt/jar/admin.jar --spring.config.location=/opt/jar/admin.yaml &gt; /dev/null 2&gt;&amp;1 &amp;</span><br><span class="line"><span class="built_in">echo</span> $! &gt; /var/run/v2ray-admin.pid</span><br><span class="line">nohup java -jar -Xmx40m -XX:MaxDirectMemorySize=8M -XX:MaxMetaspaceSize=48m /opt/jar/v2ray-proxy.jar --spring.config.location=/opt/jar/proxy.yaml &gt; /dev/null 2&gt;&amp;1 &amp;</span><br><span class="line"><span class="built_in">echo</span> $! &gt; /var/run/v2ray-proxy.pid</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chmod +x /opt/jar/v2panel-start.sh</span><br></pre></td></tr></table></figure>
+<p>2：Create v2panel-stop.sh<br>vi /opt/jar/v2panel-stop.sh</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">PID1=<span class="variable">$&#123;cat /var/run/v2ray-admin.pid&#125;</span></span><br><span class="line"><span class="built_in">kill</span> -15 <span class="variable">$PID1</span></span><br><span class="line">PID2=<span class="variable">$&#123;cat /var/run/v2ray-proxy.pid&#125;</span></span><br><span class="line"><span class="built_in">kill</span> -15 <span class="variable">$PID2</span></span><br></pre></td></tr></table></figure>
+<p>3：Register v2panel service<br>vi /etc/systemd/system/v2panel.service</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=v2ray-web-manager</span><br><span class="line">After=network.target network-online.target nss-lookup.target mysql.service mariadb.service mysqld.service</span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">StandardError=journal</span><br><span class="line">ExecStart=/opt/jar/v2panel-start.sh</span><br><span class="line">ExecStop=/opt/jar/v2panel-stop.sh</span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<p>4：启动管理脚本<br>Set autostart<br>systemctl enable v2panel<br>Start service<br>systemctl start v2panel<br>Stop service<br>systemctl stop v2panel</p>
+<p>5:SSL证书申请</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install socat -y</span><br><span class="line">curl https://get.acme.sh | sh</span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+<p>证书申请</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bash ~/.acme.sh/acme.sh --issue -d 域名 --alpn -k ec-256</span><br></pre></td></tr></table></figure>
+<p>指定安装路径</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir /etc/v2ray &amp;&amp; sudo ~/.acme.sh/acme.sh --installcert -d 域名 --fullchainpath /etc/v2ray/v2ray.crt --keypath /etc/v2ray/v2ray.key --ecc</span><br></pre></td></tr></table></figure>
+
+<p>6：配置Nginx配置文件<br>vi /etc/nginx/conf.d/v2ray-manager.conf</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 443 ssl http2;</span><br><span class="line">    server_name 域名;</span><br><span class="line">    root /opt/jar/web;</span><br><span class="line">    ssl_certificate       /etc/v2ray/v2ray.crt;</span><br><span class="line">    ssl_certificate_key   /etc/v2ray/v2ray.key;</span><br><span class="line">    ssl_protocols TLSv1.1 TLSv1.2 TLSv1.3;</span><br><span class="line">    ssl_ciphers TLS13-AES-128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line">location /api &#123;</span><br><span class="line">        proxy_pass http://127.0.0.1:9091/;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location /ws/ &#123;</span><br><span class="line">        proxy_redirect off;</span><br><span class="line">        proxy_pass http://127.0.0.1:8081;</span><br><span class="line">        proxy_http_version 1.1;</span><br><span class="line">        proxy_set_header Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">        proxy_set_header Connection <span class="string">"upgrade"</span>;</span><br><span class="line">        proxy_set_header Host <span class="variable">$http_host</span>;</span><br><span class="line">        proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">        proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line">       </span><br><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name 域名;</span><br><span class="line">    <span class="built_in">return</span> 301 https:///<span class="variable">$http_host</span><span class="variable">$request_uri</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>方法二推荐：</p>
+<h1 id="用宝塔面板搭建"><a href="#用宝塔面板搭建" class="headerlink" title="用宝塔面板搭建"></a>用宝塔面板搭建</h1><p>1：BT安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y wget &amp;&amp; wget -O install.sh http://download.bt.cn/install/install_6.0.sh &amp;&amp; sh install.sh</span><br></pre></td></tr></table></figure>
+<p>2:登陆宝塔安装Nginx</p>
+<p>3:添加网站；添加域名；申请SSL证书并修改配置文件<br>在「设置」——「配置文件」选项，在ssl最后一个}前添加如下代码：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">location /api &#123;</span><br><span class="line">  proxy_pass http://127.0.0.1:9091/;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">location /ws/ &#123;</span><br><span class="line">  proxy_redirect off;</span><br><span class="line">  proxy_pass http://127.0.0.1:8081;</span><br><span class="line">  proxy_http_version 1.1;</span><br><span class="line">  proxy_set_header Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">  proxy_set_header Connection <span class="string">"upgrade"</span>;</span><br><span class="line">  proxy_set_header Host <span class="variable">$http_host</span>;</span><br><span class="line">  proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">  proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4:安装V2ray<br><a href="https://github.com/v2fly/fhs-install-v2ray" target="_blank" rel="noopener">V2Fly项目地址</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum makecache</span><br><span class="line">yum install curl</span><br><span class="line">curl -O https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh</span><br><span class="line">curl -O https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-dat-release.sh</span><br><span class="line">bash install-release.sh</span><br><span class="line">bash install-dat-release.sh</span><br></pre></td></tr></table></figure>
+
+<p>5：编辑V2ray配置文件<br>cd /usr/local/etc/v2ray<br>vi config.json</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"api"</span>: &#123;</span><br><span class="line">    <span class="string">"services"</span>: [</span><br><span class="line">      <span class="string">"HandlerService"</span>,</span><br><span class="line">      <span class="string">"LoggerService"</span>,</span><br><span class="line">      <span class="string">"StatsService"</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="string">"tag"</span>: <span class="string">"api"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"inboundDetour"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"listen"</span>: <span class="string">"127.0.0.1"</span>,</span><br><span class="line">      <span class="string">"port"</span>: 62789,</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"dokodemo-door"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;</span><br><span class="line">        <span class="string">"address"</span>: <span class="string">"127.0.0.1"</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"tag"</span>: <span class="string">"api"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"log"</span>: &#123;</span><br><span class="line">    <span class="string">"loglevel"</span>: <span class="string">"info"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"inbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"listen"</span>: <span class="string">"127.0.0.1"</span>,</span><br><span class="line">      <span class="string">"port"</span>: 6001,</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"vmess"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;</span><br><span class="line">        <span class="string">"clients"</span>: [],</span><br><span class="line">        <span class="string">"disableInsecureEncryption"</span>: <span class="literal">false</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"sniffing"</span>: &#123;</span><br><span class="line">        <span class="string">"destOverride"</span>: [</span><br><span class="line">          <span class="string">"http"</span>,</span><br><span class="line">          <span class="string">"tls"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">"enabled"</span>: <span class="literal">true</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"streamSettings"</span>: &#123;</span><br><span class="line">        <span class="string">"network"</span>: <span class="string">"ws"</span>,</span><br><span class="line">        <span class="string">"security"</span>: <span class="string">"none"</span>,</span><br><span class="line">        <span class="string">"wsSettings"</span>: &#123;</span><br><span class="line">          <span class="string">"headers"</span>: &#123;&#125;,</span><br><span class="line">          <span class="string">"path"</span>: <span class="string">"/ws/"</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"tag"</span>: <span class="string">"6001"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"outbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"freedom"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"blackhole"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;&#125;,</span><br><span class="line">      <span class="string">"tag"</span>: <span class="string">"blocked"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"policy"</span>: &#123;</span><br><span class="line">    <span class="string">"system"</span>: &#123;</span><br><span class="line">      <span class="string">"statsInboundDownlink"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="string">"statsInboundUplink"</span>: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"routing"</span>: &#123;</span><br><span class="line">    <span class="string">"rules"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"inboundTag"</span>: [</span><br><span class="line">          <span class="string">"api"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">"outboundTag"</span>: <span class="string">"api"</span>,</span><br><span class="line">        <span class="string">"type"</span>: <span class="string">"field"</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"ip"</span>: [</span><br><span class="line">          <span class="string">"geoip:private"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">"outboundTag"</span>: <span class="string">"blocked"</span>,</span><br><span class="line">        <span class="string">"type"</span>: <span class="string">"field"</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"outboundTag"</span>: <span class="string">"blocked"</span>,</span><br><span class="line">        <span class="string">"protocol"</span>: [</span><br><span class="line">          <span class="string">"bittorrent"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">"type"</span>: <span class="string">"field"</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"stats"</span>: &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>重启V2ray</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service v2ray restart</span><br></pre></td></tr></table></figure>
+<p>其余同第一种方法的第6步开始</p>
+<p>END</p>
+<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场-注册就送50G免费流量"><a href="#星际云网络加速-免费节点机场-注册就送50G免费流量" class="headerlink" title="星际云网络加速|免费节点机场-注册就送50G免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a>-注册就送50G免费流量</h1><h1 id="星云网络加速-年付4K机场"><a href="#星云网络加速-年付4K机场" class="headerlink" title="星云网络加速|年付4K机场"></a><a href="https://www.xjycloud.pw" target="_blank" rel="noopener">星云网络加速|年付4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
+  </entry>
+  <entry>
     <title>2020年最新V2RAY+WS+TLS+NGinx搭建教程</title>
     <url>/posts/bde4d854.html</url>
     <content><![CDATA[<h1 id="2020年最新V2RAY-WS-TLS-NGinx搭建教程"><a href="#2020年最新V2RAY-WS-TLS-NGinx搭建教程" class="headerlink" title="2020年最新V2RAY+WS+TLS+NGinx搭建教程"></a><center>2020年最新V2RAY+WS+TLS+NGinx搭建教程</center></h1><p>准备工具：VPS一台；系统CentOS7+;域名1个；(CloudFlare非必须)<br>1：设置谷歌云XSHELL连接：</p>
@@ -50,101 +147,6 @@
 <h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="星云网络加速-年付4K机场"><a href="#星云网络加速-年付4K机场" class="headerlink" title="星云网络加速|年付4K机场"></a><a href="https://www.xjycloud.pw" target="_blank" rel="noopener">星云网络加速|年付4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
   </entry>
   <entry>
-    <title>2020年如何编译自带SSRPLUS的OpenWrt软路由固件</title>
-    <url>/posts/a46d8958.html</url>
-    <content><![CDATA[<h1 id="L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件"><a href="#L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件" class="headerlink" title="L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件"></a><center>L大删除SSRPLUS源码后如何编译自带SSRPLUS插件的OpenWrt软路由固件</center></h1><p>若是第一次编译请先了解如何制作生成.config文件以及如何应用Github Actions,<a href="https://siemenstutorials.github.io/posts/21b7e26f.html">详见上篇博文</a>;<br>在此基础上你便可以开始你的编译之旅了！</p>
-<p>1：在你的第一次编译基础上，打开Workeflow里的yml文件，找到如下URL，并将URL更换成如下链接：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">REPO_URL: https://github.com/hikelin19871112/lede.git</span><br><span class="line">REPO_BRANCH: master</span><br></pre></td></tr></table></figure>
-<p>2：然后点击Commit</p>
-<p>3:然后切换到Actions编译就开始了，大约2小时后即可下载OpenWrt固件了！</p>
-<p>4：<a href="https://drive.google.com/open?id=1mtxDbNwZzKUGpUgoHHkSkaDY6jwL2zxP" target="_blank" rel="noopener">树莓派4b Openwrt固件下载</a></p>
-<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
-      <categories>
-        <category>Openwrt</category>
-        <category>固件编译</category>
-      </categories>
-      <tags>
-        <tag>软路由</tag>
-        <tag>ssrplus</tag>
-        <tag>Trojan</tag>
-        <tag>V2ray</tag>
-        <tag>科学上网</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2020最新V2Fly/V2ray web管理面板搭建</title>
-    <url>/posts/46d8ebb9.html</url>
-    <content><![CDATA[<h1 id="2020最新V2Fly-V2ray-web管理面板搭建"><a href="#2020最新V2Fly-V2ray-web管理面板搭建" class="headerlink" title="2020最新V2Fly/V2ray web管理面板搭建"></a><center>2020最新V2Fly/V2ray web管理面板搭建</center></h1><p><img src="/images/webmanage.png" alt></p>
-<p><a href="https://github.com/master-coder-ll/v2ray-web-manager" target="_blank" rel="noopener">面板项目地址</a><br><a href="https://github.com/v2fly/fhs-install-v2ray" target="_blank" rel="noopener">V2Fly项目地址</a><br>官方推荐方法一：<br>1:安装前准备<br>域名1个；VPS一台(这里用谷歌云);系统镜像:CENTOS7<br>2：设定xshell进行root密码登陆，避免SSH经常断连</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sed -i <span class="string">'s/PermitRootLogin no/PermitRootLogin yes/g'</span> /etc/ssh/sshd_config</span><br><span class="line">sed -i <span class="string">'s/PasswordAuthentication no/PasswordAuthentication yes/g'</span> /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
-<p>设定密码<br>passwd root<br>重启sshd服务<br>service sshd restart<br>3：开始安装</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum update</span><br><span class="line">yum makecache</span><br><span class="line">yum install epel-release</span><br><span class="line">yum install vim nginx java-1.8.0-openjdk wget unzip -y</span><br></pre></td></tr></table></figure>
-<p><a href="https://github.com/v2fly/fhs-install-v2ray" target="_blank" rel="noopener">安装V2ray</a><br>3:配置Nginx</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/nginx/conf.d</span><br><span class="line">vi v2ray-manager.conf</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">  listen 80;</span><br><span class="line">  server_name 127.0.0.1; <span class="comment">#修改为自己的IP/域名</span></span><br><span class="line">  root /opt/jar/web;</span><br><span class="line">                </span><br><span class="line">  location /api &#123;</span><br><span class="line">    proxy_pass http://127.0.0.1:9091/;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  location /ws/ &#123;</span><br><span class="line">    proxy_redirect off;</span><br><span class="line">    proxy_pass http://127.0.0.1:8081;</span><br><span class="line">    proxy_http_version 1.1;</span><br><span class="line">    proxy_set_header Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">    proxy_set_header Connection <span class="string">"upgrade"</span>;</span><br><span class="line">    proxy_set_header Host <span class="variable">$http_host</span>;</span><br><span class="line">    proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">    proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">  &#125; </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>systemctl start nginx<br>nginx -s reload<br>systemctl status nginx.service</p>
-<p>6:创建目录</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir /opt/jar -p</span><br><span class="line"><span class="built_in">cd</span> /opt/jar</span><br></pre></td></tr></table></figure>
-<p>下载releases包</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -c https://glare.now.sh/master-coder-ll/v2ray-web-manager/admin -O admin.jar</span><br><span class="line">wget -c https://glare.now.sh/master-coder-ll/v2ray-manager-console/dist -O dist.zip</span><br><span class="line">wget -c https://glare.now.sh/master-coder-ll/v2ray-web-manager/v2ray-proxy -O v2ray-proxy.jar</span><br></pre></td></tr></table></figure>
-<p>解压前端到web文件夹<br>unzip dist.zip  -d web</p>
-<p>4.下载管理配置文件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -c --no-check-certificate https://raw.githubusercontent.com/master-coder-ll/v2ray-web-manager/master/conf/admin.yaml</span><br><span class="line">wget -c --no-check-certificate https://raw.githubusercontent.com/master-coder-ll/v2ray-web-manager/master/conf/proxy.yaml</span><br><span class="line">wget -c --no-check-certificate https://raw.githubusercontent.com/master-coder-ll/v2ray-web-manager/master/conf/config.json</span><br></pre></td></tr></table></figure>
-<p>修改admin.yaml与proxy.yaml</p>
-<p>5:配置V2ray</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cp /opt/jar/config.json /usr/<span class="built_in">local</span>/etc/v2ray/</span><br></pre></td></tr></table></figure>
-<p>重启v2ray</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service v2ray stop</span><br><span class="line">service v2ray start</span><br></pre></td></tr></table></figure>
-<p>6.运行JAVA<br>创建默认数据库目录</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir /opt/jar/db -p</span><br></pre></td></tr></table></figure>
-<p>运行admin</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nohup java -jar -Xms40m -Xmx40m -XX:MaxDirectMemorySize=10M -XX:MaxMetaspaceSize=80m  /opt/jar/admin.jar --spring.config.location=/opt/jar/admin.yaml &gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
-<p>运行V2ray-proxy</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nohup java -jar -Xms40m -Xmx40m -XX:MaxDirectMemorySize=10M -XX:MaxMetaspaceSize=80m /opt/jar/v2ray-proxy.jar --spring.config.location=/opt/jar/proxy.yaml &gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
-<p>7.日志查看</p>
-<h1 id="查看admin日志"><a href="#查看admin日志" class="headerlink" title="查看admin日志"></a>查看admin日志</h1><p>tail -100f /opt/jar/logs/admin.log</p>
-<h1 id="查看admin的错误日志-version-gt-v3-1-5"><a href="#查看admin的错误日志-version-gt-v3-1-5" class="headerlink" title="查看admin的错误日志(version &gt; v3.1.5)"></a>查看admin的错误日志(version &gt; v3.1.5)</h1><p>tail -100f /opt/jar/logs/admin.log.ERROR</p>
-<h1 id="查看-v2ray-proxy日志"><a href="#查看-v2ray-proxy日志" class="headerlink" title="查看 v2ray-proxy日志"></a>查看 v2ray-proxy日志</h1><p>tail -100f /opt/jar/logs/v2ray-proxy.log</p>
-<h1 id="查看v2ray-proxy的错误日志-version-gt-v3-1-5"><a href="#查看v2ray-proxy的错误日志-version-gt-v3-1-5" class="headerlink" title="查看v2ray-proxy的错误日志(version &gt; v3.1.5)"></a>查看v2ray-proxy的错误日志(version &gt; v3.1.5)</h1><p>tail -100f /opt/jar/logs/v2ray-proxy.log.ERROR</p>
-<h1 id="ctrl-c-退出查看日志"><a href="#ctrl-c-退出查看日志" class="headerlink" title="ctrl+c 退出查看日志"></a>ctrl+c 退出查看日志</h1><p>布署常见错误解决方案：<br>502报错<br>重新运行以下命令</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nohup java -jar -Xms100m -Xmx100m -XX:MaxDirectMemorySize=10M -XX:MaxMetaspaceSize=80m  /opt/jar/admin.jar --spring.config.location=/opt/jar/admin.yaml &gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">setsebool httpd_can_network_connect 1</span><br></pre></td></tr></table></figure>
-<p>如何设置开机自启JAVA进程<br>1：Create v2panel-start.sh</p>
-<p>vi /opt/jar/v2panel-start.sh</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">nohup java -jar -Xmx40m -XX:MaxDirectMemorySize=8M -XX:MaxMetaspaceSize=80m /opt/jar/admin.jar --spring.config.location=/opt/jar/admin.yaml &gt; /dev/null 2&gt;&amp;1 &amp;</span><br><span class="line"><span class="built_in">echo</span> $! &gt; /var/run/v2ray-admin.pid</span><br><span class="line">nohup java -jar -Xmx40m -XX:MaxDirectMemorySize=8M -XX:MaxMetaspaceSize=48m /opt/jar/v2ray-proxy.jar --spring.config.location=/opt/jar/proxy.yaml &gt; /dev/null 2&gt;&amp;1 &amp;</span><br><span class="line"><span class="built_in">echo</span> $! &gt; /var/run/v2ray-proxy.pid</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chmod +x /opt/jar/v2panel-start.sh</span><br></pre></td></tr></table></figure>
-<p>2：Create v2panel-stop.sh<br>vi /opt/jar/v2panel-stop.sh</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">PID1=<span class="variable">$&#123;cat /var/run/v2ray-admin.pid&#125;</span></span><br><span class="line"><span class="built_in">kill</span> -15 <span class="variable">$PID1</span></span><br><span class="line">PID2=<span class="variable">$&#123;cat /var/run/v2ray-proxy.pid&#125;</span></span><br><span class="line"><span class="built_in">kill</span> -15 <span class="variable">$PID2</span></span><br></pre></td></tr></table></figure>
-<p>3：Register v2panel service<br>vi /etc/systemd/system/v2panel.service</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=v2ray-web-manager</span><br><span class="line">After=network.target network-online.target nss-lookup.target mysql.service mariadb.service mysqld.service</span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">StandardError=journal</span><br><span class="line">ExecStart=/opt/jar/v2panel-start.sh</span><br><span class="line">ExecStop=/opt/jar/v2panel-stop.sh</span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
-<p>4：启动管理脚本<br>Set autostart<br>systemctl enable v2panel<br>Start service<br>systemctl start v2panel<br>Stop service<br>systemctl stop v2panel</p>
-<p>5:SSL证书申请</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install socat -y</span><br><span class="line">curl https://get.acme.sh | sh</span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
-<p>证书申请</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bash ~/.acme.sh/acme.sh --issue -d 域名 --alpn -k ec-256</span><br></pre></td></tr></table></figure>
-<p>指定安装路径</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir /etc/v2ray &amp;&amp; sudo ~/.acme.sh/acme.sh --installcert -d 域名 --fullchainpath /etc/v2ray/v2ray.crt --keypath /etc/v2ray/v2ray.key --ecc</span><br></pre></td></tr></table></figure>
-
-<p>6：配置Nginx配置文件<br>vi /etc/nginx/conf.d/v2ray-manager.conf</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 443 ssl http2;</span><br><span class="line">    server_name 域名;</span><br><span class="line">    root /opt/jar/web;</span><br><span class="line">    ssl_certificate       /etc/v2ray/v2ray.crt;</span><br><span class="line">    ssl_certificate_key   /etc/v2ray/v2ray.key;</span><br><span class="line">    ssl_protocols TLSv1.1 TLSv1.2 TLSv1.3;</span><br><span class="line">    ssl_ciphers TLS13-AES-128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line">location /api &#123;</span><br><span class="line">        proxy_pass http://127.0.0.1:9091/;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location /ws/ &#123;</span><br><span class="line">        proxy_redirect off;</span><br><span class="line">        proxy_pass http://127.0.0.1:8081;</span><br><span class="line">        proxy_http_version 1.1;</span><br><span class="line">        proxy_set_header Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">        proxy_set_header Connection <span class="string">"upgrade"</span>;</span><br><span class="line">        proxy_set_header Host <span class="variable">$http_host</span>;</span><br><span class="line">        proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">        proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line">       </span><br><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name 域名;</span><br><span class="line">    <span class="built_in">return</span> 301 https:///<span class="variable">$http_host</span><span class="variable">$request_uri</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>方法二推荐：</p>
-<h1 id="用宝塔面板搭建"><a href="#用宝塔面板搭建" class="headerlink" title="用宝塔面板搭建"></a>用宝塔面板搭建</h1><p>1：BT安装</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y wget &amp;&amp; wget -O install.sh http://download.bt.cn/install/install_6.0.sh &amp;&amp; sh install.sh</span><br></pre></td></tr></table></figure>
-<p>2:登陆宝塔安装Nginx</p>
-<p>3:添加网站；添加域名；申请SSL证书并修改配置文件<br>在「设置」——「配置文件」选项，在ssl最后一个}前添加如下代码：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">location /api &#123;</span><br><span class="line">  proxy_pass http://127.0.0.1:9091/;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">location /ws/ &#123;</span><br><span class="line">  proxy_redirect off;</span><br><span class="line">  proxy_pass http://127.0.0.1:8081;</span><br><span class="line">  proxy_http_version 1.1;</span><br><span class="line">  proxy_set_header Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">  proxy_set_header Connection <span class="string">"upgrade"</span>;</span><br><span class="line">  proxy_set_header Host <span class="variable">$http_host</span>;</span><br><span class="line">  proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">  proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>4:安装V2ray<br><a href="https://github.com/v2fly/fhs-install-v2ray" target="_blank" rel="noopener">V2Fly项目地址</a></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum makecache</span><br><span class="line">yum install curl</span><br><span class="line">curl -O https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh</span><br><span class="line">curl -O https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-dat-release.sh</span><br><span class="line">bash install-release.sh</span><br><span class="line">bash install-dat-release.sh</span><br></pre></td></tr></table></figure>
-
-<p>5：编辑V2ray配置文件<br>cd /usr/local/etc/v2ray<br>vi config.json</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"api"</span>: &#123;</span><br><span class="line">    <span class="string">"services"</span>: [</span><br><span class="line">      <span class="string">"HandlerService"</span>,</span><br><span class="line">      <span class="string">"LoggerService"</span>,</span><br><span class="line">      <span class="string">"StatsService"</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="string">"tag"</span>: <span class="string">"api"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"inboundDetour"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"listen"</span>: <span class="string">"127.0.0.1"</span>,</span><br><span class="line">      <span class="string">"port"</span>: 62789,</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"dokodemo-door"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;</span><br><span class="line">        <span class="string">"address"</span>: <span class="string">"127.0.0.1"</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"tag"</span>: <span class="string">"api"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"log"</span>: &#123;</span><br><span class="line">    <span class="string">"loglevel"</span>: <span class="string">"info"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"inbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"listen"</span>: <span class="string">"127.0.0.1"</span>,</span><br><span class="line">      <span class="string">"port"</span>: 6001,</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"vmess"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;</span><br><span class="line">        <span class="string">"clients"</span>: [],</span><br><span class="line">        <span class="string">"disableInsecureEncryption"</span>: <span class="literal">false</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"sniffing"</span>: &#123;</span><br><span class="line">        <span class="string">"destOverride"</span>: [</span><br><span class="line">          <span class="string">"http"</span>,</span><br><span class="line">          <span class="string">"tls"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">"enabled"</span>: <span class="literal">true</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"streamSettings"</span>: &#123;</span><br><span class="line">        <span class="string">"network"</span>: <span class="string">"ws"</span>,</span><br><span class="line">        <span class="string">"security"</span>: <span class="string">"none"</span>,</span><br><span class="line">        <span class="string">"wsSettings"</span>: &#123;</span><br><span class="line">          <span class="string">"headers"</span>: &#123;&#125;,</span><br><span class="line">          <span class="string">"path"</span>: <span class="string">"/ws/"</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"tag"</span>: <span class="string">"6001"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"outbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"freedom"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"blackhole"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;&#125;,</span><br><span class="line">      <span class="string">"tag"</span>: <span class="string">"blocked"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"policy"</span>: &#123;</span><br><span class="line">    <span class="string">"system"</span>: &#123;</span><br><span class="line">      <span class="string">"statsInboundDownlink"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="string">"statsInboundUplink"</span>: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"routing"</span>: &#123;</span><br><span class="line">    <span class="string">"rules"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"inboundTag"</span>: [</span><br><span class="line">          <span class="string">"api"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">"outboundTag"</span>: <span class="string">"api"</span>,</span><br><span class="line">        <span class="string">"type"</span>: <span class="string">"field"</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"ip"</span>: [</span><br><span class="line">          <span class="string">"geoip:private"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">"outboundTag"</span>: <span class="string">"blocked"</span>,</span><br><span class="line">        <span class="string">"type"</span>: <span class="string">"field"</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"outboundTag"</span>: <span class="string">"blocked"</span>,</span><br><span class="line">        <span class="string">"protocol"</span>: [</span><br><span class="line">          <span class="string">"bittorrent"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">"type"</span>: <span class="string">"field"</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"stats"</span>: &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>重启V2ray</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service v2ray restart</span><br></pre></td></tr></table></figure>
-<p>其余同第一种方法的第6步开始</p>
-<p>END</p>
-<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场-注册就送50G免费流量"><a href="#星际云网络加速-免费节点机场-注册就送50G免费流量" class="headerlink" title="星际云网络加速|免费节点机场-注册就送50G免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a>-注册就送50G免费流量</h1><h1 id="星云网络加速-年付4K机场"><a href="#星云网络加速-年付4K机场" class="headerlink" title="星云网络加速|年付4K机场"></a><a href="https://www.xjycloud.pw" target="_blank" rel="noopener">星云网络加速|年付4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
-  </entry>
-  <entry>
     <title>CentOS7利用firewall流量转发-实现TCP/UDP中转加速</title>
     <url>/posts/9b74aaac.html</url>
     <content><![CDATA[<h1 id="CentOS7-利用firewall流量转发-实现TCP-UDP中转加速"><a href="#CentOS7-利用firewall流量转发-实现TCP-UDP中转加速" class="headerlink" title="CentOS7 利用firewall流量转发-实现TCP/UDP中转加速"></a><center>CentOS7 利用firewall流量转发-实现TCP/UDP中转加速</center></h1><p>支持系统:CentOS7或以上</p>
@@ -186,51 +188,6 @@
         <tag>软路由固件</tag>
         <tag>固件编译</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>2020最新版V2ray官方搭建教程</title>
-    <url>/posts/cadd31bd.html</url>
-    <content><![CDATA[<center>2020最新版V2fly ws+tls+官方搭建教程</center>
-1:时间同步：
-Centos系统
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">date -R</span><br><span class="line">timedatectl <span class="built_in">set</span>-local-rtc 1</span><br><span class="line">timedatectl <span class="built_in">set</span>-timezone Asia/Shanghai</span><br></pre></td></tr></table></figure>
-Debian系统
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">date -R</span><br><span class="line">rm -rf /etc/localtime</span><br><span class="line">cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br></pre></td></tr></table></figure>
-2：[V2fly新版项目地址](https://github.com/v2fly/fhs-install-v2ray)
-安装依赖：
-Debian
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt update</span><br><span class="line">apt install curl</span><br></pre></td></tr></table></figure>
-CentOS
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum makecache</span><br><span class="line">yum install curl</span><br></pre></td></tr></table></figure>
-3:安装源码：
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -O https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh</span><br><span class="line">curl -O https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-dat-release.sh</span><br></pre></td></tr></table></figure>
-4:安裝和更新 V2Ray
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bash install-release.sh</span><br></pre></td></tr></table></figure>
-5:安裝最新發行的 geoip.dat 和 geosite.dat
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bash install-dat-release.sh</span><br></pre></td></tr></table></figure>
-6：移除 V2Ray
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bash install-release.sh --remove</span><br></pre></td></tr></table></figure>
-7：创建配置文件
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi /usr/<span class="built_in">local</span>/etc/v2ray/config.json</span><br></pre></td></tr></table></figure>
-配置文件内容：
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"inbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"port"</span>: 443, // 服务器端口</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"vmess"</span>,    </span><br><span class="line">      <span class="string">"settings"</span>: &#123;</span><br><span class="line">        <span class="string">"clients"</span>: [</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="string">"id"</span>: <span class="string">"UUID"</span>, // V2ray客户端UUID </span><br><span class="line">            <span class="string">"alterId"</span>: 64</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"streamSettings"</span>: &#123;</span><br><span class="line">        <span class="string">"network"</span>: <span class="string">"ws"</span>, // TCP或WS</span><br><span class="line">        <span class="string">"security"</span>: <span class="string">"tls"</span>, // security 要设置为 tls 才会启用 TLS</span><br><span class="line">        <span class="string">"tlsSettings"</span>: &#123;</span><br><span class="line">          <span class="string">"certificates"</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">              <span class="string">"certificateFile"</span>: <span class="string">"/etc/v2ray/v2ray.crt"</span>, // 证书文件路径</span><br><span class="line">              <span class="string">"keyFile"</span>: <span class="string">"/etc/v2ray/v2ray.key"</span> // 密钥文件路径</span><br><span class="line">            &#125;</span><br><span class="line">          ]</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"outbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"freedom"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-8:安装软件依赖
-Debian/Ubuntu系统:
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt-get update &amp;&amp; apt-get install curl -y &amp;&amp; apt-get install cron -y &amp;&amp; apt-get install socat -y</span><br></pre></td></tr></table></figure>
-CentOS系统:
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum update &amp;&amp; yum install curl -y &amp;&amp; yum install cron -y &amp;&amp; yum install socat -y</span><br></pre></td></tr></table></figure>
-9:安装 acme.sh:
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://get.acme.sh | sh</span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
-10:申请证书： 
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bash ~/.acme.sh/acme.sh --issue -d 域名 --alpn -k ec-256</span><br></pre></td></tr></table></figure>
-11:安装证书：
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir /etc/v2ray &amp;&amp; sudo ~/.acme.sh/acme.sh --installcert -d 域名 --fullchainpath /etc/v2ray/v2ray.crt --keypath /etc/v2ray/v2ray.key --ecc</span><br></pre></td></tr></table></figure>
-12:证书权限设置：
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chmod 644 /etc/v2ray/v2ray.key</span><br></pre></td></tr></table></figure>
-13:设置重启|状态检查|开机自启
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl restart v2ray</span><br><span class="line">systemctl status v2ray</span><br><span class="line">systemctl <span class="built_in">enable</span> v2ray</span><br></pre></td></tr></table></figure>
-
-<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="星云网络加速-年付4K机场"><a href="#星云网络加速-年付4K机场" class="headerlink" title="星云网络加速|年付4K机场"></a><a href="https://www.xjycloud.pw" target="_blank" rel="noopener">星云网络加速|年付4K机场</a></h1>]]></content>
   </entry>
   <entry>
     <title>Gost Docker布署加密隧道节点</title>
@@ -317,38 +274,27 @@ CentOS系统:
       </tags>
   </entry>
   <entry>
-    <title>NAT VPS阿里云DDNS动态域名绑定</title>
-    <url>/posts/ee769b01.html</url>
-    <content><![CDATA[<h1 id="NAT-VPS阿里云DDNS动态域名绑定"><a href="#NAT-VPS阿里云DDNS动态域名绑定" class="headerlink" title="NAT VPS阿里云DDNS动态域名绑定"></a><center>NAT VPS阿里云DDNS动态域名绑定</center></h1><p><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">视频教程</a></p>
-<p>根据系统安装依赖：<br>1:centOS安装依赖</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y wget curl cronie</span><br></pre></td></tr></table></figure>
-<p>1.1 Debain/ubuntu依赖安装：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt-get install -y wget curl cron</span><br></pre></td></tr></table></figure>
-<p>2：安装DDNS脚本</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -O /usr/sbin/AliDDNS-v2.0.sh https://github.com/siemenstutorials/ALIDDNSV2.0/raw/master/AliDDNSv2.sh</span><br></pre></td></tr></table></figure>
-<p>或</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -O /usr/sbin/AliDDNS-v2.0.sh https://ilemonrain.com/download/shell/AliDDNSv2.sh</span><br></pre></td></tr></table></figure>
-<p>3：赋予权限</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chmod +x /usr/sbin/AliDDNS-v2.0.sh</span><br></pre></td></tr></table></figure>
-<p>4：运行AliDDNS 工具</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/usr/sbin/AliDDNS-v2.0.sh</span><br></pre></td></tr></table></figure>
-<p>5：选择1进行配置；<br><img src="/images/5.jpg" alt><br><img src="/images/6.jpg" alt><br>并按提示进行输入域名<br>6：登陆阿里云DNS添加A记录：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">记录类型：A</span><br><span class="line">主机记录：[请填写你的二级域名]</span><br><span class="line">解析线路：默认</span><br><span class="line">记录值：127.0.0.1 (或者随便填写一个IP地址)</span><br><span class="line">TTL： [请根据实际需要选择合适的TTL]</span><br><span class="line">同步默认线路：是 (勾选)</span><br></pre></td></tr></table></figure>
-<p>7：新建用户并分配如下权限<br><a href="https://ram.console.aliyun.com" target="_blank" rel="noopener">创建子用户</a><br>给用户添加权限:<br> AliyunDNSReadOnlyAccess(只读访问云解析(DNS)的权限) 和 AliyunDNSFullAccess(管理云解析(DNS)的权限)<br>8：运行nslookup查看更新情况<br>9：定时更新</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">crontab -e</span><br></pre></td></tr></table></figure>
-<p>在文件后面添加</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">*/5 * * * * /usr/sbin/AliDDNS-v2.0.sh run &gt;/dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
-<p>显示crontab: installing new crontab表明成功<br>10：添加开机自启<br>CentOS：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service crond restart</span><br><span class="line">chkconfig crond on</span><br></pre></td></tr></table></figure>
-<p> Ubuntu/Debian</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service cron restart</span><br><span class="line">systemctl <span class="built_in">enable</span> cron</span><br></pre></td></tr></table></figure>
-<p><a href="https://blog.ilemonrain.com/linux/aliddns-v2.html" target="_blank" rel="noopener">以上脚本源于互联网</a></p>
+    <title>OpenWrt/Lede软路由FRP内网穿透从无到有完整教程</title>
+    <url>/posts/93a83708.html</url>
+    <content><![CDATA[<h1 id="OpenWrt-Lede软路由FRP内网穿透从无到有完整教程"><a href="#OpenWrt-Lede软路由FRP内网穿透从无到有完整教程" class="headerlink" title="OpenWrt/Lede软路由FRP内网穿透从无到有完整教程"></a><Center>OpenWrt/Lede软路由FRP内网穿透从无到有完整教程</Center></h1><center>[视频教程](https://youtu.be/jeDKfijKNuc)</center>
+
+<p>1:OPENWRT软路由插件安装<br>下载Frps和Frpc.ipk文件以及luci-app-frpc</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">https://github.com/kuoruan/openwrt-frp/releases</span><br><span class="line">https://github.com/kuoruan/luci-app-frpc/releases</span><br></pre></td></tr></table></figure>
+<p>2:利用Winscp上传第1步下载的4个插件<br>然后进入tmp目录<br>cd /tmp<br>然后运行opkg install ***.ipk文件<br>3：准备一个域名并运行VPS然后利用一键安装命令安装frp<br>一键Frp安装脚本如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/MvsCode/frps-onekey/master/install-frps.sh -O ./install-frps.sh</span><br><span class="line">chmod 700 ./install-frps.sh</span><br><span class="line">./install-frps.sh install</span><br></pre></td></tr></table></figure>
+<p>Aliyun</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://code.aliyun.com/MvsCode/frps-onekey/raw/master/install-frps.sh -O ./install-frps.sh</span><br><span class="line">chmod 700 ./install-frps.sh</span><br><span class="line">./install-frps.sh install</span><br></pre></td></tr></table></figure>
+<p>其余相关命令：<br>Uninstall（卸载）<br>./install-frps.sh uninstall<br>Update（更新）<br>./install-frps.sh update<br>Server management（服务管理器）<br>Usage: /etc/init.d/frps {start|stop|restart|status|config|version}<br>4：输入域名，解析域名</p>
+<p>5：在OpenWrt里设置Frp，启动服务，设置http、端口、本地IP。</p>
+<p>6：以上设置发后即可以用域名访问OpenWrt/Lede软路由.</p>
 <h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
+      <categories>
+        <category>Openwrt</category>
+        <category>Frp</category>
+      </categories>
       <tags>
-        <tag>ddns</tag>
-        <tag>阿里云</tag>
-        <tag>NAT</tag>
-        <tag>VPS</tag>
+        <tag>openwrt</tag>
+        <tag>frp</tag>
       </tags>
   </entry>
   <entry>
@@ -405,6 +351,65 @@ CentOS系统:
       </tags>
   </entry>
   <entry>
+    <title>NAT VPS阿里云DDNS动态域名绑定</title>
+    <url>/posts/ee769b01.html</url>
+    <content><![CDATA[<h1 id="NAT-VPS阿里云DDNS动态域名绑定"><a href="#NAT-VPS阿里云DDNS动态域名绑定" class="headerlink" title="NAT VPS阿里云DDNS动态域名绑定"></a><center>NAT VPS阿里云DDNS动态域名绑定</center></h1><p><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">视频教程</a></p>
+<p>根据系统安装依赖：<br>1:centOS安装依赖</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y wget curl cronie</span><br></pre></td></tr></table></figure>
+<p>1.1 Debain/ubuntu依赖安装：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt-get install -y wget curl cron</span><br></pre></td></tr></table></figure>
+<p>2：安装DDNS脚本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -O /usr/sbin/AliDDNS-v2.0.sh https://github.com/siemenstutorials/ALIDDNSV2.0/raw/master/AliDDNSv2.sh</span><br></pre></td></tr></table></figure>
+<p>或</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -O /usr/sbin/AliDDNS-v2.0.sh https://ilemonrain.com/download/shell/AliDDNSv2.sh</span><br></pre></td></tr></table></figure>
+<p>3：赋予权限</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chmod +x /usr/sbin/AliDDNS-v2.0.sh</span><br></pre></td></tr></table></figure>
+<p>4：运行AliDDNS 工具</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/usr/sbin/AliDDNS-v2.0.sh</span><br></pre></td></tr></table></figure>
+<p>5：选择1进行配置；<br><img src="/images/5.jpg" alt><br><img src="/images/6.jpg" alt><br>并按提示进行输入域名<br>6：登陆阿里云DNS添加A记录：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">记录类型：A</span><br><span class="line">主机记录：[请填写你的二级域名]</span><br><span class="line">解析线路：默认</span><br><span class="line">记录值：127.0.0.1 (或者随便填写一个IP地址)</span><br><span class="line">TTL： [请根据实际需要选择合适的TTL]</span><br><span class="line">同步默认线路：是 (勾选)</span><br></pre></td></tr></table></figure>
+<p>7：新建用户并分配如下权限<br><a href="https://ram.console.aliyun.com" target="_blank" rel="noopener">创建子用户</a><br>给用户添加权限:<br> AliyunDNSReadOnlyAccess(只读访问云解析(DNS)的权限) 和 AliyunDNSFullAccess(管理云解析(DNS)的权限)<br>8：运行nslookup查看更新情况<br>9：定时更新</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">crontab -e</span><br></pre></td></tr></table></figure>
+<p>在文件后面添加</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">*/5 * * * * /usr/sbin/AliDDNS-v2.0.sh run &gt;/dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<p>显示crontab: installing new crontab表明成功<br>10：添加开机自启<br>CentOS：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service crond restart</span><br><span class="line">chkconfig crond on</span><br></pre></td></tr></table></figure>
+<p> Ubuntu/Debian</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service cron restart</span><br><span class="line">systemctl <span class="built_in">enable</span> cron</span><br></pre></td></tr></table></figure>
+<p><a href="https://blog.ilemonrain.com/linux/aliddns-v2.html" target="_blank" rel="noopener">以上脚本源于互联网</a></p>
+<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
+      <tags>
+        <tag>ddns</tag>
+        <tag>阿里云</tag>
+        <tag>NAT</tag>
+        <tag>VPS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SSPANEL 后端端口偏移食用方法</title>
+    <url>/posts/f6ab28ab.html</url>
+    <content><![CDATA[<h1 id="SSPANEL-后端端口偏移食用方法"><a href="#SSPANEL-后端端口偏移食用方法" class="headerlink" title="SSPANEL 后端端口偏移食用方法"></a><center>SSPANEL 后端端口偏移食用方法</center></h1><p>以下以CentOS7为例<br>1:Docker安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -sSL https://get.docker.com/ | sh</span><br><span class="line">service docker restart</span><br><span class="line">`</span><br></pre></td></tr></table></figure>
+<p>2:全端口偏移</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d --name=自定义名字 -e NODE_ID=节点ID -e API_INTERFACE=modwebapi -e WEBAPI_URL=https://siemenstutorial.tk -e WEBAPI_TOKEN=密码 --network=host --<span class="built_in">log</span>-opt max-size=50m --<span class="built_in">log</span>-opt max-file=3 --restart=always fanvinga/docker-ssrmu</span><br></pre></td></tr></table></figure>
+<p>2.1:单端口偏移</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d --name=name(自定义) -e NODE_ID=节点ID -e API_INTERFACE=modwebapi -e WEBAPI_URL=https://siemenstutorial.tk -e SPEEDTEST=0 -e WEBAPI_TOKEN=密码 --<span class="built_in">log</span>-opt max-size=50m --<span class="built_in">log</span>-opt max-file=3 -p 偏移后端口:承载端口/tcp -p 偏移后端口:承载端口/udp --restart=always fanvinga/docker-ssrmu</span><br></pre></td></tr></table></figure>
+<p>3:关闭防火墙</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br></pre></td></tr></table></figure>
+<p>END</p>
+<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
+      <categories>
+        <category>SSPANEL</category>
+        <category>端口偏移</category>
+      </categories>
+      <tags>
+        <tag>ssr</tag>
+        <tag>v2ray</tag>
+        <tag>sspanel</tag>
+        <tag>shadowsocks</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SSPANEL Brook SSR中转节点搭建</title>
     <url>/posts/239d0dcf.html</url>
     <content><![CDATA[<h1 id="SSPANEL-Brook-SSR中转节点搭建"><a href="#SSPANEL-Brook-SSR中转节点搭建" class="headerlink" title="SSPANEL Brook SSR中转节点搭建"></a><center>SSPANEL Brook SSR中转节点搭建</center></h1><p>1:国内NAT/VPS安装Brook</p>
@@ -434,85 +439,6 @@ CentOS系统:
         <tag>V2ray</tag>
         <tag>科学上网</tag>
         <tag>SSR</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>OpenWrt/Lede软路由FRP内网穿透从无到有完整教程</title>
-    <url>/posts/93a83708.html</url>
-    <content><![CDATA[<h1 id="OpenWrt-Lede软路由FRP内网穿透从无到有完整教程"><a href="#OpenWrt-Lede软路由FRP内网穿透从无到有完整教程" class="headerlink" title="OpenWrt/Lede软路由FRP内网穿透从无到有完整教程"></a><Center>OpenWrt/Lede软路由FRP内网穿透从无到有完整教程</Center></h1><center>[视频教程](https://youtu.be/jeDKfijKNuc)</center>
-
-<p>1:OPENWRT软路由插件安装<br>下载Frps和Frpc.ipk文件以及luci-app-frpc</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">https://github.com/kuoruan/openwrt-frp/releases</span><br><span class="line">https://github.com/kuoruan/luci-app-frpc/releases</span><br></pre></td></tr></table></figure>
-<p>2:利用Winscp上传第1步下载的4个插件<br>然后进入tmp目录<br>cd /tmp<br>然后运行opkg install ***.ipk文件<br>3：准备一个域名并运行VPS然后利用一键安装命令安装frp<br>一键Frp安装脚本如下：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/MvsCode/frps-onekey/master/install-frps.sh -O ./install-frps.sh</span><br><span class="line">chmod 700 ./install-frps.sh</span><br><span class="line">./install-frps.sh install</span><br></pre></td></tr></table></figure>
-<p>Aliyun</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://code.aliyun.com/MvsCode/frps-onekey/raw/master/install-frps.sh -O ./install-frps.sh</span><br><span class="line">chmod 700 ./install-frps.sh</span><br><span class="line">./install-frps.sh install</span><br></pre></td></tr></table></figure>
-<p>其余相关命令：<br>Uninstall（卸载）<br>./install-frps.sh uninstall<br>Update（更新）<br>./install-frps.sh update<br>Server management（服务管理器）<br>Usage: /etc/init.d/frps {start|stop|restart|status|config|version}<br>4：输入域名，解析域名</p>
-<p>5：在OpenWrt里设置Frp，启动服务，设置http、端口、本地IP。</p>
-<p>6：以上设置发后即可以用域名访问OpenWrt/Lede软路由.</p>
-<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
-      <categories>
-        <category>Openwrt</category>
-        <category>Frp</category>
-      </categories>
-      <tags>
-        <tag>openwrt</tag>
-        <tag>frp</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SSPANEL 后端端口偏移食用方法</title>
-    <url>/posts/f6ab28ab.html</url>
-    <content><![CDATA[<h1 id="SSPANEL-后端端口偏移食用方法"><a href="#SSPANEL-后端端口偏移食用方法" class="headerlink" title="SSPANEL 后端端口偏移食用方法"></a><center>SSPANEL 后端端口偏移食用方法</center></h1><p>以下以CentOS7为例<br>1:Docker安装</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -sSL https://get.docker.com/ | sh</span><br><span class="line">service docker restart</span><br><span class="line">`</span><br></pre></td></tr></table></figure>
-<p>2:全端口偏移</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d --name=自定义名字 -e NODE_ID=节点ID -e API_INTERFACE=modwebapi -e WEBAPI_URL=https://siemenstutorial.tk -e WEBAPI_TOKEN=密码 --network=host --<span class="built_in">log</span>-opt max-size=50m --<span class="built_in">log</span>-opt max-file=3 --restart=always fanvinga/docker-ssrmu</span><br></pre></td></tr></table></figure>
-<p>2.1:单端口偏移</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d --name=name(自定义) -e NODE_ID=节点ID -e API_INTERFACE=modwebapi -e WEBAPI_URL=https://siemenstutorial.tk -e SPEEDTEST=0 -e WEBAPI_TOKEN=密码 --<span class="built_in">log</span>-opt max-size=50m --<span class="built_in">log</span>-opt max-file=3 -p 偏移后端口:承载端口/tcp -p 偏移后端口:承载端口/udp --restart=always fanvinga/docker-ssrmu</span><br></pre></td></tr></table></figure>
-<p>3:关闭防火墙</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br></pre></td></tr></table></figure>
-<p>END</p>
-<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
-      <categories>
-        <category>SSPANEL</category>
-        <category>端口偏移</category>
-      </categories>
-      <tags>
-        <tag>ssr</tag>
-        <tag>v2ray</tag>
-        <tag>sspanel</tag>
-        <tag>shadowsocks</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Trojan+v2ray+SSR单VPS共存</title>
-    <url>/posts/46908.html</url>
-    <content><![CDATA[<iframe width="560" height="315" src="https://www.youtube.com/embed/hSqO8ppMYyc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<h1 id="Trojan-v2ray-SSR单VPS共存"><a href="#Trojan-v2ray-SSR单VPS共存" class="headerlink" title="Trojan+v2ray+SSR单VPS共存"></a><center>Trojan+v2ray+SSR单VPS共存</center></h1><p> 准备工具：域名1个/VPS一台(CentOS7)<br>视频教程：<a href="https://youtu.be/hSqO8ppMYyc" target="_blank" rel="noopener">YouTube</a><br>1:域名解析到VPS；解析要充分，以便全球生效！</p>
-<p>2：安装BBR PLUS加速（可选）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget <span class="string">"https://github.com/chiakge/Linux-NetSpeed/raw/master/tcp.sh"</span> &amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh</span><br></pre></td></tr></table></figure>
-<p>3:大神atrandys一键安装Trojan脚本：<br>若提示无wget,则运行：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install wget</span><br></pre></td></tr></table></figure>
-<p>然后再运行下面Docker版Trojan一键安装脚本:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -O https://raw.githubusercontent.com/atrandys/trojan/master/trojan_install.sh &amp;&amp; chmod +x trojan_install.sh &amp;&amp; ./trojan_install.sh</span><br></pre></td></tr></table></figure>
-<p>4：运行大神Docker的UI管理Portainer一键脚本：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">--name ui --restart=always lihaixin/portainer:me</span><br></pre></td></tr></table></figure>
-<p>5：浏览器运行<a href="https://VPS_IP:9000;设置密码并创建帐户，然后选择local。">https://VPS_IP:9000;设置密码并创建帐户，然后选择local。</a></p>
-<p>6:在容器containers中可以看到安装的Trojan；在App Templates中可以选择V2ray、SSR、Brook等代理程序</p>
-<p>8：客户端下载<br><a href="https://drive.google.com/open?id=1m9b6n9KnWI40octuo6IWAWqWdWxseLLk" target="_blank" rel="noopener">SS客户端</a><br><a href="https://drive.google.com/open?id=15sRZ7Sf9CVO0IdELNEvgD7xLxCxMqUVO" target="_blank" rel="noopener">V2ray客户端下载</a></p>
-<h1 id="星际云网络速"><a href="#星际云网络速" class="headerlink" title="星际云网络速"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络速</a></h1><h2 id="Trojan科学上网节点搭建视频教程"><a href="#Trojan科学上网节点搭建视频教程" class="headerlink" title="Trojan科学上网节点搭建视频教程"></a><a href="https://youtu.be/esr4bDuZj34" target="_blank" rel="noopener">Trojan科学上网节点搭建视频教程</a></h2><h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
-      <categories>
-        <category>科学上网</category>
-        <category>Trojan</category>
-        <category>V2ray</category>
-        <category>SSR</category>
-      </categories>
-      <tags>
-        <tag>Trojan</tag>
-        <tag>V2ray</tag>
-        <tag>SSR</tag>
-        <tag>Brook</tag>
       </tags>
   </entry>
   <entry>
@@ -546,62 +472,14 @@ CentOS系统:
 <h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
       <categories>
         <category>科学上网</category>
-        <category>Trojan</category>
         <category>V2ray</category>
+        <category>Trojan</category>
         <category>SSR</category>
       </categories>
       <tags>
         <tag>科学上网</tag>
         <tag>SSR隧道加密</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>V2fly|V2ray+CDN+Nginx+wS+TLS+宝塔共存节点构建</title>
-    <url>/posts/c6a6c322.html</url>
-    <content><![CDATA[<p>工具准备<br>域名1个；VPS一台；cloudflare帐号一个；系统镜像CENTOS7+</p>
-<p>1：BT安装</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y wget &amp;&amp; wget -O install.sh http://download.bt.cn/install/install_6.0.sh &amp;&amp; sh install.sh</span><br></pre></td></tr></table></figure>
-<p>2:登陆宝塔安装Nginx</p>
-<p>3:添加网站；添加域名；申请SSL证书<br>在「设置」——「配置文件」选项，在ssl最后一个}前添加如下代码：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">location /ray &#123;   </span><br><span class="line">     proxy_redirect off;</span><br><span class="line">     proxy_http_version 1.1;</span><br><span class="line">     proxy_set_header Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">     proxy_set_header Connection <span class="string">"upgrade"</span>;</span><br><span class="line">     proxy_set_header Host <span class="variable">$http_host</span>; </span><br><span class="line">     proxy_pass http://127.0.0.1:V2Ray端口须与V2ray配置文件一致; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>4:安装V2ray<br><a href="https://github.com/v2fly/fhs-install-v2ray" target="_blank" rel="noopener">V2Fly项目地址</a></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum makecache</span><br><span class="line">yum install curl</span><br><span class="line">curl -O https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh</span><br><span class="line">curl -O https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-dat-release.sh</span><br><span class="line">bash install-release.sh</span><br><span class="line">bash install-dat-release.sh</span><br></pre></td></tr></table></figure>
-
-<p>5：编辑V2ray配置文件<br>cd /usr/local/etc/v2ray<br>创建配置文件<br>vi config.json</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"inbounds"</span>: [&#123;</span><br><span class="line">    <span class="string">"port"</span>: 1688,           </span><br><span class="line">    <span class="string">"listen"</span>:<span class="string">"127.0.0.1"</span>,</span><br><span class="line">    <span class="string">"protocol"</span>: <span class="string">"vmess"</span>,</span><br><span class="line">    <span class="string">"settings"</span>: &#123;</span><br><span class="line">      <span class="string">"clients"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="string">"id"</span>: <span class="string">"a038c874-f959-4c3b-94e3-a276ce2acf50"</span>, </span><br><span class="line">          <span class="string">"level"</span>: 1,</span><br><span class="line">          <span class="string">"alterId"</span>: 64     </span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"streamSettings"</span>: &#123;</span><br><span class="line">      <span class="string">"network"</span>: <span class="string">"ws"</span>,</span><br><span class="line">      <span class="string">"wsSettings"</span>: &#123;</span><br><span class="line">        <span class="string">"path"</span>: <span class="string">"/ray"</span>   </span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;],</span><br><span class="line">  <span class="string">"outbounds"</span>: [&#123;</span><br><span class="line">    <span class="string">"protocol"</span>: <span class="string">"freedom"</span>,</span><br><span class="line">    <span class="string">"settings"</span>: &#123;&#125;</span><br><span class="line">  &#125;,&#123;</span><br><span class="line">    <span class="string">"protocol"</span>: <span class="string">"blackhole"</span>,</span><br><span class="line">    <span class="string">"settings"</span>: &#123;&#125;,</span><br><span class="line">    <span class="string">"tag"</span>: <span class="string">"blocked"</span></span><br><span class="line">  &#125;],</span><br><span class="line">  <span class="string">"routing"</span>: &#123;</span><br><span class="line">    <span class="string">"rules"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"type"</span>: <span class="string">"field"</span>,</span><br><span class="line">        <span class="string">"ip"</span>: [<span class="string">"geoip:private"</span>],</span><br><span class="line">        <span class="string">"outboundTag"</span>: <span class="string">"blocked"</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>V2ray管理命令</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> v2ray</span><br><span class="line">service v2ray start <span class="comment">#启动 V2Ray  </span></span><br><span class="line">service v2ray stop <span class="comment">#停止运行 V2Ray  </span></span><br><span class="line">service v2ray restart <span class="comment">#重启 V2Ray  </span></span><br><span class="line">service v2ray status <span class="comment">#查看 V2Ray 状态</span></span><br></pre></td></tr></table></figure>
-
-<p>END</p>
-<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场-注册就送50G免费流量"><a href="#星际云网络加速-免费节点机场-注册就送50G免费流量" class="headerlink" title="星际云网络加速|免费节点机场-注册就送50G免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a>-注册就送50G免费流量</h1><h1 id="星云网络加速-年付4K机场"><a href="#星云网络加速-年付4K机场" class="headerlink" title="星云网络加速|年付4K机场"></a><a href="https://www.xjycloud.pw" target="_blank" rel="noopener">星云网络加速|年付4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
-  </entry>
-  <entry>
-    <title>V2Fly/V2ray Docker版官方搭建教程</title>
-    <url>/posts/27024d5e.html</url>
-    <content><![CDATA[<h1 id="V2Fly-V2ray-Docker版官方搭建教程"><a href="#V2Fly-V2ray-Docker版官方搭建教程" class="headerlink" title="V2Fly/V2ray Docker版官方搭建教程"></a><center>V2Fly/V2ray Docker版官方搭建教程</center></h1><p>1：Docker安装<br>CentOS系统</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y docker</span><br></pre></td></tr></table></figure>
-<p>debian系统</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt-get install -y docker</span><br><span class="line">curl -sSL https://get.docker.com | bash</span><br><span class="line">service docker restart</span><br></pre></td></tr></table></figure>
-<p>2：拉取V2ray官方镜像</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull v2ray/official</span><br></pre></td></tr></table></figure>
-<p>3:在etc目录下创建V2ray文件夹</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir /etc/v2ray</span><br></pre></td></tr></table></figure>
-
-<p>4:进入V2ray文件夹并创建config.json配置文件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi config.json</span><br></pre></td></tr></table></figure>
-<p>TCP+VMESS配置文件如下：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"log"</span>: &#123;</span><br><span class="line">    <span class="string">"access"</span>: <span class="string">"/var/log/v2ray/access.log"</span>,</span><br><span class="line">    <span class="string">"error"</span>: <span class="string">"/var/log/v2ray/error.log"</span>,</span><br><span class="line">    <span class="string">"loglevel"</span>: <span class="string">"warning"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"dns"</span>: &#123;&#125;,</span><br><span class="line">  <span class="string">"stats"</span>: &#123;&#125;,</span><br><span class="line">  <span class="string">"inbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"port"</span>: 自定义端口,</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"vmess"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;</span><br><span class="line">        <span class="string">"clients"</span>: [</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="string">"id"</span>: <span class="string">"[UUID自定义](https://www.uuidgenerator.net/)"</span>,</span><br><span class="line">            <span class="string">"alterId"</span>: 32</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"tag"</span>: <span class="string">"in-0"</span>,</span><br><span class="line">      <span class="string">"streamSettings"</span>: &#123;</span><br><span class="line">        <span class="string">"network"</span>: <span class="string">"tcp"</span>,</span><br><span class="line">        <span class="string">"security"</span>: <span class="string">"none"</span>,</span><br><span class="line">        <span class="string">"tcpSettings"</span>: &#123;&#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"outbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"tag"</span>: <span class="string">"direct"</span>,</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"freedom"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"tag"</span>: <span class="string">"blocked"</span>,</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"blackhole"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"routing"</span>: &#123;</span><br><span class="line">    <span class="string">"domainStrategy"</span>: <span class="string">"AsIs"</span>,</span><br><span class="line">    <span class="string">"rules"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"type"</span>: <span class="string">"field"</span>,</span><br><span class="line">        <span class="string">"ip"</span>: [</span><br><span class="line">          <span class="string">"geoip:private"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">"outboundTag"</span>: <span class="string">"blocked"</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"policy"</span>: &#123;&#125;,</span><br><span class="line">  <span class="string">"reverse"</span>: &#123;&#125;,</span><br><span class="line">  <span class="string">"transport"</span>: &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>5：启动Docker容器</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -it -d --name v2ray -v /etc/v2ray:/etc/v2ray -p 8888:8888 v2ray/official v2ray -config=/etc/v2ray/config.json</span><br></pre></td></tr></table></figure>
-<p>6:容器列表查看</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker container ls</span><br></pre></td></tr></table></figure>
-<p>7：启动和停止V2ray</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker container start v2ray //启动V2ray</span><br><span class="line">docker container stop v2ray //停止V2ray</span><br><span class="line">docker container restart v2ray //重启V2ray</span><br></pre></td></tr></table></figure>
-<p>若要升级镜像请按如下命令操作：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker container stop v2ray</span><br><span class="line">docker container rm v2ray</span><br><span class="line">docker pull v2ray/official</span><br><span class="line">docker run -it -d --name v2ray -v /etc/v2ray:/etc/v2ray -p 8888:8888 v2ray/official v2ray -config=/etc/v2ray/config.json</span><br></pre></td></tr></table></figure>
-<p>END</p>
-<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场-注册就送50G免费流量"><a href="#星际云网络加速-免费节点机场-注册就送50G免费流量" class="headerlink" title="星际云网络加速|免费节点机场-注册就送50G免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a>-注册就送50G免费流量</h1><h1 id="星云网络加速-年付4K机场"><a href="#星云网络加速-年付4K机场" class="headerlink" title="星云网络加速|年付4K机场"></a><a href="https://www.xjycloud.pw" target="_blank" rel="noopener">星云网络加速|年付4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
   </entry>
   <entry>
     <title>Trojan-Go+Cloudflare拯救被墙VPS IP</title>
@@ -645,35 +523,82 @@ CentOS系统:
       </tags>
   </entry>
   <entry>
-    <title>利用Caddy完美实现Trojan与V2ray共存</title>
-    <url>/posts/47385.html</url>
-    <content><![CDATA[<h1 id="利用Caddy完美实现Trojan与V2ray共存"><a href="#利用Caddy完美实现Trojan与V2ray共存" class="headerlink" title="利用Caddy完美实现Trojan与V2ray共存"></a><center>利用Caddy完美实现Trojan与V2ray共存</center></h1><h2 id="视频教程"><a href="#视频教程" class="headerlink" title="视频教程"></a><center><a href="https://youtu.be/YuZ4TEayfGw" target="_blank" rel="noopener">视频教程</a></center></h2><p>1：准备工具域名1个；VPS一个（系统镜像ubuntu16.0+）;<br>请先将域名解析至VPS,并确定解析成功后再进行搭建。</p>
-<p>2：安装Docker与Docker Compose；<br>Docker安装脚本：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt-get update</span><br><span class="line">apt-get install docker.io</span><br></pre></td></tr></table></figure>
-<p>Docker Compose安装脚本：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">docker-compose --version</span><br></pre></td></tr></table></figure>
-<p>3:Git工具安装以及源码下载：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt-get install git</span><br></pre></td></tr></table></figure>
-<p>源码下载</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/maidoudouo/V2ray_Trojan_Docker</span><br></pre></td></tr></table></figure>
-<p>4：域名设置<br>进入目录</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> V2ray_Trojan_Docker</span><br></pre></td></tr></table></figure>
-<p>然后启动设置</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./OneKeySet.sh</span><br></pre></td></tr></table></figure>
-<p>5：启动Docker<br>运行脚本</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
-<p>6：配置信息查看：<br>vi info.txt</p>
-<p>若要修改配置信息请先cd V2ray_Trojan_Docker；<br>1：在caddy/Caddyfile中修改Caddy修改域名；<br>2：在v2ray/config.json中修改V2Ray的UUID；<br>3：在trojan/config/config.json中修改Trojan的密码、证书路径、域名。</p>
-<p>(本文脚本源于<a href="https://github.com/maidoudouo/V2ray_Trojan_Docker" target="_blank" rel="noopener">maidoudouo</a>;在此感谢大神的辛勤付出)</p>
-<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
+    <title>V2Fly/V2ray Docker版官方搭建教程</title>
+    <url>/posts/27024d5e.html</url>
+    <content><![CDATA[<h1 id="V2Fly-V2ray-Docker版官方搭建教程"><a href="#V2Fly-V2ray-Docker版官方搭建教程" class="headerlink" title="V2Fly/V2ray Docker版官方搭建教程"></a><center>V2Fly/V2ray Docker版官方搭建教程</center></h1><p>1：Docker安装<br>CentOS系统</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y docker</span><br></pre></td></tr></table></figure>
+<p>debian系统</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt-get install -y docker</span><br><span class="line">curl -sSL https://get.docker.com | bash</span><br><span class="line">service docker restart</span><br></pre></td></tr></table></figure>
+<p>2：拉取V2ray官方镜像</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull v2ray/official</span><br></pre></td></tr></table></figure>
+<p>3:在etc目录下创建V2ray文件夹</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir /etc/v2ray</span><br></pre></td></tr></table></figure>
+
+<p>4:进入V2ray文件夹并创建config.json配置文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi config.json</span><br></pre></td></tr></table></figure>
+<p>TCP+VMESS配置文件如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"log"</span>: &#123;</span><br><span class="line">    <span class="string">"access"</span>: <span class="string">"/var/log/v2ray/access.log"</span>,</span><br><span class="line">    <span class="string">"error"</span>: <span class="string">"/var/log/v2ray/error.log"</span>,</span><br><span class="line">    <span class="string">"loglevel"</span>: <span class="string">"warning"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"dns"</span>: &#123;&#125;,</span><br><span class="line">  <span class="string">"stats"</span>: &#123;&#125;,</span><br><span class="line">  <span class="string">"inbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"port"</span>: 自定义端口,</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"vmess"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;</span><br><span class="line">        <span class="string">"clients"</span>: [</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="string">"id"</span>: <span class="string">"[UUID自定义](https://www.uuidgenerator.net/)"</span>,</span><br><span class="line">            <span class="string">"alterId"</span>: 32</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"tag"</span>: <span class="string">"in-0"</span>,</span><br><span class="line">      <span class="string">"streamSettings"</span>: &#123;</span><br><span class="line">        <span class="string">"network"</span>: <span class="string">"tcp"</span>,</span><br><span class="line">        <span class="string">"security"</span>: <span class="string">"none"</span>,</span><br><span class="line">        <span class="string">"tcpSettings"</span>: &#123;&#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"outbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"tag"</span>: <span class="string">"direct"</span>,</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"freedom"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"tag"</span>: <span class="string">"blocked"</span>,</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"blackhole"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"routing"</span>: &#123;</span><br><span class="line">    <span class="string">"domainStrategy"</span>: <span class="string">"AsIs"</span>,</span><br><span class="line">    <span class="string">"rules"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"type"</span>: <span class="string">"field"</span>,</span><br><span class="line">        <span class="string">"ip"</span>: [</span><br><span class="line">          <span class="string">"geoip:private"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">"outboundTag"</span>: <span class="string">"blocked"</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"policy"</span>: &#123;&#125;,</span><br><span class="line">  <span class="string">"reverse"</span>: &#123;&#125;,</span><br><span class="line">  <span class="string">"transport"</span>: &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>5：启动Docker容器</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -it -d --name v2ray -v /etc/v2ray:/etc/v2ray -p 8888:8888 v2ray/official v2ray -config=/etc/v2ray/config.json</span><br></pre></td></tr></table></figure>
+<p>6:容器列表查看</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker container ls</span><br></pre></td></tr></table></figure>
+<p>7：启动和停止V2ray</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker container start v2ray //启动V2ray</span><br><span class="line">docker container stop v2ray //停止V2ray</span><br><span class="line">docker container restart v2ray //重启V2ray</span><br></pre></td></tr></table></figure>
+<p>若要升级镜像请按如下命令操作：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker container stop v2ray</span><br><span class="line">docker container rm v2ray</span><br><span class="line">docker pull v2ray/official</span><br><span class="line">docker run -it -d --name v2ray -v /etc/v2ray:/etc/v2ray -p 8888:8888 v2ray/official v2ray -config=/etc/v2ray/config.json</span><br></pre></td></tr></table></figure>
+<p>END</p>
+<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场-注册就送50G免费流量"><a href="#星际云网络加速-免费节点机场-注册就送50G免费流量" class="headerlink" title="星际云网络加速|免费节点机场-注册就送50G免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a>-注册就送50G免费流量</h1><h1 id="星云网络加速-年付4K机场"><a href="#星云网络加速-年付4K机场" class="headerlink" title="星云网络加速|年付4K机场"></a><a href="https://www.xjycloud.pw" target="_blank" rel="noopener">星云网络加速|年付4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
+  </entry>
+  <entry>
+    <title>V2fly|V2ray+CDN+Nginx+wS+TLS+宝塔共存节点构建</title>
+    <url>/posts/c6a6c322.html</url>
+    <content><![CDATA[<p>工具准备<br>域名1个；VPS一台；cloudflare帐号一个；系统镜像CENTOS7+</p>
+<p>1：BT安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y wget &amp;&amp; wget -O install.sh http://download.bt.cn/install/install_6.0.sh &amp;&amp; sh install.sh</span><br></pre></td></tr></table></figure>
+<p>2:登陆宝塔安装Nginx</p>
+<p>3:添加网站；添加域名；申请SSL证书<br>在「设置」——「配置文件」选项，在ssl最后一个}前添加如下代码：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">location /ray &#123;   </span><br><span class="line">     proxy_redirect off;</span><br><span class="line">     proxy_http_version 1.1;</span><br><span class="line">     proxy_set_header Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">     proxy_set_header Connection <span class="string">"upgrade"</span>;</span><br><span class="line">     proxy_set_header Host <span class="variable">$http_host</span>; </span><br><span class="line">     proxy_pass http://127.0.0.1:V2Ray端口须与V2ray配置文件一致; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4:安装V2ray<br><a href="https://github.com/v2fly/fhs-install-v2ray" target="_blank" rel="noopener">V2Fly项目地址</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum makecache</span><br><span class="line">yum install curl</span><br><span class="line">curl -O https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh</span><br><span class="line">curl -O https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-dat-release.sh</span><br><span class="line">bash install-release.sh</span><br><span class="line">bash install-dat-release.sh</span><br></pre></td></tr></table></figure>
+
+<p>5：编辑V2ray配置文件<br>cd /usr/local/etc/v2ray<br>创建配置文件<br>vi config.json</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"inbounds"</span>: [&#123;</span><br><span class="line">    <span class="string">"port"</span>: 1688,           </span><br><span class="line">    <span class="string">"listen"</span>:<span class="string">"127.0.0.1"</span>,</span><br><span class="line">    <span class="string">"protocol"</span>: <span class="string">"vmess"</span>,</span><br><span class="line">    <span class="string">"settings"</span>: &#123;</span><br><span class="line">      <span class="string">"clients"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="string">"id"</span>: <span class="string">"a038c874-f959-4c3b-94e3-a276ce2acf50"</span>, </span><br><span class="line">          <span class="string">"level"</span>: 1,</span><br><span class="line">          <span class="string">"alterId"</span>: 64     </span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"streamSettings"</span>: &#123;</span><br><span class="line">      <span class="string">"network"</span>: <span class="string">"ws"</span>,</span><br><span class="line">      <span class="string">"wsSettings"</span>: &#123;</span><br><span class="line">        <span class="string">"path"</span>: <span class="string">"/ray"</span>   </span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;],</span><br><span class="line">  <span class="string">"outbounds"</span>: [&#123;</span><br><span class="line">    <span class="string">"protocol"</span>: <span class="string">"freedom"</span>,</span><br><span class="line">    <span class="string">"settings"</span>: &#123;&#125;</span><br><span class="line">  &#125;,&#123;</span><br><span class="line">    <span class="string">"protocol"</span>: <span class="string">"blackhole"</span>,</span><br><span class="line">    <span class="string">"settings"</span>: &#123;&#125;,</span><br><span class="line">    <span class="string">"tag"</span>: <span class="string">"blocked"</span></span><br><span class="line">  &#125;],</span><br><span class="line">  <span class="string">"routing"</span>: &#123;</span><br><span class="line">    <span class="string">"rules"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"type"</span>: <span class="string">"field"</span>,</span><br><span class="line">        <span class="string">"ip"</span>: [<span class="string">"geoip:private"</span>],</span><br><span class="line">        <span class="string">"outboundTag"</span>: <span class="string">"blocked"</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>V2ray管理命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> v2ray</span><br><span class="line">service v2ray start <span class="comment">#启动 V2Ray  </span></span><br><span class="line">service v2ray stop <span class="comment">#停止运行 V2Ray  </span></span><br><span class="line">service v2ray restart <span class="comment">#重启 V2Ray  </span></span><br><span class="line">service v2ray status <span class="comment">#查看 V2Ray 状态</span></span><br></pre></td></tr></table></figure>
+
+<p>END</p>
+<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场-注册就送50G免费流量"><a href="#星际云网络加速-免费节点机场-注册就送50G免费流量" class="headerlink" title="星际云网络加速|免费节点机场-注册就送50G免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a>-注册就送50G免费流量</h1><h1 id="星云网络加速-年付4K机场"><a href="#星云网络加速-年付4K机场" class="headerlink" title="星云网络加速|年付4K机场"></a><a href="https://www.xjycloud.pw" target="_blank" rel="noopener">星云网络加速|年付4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
+  </entry>
+  <entry>
+    <title>Trojan+v2ray+SSR单VPS共存</title>
+    <url>/posts/46908.html</url>
+    <content><![CDATA[<iframe width="560" height="315" src="https://www.youtube.com/embed/hSqO8ppMYyc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h1 id="Trojan-v2ray-SSR单VPS共存"><a href="#Trojan-v2ray-SSR单VPS共存" class="headerlink" title="Trojan+v2ray+SSR单VPS共存"></a><center>Trojan+v2ray+SSR单VPS共存</center></h1><p> 准备工具：域名1个/VPS一台(CentOS7)<br>视频教程：<a href="https://youtu.be/hSqO8ppMYyc" target="_blank" rel="noopener">YouTube</a><br>1:域名解析到VPS；解析要充分，以便全球生效！</p>
+<p>2：安装BBR PLUS加速（可选）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget <span class="string">"https://github.com/chiakge/Linux-NetSpeed/raw/master/tcp.sh"</span> &amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh</span><br></pre></td></tr></table></figure>
+<p>3:大神atrandys一键安装Trojan脚本：<br>若提示无wget,则运行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install wget</span><br></pre></td></tr></table></figure>
+<p>然后再运行下面Docker版Trojan一键安装脚本:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -O https://raw.githubusercontent.com/atrandys/trojan/master/trojan_install.sh &amp;&amp; chmod +x trojan_install.sh &amp;&amp; ./trojan_install.sh</span><br></pre></td></tr></table></figure>
+<p>4：运行大神Docker的UI管理Portainer一键脚本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">--name ui --restart=always lihaixin/portainer:me</span><br></pre></td></tr></table></figure>
+<p>5：浏览器运行<a href="https://VPS_IP:9000;设置密码并创建帐户，然后选择local。">https://VPS_IP:9000;设置密码并创建帐户，然后选择local。</a></p>
+<p>6:在容器containers中可以看到安装的Trojan；在App Templates中可以选择V2ray、SSR、Brook等代理程序</p>
+<p>8：客户端下载<br><a href="https://drive.google.com/open?id=1m9b6n9KnWI40octuo6IWAWqWdWxseLLk" target="_blank" rel="noopener">SS客户端</a><br><a href="https://drive.google.com/open?id=15sRZ7Sf9CVO0IdELNEvgD7xLxCxMqUVO" target="_blank" rel="noopener">V2ray客户端下载</a></p>
+<h1 id="星际云网络速"><a href="#星际云网络速" class="headerlink" title="星际云网络速"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络速</a></h1><h2 id="Trojan科学上网节点搭建视频教程"><a href="#Trojan科学上网节点搭建视频教程" class="headerlink" title="Trojan科学上网节点搭建视频教程"></a><a href="https://youtu.be/esr4bDuZj34" target="_blank" rel="noopener">Trojan科学上网节点搭建视频教程</a></h2><h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
       <categories>
         <category>科学上网</category>
-        <category>Trojan</category>
         <category>V2ray</category>
+        <category>Trojan</category>
+        <category>SSR</category>
       </categories>
       <tags>
         <tag>Trojan</tag>
         <tag>V2ray</tag>
+        <tag>SSR</tag>
+        <tag>Brook</tag>
       </tags>
   </entry>
   <entry>
@@ -710,25 +635,6 @@ CentOS系统:
 <h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></center></h1>]]></content>
   </entry>
   <entry>
-    <title>国内NAT如何提升速度下载Github脚本</title>
-    <url>/posts/5c352cb9.html</url>
-    <content><![CDATA[<h1 id="国内NAT如何提升速度下载Github脚本"><a href="#国内NAT如何提升速度下载Github脚本" class="headerlink" title="国内NAT如何提升速度下载Github脚本"></a><center>国内NAT如何提升速度下载Github脚本</center></h1><p>1：根据Github拉取源码的域名对应查询最快的IP</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1. github.com</span><br><span class="line">2. assets-cdn.github.com</span><br><span class="line">3. github.global.ssl.fastly.net</span><br><span class="line">4. codeload.github.com</span><br><span class="line">5.raw.githubusercontent.com</span><br></pre></td></tr></table></figure>
-<p>连接GITHUB最快的IP地址查询网址：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">https://www.ipaddress.com/</span><br></pre></td></tr></table></figure>
-<p>2：利用vi命令将host文件进行修改</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi /etc/hosts</span><br></pre></td></tr></table></figure>
-<p>在hosts文件中加入以下ip 域名；如：<br>IP github.com<br>IP raw.githubusercontent.com<br>3：然后保存退出即可正常下载了！</p>
-<p>[END]</p>
-<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
-      <tags>
-        <tag>NAT</tag>
-        <tag>GitHub</tag>
-        <tag>脚本下载</tag>
-        <tag>速度慢</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>V2ray+Docker-compose+Caddy搭建教程</title>
     <url>/posts/d56ad2f5.html</url>
     <content><![CDATA[<h1 id="V2ray-Docker-compose-Caddy搭建教程——V2ray科学上网节点搭建新方式"><a href="#V2ray-Docker-compose-Caddy搭建教程——V2ray科学上网节点搭建新方式" class="headerlink" title="V2ray+Docker-compose+Caddy搭建教程——V2ray科学上网节点搭建新方式"></a>V2ray+Docker-compose+Caddy搭建教程——V2ray科学上网节点搭建新方式</h1><p>1.Docker安装</p>
@@ -749,6 +655,57 @@ CentOS系统:
 <p>8.设置开机启动<br>sudo systemctl start docker<br>sudo systemctl enable docker</p>
 <p><a href="https://myssl.com" target="_blank" rel="noopener">证书SSL证书评级</a></p>
 <h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="星云网络加速-年付4K机场"><a href="#星云网络加速-年付4K机场" class="headerlink" title="星云网络加速|年付4K机场"></a><a href="https://www.xjycloud.pw" target="_blank" rel="noopener">星云网络加速|年付4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
+  </entry>
+  <entry>
+    <title>利用Caddy完美实现Trojan与V2ray共存</title>
+    <url>/posts/47385.html</url>
+    <content><![CDATA[<h1 id="利用Caddy完美实现Trojan与V2ray共存"><a href="#利用Caddy完美实现Trojan与V2ray共存" class="headerlink" title="利用Caddy完美实现Trojan与V2ray共存"></a><center>利用Caddy完美实现Trojan与V2ray共存</center></h1><h2 id="视频教程"><a href="#视频教程" class="headerlink" title="视频教程"></a><center><a href="https://youtu.be/YuZ4TEayfGw" target="_blank" rel="noopener">视频教程</a></center></h2><p>1：准备工具域名1个；VPS一个（系统镜像ubuntu16.0+）;<br>请先将域名解析至VPS,并确定解析成功后再进行搭建。</p>
+<p>2：安装Docker与Docker Compose；<br>Docker安装脚本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt-get update</span><br><span class="line">apt-get install docker.io</span><br></pre></td></tr></table></figure>
+<p>Docker Compose安装脚本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">docker-compose --version</span><br></pre></td></tr></table></figure>
+<p>3:Git工具安装以及源码下载：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt-get install git</span><br></pre></td></tr></table></figure>
+<p>源码下载</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/maidoudouo/V2ray_Trojan_Docker</span><br></pre></td></tr></table></figure>
+<p>4：域名设置<br>进入目录</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> V2ray_Trojan_Docker</span><br></pre></td></tr></table></figure>
+<p>然后启动设置</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./OneKeySet.sh</span><br></pre></td></tr></table></figure>
+<p>5：启动Docker<br>运行脚本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+<p>6：配置信息查看：<br>vi info.txt</p>
+<p>若要修改配置信息请先cd V2ray_Trojan_Docker；<br>1：在caddy/Caddyfile中修改Caddy修改域名；<br>2：在v2ray/config.json中修改V2Ray的UUID；<br>3：在trojan/config/config.json中修改Trojan的密码、证书路径、域名。</p>
+<p>(本文脚本源于<a href="https://github.com/maidoudouo/V2ray_Trojan_Docker" target="_blank" rel="noopener">maidoudouo</a>;在此感谢大神的辛勤付出)</p>
+<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
+      <categories>
+        <category>科学上网</category>
+        <category>V2ray</category>
+        <category>Trojan</category>
+      </categories>
+      <tags>
+        <tag>Trojan</tag>
+        <tag>V2ray</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>国内NAT如何提升速度下载Github脚本</title>
+    <url>/posts/5c352cb9.html</url>
+    <content><![CDATA[<h1 id="国内NAT如何提升速度下载Github脚本"><a href="#国内NAT如何提升速度下载Github脚本" class="headerlink" title="国内NAT如何提升速度下载Github脚本"></a><center>国内NAT如何提升速度下载Github脚本</center></h1><p>1：根据Github拉取源码的域名对应查询最快的IP</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1. github.com</span><br><span class="line">2. assets-cdn.github.com</span><br><span class="line">3. github.global.ssl.fastly.net</span><br><span class="line">4. codeload.github.com</span><br><span class="line">5.raw.githubusercontent.com</span><br></pre></td></tr></table></figure>
+<p>连接GITHUB最快的IP地址查询网址：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">https://www.ipaddress.com/</span><br></pre></td></tr></table></figure>
+<p>2：利用vi命令将host文件进行修改</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi /etc/hosts</span><br></pre></td></tr></table></figure>
+<p>在hosts文件中加入以下ip 域名；如：<br>IP github.com<br>IP raw.githubusercontent.com<br>3：然后保存退出即可正常下载了！</p>
+<p>[END]</p>
+<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
+      <tags>
+        <tag>NAT</tag>
+        <tag>GitHub</tag>
+        <tag>脚本下载</tag>
+        <tag>速度慢</tag>
+      </tags>
   </entry>
   <entry>
     <title>华硕RT-ACRH17路由器自带SSRPLUS插件OpenWrt路由器固件编译</title>
@@ -777,30 +734,6 @@ CentOS系统:
       </tags>
   </entry>
   <entry>
-    <title>如何删除GitHub仓库的所用commit</title>
-    <url>/posts/4a1536ed.html</url>
-    <content><![CDATA[<h1 id="如何删除GitHub仓库的所用commit"><a href="#如何删除GitHub仓库的所用commit" class="headerlink" title="如何删除GitHub仓库的所用commit"></a><center>如何删除GitHub仓库的所用commit</center></h1><p>因个人的需要有时候的误提交可能会有多余的commit,这时候如何删除commit就是一个很D疼的事；今天看到一个大神写了这个教程，特copy至此作为个人工作的一些记录以作备查，在此感谢大神<a href="https://p3terx.com/archives/github-warehouse-cleaning-delete-all-commit-records.html" target="_blank" rel="noopener">P3TERX</a></p>
-<p>1：新建一个空白分支</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout --orphan latest_branch</span><br></pre></td></tr></table></figure>
-<p>2:添加所有文件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add -A</span><br></pre></td></tr></table></figure>
-<p>3:提交</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git commit -am <span class="string">"."</span></span><br></pre></td></tr></table></figure>
-<p>4：强制删除旧的分支，如果是 master</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -D master</span><br></pre></td></tr></table></figure>
-<p>5：将当前分支重命名为 master</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -m master</span><br></pre></td></tr></table></figure>
-<p>6：强制推送到远程仓库</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push -f origin master</span><br></pre></td></tr></table></figure>
-<p>7:至此您将获得全新干净的仓库<br>本文内容源自<a href="https://p3terx.com/archives/github-warehouse-cleaning-delete-all-commit-records.html" target="_blank" rel="noopener">P3TERX</a></p>
-]]></content>
-      <tags>
-        <tag>Github</tag>
-        <tag>commit</tag>
-        <tag>master</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>科学上网SSR VPS搭建一键安装脚本合辑</title>
     <url>/posts/8b0dfdea.html</url>
     <content><![CDATA[<p>逗比SSR一键安装脚本：</p>
@@ -824,6 +757,18 @@ CentOS系统:
         <tag>一键安装脚本</tag>
         <tag>SSR节点搭建</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>科学上网VLESS+WS+TLS+Nginx一键安装脚本</title>
+    <url>/posts/bd4de8a8.html</url>
+    <content><![CDATA[<h1 id="VLESS-WS-TLS-Nginx一键安装脚本"><a href="#VLESS-WS-TLS-Nginx一键安装脚本" class="headerlink" title="VLESS+WS+TLS+Nginx一键安装脚本"></a><center>VLESS+WS+TLS+Nginx一键安装脚本</center></h1><p>搭建工具：域名+VPS+(CloudFlare可选)<br>系统镜像：Debian9</p>
+<p>1:安装依赖</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt update -y  <span class="comment">#非必须</span></span><br></pre></td></tr></table></figure>
+<p>2:一键安装脚本<br><a href="https://github.com/wulabing/V2Ray_ws-tls_bash_onekey/tree/dev" target="_blank" rel="noopener">项目地址</a><br>安装脚本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -N --no-check-certificate -q -O install.sh <span class="string">"https://raw.githubusercontent.com/wulabing/V2Ray_ws-tls_bash_onekey/dev/install.sh"</span> &amp;&amp; chmod +x install.sh &amp;&amp; bash install.sh</span><br></pre></td></tr></table></figure>
+<p>3:输入域名根据提示进行安装即可</p>
+<p>4：客户端下载<br>[VLESS/V2ray客户端下载]<br>(<a href="https://github.com/2dust/v2rayN/releases/tag/3.21" target="_blank" rel="noopener">https://github.com/2dust/v2rayN/releases/tag/3.21</a>)<br>[VLESS/V2ray内核下载]<br>(<a href="https://github.com/v2fly/v2ray-core/releases" target="_blank" rel="noopener">https://github.com/v2fly/v2ray-core/releases</a>)<br>注意两个压缩包下载后合并至一个文件内进行使用</p>
+<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="星云网络加速-年付4K机场"><a href="#星云网络加速-年付4K机场" class="headerlink" title="星云网络加速|年付4K机场"></a><a href="https://www.xjycloud.pw" target="_blank" rel="noopener">星云网络加速|年付4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
   </entry>
   <entry>
     <title>谷歌云Root密码登陆开启设置</title>
@@ -855,16 +800,28 @@ CentOS系统:
       </tags>
   </entry>
   <entry>
-    <title>科学上网VLESS+WS+TLS+Nginx一键安装脚本</title>
-    <url>/posts/bd4de8a8.html</url>
-    <content><![CDATA[<h1 id="VLESS-WS-TLS-Nginx一键安装脚本"><a href="#VLESS-WS-TLS-Nginx一键安装脚本" class="headerlink" title="VLESS+WS+TLS+Nginx一键安装脚本"></a><center>VLESS+WS+TLS+Nginx一键安装脚本</center></h1><p>搭建工具：域名+VPS+(CloudFlare可选)<br>系统镜像：Debian9</p>
-<p>1:安装依赖</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt update -y  <span class="comment">#非必须</span></span><br></pre></td></tr></table></figure>
-<p>2:一键安装脚本<br><a href="https://github.com/wulabing/V2Ray_ws-tls_bash_onekey/tree/dev" target="_blank" rel="noopener">项目地址</a><br>安装脚本：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -N --no-check-certificate -q -O install.sh <span class="string">"https://raw.githubusercontent.com/wulabing/V2Ray_ws-tls_bash_onekey/dev/install.sh"</span> &amp;&amp; chmod +x install.sh &amp;&amp; bash install.sh</span><br></pre></td></tr></table></figure>
-<p>3:输入域名根据提示进行安装即可</p>
-<p>4：客户端下载<br>[VLESS/V2ray客户端下载]<br>(<a href="https://github.com/2dust/v2rayN/releases/tag/3.21" target="_blank" rel="noopener">https://github.com/2dust/v2rayN/releases/tag/3.21</a>)<br>[VLESS/V2ray内核下载]<br>(<a href="https://github.com/v2fly/v2ray-core/releases" target="_blank" rel="noopener">https://github.com/v2fly/v2ray-core/releases</a>)<br>注意两个压缩包下载后合并至一个文件内进行使用</p>
-<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="星云网络加速-年付4K机场"><a href="#星云网络加速-年付4K机场" class="headerlink" title="星云网络加速|年付4K机场"></a><a href="https://www.xjycloud.pw" target="_blank" rel="noopener">星云网络加速|年付4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
+    <title>如何删除GitHub仓库的所用commit</title>
+    <url>/posts/4a1536ed.html</url>
+    <content><![CDATA[<h1 id="如何删除GitHub仓库的所用commit"><a href="#如何删除GitHub仓库的所用commit" class="headerlink" title="如何删除GitHub仓库的所用commit"></a><center>如何删除GitHub仓库的所用commit</center></h1><p>因个人的需要有时候的误提交可能会有多余的commit,这时候如何删除commit就是一个很D疼的事；今天看到一个大神写了这个教程，特copy至此作为个人工作的一些记录以作备查，在此感谢大神<a href="https://p3terx.com/archives/github-warehouse-cleaning-delete-all-commit-records.html" target="_blank" rel="noopener">P3TERX</a></p>
+<p>1：新建一个空白分支</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout --orphan latest_branch</span><br></pre></td></tr></table></figure>
+<p>2:添加所有文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add -A</span><br></pre></td></tr></table></figure>
+<p>3:提交</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git commit -am <span class="string">"."</span></span><br></pre></td></tr></table></figure>
+<p>4：强制删除旧的分支，如果是 master</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -D master</span><br></pre></td></tr></table></figure>
+<p>5：将当前分支重命名为 master</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -m master</span><br></pre></td></tr></table></figure>
+<p>6：强制推送到远程仓库</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push -f origin master</span><br></pre></td></tr></table></figure>
+<p>7:至此您将获得全新干净的仓库<br>本文内容源自<a href="https://p3terx.com/archives/github-warehouse-cleaning-delete-all-commit-records.html" target="_blank" rel="noopener">P3TERX</a></p>
+]]></content>
+      <tags>
+        <tag>Github</tag>
+        <tag>commit</tag>
+        <tag>master</tag>
+      </tags>
   </entry>
   <entry>
     <title>高级中继节点搭建转发脚本合辑</title>
@@ -894,5 +851,50 @@ CentOS系统:
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget --no-check-certificate -O tcp.sh https://github.com/cx9208/Linux-NetSpeed/raw/master/tcp.sh &amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh</span><br></pre></td></tr></table></figure>
 <p>[END]</p>
 <h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
+  </entry>
+  <entry>
+    <title>2020最新版V2ray官方搭建教程</title>
+    <url>/posts/cadd31bd.html</url>
+    <content><![CDATA[<center>2020最新版V2fly ws+tls+官方搭建教程</center>
+1:时间同步：
+Centos系统
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">date -R</span><br><span class="line">timedatectl <span class="built_in">set</span>-local-rtc 1</span><br><span class="line">timedatectl <span class="built_in">set</span>-timezone Asia/Shanghai</span><br></pre></td></tr></table></figure>
+Debian系统
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">date -R</span><br><span class="line">rm -rf /etc/localtime</span><br><span class="line">cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br></pre></td></tr></table></figure>
+2：[V2fly新版项目地址](https://github.com/v2fly/fhs-install-v2ray)
+安装依赖：
+Debian
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt update</span><br><span class="line">apt install curl</span><br></pre></td></tr></table></figure>
+CentOS
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum makecache</span><br><span class="line">yum install curl</span><br></pre></td></tr></table></figure>
+3:安装源码：
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -O https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh</span><br><span class="line">curl -O https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-dat-release.sh</span><br></pre></td></tr></table></figure>
+4:安裝和更新 V2Ray
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bash install-release.sh</span><br></pre></td></tr></table></figure>
+5:安裝最新發行的 geoip.dat 和 geosite.dat
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bash install-dat-release.sh</span><br></pre></td></tr></table></figure>
+6：移除 V2Ray
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bash install-release.sh --remove</span><br></pre></td></tr></table></figure>
+7：创建配置文件
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi /usr/<span class="built_in">local</span>/etc/v2ray/config.json</span><br></pre></td></tr></table></figure>
+配置文件内容：
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"inbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"port"</span>: 443, // 服务器端口</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"vmess"</span>,    </span><br><span class="line">      <span class="string">"settings"</span>: &#123;</span><br><span class="line">        <span class="string">"clients"</span>: [</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="string">"id"</span>: <span class="string">"UUID"</span>, // V2ray客户端UUID </span><br><span class="line">            <span class="string">"alterId"</span>: 64</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"streamSettings"</span>: &#123;</span><br><span class="line">        <span class="string">"network"</span>: <span class="string">"ws"</span>, // TCP或WS</span><br><span class="line">        <span class="string">"security"</span>: <span class="string">"tls"</span>, // security 要设置为 tls 才会启用 TLS</span><br><span class="line">        <span class="string">"tlsSettings"</span>: &#123;</span><br><span class="line">          <span class="string">"certificates"</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">              <span class="string">"certificateFile"</span>: <span class="string">"/etc/v2ray/v2ray.crt"</span>, // 证书文件路径</span><br><span class="line">              <span class="string">"keyFile"</span>: <span class="string">"/etc/v2ray/v2ray.key"</span> // 密钥文件路径</span><br><span class="line">            &#125;</span><br><span class="line">          ]</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"outbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"freedom"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+8:安装软件依赖
+Debian/Ubuntu系统:
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt-get update &amp;&amp; apt-get install curl -y &amp;&amp; apt-get install cron -y &amp;&amp; apt-get install socat -y</span><br></pre></td></tr></table></figure>
+CentOS系统:
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum update &amp;&amp; yum install curl -y &amp;&amp; yum install cron -y &amp;&amp; yum install socat -y</span><br></pre></td></tr></table></figure>
+9:安装 acme.sh:
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://get.acme.sh | sh</span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+10:申请证书： 
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bash ~/.acme.sh/acme.sh --issue -d 域名 --alpn -k ec-256</span><br></pre></td></tr></table></figure>
+11:安装证书：
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir /etc/v2ray &amp;&amp; sudo ~/.acme.sh/acme.sh --installcert -d 域名 --fullchainpath /etc/v2ray/v2ray.crt --keypath /etc/v2ray/v2ray.key --ecc</span><br></pre></td></tr></table></figure>
+12:证书权限设置：
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chmod 644 /etc/v2ray/v2ray.key</span><br></pre></td></tr></table></figure>
+13:设置重启|状态检查|开机自启
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl restart v2ray</span><br><span class="line">systemctl status v2ray</span><br><span class="line">systemctl <span class="built_in">enable</span> v2ray</span><br></pre></td></tr></table></figure>
+
+<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="星云网络加速-年付4K机场"><a href="#星云网络加速-年付4K机场" class="headerlink" title="星云网络加速|年付4K机场"></a><a href="https://www.xjycloud.pw" target="_blank" rel="noopener">星云网络加速|年付4K机场</a></h1>]]></content>
   </entry>
 </search>
