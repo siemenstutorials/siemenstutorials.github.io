@@ -9,7 +9,7 @@
 <p>2：然后点击Commit</p>
 <p>3:然后切换到Actions编译就开始了，大约2小时后即可下载OpenWrt固件了！</p>
 <p>4：<a href="https://drive.google.com/open?id=1mtxDbNwZzKUGpUgoHHkSkaDY6jwL2zxP" target="_blank" rel="noopener">树莓派4b Openwrt固件下载</a></p>
-<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
+<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="SiemensTutorials-1"><a href="#SiemensTutorials-1" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
       <categories>
         <category>Openwrt</category>
         <category>固件编译</category>
@@ -21,6 +21,55 @@
         <tag>V2ray</tag>
         <tag>科学上网</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>2020年最新V2RAY+WS+TLS+NGinx搭建教程</title>
+    <url>/posts/bde4d854.html</url>
+    <content><![CDATA[<h1 id="2020年最新V2RAY-WS-TLS-NGinx搭建教程"><a href="#2020年最新V2RAY-WS-TLS-NGinx搭建教程" class="headerlink" title="2020年最新V2RAY+WS+TLS+NGinx搭建教程"></a><center>2020年最新V2RAY+WS+TLS+NGinx搭建教程</center></h1><p>准备工具：VPS一台；系统CentOS7+;域名1个；(CloudFlare非必须)<br>1：设置谷歌云XSHELL连接：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo -i</span><br><span class="line">vi /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+<p>将下面两项参数进行修改：</p>
+<p>修改PermitRootLogin，将no改为为yes；</p>
+<p>修改passwordAuthentication，将no改为yes<br>然后<br>设置Root登陆密码，输入以下命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">passwd root</span><br></pre></td></tr></table></figure>
+<p>密码设置成功后，重启sshd服务</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service sshd restart</span><br></pre></td></tr></table></figure>
+<p>然后采用XSHELL进行VPS连接。<br>2：安装V2ray最新版本， <a href="https://github.com/v2fly/fhs-install-v2ray" target="_blank" rel="noopener">V2Fly项目地址</a><br>本视频采用采用CentOS7演示</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum makecache</span><br><span class="line">yum install curl</span><br><span class="line">curl -O https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh </span><br><span class="line">curl -O https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-dat-release.sh</span><br></pre></td></tr></table></figure>
+<p>安装和更新V2ray、安裝最新發行的 geoip.dat 和 geosite.dat</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bash install-release.sh &amp;&amp; bash install-dat-release.sh</span><br></pre></td></tr></table></figure>
+<p>3：编辑V2ray配置文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi /usr/<span class="built_in">local</span>/etc/v2ray/config.json</span><br></pre></td></tr></table></figure>
+<p>配置文件如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"inbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"port"</span>: 1112,</span><br><span class="line">      <span class="string">"listen"</span>:<span class="string">"127.0.0.1"</span>,//只监听 127.0.0.1，避免除本机外的机器探测到开放了 1112 端口</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"vmess"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;</span><br><span class="line">        <span class="string">"clients"</span>: [</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="string">"id"</span>: <span class="string">"UUID"</span>,</span><br><span class="line">            <span class="string">"alterId"</span>: 64</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"streamSettings"</span>: &#123;</span><br><span class="line">        <span class="string">"network"</span>: <span class="string">"ws"</span>,</span><br><span class="line">        <span class="string">"wsSettings"</span>: &#123;</span><br><span class="line">        <span class="string">"path"</span>: <span class="string">"/ray"</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"outbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"freedom"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.uuidgenerator.net/" target="_blank" rel="noopener">UUID获取网址</a></p>
+<p>4:申请SSL证书,安装 acme.sh：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum update &amp;&amp; yum install curl -y &amp;&amp; yum install cron -y &amp;&amp; yum install socat -y</span><br><span class="line">curl https://get.acme.sh | sh</span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+<p>申请证书：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bash ~/.acme.sh/acme.sh --issue -d 域名 --alpn -k ec-256</span><br></pre></td></tr></table></figure>
+<p>安装证书到指定路径：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir /etc/v2ray &amp;&amp; sudo ~/.acme.sh/acme.sh --installcert -d 域名 --fullchainpath /etc/v2ray/v2ray.crt --keypath /etc/v2ray/v2ray.key --ecc</span><br></pre></td></tr></table></figure>
+<p>给证书赋予权限</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chmod 644 /etc/v2ray/v2ray.key</span><br></pre></td></tr></table></figure>
+<p>[SSL证书效果查询网址]（<a href="https://www.ssllabs.com/ssltest/index.html）" target="_blank" rel="noopener">https://www.ssllabs.com/ssltest/index.html）</a><br>5：设置V2ray重启|状态检查|开机自启</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl restart v2ray</span><br><span class="line">systemctl status v2ray</span><br><span class="line">systemctl <span class="built_in">enable</span> v2ray</span><br></pre></td></tr></table></figure>
+<p>6:Nginx 安装：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install nginx -y</span><br></pre></td></tr></table></figure>
+<p>7:设置Nginx配置文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi /etc/nginx/conf.d/v2ray.conf</span><br></pre></td></tr></table></figure>
+<p>Nginx配置文件如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">  listen 443 ssl;</span><br><span class="line">  listen [::]:443 ssl;</span><br><span class="line">  </span><br><span class="line">  ssl_certificate       /etc/v2ray/v2ray.crt;</span><br><span class="line">  ssl_certificate_key   /etc/v2ray/v2ray.key;</span><br><span class="line">  ssl_session_timeout 1d;</span><br><span class="line">  ssl_session_cache shared:MozSSL:10m;</span><br><span class="line">  ssl_session_tickets off;</span><br><span class="line">  root /usr/share/nginx/html;</span><br><span class="line"></span><br><span class="line">  ssl_protocols         TLSv1.2 TLSv1.3;</span><br><span class="line">  ssl_ciphers           ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384;</span><br><span class="line">  ssl_prefer_server_ciphers off;</span><br><span class="line">  </span><br><span class="line">  server_name           ce.nxcam.tk;</span><br><span class="line">  location /ray &#123; <span class="comment"># 与 V2Ray 配置中的 path 保持一致</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$http_upgrade</span> != <span class="string">"websocket"</span>) &#123; <span class="comment"># WebSocket协商失败时返回404</span></span><br><span class="line">        <span class="built_in">return</span> 404;</span><br><span class="line">    &#125;</span><br><span class="line">    proxy_redirect off;</span><br><span class="line">    proxy_pass http://127.0.0.1:1112; <span class="comment"># 假设WebSocket监听在环回地址的1112端口上;须与V2ray配置端口一致</span></span><br><span class="line">    proxy_http_version 1.1;</span><br><span class="line">    proxy_set_header Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">    proxy_set_header Connection <span class="string">"upgrade"</span>;</span><br><span class="line">    proxy_set_header Host <span class="variable">$host</span>;</span><br><span class="line">    <span class="comment"># Show real IP in v2ray access.log</span></span><br><span class="line">    proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">    proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>8：设置NGinx开机启动等相关命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> nginx.service</span><br><span class="line">systemctl restart nginx.service</span><br><span class="line">systemctl status nginx</span><br><span class="line">systemctl start nginx.service</span><br></pre></td></tr></table></figure>
+<p>9：证书自动更新设置：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">crontab -e</span><br><span class="line"></span><br><span class="line">44 3 * * * <span class="built_in">source</span> ~/.bash_profile &amp;&amp; ~/.acme.sh/acme.sh --issue -d 域名 --standalone --pre-hook <span class="string">"/nginx/nginx/sbin/nginx -s stop"</span> --post-hook <span class="string">"/nginx/nginx/sbin/nginx"</span> &gt; /dev/null</span><br></pre></td></tr></table></figure>
+<p>10:Nginx伪装网页设置：<br>进入以下目录</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/share/nginx/html</span><br></pre></td></tr></table></figure>
+<p>利用XFTP上传下载好的网页模板即可;<a href="https://colorlib.com/wp/templates/" target="_blank" rel="noopener">模板下载地址</a></p>
+<p>10:最后要运行一下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">setsebool -P httpd_can_network_connect 1</span><br></pre></td></tr></table></figure>
+<p>否则无法正常FQ</p>
+<h1 id="TG交流群"><a href="#TG交流群" class="headerlink" title="TG交流群"></a><a href="https://t.me/siemenstutorials" target="_blank" rel="noopener">TG交流群</a></h1><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
   </entry>
   <entry>
     <title>2020最新V2Fly/V2ray web管理面板搭建</title>
@@ -93,7 +142,7 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service v2ray restart</span><br></pre></td></tr></table></figure>
 <p>其余同第一种方法的第6步开始</p>
 <p>END</p>
-<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场-注册就送50G免费流量"><a href="#星际云网络加速-免费节点机场-注册就送50G免费流量" class="headerlink" title="星际云网络加速|免费节点机场-注册就送50G免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a>-注册就送50G免费流量</h1><h1 id="星云网络加速-年付4K机场"><a href="#星云网络加速-年付4K机场" class="headerlink" title="星云网络加速|年付4K机场"></a><a href="https://www.xjycloud.pw" target="_blank" rel="noopener">星云网络加速|年付4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
+<h1 id="TG交流群"><a href="#TG交流群" class="headerlink" title="TG交流群"></a><a href="https://t.me/siemenstutorials" target="_blank" rel="noopener">TG交流群</a></h1><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-注册即送50G-免费流量"><a href="#星际云网络加速-注册即送50G-免费流量" class="headerlink" title="星际云网络加速-注册即送50G|免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速-注册即送50G|免费流量</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
   </entry>
   <entry>
     <title>2020最新版V2ray官方搭建教程</title>
@@ -137,57 +186,13 @@ CentOS系统:
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chmod 644 /etc/v2ray/v2ray.key</span><br></pre></td></tr></table></figure>
 13:设置重启|状态检查|开机自启
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl restart v2ray</span><br><span class="line">systemctl status v2ray</span><br><span class="line">systemctl <span class="built_in">enable</span> v2ray</span><br></pre></td></tr></table></figure>
+# [TG交流群](https://t.me/siemenstutorials)
+# [SiemensTutorials](https://www.youtube.com/SiemensTutorials)
+# [星际云网络加速|免费节点机场](https://www.xjycloud.xyz)
+# [自由云网络加速|4K机场](https://www.freecloud.pw)
+# [NETFLIX奈飞合租车](https://naifei.pro/m/?rid=23xrl)
 
-<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="星云网络加速-年付4K机场"><a href="#星云网络加速-年付4K机场" class="headerlink" title="星云网络加速|年付4K机场"></a><a href="https://www.xjycloud.pw" target="_blank" rel="noopener">星云网络加速|年付4K机场</a></h1>]]></content>
-  </entry>
-  <entry>
-    <title>2020年最新V2RAY+WS+TLS+NGinx搭建教程</title>
-    <url>/posts/bde4d854.html</url>
-    <content><![CDATA[<h1 id="2020年最新V2RAY-WS-TLS-NGinx搭建教程"><a href="#2020年最新V2RAY-WS-TLS-NGinx搭建教程" class="headerlink" title="2020年最新V2RAY+WS+TLS+NGinx搭建教程"></a><center>2020年最新V2RAY+WS+TLS+NGinx搭建教程</center></h1><p>准备工具：VPS一台；系统CentOS7+;域名1个；(CloudFlare非必须)<br>1：设置谷歌云XSHELL连接：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo -i</span><br><span class="line">vi /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
-<p>将下面两项参数进行修改：</p>
-<p>修改PermitRootLogin，将no改为为yes；</p>
-<p>修改passwordAuthentication，将no改为yes<br>然后<br>设置Root登陆密码，输入以下命令</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">passwd root</span><br></pre></td></tr></table></figure>
-<p>密码设置成功后，重启sshd服务</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service sshd restart</span><br></pre></td></tr></table></figure>
-<p>然后采用XSHELL进行VPS连接。<br>2：安装V2ray最新版本， <a href="https://github.com/v2fly/fhs-install-v2ray" target="_blank" rel="noopener">V2Fly项目地址</a><br>本视频采用采用CentOS7演示</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum makecache</span><br><span class="line">yum install curl</span><br><span class="line">curl -O https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh </span><br><span class="line">curl -O https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-dat-release.sh</span><br></pre></td></tr></table></figure>
-<p>安装和更新V2ray、安裝最新發行的 geoip.dat 和 geosite.dat</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bash install-release.sh &amp;&amp; bash install-dat-release.sh</span><br></pre></td></tr></table></figure>
-<p>3：编辑V2ray配置文件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi /usr/<span class="built_in">local</span>/etc/v2ray/config.json</span><br></pre></td></tr></table></figure>
-<p>配置文件如下：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"inbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"port"</span>: 1112,</span><br><span class="line">      <span class="string">"listen"</span>:<span class="string">"127.0.0.1"</span>,//只监听 127.0.0.1，避免除本机外的机器探测到开放了 1112 端口</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"vmess"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;</span><br><span class="line">        <span class="string">"clients"</span>: [</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="string">"id"</span>: <span class="string">"UUID"</span>,</span><br><span class="line">            <span class="string">"alterId"</span>: 64</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"streamSettings"</span>: &#123;</span><br><span class="line">        <span class="string">"network"</span>: <span class="string">"ws"</span>,</span><br><span class="line">        <span class="string">"wsSettings"</span>: &#123;</span><br><span class="line">        <span class="string">"path"</span>: <span class="string">"/ray"</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"outbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"freedom"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://www.uuidgenerator.net/" target="_blank" rel="noopener">UUID获取网址</a></p>
-<p>4:申请SSL证书,安装 acme.sh：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum update &amp;&amp; yum install curl -y &amp;&amp; yum install cron -y &amp;&amp; yum install socat -y</span><br><span class="line">curl https://get.acme.sh | sh</span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
-<p>申请证书：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bash ~/.acme.sh/acme.sh --issue -d 域名 --alpn -k ec-256</span><br></pre></td></tr></table></figure>
-<p>安装证书到指定路径：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir /etc/v2ray &amp;&amp; sudo ~/.acme.sh/acme.sh --installcert -d 域名 --fullchainpath /etc/v2ray/v2ray.crt --keypath /etc/v2ray/v2ray.key --ecc</span><br></pre></td></tr></table></figure>
-<p>给证书赋予权限</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chmod 644 /etc/v2ray/v2ray.key</span><br></pre></td></tr></table></figure>
-<p>[SSL证书效果查询网址]（<a href="https://www.ssllabs.com/ssltest/index.html）" target="_blank" rel="noopener">https://www.ssllabs.com/ssltest/index.html）</a><br>5：设置V2ray重启|状态检查|开机自启</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl restart v2ray</span><br><span class="line">systemctl status v2ray</span><br><span class="line">systemctl <span class="built_in">enable</span> v2ray</span><br></pre></td></tr></table></figure>
-<p>6:Nginx 安装：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install nginx -y</span><br></pre></td></tr></table></figure>
-<p>7:设置Nginx配置文件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi /etc/nginx/conf.d/v2ray.conf</span><br></pre></td></tr></table></figure>
-<p>Nginx配置文件如下：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">  listen 443 ssl;</span><br><span class="line">  listen [::]:443 ssl;</span><br><span class="line">  </span><br><span class="line">  ssl_certificate       /etc/v2ray/v2ray.crt;</span><br><span class="line">  ssl_certificate_key   /etc/v2ray/v2ray.key;</span><br><span class="line">  ssl_session_timeout 1d;</span><br><span class="line">  ssl_session_cache shared:MozSSL:10m;</span><br><span class="line">  ssl_session_tickets off;</span><br><span class="line">  root /usr/share/nginx/html;</span><br><span class="line"></span><br><span class="line">  ssl_protocols         TLSv1.2 TLSv1.3;</span><br><span class="line">  ssl_ciphers           ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384;</span><br><span class="line">  ssl_prefer_server_ciphers off;</span><br><span class="line">  </span><br><span class="line">  server_name           ce.nxcam.tk;</span><br><span class="line">  location /ray &#123; <span class="comment"># 与 V2Ray 配置中的 path 保持一致</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$http_upgrade</span> != <span class="string">"websocket"</span>) &#123; <span class="comment"># WebSocket协商失败时返回404</span></span><br><span class="line">        <span class="built_in">return</span> 404;</span><br><span class="line">    &#125;</span><br><span class="line">    proxy_redirect off;</span><br><span class="line">    proxy_pass http://127.0.0.1:1112; <span class="comment"># 假设WebSocket监听在环回地址的1112端口上;须与V2ray配置端口一致</span></span><br><span class="line">    proxy_http_version 1.1;</span><br><span class="line">    proxy_set_header Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">    proxy_set_header Connection <span class="string">"upgrade"</span>;</span><br><span class="line">    proxy_set_header Host <span class="variable">$host</span>;</span><br><span class="line">    <span class="comment"># Show real IP in v2ray access.log</span></span><br><span class="line">    proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">    proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>8：设置NGinx开机启动等相关命令</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> nginx.service</span><br><span class="line">systemctl restart nginx.service</span><br><span class="line">systemctl status nginx</span><br><span class="line">systemctl start nginx.service</span><br></pre></td></tr></table></figure>
-<p>9：证书自动更新设置：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">crontab -e</span><br><span class="line"></span><br><span class="line">44 3 * * * <span class="built_in">source</span> ~/.bash_profile &amp;&amp; ~/.acme.sh/acme.sh --issue -d 域名 --standalone --pre-hook <span class="string">"/nginx/nginx/sbin/nginx -s stop"</span> --post-hook <span class="string">"/nginx/nginx/sbin/nginx"</span> &gt; /dev/null</span><br></pre></td></tr></table></figure>
-<p>10:Nginx伪装网页设置：<br>进入以下目录</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/share/nginx/html</span><br></pre></td></tr></table></figure>
-<p>利用XFTP上传下载好的网页模板即可;<a href="https://colorlib.com/wp/templates/" target="_blank" rel="noopener">模板下载地址</a></p>
-<p>10:最后要运行一下</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">setsebool -P httpd_can_network_connect 1</span><br></pre></td></tr></table></figure>
-<p>否则无法正常FQ</p>
-<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="星云网络加速-年付4K机场"><a href="#星云网络加速-年付4K机场" class="headerlink" title="星云网络加速|年付4K机场"></a><a href="https://www.xjycloud.pw" target="_blank" rel="noopener">星云网络加速|年付4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
+]]></content>
   </entry>
   <entry>
     <title>CentOS7利用firewall流量转发-实现TCP/UDP中转加速</title>
@@ -210,64 +215,7 @@ CentOS系统:
 <p>6:重载设置使其生效<br>运行如下命令：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
 <p>7:firewall默认的配置文件路径是/etc/firewalld/zones/public.xml</p>
-<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
-  </entry>
-  <entry>
-    <title>Github Action Openwrt固件自动编译教程</title>
-    <url>/posts/21b7e26f.html</url>
-    <content><![CDATA[<h1 id="Github-Action-Openwrt固件自动编译教程"><a href="#Github-Action-Openwrt固件自动编译教程" class="headerlink" title="Github Action Openwrt固件自动编译教程"></a><center>Github Action Openwrt固件自动编译教程</center></h1><h2 id="视频教程"><a href="#视频教程" class="headerlink" title="视频教程"></a><center><a href="https://youtu.be/YoVhsQDdldA" target="_blank" rel="noopener">视频教程</a></center></h2><p>1:根据<a href="https://github.com/coolsnowwolf/lede" target="_blank" rel="noopener">L大</a>的源码仓库指导步骤，利用 Ubuntu 18 LTS x64的VPS获取对应路由器型号的.config文件。</p>
-<p>2:利用的源码仓<a href="https://github.com/P3TERX/Actions-OpenWrt" target="_blank" rel="noopener">P3TERX</a>导入.config文件启动GitHub Action自动云编译。</p>
-<p>3:进入 P3TERX/Actions-OpenWrt 项目页面，点击 Use this template 。</p>
-<p>4:填写仓库名称，然后点击Create repository from template按钮。经过几秒钟的等待，页面会跳转到新建的仓库，然后点击Create new file按钮。<br>5：然后文件名填写为.config，把生成的.config 文件的内容复制粘贴到下面的文本框中.</p>
-<p>最后等待2-3小时前往Github Action下载压缩包固件使用即可。</p>
-<p>本文参考：<br><a href="https://github.com/coolsnowwolf/lede" target="_blank" rel="noopener">L大</a><br><a href="https://p3terx.com/archives/build-openwrt-with-github-actions.html" target="_blank" rel="noopener">P3TERX</a></p>
-<h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
-      <categories>
-        <category>OpenWrt</category>
-      </categories>
-      <tags>
-        <tag>路由器</tag>
-        <tag>openwrt</tag>
-        <tag>软路由固件</tag>
-        <tag>固件编译</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Gost不惧VPS重启-开机自动启动服务搭建方法</title>
-    <url>/posts/c1a6fb57.html</url>
-    <content><![CDATA[<h1 id="Gost不惧VPS重启-开机自动启动服务搭建方法"><a href="#Gost不惧VPS重启-开机自动启动服务搭建方法" class="headerlink" title="Gost不惧VPS重启-开机自动启动服务搭建方法"></a><center>Gost不惧VPS重启-开机自动启动服务搭建方法</center></h1><p>1：服务端SSR一键安装脚本：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh</span><br><span class="line">chmod +x shadowsocks-all.sh</span><br><span class="line">./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log</span><br></pre></td></tr></table></figure>
-<p>【注意记录你的SSR端口号】<br>2：在客户端VPS上安装Gost服务：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -N --no-check-certificate https://github.com/ginuerzh/gost/releases/download/v2.11.1/gost-linux-amd64-2.11.1.gz &amp;&amp; gzip -d gost-linux-amd64-2.11.1.gz</span><br><span class="line">mv gost-linux-amd64-2.11.1 gost</span><br><span class="line">chmod +x gost</span><br></pre></td></tr></table></figure>
-<p>2.1:编辑config.json<br>vi config.json<br>在对应的服务端写入配置文件：<br>客户端<br>模式：mtls+relay TCP+UDP转发</p>
-<p>{<br>    “Debug”: false,<br>    “Retries”: 0,<br>    “ServeNodes”: [],<br>    “ChainNodes”: [],<br>    “Routes”: [<br>        {<br>            “ServeNodes”: [ “udp://:1567” ],<br>            “ChainNodes”: [ “relay+mtls://45.134.147.201:2334” ]<br>        },<br>        {<br>            “ServeNodes”: [ “tcp://:1567” ],<br>            “ChainNodes”: [ “relay+mtls://45.134.147.201:2334” ]<br>        },<br>        {}<br>    ]<br>}</p>
-<p>2.2:运行以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir /etc/gost</span><br><span class="line">cp /root/config.json /etc/gost/</span><br><span class="line">cp /root/gost /usr/bin/</span><br><span class="line">chmod +x /usr/bin/gost</span><br></pre></td></tr></table></figure>
-<p>2.3:在目录/lib/systemd/system/创建gost.service<br>vi /lib/systemd/system/gost.service<br>并写入以系统进程文件:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Gost</span><br><span class="line">After=network.target</span><br><span class="line">Wants=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">User=root</span><br><span class="line">ExecStart=/usr/bin/gost -C /etc/gost/config.json</span><br><span class="line">Type=simple</span><br><span class="line">KillMode=control-group</span><br><span class="line">Restart=always</span><br><span class="line">RestartSec=10s</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
-<p>2.4:最后让服务生效运行以下命令</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl <span class="built_in">enable</span> gost.service</span><br><span class="line">systemctl start gost.service</span><br><span class="line">systemctl status gost.service</span><br></pre></td></tr></table></figure>
-<p>3：服务端安装gost</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -N --no-check-certificate https://github.com/ginuerzh/gost/releases/download/v2.11.1/gost-linux-amd64-2.11.1.gz &amp;&amp; gzip -d gost-linux-amd64-2.11.1.gz</span><br><span class="line">mv gost-linux-amd64-2.11.1 gost</span><br><span class="line">chmod +x gost</span><br></pre></td></tr></table></figure>
-<p>4:服务端模式mtls配置文件：</p>
-<p>{<br>    “Debug”: false,<br>    “Retries”: 0,<br>    “ServeNodes”: [],<br>    “ChainNodes”: [],<br>    “Routes”: [<br>        {<br>            “ServeNodes”: [ “relay+mtls://:2334/127.0.0.1:15802” ],<br>            “ChainNodes”: []<br>        },<br>        {}<br>    ]<br>}</p>
-<p>mkdir /etc/gost<br>cp /root/config.json /etc/gost/<br>cp /root/gost /usr/bin/<br>chmod +x /usr/bin/gost</p>
-<p>gost.service</p>
-<p>在目录/lib/systemd/system/创建gost.service并写入以下文件<br>vi /lib/systemd/system/gost.service</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Gost</span><br><span class="line">After=network.target</span><br><span class="line">Wants=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">User=root</span><br><span class="line">ExecStart=/usr/bin/gost -C /etc/gost/config.json</span><br><span class="line">Type=simple</span><br><span class="line">KillMode=control-group</span><br><span class="line">Restart=always</span><br><span class="line">RestartSec=10s</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl <span class="built_in">enable</span> gost.service</span><br><span class="line">systemctl start gost.service</span><br><span class="line">systemctl status gost.service</span><br></pre></td></tr></table></figure>
-<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
-      <categories>
-        <category>Gost</category>
-        <category>中转</category>
-      </categories>
-      <tags>
-        <tag>Trojan</tag>
-        <tag>V2ray</tag>
-        <tag>GOST</tag>
-        <tag>SSR</tag>
-        <tag>隧道中转</tag>
-      </tags>
+<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
   </entry>
   <entry>
     <title>Gost Docker布署加密隧道节点</title>
@@ -302,7 +250,7 @@ CentOS系统:
 <p>注VPS重启会导致加密转发失效，若要自动启动不失效请参考<a href="https://youtu.be/AqQUm8fZKso" target="_blank" rel="noopener">视频教程</a><br>或请重新运行以下命令启动隧道转发</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service docker restart</span><br><span class="line">systemctl start docker</span><br><span class="line">systemctl daemon-reload</span><br></pre></td></tr></table></figure>
 <p>[END]</p>
-<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
+<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
       <categories>
         <category>Gost</category>
         <category>Docker</category>
@@ -315,6 +263,88 @@ CentOS系统:
         <tag>iptable</tag>
         <tag>brook</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Github Action Openwrt固件自动编译教程</title>
+    <url>/posts/21b7e26f.html</url>
+    <content><![CDATA[<h1 id="Github-Action-Openwrt固件自动编译教程"><a href="#Github-Action-Openwrt固件自动编译教程" class="headerlink" title="Github Action Openwrt固件自动编译教程"></a><center>Github Action Openwrt固件自动编译教程</center></h1><h2 id="视频教程"><a href="#视频教程" class="headerlink" title="视频教程"></a><center><a href="https://youtu.be/YoVhsQDdldA" target="_blank" rel="noopener">视频教程</a></center></h2><p>1:根据<a href="https://github.com/coolsnowwolf/lede" target="_blank" rel="noopener">L大</a>的源码仓库指导步骤，利用 Ubuntu 18 LTS x64的VPS获取对应路由器型号的.config文件。</p>
+<p>2:利用的源码仓<a href="https://github.com/P3TERX/Actions-OpenWrt" target="_blank" rel="noopener">P3TERX</a>导入.config文件启动GitHub Action自动云编译。</p>
+<p>3:进入 P3TERX/Actions-OpenWrt 项目页面，点击 Use this template 。</p>
+<p>4:填写仓库名称，然后点击Create repository from template按钮。经过几秒钟的等待，页面会跳转到新建的仓库，然后点击Create new file按钮。<br>5：然后文件名填写为.config，把生成的.config 文件的内容复制粘贴到下面的文本框中.</p>
+<p>最后等待2-3小时前往Github Action下载压缩包固件使用即可。</p>
+<p>本文参考：<br><a href="https://github.com/coolsnowwolf/lede" target="_blank" rel="noopener">L大</a><br><a href="https://p3terx.com/archives/build-openwrt-with-github-actions.html" target="_blank" rel="noopener">P3TERX</a></p>
+<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
+      <categories>
+        <category>OpenWrt</category>
+      </categories>
+      <tags>
+        <tag>路由器</tag>
+        <tag>openwrt</tag>
+        <tag>软路由固件</tag>
+        <tag>固件编译</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Gost不惧VPS重启-开机自动启动服务搭建方法</title>
+    <url>/posts/c1a6fb57.html</url>
+    <content><![CDATA[<h1 id="Gost不惧VPS重启-开机自动启动服务搭建方法"><a href="#Gost不惧VPS重启-开机自动启动服务搭建方法" class="headerlink" title="Gost不惧VPS重启-开机自动启动服务搭建方法"></a><center>Gost不惧VPS重启-开机自动启动服务搭建方法</center></h1><p>1：服务端SSR一键安装脚本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh</span><br><span class="line">chmod +x shadowsocks-all.sh</span><br><span class="line">./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log</span><br></pre></td></tr></table></figure>
+<p>【注意记录你的SSR端口号】<br>2：在客户端VPS上安装Gost服务：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -N --no-check-certificate https://github.com/ginuerzh/gost/releases/download/v2.11.1/gost-linux-amd64-2.11.1.gz &amp;&amp; gzip -d gost-linux-amd64-2.11.1.gz</span><br><span class="line">mv gost-linux-amd64-2.11.1 gost</span><br><span class="line">chmod +x gost</span><br></pre></td></tr></table></figure>
+<p>2.1:编辑config.json<br>vi config.json<br>在对应的服务端写入配置文件：<br>客户端<br>模式：mtls+relay TCP+UDP转发</p>
+<p>{<br>    “Debug”: false,<br>    “Retries”: 0,<br>    “ServeNodes”: [],<br>    “ChainNodes”: [],<br>    “Routes”: [<br>        {<br>            “ServeNodes”: [ “udp://:1567” ],<br>            “ChainNodes”: [ “relay+mtls://45.134.147.201:2334” ]<br>        },<br>        {<br>            “ServeNodes”: [ “tcp://:1567” ],<br>            “ChainNodes”: [ “relay+mtls://45.134.147.201:2334” ]<br>        },<br>        {}<br>    ]<br>}</p>
+<p>2.2:运行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir /etc/gost</span><br><span class="line">cp /root/config.json /etc/gost/</span><br><span class="line">cp /root/gost /usr/bin/</span><br><span class="line">chmod +x /usr/bin/gost</span><br></pre></td></tr></table></figure>
+<p>2.3:在目录/lib/systemd/system/创建gost.service<br>vi /lib/systemd/system/gost.service<br>并写入以系统进程文件:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Gost</span><br><span class="line">After=network.target</span><br><span class="line">Wants=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">User=root</span><br><span class="line">ExecStart=/usr/bin/gost -C /etc/gost/config.json</span><br><span class="line">Type=simple</span><br><span class="line">KillMode=control-group</span><br><span class="line">Restart=always</span><br><span class="line">RestartSec=10s</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<p>2.4:最后让服务生效运行以下命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl <span class="built_in">enable</span> gost.service</span><br><span class="line">systemctl start gost.service</span><br><span class="line">systemctl status gost.service</span><br></pre></td></tr></table></figure>
+<p>3：服务端安装gost</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -N --no-check-certificate https://github.com/ginuerzh/gost/releases/download/v2.11.1/gost-linux-amd64-2.11.1.gz &amp;&amp; gzip -d gost-linux-amd64-2.11.1.gz</span><br><span class="line">mv gost-linux-amd64-2.11.1 gost</span><br><span class="line">chmod +x gost</span><br></pre></td></tr></table></figure>
+<p>4:服务端模式mtls配置文件：</p>
+<p>{<br>    “Debug”: false,<br>    “Retries”: 0,<br>    “ServeNodes”: [],<br>    “ChainNodes”: [],<br>    “Routes”: [<br>        {<br>            “ServeNodes”: [ “relay+mtls://:2334/127.0.0.1:15802” ],<br>            “ChainNodes”: []<br>        },<br>        {}<br>    ]<br>}</p>
+<p>mkdir /etc/gost<br>cp /root/config.json /etc/gost/<br>cp /root/gost /usr/bin/<br>chmod +x /usr/bin/gost</p>
+<p>gost.service</p>
+<p>在目录/lib/systemd/system/创建gost.service并写入以下文件<br>vi /lib/systemd/system/gost.service</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Gost</span><br><span class="line">After=network.target</span><br><span class="line">Wants=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">User=root</span><br><span class="line">ExecStart=/usr/bin/gost -C /etc/gost/config.json</span><br><span class="line">Type=simple</span><br><span class="line">KillMode=control-group</span><br><span class="line">Restart=always</span><br><span class="line">RestartSec=10s</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl <span class="built_in">enable</span> gost.service</span><br><span class="line">systemctl start gost.service</span><br><span class="line">systemctl status gost.service</span><br></pre></td></tr></table></figure>
+<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
+      <categories>
+        <category>Gost</category>
+        <category>中转</category>
+      </categories>
+      <tags>
+        <tag>Trojan</tag>
+        <tag>V2ray</tag>
+        <tag>GOST</tag>
+        <tag>SSR</tag>
+        <tag>隧道中转</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Iptables转发失效？让Gost来接替</title>
+    <url>/posts/114c2a00.html</url>
+    <content><![CDATA[<h1 id="如何让GOST直接代替Iptables转发流量搭建V2ray-SSR高级中转节点？"><a href="#如何让GOST直接代替Iptables转发流量搭建V2ray-SSR高级中转节点？" class="headerlink" title="如何让GOST直接代替Iptables转发流量搭建V2ray/SSR高级中转节点？"></a>如何让GOST直接代替Iptables转发流量搭建V2ray/SSR高级中转节点？</h1><p>1：在国外VPS上搭建SSR/V2ray节点并记住端口</p>
+<p>2：在国内NAT VPS上安装Docker</p>
+<p>Docker安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -sSL https://get.docker.com | bash</span><br><span class="line">service docker restart</span><br></pre></td></tr></table></figure>
+
+<p>3:composep安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -L <span class="string">"https://github.com/docker/compose/releases/download/1.26.0/docker-compose-<span class="variable">$(uname -s)</span>-<span class="variable">$(uname -m)</span>"</span> -o /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">ln -s /usr/<span class="built_in">local</span>/bin/docker-compose /usr/bin/docker-compose</span><br></pre></td></tr></table></figure>
+<p>4:创建文件夹</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir v2rays</span><br><span class="line"><span class="built_in">cd</span> v2rays</span><br></pre></td></tr></table></figure>
+<p>5:创建yml文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi docker-compose.yml</span><br></pre></td></tr></table></figure>
+
+<p>6:写入docker-compose配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">services:</span><br><span class="line">  redirect:</span><br><span class="line">    image: ginuerzh/gost</span><br><span class="line">    restart: always</span><br><span class="line">    network_mode: <span class="string">"host"</span></span><br><span class="line">    <span class="built_in">command</span>:</span><br><span class="line">      - <span class="string">"-L=tcp://:NAT_port/落地:443"</span></span><br><span class="line">      - <span class="string">"-L=udp://:NAT_port/落地:443"</span></span><br><span class="line">    logging:</span><br><span class="line">      options:</span><br><span class="line">        max-size: <span class="string">"10m"</span></span><br><span class="line">        max-file: <span class="string">"3"</span></span><br></pre></td></tr></table></figure>
+<p>7:启动转发</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+<p>8：设置docker启动及开机自启</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo systemctl start docker</span><br><span class="line">sudo systemctl enable docker</span><br></pre></td></tr></table></figure>
+<p>8：关闭防火墙</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br></pre></td></tr></table></figure>
+<h1 id="TG交流群"><a href="#TG交流群" class="headerlink" title="TG交流群"></a><a href="https://t.me/siemenstutorials" target="_blank" rel="noopener">TG交流群</a></h1><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-注册即送50G-免费流量"><a href="#星际云网络加速-注册即送50G-免费流量" class="headerlink" title="星际云网络加速-注册即送50G|免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速-注册即送50G|免费流量</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
   </entry>
   <entry>
     <title>NAT VPS阿里云DDNS动态域名绑定</title>
@@ -343,7 +373,7 @@ CentOS系统:
 <p> Ubuntu/Debian</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service cron restart</span><br><span class="line">systemctl <span class="built_in">enable</span> cron</span><br></pre></td></tr></table></figure>
 <p><a href="https://blog.ilemonrain.com/linux/aliddns-v2.html" target="_blank" rel="noopener">以上脚本源于互联网</a></p>
-<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
+<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
       <tags>
         <tag>ddns</tag>
         <tag>阿里云</tag>
@@ -393,7 +423,7 @@ CentOS系统:
 【gfw探测你的vps，除了ssh、网站等常用端口，ss/ssr/v2ray的端口直接无法连接，被墙概率自然就降低了。】</li>
 </ol>
 <p>[END]</p>
-<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
+<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
       <categories>
         <category>SSR，中转节点搭建</category>
       </categories>
@@ -418,7 +448,7 @@ CentOS系统:
 <p>其余相关命令：<br>Uninstall（卸载）<br>./install-frps.sh uninstall<br>Update（更新）<br>./install-frps.sh update<br>Server management（服务管理器）<br>Usage: /etc/init.d/frps {start|stop|restart|status|config|version}<br>4：输入域名，解析域名</p>
 <p>5：在OpenWrt里设置Frp，启动服务，设置http、端口、本地IP。</p>
 <p>6：以上设置发后即可以用域名访问OpenWrt/Lede软路由.</p>
-<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
+<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
       <categories>
         <category>Openwrt</category>
         <category>Frp</category>
@@ -442,7 +472,7 @@ CentOS系统:
 <p>3.2多端口转发<br>监听端口888，被转发（落地/国外VIPS）IP:1.1.1.1 端口：999<br>监听端口889，被转发（落地/国外VIPS）IP:2.2.2.2 端口：998<br>监听端口887，被转发（落地/国外VIPS）IP:3.3.3.3 端口：997</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nohup ./brook relays -l <span class="string">":888 1.1.1.1:999"</span> -l <span class="string">":889 2.2.2.2:998"</span> -l <span class="string">":887 3.3.3.3:997"</span> &gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
 <p>END</p>
-<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
+<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
   </entry>
   <entry>
     <title>SSPANEL 后端端口偏移食用方法</title>
@@ -456,7 +486,7 @@ CentOS系统:
 <p>3:关闭防火墙</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br></pre></td></tr></table></figure>
 <p>END</p>
-<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
+<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
       <categories>
         <category>SSPANEL</category>
         <category>端口偏移</category>
@@ -472,7 +502,8 @@ CentOS系统:
     <title>SSR/TROJAN/V2RAY客户端下载汇总</title>
     <url>/posts/f9792ba.html</url>
     <content><![CDATA[<h1 id="SSR-TROJAN-V2RAY科学上网客户端下载"><a href="#SSR-TROJAN-V2RAY科学上网客户端下载" class="headerlink" title="SSR+TROJAN+V2RAY科学上网客户端下载"></a><center>SSR+TROJAN+V2RAY科学上网客户端下载</center></h1><p>1:SSR客户端<br><a href="https://www.xjycloud.xyz/ssr-download/ssr-win.7z" target="_blank" rel="noopener">Windows客户端</a><br><a href="https://www.xjycloud.xyz/ssr-download/ssr-mac.dmg" target="_blank" rel="noopener">MACOS客户端</a><br>2:Trojan客户端<br><a href="https://github.com/trojan-gfw/trojan/releases/download/v1.15.1/trojan-1.15.1-win.zip" target="_blank" rel="noopener">Windows客户端</a><br><a href="https://github.com/trojan-gfw/trojan/releases/download/v1.15.1/trojan-1.15.1-macos.zip" target="_blank" rel="noopener">MACOS客户端</a><br>3:V2RAY客户端<br><a href="https://github.com/v2ray/v2ray-core/releases/download/v4.23.1/v2ray-openbsd-64.zip" target="_blank" rel="noopener">Windows</a><br><a href="https://github.com/v2ray/v2ray-core/releases/download/v4.23.1/v2ray-openbsd-32.zip" target="_blank" rel="noopener">MACOS客户端</a></p>
-<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
+<p>END</p>
+<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
       <categories>
         <category>科学上网</category>
         <category>客户端</category>
@@ -512,7 +543,7 @@ CentOS系统:
 <p>11:后台面板登陆：<br>服务器IP:NAT指定外部通讯端口/resources/add_client.html</p>
 <p>12:NAT TUNNEL服务端设置好后切记得关闭防火墙否则无法FQ<br>防火墙关闭命令</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br></pre></td></tr></table></figure>
-<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
+<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h1 id="SiemensTutorials-1"><a href="#SiemensTutorials-1" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
       <categories>
         <category>科学上网</category>
         <category>SSR</category>
@@ -523,64 +554,6 @@ CentOS系统:
         <tag>科学上网</tag>
         <tag>SSR隧道加密</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Trojan+v2ray+SSR单VPS共存</title>
-    <url>/posts/46908.html</url>
-    <content><![CDATA[<iframe width="560" height="315" src="https://www.youtube.com/embed/hSqO8ppMYyc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<h1 id="Trojan-v2ray-SSR单VPS共存"><a href="#Trojan-v2ray-SSR单VPS共存" class="headerlink" title="Trojan+v2ray+SSR单VPS共存"></a><center>Trojan+v2ray+SSR单VPS共存</center></h1><p> 准备工具：域名1个/VPS一台(CentOS7)<br>视频教程：<a href="https://youtu.be/hSqO8ppMYyc" target="_blank" rel="noopener">YouTube</a><br>1:域名解析到VPS；解析要充分，以便全球生效！</p>
-<p>2：安装BBR PLUS加速（可选）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget <span class="string">"https://github.com/chiakge/Linux-NetSpeed/raw/master/tcp.sh"</span> &amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh</span><br></pre></td></tr></table></figure>
-<p>3:大神atrandys一键安装Trojan脚本：<br>若提示无wget,则运行：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install wget</span><br></pre></td></tr></table></figure>
-<p>然后再运行下面Docker版Trojan一键安装脚本:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -O https://raw.githubusercontent.com/atrandys/trojan/master/trojan_install.sh &amp;&amp; chmod +x trojan_install.sh &amp;&amp; ./trojan_install.sh</span><br></pre></td></tr></table></figure>
-<p>4：运行大神Docker的UI管理Portainer一键脚本：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">--name ui --restart=always lihaixin/portainer:me</span><br></pre></td></tr></table></figure>
-<p>5：浏览器运行<a href="https://VPS_IP:9000;设置密码并创建帐户，然后选择local。">https://VPS_IP:9000;设置密码并创建帐户，然后选择local。</a></p>
-<p>6:在容器containers中可以看到安装的Trojan；在App Templates中可以选择V2ray、SSR、Brook等代理程序</p>
-<p>8：客户端下载<br><a href="https://drive.google.com/open?id=1m9b6n9KnWI40octuo6IWAWqWdWxseLLk" target="_blank" rel="noopener">SS客户端</a><br><a href="https://drive.google.com/open?id=15sRZ7Sf9CVO0IdELNEvgD7xLxCxMqUVO" target="_blank" rel="noopener">V2ray客户端下载</a></p>
-<h1 id="星际云网络速"><a href="#星际云网络速" class="headerlink" title="星际云网络速"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络速</a></h1><h2 id="Trojan科学上网节点搭建视频教程"><a href="#Trojan科学上网节点搭建视频教程" class="headerlink" title="Trojan科学上网节点搭建视频教程"></a><a href="https://youtu.be/esr4bDuZj34" target="_blank" rel="noopener">Trojan科学上网节点搭建视频教程</a></h2><h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
-      <categories>
-        <category>科学上网</category>
-        <category>SSR</category>
-        <category>V2ray</category>
-        <category>Trojan</category>
-      </categories>
-      <tags>
-        <tag>Trojan</tag>
-        <tag>V2ray</tag>
-        <tag>SSR</tag>
-        <tag>Brook</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>V2Fly/V2ray Docker版官方搭建教程</title>
-    <url>/posts/27024d5e.html</url>
-    <content><![CDATA[<h1 id="V2Fly-V2ray-Docker版官方搭建教程"><a href="#V2Fly-V2ray-Docker版官方搭建教程" class="headerlink" title="V2Fly/V2ray Docker版官方搭建教程"></a><center>V2Fly/V2ray Docker版官方搭建教程</center></h1><p>1：Docker安装<br>CentOS系统</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y docker</span><br></pre></td></tr></table></figure>
-<p>debian系统</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt-get install -y docker</span><br><span class="line">curl -sSL https://get.docker.com | bash</span><br><span class="line">service docker restart</span><br></pre></td></tr></table></figure>
-<p>2：拉取V2ray官方镜像</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull v2ray/official</span><br></pre></td></tr></table></figure>
-<p>3:在etc目录下创建V2ray文件夹</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir /etc/v2ray</span><br></pre></td></tr></table></figure>
-
-<p>4:进入V2ray文件夹并创建config.json配置文件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi config.json</span><br></pre></td></tr></table></figure>
-<p>TCP+VMESS配置文件如下：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"log"</span>: &#123;</span><br><span class="line">    <span class="string">"access"</span>: <span class="string">"/var/log/v2ray/access.log"</span>,</span><br><span class="line">    <span class="string">"error"</span>: <span class="string">"/var/log/v2ray/error.log"</span>,</span><br><span class="line">    <span class="string">"loglevel"</span>: <span class="string">"warning"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"dns"</span>: &#123;&#125;,</span><br><span class="line">  <span class="string">"stats"</span>: &#123;&#125;,</span><br><span class="line">  <span class="string">"inbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"port"</span>: 自定义端口,</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"vmess"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;</span><br><span class="line">        <span class="string">"clients"</span>: [</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="string">"id"</span>: <span class="string">"[UUID自定义](https://www.uuidgenerator.net/)"</span>,</span><br><span class="line">            <span class="string">"alterId"</span>: 32</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"tag"</span>: <span class="string">"in-0"</span>,</span><br><span class="line">      <span class="string">"streamSettings"</span>: &#123;</span><br><span class="line">        <span class="string">"network"</span>: <span class="string">"tcp"</span>,</span><br><span class="line">        <span class="string">"security"</span>: <span class="string">"none"</span>,</span><br><span class="line">        <span class="string">"tcpSettings"</span>: &#123;&#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"outbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"tag"</span>: <span class="string">"direct"</span>,</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"freedom"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"tag"</span>: <span class="string">"blocked"</span>,</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"blackhole"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"routing"</span>: &#123;</span><br><span class="line">    <span class="string">"domainStrategy"</span>: <span class="string">"AsIs"</span>,</span><br><span class="line">    <span class="string">"rules"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"type"</span>: <span class="string">"field"</span>,</span><br><span class="line">        <span class="string">"ip"</span>: [</span><br><span class="line">          <span class="string">"geoip:private"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">"outboundTag"</span>: <span class="string">"blocked"</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"policy"</span>: &#123;&#125;,</span><br><span class="line">  <span class="string">"reverse"</span>: &#123;&#125;,</span><br><span class="line">  <span class="string">"transport"</span>: &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>5：启动Docker容器</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -it -d --name v2ray -v /etc/v2ray:/etc/v2ray -p 8888:8888 v2ray/official v2ray -config=/etc/v2ray/config.json</span><br></pre></td></tr></table></figure>
-<p>6:容器列表查看</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker container ls</span><br></pre></td></tr></table></figure>
-<p>7：启动和停止V2ray</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker container start v2ray //启动V2ray</span><br><span class="line">docker container stop v2ray //停止V2ray</span><br><span class="line">docker container restart v2ray //重启V2ray</span><br></pre></td></tr></table></figure>
-<p>若要升级镜像请按如下命令操作：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker container stop v2ray</span><br><span class="line">docker container rm v2ray</span><br><span class="line">docker pull v2ray/official</span><br><span class="line">docker run -it -d --name v2ray -v /etc/v2ray:/etc/v2ray -p 8888:8888 v2ray/official v2ray -config=/etc/v2ray/config.json</span><br></pre></td></tr></table></figure>
-<p>END</p>
-<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场-注册就送50G免费流量"><a href="#星际云网络加速-免费节点机场-注册就送50G免费流量" class="headerlink" title="星际云网络加速|免费节点机场-注册就送50G免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a>-注册就送50G免费流量</h1><h1 id="星云网络加速-年付4K机场"><a href="#星云网络加速-年付4K机场" class="headerlink" title="星云网络加速|年付4K机场"></a><a href="https://www.xjycloud.pw" target="_blank" rel="noopener">星云网络加速|年付4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
   </entry>
   <entry>
     <title>Trojan-Go+Cloudflare拯救被墙VPS IP</title>
@@ -610,7 +583,7 @@ CentOS系统:
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nohup ./trojan-go -config ./server.json &amp;</span><br></pre></td></tr></table></figure>
 <p>注意：若要实现开机自动重启请选择ubuntu和Debian系统;因CentOS7经测试无法自动运行。<br>Ubuntu<br>apt-get install nginx<br>apt install unzip</p>
 <p>END</p>
-<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
+<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
       <categories>
         <category>科学上网</category>
         <category>Trojan</category>
@@ -621,6 +594,37 @@ CentOS系统:
         <tag>Trojan-GO</tag>
         <tag>CDN</tag>
         <tag>Cloudflare</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Trojan+v2ray+SSR单VPS共存</title>
+    <url>/posts/46908.html</url>
+    <content><![CDATA[<iframe width="560" height="315" src="https://www.youtube.com/embed/hSqO8ppMYyc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h1 id="Trojan-v2ray-SSR单VPS共存"><a href="#Trojan-v2ray-SSR单VPS共存" class="headerlink" title="Trojan+v2ray+SSR单VPS共存"></a><center>Trojan+v2ray+SSR单VPS共存</center></h1><p> 准备工具：域名1个/VPS一台(CentOS7)<br>视频教程：<a href="https://youtu.be/hSqO8ppMYyc" target="_blank" rel="noopener">YouTube</a><br>1:域名解析到VPS；解析要充分，以便全球生效！</p>
+<p>2：安装BBR PLUS加速（可选）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget <span class="string">"https://github.com/chiakge/Linux-NetSpeed/raw/master/tcp.sh"</span> &amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh</span><br></pre></td></tr></table></figure>
+<p>3:大神atrandys一键安装Trojan脚本：<br>若提示无wget,则运行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install wget</span><br></pre></td></tr></table></figure>
+<p>然后再运行下面Docker版Trojan一键安装脚本:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -O https://raw.githubusercontent.com/atrandys/trojan/master/trojan_install.sh &amp;&amp; chmod +x trojan_install.sh &amp;&amp; ./trojan_install.sh</span><br></pre></td></tr></table></figure>
+<p>4：运行大神Docker的UI管理Portainer一键脚本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">--name ui --restart=always lihaixin/portainer:me</span><br></pre></td></tr></table></figure>
+<p>5：浏览器运行<a href="https://VPS_IP:9000;设置密码并创建帐户，然后选择local。">https://VPS_IP:9000;设置密码并创建帐户，然后选择local。</a></p>
+<p>6:在容器containers中可以看到安装的Trojan；在App Templates中可以选择V2ray、SSR、Brook等代理程序</p>
+<p>8：客户端下载<br><a href="https://drive.google.com/open?id=1m9b6n9KnWI40octuo6IWAWqWdWxseLLk" target="_blank" rel="noopener">SS客户端</a><br><a href="https://drive.google.com/open?id=15sRZ7Sf9CVO0IdELNEvgD7xLxCxMqUVO" target="_blank" rel="noopener">V2ray客户端下载</a></p>
+<h1 id="星际云网络速"><a href="#星际云网络速" class="headerlink" title="星际云网络速"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络速</a></h1><h2 id="Trojan科学上网节点搭建视频教程"><a href="#Trojan科学上网节点搭建视频教程" class="headerlink" title="Trojan科学上网节点搭建视频教程"></a><a href="https://youtu.be/esr4bDuZj34" target="_blank" rel="noopener">Trojan科学上网节点搭建视频教程</a></h2><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
+      <categories>
+        <category>科学上网</category>
+        <category>SSR</category>
+        <category>V2ray</category>
+        <category>Trojan</category>
+      </categories>
+      <tags>
+        <tag>Trojan</tag>
+        <tag>V2ray</tag>
+        <tag>SSR</tag>
+        <tag>Brook</tag>
       </tags>
   </entry>
   <entry>
@@ -651,7 +655,34 @@ CentOS系统:
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl restart trojan</span><br></pre></td></tr></table></figure>
 <p>10:QV2RAY配置连接参考如下<br><img src="/images/1003.png" alt></p>
 <p>END</p>
-<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场-注册就送50G免费流量"><a href="#星际云网络加速-免费节点机场-注册就送50G免费流量" class="headerlink" title="星际云网络加速|免费节点机场-注册就送50G免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a>-注册就送50G免费流量</h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
+<h1 id="TG交流群"><a href="#TG交流群" class="headerlink" title="TG交流群"></a><a href="https://t.me/siemenstutorials" target="_blank" rel="noopener">TG交流群</a></h1><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-注册即送50G-免费流量"><a href="#星际云网络加速-注册即送50G-免费流量" class="headerlink" title="星际云网络加速-注册即送50G|免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速-注册即送50G|免费流量</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
+  </entry>
+  <entry>
+    <title>V2Fly/V2ray Docker版官方搭建教程</title>
+    <url>/posts/27024d5e.html</url>
+    <content><![CDATA[<h1 id="V2Fly-V2ray-Docker版官方搭建教程"><a href="#V2Fly-V2ray-Docker版官方搭建教程" class="headerlink" title="V2Fly/V2ray Docker版官方搭建教程"></a><center>V2Fly/V2ray Docker版官方搭建教程</center></h1><p>1：Docker安装<br>CentOS系统</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y docker</span><br></pre></td></tr></table></figure>
+<p>debian系统</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt-get install -y docker</span><br><span class="line">curl -sSL https://get.docker.com | bash</span><br><span class="line">service docker restart</span><br></pre></td></tr></table></figure>
+<p>2：拉取V2ray官方镜像</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull v2ray/official</span><br></pre></td></tr></table></figure>
+<p>3:在etc目录下创建V2ray文件夹</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir /etc/v2ray</span><br></pre></td></tr></table></figure>
+
+<p>4:进入V2ray文件夹并创建config.json配置文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi config.json</span><br></pre></td></tr></table></figure>
+<p>TCP+VMESS配置文件如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"log"</span>: &#123;</span><br><span class="line">    <span class="string">"access"</span>: <span class="string">"/var/log/v2ray/access.log"</span>,</span><br><span class="line">    <span class="string">"error"</span>: <span class="string">"/var/log/v2ray/error.log"</span>,</span><br><span class="line">    <span class="string">"loglevel"</span>: <span class="string">"warning"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"dns"</span>: &#123;&#125;,</span><br><span class="line">  <span class="string">"stats"</span>: &#123;&#125;,</span><br><span class="line">  <span class="string">"inbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"port"</span>: 自定义端口,</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"vmess"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;</span><br><span class="line">        <span class="string">"clients"</span>: [</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="string">"id"</span>: <span class="string">"[UUID自定义](https://www.uuidgenerator.net/)"</span>,</span><br><span class="line">            <span class="string">"alterId"</span>: 32</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"tag"</span>: <span class="string">"in-0"</span>,</span><br><span class="line">      <span class="string">"streamSettings"</span>: &#123;</span><br><span class="line">        <span class="string">"network"</span>: <span class="string">"tcp"</span>,</span><br><span class="line">        <span class="string">"security"</span>: <span class="string">"none"</span>,</span><br><span class="line">        <span class="string">"tcpSettings"</span>: &#123;&#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"outbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"tag"</span>: <span class="string">"direct"</span>,</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"freedom"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"tag"</span>: <span class="string">"blocked"</span>,</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"blackhole"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"routing"</span>: &#123;</span><br><span class="line">    <span class="string">"domainStrategy"</span>: <span class="string">"AsIs"</span>,</span><br><span class="line">    <span class="string">"rules"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"type"</span>: <span class="string">"field"</span>,</span><br><span class="line">        <span class="string">"ip"</span>: [</span><br><span class="line">          <span class="string">"geoip:private"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">"outboundTag"</span>: <span class="string">"blocked"</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"policy"</span>: &#123;&#125;,</span><br><span class="line">  <span class="string">"reverse"</span>: &#123;&#125;,</span><br><span class="line">  <span class="string">"transport"</span>: &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>5：启动Docker容器</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -it -d --name v2ray -v /etc/v2ray:/etc/v2ray -p 8888:8888 v2ray/official v2ray -config=/etc/v2ray/config.json</span><br></pre></td></tr></table></figure>
+<p>6:容器列表查看</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker container ls</span><br></pre></td></tr></table></figure>
+<p>7：启动和停止V2ray</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker container start v2ray //启动V2ray</span><br><span class="line">docker container stop v2ray //停止V2ray</span><br><span class="line">docker container restart v2ray //重启V2ray</span><br></pre></td></tr></table></figure>
+<p>若要升级镜像请按如下命令操作：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker container stop v2ray</span><br><span class="line">docker container rm v2ray</span><br><span class="line">docker pull v2ray/official</span><br><span class="line">docker run -it -d --name v2ray -v /etc/v2ray:/etc/v2ray -p 8888:8888 v2ray/official v2ray -config=/etc/v2ray/config.json</span><br></pre></td></tr></table></figure>
+<p>END</p>
+<h1 id="TG交流群"><a href="#TG交流群" class="headerlink" title="TG交流群"></a><a href="https://t.me/siemenstutorials" target="_blank" rel="noopener">TG交流群</a></h1><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-注册即送50G-免费流量"><a href="#星际云网络加速-注册即送50G-免费流量" class="headerlink" title="星际云网络加速-注册即送50G|免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速-注册即送50G|免费流量</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
   </entry>
   <entry>
     <title>V2Fly+WS+TLS+CDN+宝塔VLESS搭建教程</title>
@@ -674,7 +705,7 @@ CentOS系统:
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service v2ray start</span><br><span class="line">service v2ray status</span><br><span class="line">systemctl <span class="built_in">enable</span> v2ray</span><br></pre></td></tr></table></figure>
 <p>9：节点添加设置</p>
 <p>END</p>
-<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场-注册就送50G免费流量"><a href="#星际云网络加速-免费节点机场-注册就送50G免费流量" class="headerlink" title="星际云网络加速|免费节点机场-注册就送50G免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a>-注册就送50G免费流量</h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
+<h1 id="TG交流群"><a href="#TG交流群" class="headerlink" title="TG交流群"></a><a href="https://t.me/siemenstutorials" target="_blank" rel="noopener">TG交流群</a></h1><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-注册即送50G-免费流量"><a href="#星际云网络加速-注册即送50G-免费流量" class="headerlink" title="星际云网络加速-注册即送50G|免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速-注册即送50G|免费流量</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
   </entry>
   <entry>
     <title>V2fly|V2ray+CDN+Nginx+wS+TLS+宝塔共存节点构建</title>
@@ -695,7 +726,7 @@ CentOS系统:
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> v2ray</span><br><span class="line">service v2ray start <span class="comment">#启动 V2Ray  </span></span><br><span class="line">service v2ray stop <span class="comment">#停止运行 V2Ray  </span></span><br><span class="line">service v2ray restart <span class="comment">#重启 V2Ray  </span></span><br><span class="line">service v2ray status <span class="comment">#查看 V2Ray 状态</span></span><br></pre></td></tr></table></figure>
 
 <p>END</p>
-<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场-注册就送50G免费流量"><a href="#星际云网络加速-免费节点机场-注册就送50G免费流量" class="headerlink" title="星际云网络加速|免费节点机场-注册就送50G免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a>-注册就送50G免费流量</h1><h1 id="星云网络加速-年付4K机场"><a href="#星云网络加速-年付4K机场" class="headerlink" title="星云网络加速|年付4K机场"></a><a href="https://www.xjycloud.pw" target="_blank" rel="noopener">星云网络加速|年付4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
+<h1 id="TG交流群"><a href="#TG交流群" class="headerlink" title="TG交流群"></a><a href="https://t.me/siemenstutorials" target="_blank" rel="noopener">TG交流群</a></h1><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-注册即送50G-免费流量"><a href="#星际云网络加速-注册即送50G-免费流量" class="headerlink" title="星际云网络加速-注册即送50G|免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速-注册即送50G|免费流量</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
   </entry>
   <entry>
     <title>V2ray+Docker-compose+Caddy搭建教程</title>
@@ -717,7 +748,7 @@ CentOS系统:
 <p>7.启动<br>docker-compose up -d</p>
 <p>8.设置开机启动<br>sudo systemctl start docker<br>sudo systemctl enable docker</p>
 <p><a href="https://myssl.com" target="_blank" rel="noopener">证书SSL证书评级</a></p>
-<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="星云网络加速-年付4K机场"><a href="#星云网络加速-年付4K机场" class="headerlink" title="星云网络加速|年付4K机场"></a><a href="https://www.xjycloud.pw" target="_blank" rel="noopener">星云网络加速|年付4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
+<h1 id="TG交流群"><a href="#TG交流群" class="headerlink" title="TG交流群"></a><a href="https://t.me/siemenstutorials" target="_blank" rel="noopener">TG交流群</a></h1><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
   </entry>
   <entry>
     <title>利用Caddy完美实现Trojan与V2ray共存</title>
@@ -740,7 +771,7 @@ CentOS系统:
 <p>6：配置信息查看：<br>vi info.txt</p>
 <p>若要修改配置信息请先cd V2ray_Trojan_Docker；<br>1：在caddy/Caddyfile中修改Caddy修改域名；<br>2：在v2ray/config.json中修改V2Ray的UUID；<br>3：在trojan/config/config.json中修改Trojan的密码、证书路径、域名。</p>
 <p>(本文脚本源于<a href="https://github.com/maidoudouo/V2ray_Trojan_Docker" target="_blank" rel="noopener">maidoudouo</a>;在此感谢大神的辛勤付出)</p>
-<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
+<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h1 id="SiemensTutorials-1"><a href="#SiemensTutorials-1" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
       <categories>
         <category>科学上网</category>
         <category>V2ray</category>
@@ -782,7 +813,26 @@ CentOS系统:
 <p>11：若要定时重启可添加定时任务<br>执行 crontab -e命令</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">0 */12 * * * systemctl restart nginx</span><br></pre></td></tr></table></figure>
 
-<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></center></h1>]]></content>
+<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
+  </entry>
+  <entry>
+    <title>国内NAT如何提升速度下载Github脚本</title>
+    <url>/posts/5c352cb9.html</url>
+    <content><![CDATA[<h1 id="国内NAT如何提升速度下载Github脚本"><a href="#国内NAT如何提升速度下载Github脚本" class="headerlink" title="国内NAT如何提升速度下载Github脚本"></a><center>国内NAT如何提升速度下载Github脚本</center></h1><p>1：根据Github拉取源码的域名对应查询最快的IP</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1. github.com</span><br><span class="line">2. assets-cdn.github.com</span><br><span class="line">3. github.global.ssl.fastly.net</span><br><span class="line">4. codeload.github.com</span><br><span class="line">5.raw.githubusercontent.com</span><br></pre></td></tr></table></figure>
+<p>连接GITHUB最快的IP地址查询网址：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">https://www.ipaddress.com/</span><br></pre></td></tr></table></figure>
+<p>2：利用vi命令将host文件进行修改</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi /etc/hosts</span><br></pre></td></tr></table></figure>
+<p>在hosts文件中加入以下ip 域名；如：<br>IP github.com<br>IP raw.githubusercontent.com<br>3：然后保存退出即可正常下载了！</p>
+<p>[END]</p>
+<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
+      <tags>
+        <tag>NAT</tag>
+        <tag>GitHub</tag>
+        <tag>脚本下载</tag>
+        <tag>速度慢</tag>
+      </tags>
   </entry>
   <entry>
     <title>华硕RT-ACRH17路由器自带SSRPLUS插件OpenWrt路由器固件编译</title>
@@ -798,7 +848,7 @@ CentOS系统:
 <p><a href="https://drive.google.com/open?id=1TQfZICsx-RCEdqftDr93G5kCQo-7B7rf" target="_blank" rel="noopener">固件下载地址</a></p>
 <p>4.3 刷机完界面如下</p>
 <p>总览<br><img src="/images/1.jpg" alt><br>服务<br><img src="/images/2.png" alt><br>网络<br><img src="/images/3.png" alt><br>运行ShadowsocksR Plus+<br><img src="/images/4.png" alt></p>
-<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
+<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
       <categories>
         <category>OpenWrt</category>
         <category>RT-ACRH17</category>
@@ -808,25 +858,6 @@ CentOS系统:
         <tag>固件编译</tag>
         <tag>RT-ACRH17</tag>
         <tag>ShadowsocksR Plus+</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>国内NAT如何提升速度下载Github脚本</title>
-    <url>/posts/5c352cb9.html</url>
-    <content><![CDATA[<h1 id="国内NAT如何提升速度下载Github脚本"><a href="#国内NAT如何提升速度下载Github脚本" class="headerlink" title="国内NAT如何提升速度下载Github脚本"></a><center>国内NAT如何提升速度下载Github脚本</center></h1><p>1：根据Github拉取源码的域名对应查询最快的IP</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1. github.com</span><br><span class="line">2. assets-cdn.github.com</span><br><span class="line">3. github.global.ssl.fastly.net</span><br><span class="line">4. codeload.github.com</span><br><span class="line">5.raw.githubusercontent.com</span><br></pre></td></tr></table></figure>
-<p>连接GITHUB最快的IP地址查询网址：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">https://www.ipaddress.com/</span><br></pre></td></tr></table></figure>
-<p>2：利用vi命令将host文件进行修改</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi /etc/hosts</span><br></pre></td></tr></table></figure>
-<p>在hosts文件中加入以下ip 域名；如：<br>IP github.com<br>IP raw.githubusercontent.com<br>3：然后保存退出即可正常下载了！</p>
-<p>[END]</p>
-<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
-      <tags>
-        <tag>NAT</tag>
-        <tag>GitHub</tag>
-        <tag>脚本下载</tag>
-        <tag>速度慢</tag>
       </tags>
   </entry>
   <entry>
@@ -846,24 +877,12 @@ CentOS系统:
 <p>6：强制推送到远程仓库</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git push -f origin master</span><br></pre></td></tr></table></figure>
 <p>7:至此您将获得全新干净的仓库<br>本文内容源自<a href="https://p3terx.com/archives/github-warehouse-cleaning-delete-all-commit-records.html" target="_blank" rel="noopener">P3TERX</a></p>
-]]></content>
+<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
       <tags>
         <tag>Github</tag>
         <tag>commit</tag>
         <tag>master</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>科学上网VLESS+WS+TLS+Nginx一键安装脚本</title>
-    <url>/posts/bd4de8a8.html</url>
-    <content><![CDATA[<h1 id="VLESS-WS-TLS-Nginx一键安装脚本"><a href="#VLESS-WS-TLS-Nginx一键安装脚本" class="headerlink" title="VLESS+WS+TLS+Nginx一键安装脚本"></a><center>VLESS+WS+TLS+Nginx一键安装脚本</center></h1><p>搭建工具：域名+VPS+(CloudFlare可选)<br>系统镜像：Debian9</p>
-<p>1:安装依赖</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt update -y  <span class="comment">#非必须</span></span><br></pre></td></tr></table></figure>
-<p>2:一键安装脚本<br><a href="https://github.com/wulabing/V2Ray_ws-tls_bash_onekey/tree/dev" target="_blank" rel="noopener">项目地址</a><br>安装脚本：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -N --no-check-certificate -q -O install.sh <span class="string">"https://raw.githubusercontent.com/wulabing/V2Ray_ws-tls_bash_onekey/dev/install.sh"</span> &amp;&amp; chmod +x install.sh &amp;&amp; bash install.sh</span><br></pre></td></tr></table></figure>
-<p>3:输入域名根据提示进行安装即可</p>
-<p>4：客户端下载<br>[VLESS/V2ray客户端下载]<br>(<a href="https://github.com/2dust/v2rayN/releases/tag/3.21" target="_blank" rel="noopener">https://github.com/2dust/v2rayN/releases/tag/3.21</a>)<br>[VLESS/V2ray内核下载]<br>(<a href="https://github.com/v2fly/v2ray-core/releases" target="_blank" rel="noopener">https://github.com/v2fly/v2ray-core/releases</a>)<br>注意两个压缩包下载后合并至一个文件内进行使用</p>
-<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="星云网络加速-年付4K机场"><a href="#星云网络加速-年付4K机场" class="headerlink" title="星云网络加速|年付4K机场"></a><a href="https://www.xjycloud.pw" target="_blank" rel="noopener">星云网络加速|年付4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
   </entry>
   <entry>
     <title>科学上网SSR VPS搭建一键安装脚本合辑</title>
@@ -879,7 +898,7 @@ CentOS系统:
 <p>Ubuntu/Debian：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt-get -y install wget</span><br></pre></td></tr></table></figure>
 
-<h2 id="最便谊的2-99-月-1T流量VPS购买地址"><a href="#最便谊的2-99-月-1T流量VPS购买地址" class="headerlink" title="最便谊的2.99$/月-1T流量VPS购买地址"></a><a href="https://portal.thestack.net/aff.php?aff=641" target="_blank" rel="noopener">最便谊的2.99$/月-1T流量VPS购买地址</a></h2><h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
+<h2 id="最便谊的2-99-月-1T流量VPS购买地址"><a href="#最便谊的2-99-月-1T流量VPS购买地址" class="headerlink" title="最便谊的2.99$/月-1T流量VPS购买地址"></a><a href="https://portal.thestack.net/aff.php?aff=641" target="_blank" rel="noopener">最便谊的2.99$/月-1T流量VPS购买地址</a></h2><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
       <categories>
         <category>科学上网</category>
         <category>SSR</category>
@@ -889,6 +908,18 @@ CentOS系统:
         <tag>一键安装脚本</tag>
         <tag>SSR节点搭建</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>科学上网VLESS+WS+TLS+Nginx一键安装脚本</title>
+    <url>/posts/bd4de8a8.html</url>
+    <content><![CDATA[<h1 id="VLESS-WS-TLS-Nginx一键安装脚本"><a href="#VLESS-WS-TLS-Nginx一键安装脚本" class="headerlink" title="VLESS+WS+TLS+Nginx一键安装脚本"></a><center>VLESS+WS+TLS+Nginx一键安装脚本</center></h1><p>搭建工具：域名+VPS+(CloudFlare可选)<br>系统镜像：Debian9</p>
+<p>1:安装依赖</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt update -y  <span class="comment">#非必须</span></span><br></pre></td></tr></table></figure>
+<p>2:一键安装脚本<br><a href="https://github.com/wulabing/V2Ray_ws-tls_bash_onekey/tree/dev" target="_blank" rel="noopener">项目地址</a><br>安装脚本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -N --no-check-certificate -q -O install.sh <span class="string">"https://raw.githubusercontent.com/wulabing/V2Ray_ws-tls_bash_onekey/dev/install.sh"</span> &amp;&amp; chmod +x install.sh &amp;&amp; bash install.sh</span><br></pre></td></tr></table></figure>
+<p>3:输入域名根据提示进行安装即可</p>
+<p>4：客户端下载<br>[VLESS/V2ray客户端下载]<br>(<a href="https://github.com/2dust/v2rayN/releases/tag/3.21" target="_blank" rel="noopener">https://github.com/2dust/v2rayN/releases/tag/3.21</a>)<br>[VLESS/V2ray内核下载]<br>(<a href="https://github.com/v2fly/v2ray-core/releases" target="_blank" rel="noopener">https://github.com/v2fly/v2ray-core/releases</a>)<br>注意两个压缩包下载后合并至一个文件内进行使用</p>
+<h1 id="TG交流群"><a href="#TG交流群" class="headerlink" title="TG交流群"></a><a href="https://t.me/siemenstutorials" target="_blank" rel="noopener">TG交流群</a></h1><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
   </entry>
   <entry>
     <title>谷歌云Root密码登陆开启设置</title>
@@ -909,8 +940,13 @@ CentOS系统:
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sed -i <span class="string">'s/PermitRootLogin no/PermitRootLogin yes/g'</span> /etc/ssh/sshd_config</span><br><span class="line">sed -i <span class="string">'s/PasswordAuthentication no/PasswordAuthentication yes/g'</span> /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
 <p>Ubuntu系统采用以下命令：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sed -i <span class="string">'s/#PermitRootLogin prohibit-password/PermitRootLogin yes/g'</span> /etc/ssh/sshd_config</span><br><span class="line">sed -i <span class="string">'s/PasswordAuthentication no/PasswordAuthentication yes/g'</span> /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
-<p>然后利用reboot重启VM实例即可.</p>
-<h2 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h2><h2 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h2>]]></content>
+<p>然后<br>2.2:设置Root登陆密码<br>输入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">passwd root</span><br></pre></td></tr></table></figure>
+<p>2.3：重启sshd服务</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service sshd restart</span><br></pre></td></tr></table></figure>
+
+<p>利用reboot重启VM实例即可.</p>
+<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="SiemensTutorials-1"><a href="#SiemensTutorials-1" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
       <categories>
         <category>VPS</category>
       </categories>
@@ -946,6 +982,6 @@ CentOS系统:
 <p>4.BBRPLUS</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget --no-check-certificate -O tcp.sh https://github.com/cx9208/Linux-NetSpeed/raw/master/tcp.sh &amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh</span><br></pre></td></tr></table></figure>
 <p>[END]</p>
-<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><center><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></center></h1><h1 id="星际云网络加速"><a href="#星际云网络加速" class="headerlink" title="星际云网络加速"></a><center><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速</a></center></h1>]]></content>
+<h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
   </entry>
 </search>
