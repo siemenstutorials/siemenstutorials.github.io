@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://siemenstutorials.github.io/"/>
-  <updated>2020-10-25T14:21:47.614Z</updated>
+  <updated>2020-10-30T12:47:01.161Z</updated>
   <id>https://siemenstutorials.github.io/</id>
   
   <author>
@@ -17,11 +17,33 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>如何提升国内NAT机拉取镜像速度</title>
+    <link href="https://siemenstutorials.github.io/posts/b9b6c455.html"/>
+    <id>https://siemenstutorials.github.io/posts/b9b6c455.html</id>
+    <published>2020-10-30T12:41:55.000Z</published>
+    <updated>2020-10-30T12:47:01.161Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="如何提升国内NAT机拉取镜像速度"><a href="#如何提升国内NAT机拉取镜像速度" class="headerlink" title="如何提升国内NAT机拉取镜像速度"></a><center>如何提升国内NAT机拉取镜像速度</center></h1><p>因国内的一些特殊原因，NAT机拉取dockerhub代码时会极慢，故可尝试以下方法进行提速</p><p>1：运行以下命令编辑或创建daemon.json</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/docker/daemon.json</span><br></pre></td></tr></table></figure><p>2:输入以下配置文件将镜像源设成国内</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"registry-mirrors"</span>: [<span class="string">"https://docker.mirrors.ustc.edu.cn"</span>, <span class="string">"http://hub-mirror.c.163.com"</span>, <span class="string">"https://registry.docker-cn.com"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>3:重启docker使服务生效</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure><p>END</p><h1 id="TG交流群"><a href="#TG交流群" class="headerlink" title="TG交流群"></a><a href="https://t.me/siemenstutorials" target="_blank" rel="noopener">TG交流群</a></h1><h1 id="年付81元G口VPS"><a href="#年付81元G口VPS" class="headerlink" title="年付81元G口VPS"></a><a href="https://my.racknerd.com/aff.php?aff=1313&amp;pid=316" target="_blank" rel="noopener">年付81元G口VPS</a></h1><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-注册即送50G-免费流量"><a href="#星际云网络加速-注册即送50G-免费流量" class="headerlink" title="星际云网络加速-注册即送50G|免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速-注册即送50G|免费流量</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;如何提升国内NAT机拉取镜像速度&quot;&gt;&lt;a href=&quot;#如何提升国内NAT机拉取镜像速度&quot; class=&quot;headerlink&quot; title=&quot;如何提升国内NAT机拉取镜像速度&quot;&gt;&lt;/a&gt;&lt;center&gt;如何提升国内NAT机拉取镜像速度&lt;/center&gt;&lt;/h1&gt;
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>如何利用Linux批量测试SSR/V2RAY订阅节点速度</title>
     <link href="https://siemenstutorials.github.io/posts/e49a8129.html"/>
     <id>https://siemenstutorials.github.io/posts/e49a8129.html</id>
     <published>2020-10-25T06:36:05.000Z</published>
-    <updated>2020-10-25T14:21:47.614Z</updated>
+    <updated>2020-10-25T14:22:00.292Z</updated>
     
     <content type="html"><![CDATA[<h1 id="如何利用Linux批量测试SSR-V2RAY订阅节点速度"><a href="#如何利用Linux批量测试SSR-V2RAY订阅节点速度" class="headerlink" title="如何利用Linux批量测试SSR/V2RAY订阅节点速度"></a><center>如何利用Linux批量测试SSR/V2RAY订阅节点速度</center></h1><p><a href="https://github.com/tindy2013/stairspeedtest-reborn" target="_blank" rel="noopener">项目地址</a></p><p>1:下载测试最新版本代码</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/tindy2013/stairspeedtest-reborn/releases/download/v0.7.1/stairspeedtest_reborn_linux64.tar.gz</span><br><span class="line">tar -xzvf stairspeedtest_reborn_linux64.tar.gz</span><br></pre></td></tr></table></figure><p>2:运行测速脚本</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./webgui.sh</span><br></pre></td></tr></table></figure><p>3:在浏览器里输入<a href="http://serverip:65430/gui.html" target="_blank" rel="noopener">http://serverip:65430/gui.html</a><br><img src="/images/speedtest.png" alt><br>填入订阅链接测试即可</p><h1 id="TG交流群"><a href="#TG交流群" class="headerlink" title="TG交流群"></a><a href="https://t.me/siemenstutorials" target="_blank" rel="noopener">TG交流群</a></h1><h1 id="年付81元G口VPS"><a href="#年付81元G口VPS" class="headerlink" title="年付81元G口VPS"></a><a href="https://my.racknerd.com/aff.php?aff=1313&amp;pid=316" target="_blank" rel="noopener">年付81元G口VPS</a></h1><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-注册即送50G-免费流量"><a href="#星际云网络加速-注册即送50G-免费流量" class="headerlink" title="星际云网络加速-注册即送50G|免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速-注册即送50G|免费流量</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
     
@@ -491,42 +513,6 @@ Centos系统
     </summary>
     
     
-    
-  </entry>
-  
-  <entry>
-    <title>Gost不惧VPS重启-开机自动启动服务搭建方法</title>
-    <link href="https://siemenstutorials.github.io/posts/c1a6fb57.html"/>
-    <id>https://siemenstutorials.github.io/posts/c1a6fb57.html</id>
-    <published>2020-06-14T16:52:32.000Z</published>
-    <updated>2020-10-07T23:33:36.686Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Gost不惧VPS重启-开机自动启动服务搭建方法"><a href="#Gost不惧VPS重启-开机自动启动服务搭建方法" class="headerlink" title="Gost不惧VPS重启-开机自动启动服务搭建方法"></a><center>Gost不惧VPS重启-开机自动启动服务搭建方法</center></h1><p>1：服务端SSR一键安装脚本：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh</span><br><span class="line">chmod +x shadowsocks-all.sh</span><br><span class="line">./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log</span><br></pre></td></tr></table></figure><p>【注意记录你的SSR端口号】<br>2：在客户端VPS上安装Gost服务：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate https://github.com/ginuerzh/gost/releases/download/v2.11.1/gost-linux-amd64-2.11.1.gz &amp;&amp; gzip -d gost-linux-amd64-2.11.1.gz</span><br><span class="line">mv gost-linux-amd64-2.11.1 gost</span><br><span class="line">chmod +x gost</span><br></pre></td></tr></table></figure><p>2.1:编辑config.json<br>vi config.json<br>在对应的服务端写入配置文件：<br>客户端<br>模式：mtls+relay TCP+UDP转发</p><p>{<br>    “Debug”: false,<br>    “Retries”: 0,<br>    “ServeNodes”: [],<br>    “ChainNodes”: [],<br>    “Routes”: [<br>        {<br>            “ServeNodes”: [ “udp://:1567” ],<br>            “ChainNodes”: [ “relay+mtls://45.134.147.201:2334” ]<br>        },<br>        {<br>            “ServeNodes”: [ “tcp://:1567” ],<br>            “ChainNodes”: [ “relay+mtls://45.134.147.201:2334” ]<br>        },<br>        {}<br>    ]<br>}</p><p>2.2:运行以下命令：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir /etc/gost</span><br><span class="line">cp /root/config.json /etc/gost/</span><br><span class="line">cp /root/gost /usr/bin/</span><br><span class="line">chmod +x /usr/bin/gost</span><br></pre></td></tr></table></figure><p>2.3:在目录/lib/systemd/system/创建gost.service<br>vi /lib/systemd/system/gost.service<br>并写入以系统进程文件:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Gost</span><br><span class="line">After=network.target</span><br><span class="line">Wants=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">User=root</span><br><span class="line">ExecStart=/usr/bin/gost -C /etc/gost/config.json</span><br><span class="line">Type=simple</span><br><span class="line">KillMode=control-group</span><br><span class="line">Restart=always</span><br><span class="line">RestartSec=10s</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure><p>2.4:最后让服务生效运行以下命令</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl <span class="built_in">enable</span> gost.service</span><br><span class="line">systemctl start gost.service</span><br><span class="line">systemctl status gost.service</span><br></pre></td></tr></table></figure><p>3：服务端安装gost</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate https://github.com/ginuerzh/gost/releases/download/v2.11.1/gost-linux-amd64-2.11.1.gz &amp;&amp; gzip -d gost-linux-amd64-2.11.1.gz</span><br><span class="line">mv gost-linux-amd64-2.11.1 gost</span><br><span class="line">chmod +x gost</span><br></pre></td></tr></table></figure><p>4:服务端模式mtls配置文件：</p><p>{<br>    “Debug”: false,<br>    “Retries”: 0,<br>    “ServeNodes”: [],<br>    “ChainNodes”: [],<br>    “Routes”: [<br>        {<br>            “ServeNodes”: [ “relay+mtls://:2334/127.0.0.1:15802” ],<br>            “ChainNodes”: []<br>        },<br>        {}<br>    ]<br>}</p><p>mkdir /etc/gost<br>cp /root/config.json /etc/gost/<br>cp /root/gost /usr/bin/<br>chmod +x /usr/bin/gost</p><p>gost.service</p><p>在目录/lib/systemd/system/创建gost.service并写入以下文件<br>vi /lib/systemd/system/gost.service</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Gost</span><br><span class="line">After=network.target</span><br><span class="line">Wants=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">User=root</span><br><span class="line">ExecStart=/usr/bin/gost -C /etc/gost/config.json</span><br><span class="line">Type=simple</span><br><span class="line">KillMode=control-group</span><br><span class="line">Restart=always</span><br><span class="line">RestartSec=10s</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl <span class="built_in">enable</span> gost.service</span><br><span class="line">systemctl start gost.service</span><br><span class="line">systemctl status gost.service</span><br></pre></td></tr></table></figure><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;Gost不惧VPS重启-开机自动启动服务搭建方法&quot;&gt;&lt;a href=&quot;#Gost不惧VPS重启-开机自动启动服务搭建方法&quot; class=&quot;headerlink&quot; title=&quot;Gost不惧VPS重启-开机自动启动服务搭建方法&quot;&gt;&lt;/a&gt;&lt;center&gt;Gost不惧
-      
-    
-    </summary>
-    
-    
-      <category term="Gost" scheme="https://siemenstutorials.github.io/categories/Gost/"/>
-    
-      <category term="中转" scheme="https://siemenstutorials.github.io/categories/Gost/%E4%B8%AD%E8%BD%AC/"/>
-    
-    
-      <category term="Trojan" scheme="https://siemenstutorials.github.io/tags/Trojan/"/>
-    
-      <category term="V2ray" scheme="https://siemenstutorials.github.io/tags/V2ray/"/>
-    
-      <category term="GOST" scheme="https://siemenstutorials.github.io/tags/GOST/"/>
-    
-      <category term="SSR" scheme="https://siemenstutorials.github.io/tags/SSR/"/>
-    
-      <category term="隧道中转" scheme="https://siemenstutorials.github.io/tags/%E9%9A%A7%E9%81%93%E4%B8%AD%E8%BD%AC/"/>
     
   </entry>
   
