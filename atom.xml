@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://siemenstutorials.github.io/"/>
-  <updated>2020-10-30T12:47:01.161Z</updated>
+  <updated>2020-11-05T14:18:44.417Z</updated>
   <id>https://siemenstutorials.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Malio SSPANEL主题破解安装</title>
+    <link href="https://siemenstutorials.github.io/posts/4e9ae55.html"/>
+    <id>https://siemenstutorials.github.io/posts/4e9ae55.html</id>
+    <published>2020-11-05T14:03:32.000Z</published>
+    <updated>2020-11-05T14:18:44.417Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Malio-SSPANEL主题破解安装"><a href="#Malio-SSPANEL主题破解安装" class="headerlink" title="Malio SSPANEL主题破解安装"></a><center>Malio SSPANEL主题破解安装</center></h1><p>1：BT 国际面板安装</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -O install.sh http://www.aapanel.com/script/install-ubuntu_6.0_en.sh &amp;&amp; bash install.sh</span><br></pre></td></tr></table></figure><p>2:登陆BT安装LNMP<br>PHP 7.3<br>SQL5.7<br>NGINX 1.19</p><p>3:配置PHP<br>打开 宝塔面版 &gt; 软件商店 &gt; 你安装的PHP &gt; 设置，在禁用函数一栏删除 system、proc_open、proc_get_status、putenv、pcntl_signal</p><p>4:安装Malio<br>添加网站<br>上传Malio主题安装文件至网站根目录</p><p>5：在 网站目录 里取消勾选 防跨站攻击，运行目录里面选择 /public，点击保存。</p><p>在 伪静态 中填入下面内容</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">    try_files <span class="variable">$uri</span> /index.php<span class="variable">$is_args</span><span class="variable">$args</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>6:数据库设置</p><p>如果你是全新安装面板，请上传并导入网站目录下的 /sql/glzjin_all.sql、/sql/malio_all.sql</p><p>如果你是从其他主题迁移到Malio主题，请上传并导入网站目录下的 /sql/malio_all.sql、/sql/user_subscribe_log.sql、/sql/detect_ban_log.sql</p><p>如果没有导入 /sql/malio_all.sql 的话会导致无法注册新用户</p><p>将数据库user表里的全部用户的theme列改为malio，使使用phpmyadmin执行这条sql语句 UPDATE user SET theme=’malio’</p><p>7：其他命令</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php xcat createAdmin</span><br></pre></td></tr></table></figure><h1 id="TG交流群"><a href="#TG交流群" class="headerlink" title="TG交流群"></a><a href="https://t.me/siemenstutorials" target="_blank" rel="noopener">TG交流群</a></h1><h1 id="年付81元G口VPS"><a href="#年付81元G口VPS" class="headerlink" title="年付81元G口VPS"></a><a href="https://my.racknerd.com/aff.php?aff=1313&amp;pid=316" target="_blank" rel="noopener">年付81元G口VPS</a></h1><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-注册即送50G-免费流量"><a href="#星际云网络加速-注册即送50G-免费流量" class="headerlink" title="星际云网络加速-注册即送50G|免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速-注册即送50G|免费流量</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1><p>8:END</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Malio-SSPANEL主题破解安装&quot;&gt;&lt;a href=&quot;#Malio-SSPANEL主题破解安装&quot; class=&quot;headerlink&quot; title=&quot;Malio SSPANEL主题破解安装&quot;&gt;&lt;/a&gt;&lt;center&gt;Malio SSPANEL主题破解安装&lt;/
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>如何提升国内NAT机拉取镜像速度</title>
@@ -491,28 +513,6 @@ Centos系统
       <category term="sspanel" scheme="https://siemenstutorials.github.io/tags/sspanel/"/>
     
       <category term="shadowsocks" scheme="https://siemenstutorials.github.io/tags/shadowsocks/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SSPANEL Brook SSR中转节点搭建</title>
-    <link href="https://siemenstutorials.github.io/posts/239d0dcf.html"/>
-    <id>https://siemenstutorials.github.io/posts/239d0dcf.html</id>
-    <published>2020-06-21T00:45:12.000Z</published>
-    <updated>2020-10-07T23:33:49.434Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="SSPANEL-Brook-SSR中转节点搭建"><a href="#SSPANEL-Brook-SSR中转节点搭建" class="headerlink" title="SSPANEL Brook SSR中转节点搭建"></a><center>SSPANEL Brook SSR中转节点搭建</center></h1><p>1:国内NAT/VPS安装Brook</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /root &amp;&amp; mkdir brook &amp;&amp; <span class="built_in">cd</span> brook</span><br></pre></td></tr></table></figure><p>2:获取Brook最新版本(可选：也可以直接前往<a href="https://github.com/txthinking/brook/releases/" target="_blank" rel="noopener">项目</a>地址下载最新版本)</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brook_ver=$(wget -qO- <span class="string">"https://github.com/txthinking/brook/tags"</span>| grep <span class="string">"/txthinking/brook/releases/tag/"</span>| head -n 1| awk -F <span class="string">"/tag/"</span> <span class="string">'&#123;print $2&#125;'</span>| sed <span class="string">'s/\"&gt;//'</span>) &amp;&amp; <span class="built_in">echo</span> <span class="variable">$&#123;brook_ver&#125;</span></span><br><span class="line">`</span><br></pre></td></tr></table></figure><p>下载Brook并赋予权限</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate <span class="string">"https://github.com/txthinking/brook/releases/download/<span class="variable">$&#123;brook_ver&#125;</span>/brook"</span></span><br><span class="line">chmod +x brook</span><br></pre></td></tr></table></figure><p>3：brook支持单端口转发和多端口转发<br>监听端口888，被转发（落地/国外VIPS）IP:1.1.1.1 端口：999<br>3.1单端口转发</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup ./brook relay -l :888 -r 1.1.1.1:999 &gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure><p>3.2多端口转发<br>监听端口888，被转发（落地/国外VIPS）IP:1.1.1.1 端口：999<br>监听端口889，被转发（落地/国外VIPS）IP:2.2.2.2 端口：998<br>监听端口887，被转发（落地/国外VIPS）IP:3.3.3.3 端口：997</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup ./brook relays -l <span class="string">":888 1.1.1.1:999"</span> -l <span class="string">":889 2.2.2.2:998"</span> -l <span class="string">":887 3.3.3.3:997"</span> &gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure><p>END</p><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;SSPANEL-Brook-SSR中转节点搭建&quot;&gt;&lt;a href=&quot;#SSPANEL-Brook-SSR中转节点搭建&quot; class=&quot;headerlink&quot; title=&quot;SSPANEL Brook SSR中转节点搭建&quot;&gt;&lt;/a&gt;&lt;center&gt;SSPANEL B
-      
-    
-    </summary>
-    
-    
     
   </entry>
   
