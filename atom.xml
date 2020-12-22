@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://siemenstutorials.github.io/"/>
-  <updated>2020-12-14T16:27:04.890Z</updated>
+  <updated>2020-12-22T16:56:08.019Z</updated>
   <id>https://siemenstutorials.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>L2TP VPN搭建教程及Win10设置连接</title>
+    <link href="https://siemenstutorials.github.io/posts/ea21b7d6.html"/>
+    <id>https://siemenstutorials.github.io/posts/ea21b7d6.html</id>
+    <published>2020-12-22T16:10:38.000Z</published>
+    <updated>2020-12-22T16:56:08.019Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="L2TP-VPN搭建教程及Win10设置连接"><a href="#L2TP-VPN搭建教程及Win10设置连接" class="headerlink" title="L2TP VPN搭建教程及Win10设置连接"></a><center>L2TP VPN搭建教程及Win10设置连接</center></h1><p>1.准备工具：VPS一台（centos7）<br><a href="https://my.racknerd.com/aff.php?aff=1313&pid=358" target="_blank" rel="noopener">年付80元VPS选购地址</a></p><p>2:SSH连接VPS运行以下脚本</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install wget</span><br><span class="line">wget https://git.io/vpnsetup-centos -O vpnsetup.sh &amp;&amp; sudo sh vpnsetup.sh</span><br></pre></td></tr></table></figure><p>2.1:安装完成后取得L2TP登陆信息；样式如下：<br>Server IP: xxx.xx.xx.xx<br>IPsec PSK: xxxx<br>Username: xxxx<br>Password: xxxx</p><p>2.2 修改修改ipsec配置文件</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/ipsec.conf</span><br></pre></td></tr></table></figure><p>在config setup中添加一句：nat_traversal=yes，充许传透nat建立l2tp连接；</p><p>2.3 关闭防火墙</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl mask firewalld</span><br></pre></td></tr></table></figure><p>2.4配置iptables</p><p>安装iptables服务</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">yum install -y iptables</span><br><span class="line">yum install -y iptables-services</span><br><span class="line">iptables -P INPUT ACCEPT</span><br><span class="line">iptables -F</span><br><span class="line">iptables -F</span><br><span class="line">iptables -X</span><br><span class="line">iptables -Z</span><br></pre></td></tr></table></figure><p>保存重启iptables</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service iptables save</span><br><span class="line">systemctl restart iptables</span><br></pre></td></tr></table></figure><p>2.5检查 iptables、ipsec、xl2tpd 三个服务是否是正常开启状态</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl status iptables</span><br><span class="line">systemctl status ipsec</span><br><span class="line">systemctl status xl2tpd</span><br></pre></td></tr></table></figure><p>2.6设置开机自启</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> ipsec</span><br><span class="line">systemctl <span class="built_in">enable</span> xl2tpd</span><br></pre></td></tr></table></figure><p> 重启</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart iptables</span><br><span class="line">systemctl restart ipsec</span><br><span class="line">systemctl restart xl2tpd</span><br></pre></td></tr></table></figure><p>启动</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl start iptables</span><br><span class="line">systemctl start ipsec</span><br><span class="line">systemctl start xl2tpd</span><br></pre></td></tr></table></figure><p>3:Windows设置添加L2TP登陆</p><p>单击开始菜单——择控制面板——进入 网络和Internet 部分——单击 网络与共享中心——单击 设置新的连接或网络——连接到工作区<br>——单击 使用我的Internet连接 (VPN)<br><img src="/images/l2tp1.png" alt></p><p>在 Internet地址 字段中输入你的 VPN 服务器 IP</p><p>在 目标名称 字段中输入任意内容 （我这里输入L2TP）</p><p>4：进入控制面板\网络和 Internet\网络连接<br>找到L2TP——右键属性——安全<br>VPN类型选择使用 IPsec 的第 2 层隧道协议 (L2TP/IPSec)<br>数据加密默认</p><p>身份验证<br>单击 允许使用这些协议。选中 “质询握手身份验证协议 (CHAP)” 复选框<br><img src="/images/l2tp2.png" alt></p><p>5：在安全项里选择高级设置<br><img src="/images/l2tp3.png" alt></p><p>你也可以通过以下方式进行设置：VPN-L2TP-高级选项-编辑<br>详细设置参考下图<br><img src="/images/l2tp4.png" alt></p><p>6：对Win10进行设置相关注册表以确保可连接<br>6.1单击“开始”，单击“运行”，键入“regedit”，然后单击“确定”<br>6.2 找到注册表的几项<br>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\RasMan\Parameters中的</p><p>AllowL2TPWeakCrypto项、AllowPPTPWeakCrypto项、ProhibitIpSec项；</p><p>以及HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PolicyAgent中的</p><p>AssumeUDPEncapsulationContextOnSendRule项，再将所有“数值数据”，改为“1”。</p><p>若没有则“新建”-&gt;“DWORD值”,名字为AssumeUDPEncapsulationContextOnSendRule  在“数值数据”框中，键入“1”</p><p>6.3 单击“开始”，单击“运行”，键入“services.msc”，然后单击“确定”<br>找到Routing and Remote Access服务，并开启，然后建议重启一次电脑</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;L2TP-VPN搭建教程及Win10设置连接&quot;&gt;&lt;a href=&quot;#L2TP-VPN搭建教程及Win10设置连接&quot; class=&quot;headerlink&quot; title=&quot;L2TP VPN搭建教程及Win10设置连接&quot;&gt;&lt;/a&gt;&lt;center&gt;L2TP VPN搭建教程
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>年度最新高性价比年付VPS-TOP排行榜——【定期更新】</title>
@@ -446,30 +468,6 @@
 1:时间同步：
 Centos系统
 &lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>利用Nginx实现流量中转和节点负载均衡</title>
-    <link href="https://siemenstutorials.github.io/posts/7b41dba4.html"/>
-    <id>https://siemenstutorials.github.io/posts/7b41dba4.html</id>
-    <published>2020-07-26T08:59:50.000Z</published>
-    <updated>2020-10-07T23:34:40.033Z</updated>
-    
-    <content type="html"><![CDATA[<center>利用Nginx进行流量中转并实现负载均衡-一种解决断流方案</center><p>食用工具：<a href="https://olvps.com/aff.php?aff=501" target="_blank" rel="noopener">NAT机</a>一台;VPS（ABC）3台；视频中采用系统镜像为:centOS7<br>【注意：搭建之前可以对你的VPS进行域名绑定；特别是动态VPS的必须用域名进行中转】</p><p>1:关闭所有VPS的防火墙</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld.service</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld.service</span><br></pre></td></tr></table></figure><p>2:在NAT机上安装Nginx</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y epel-release &amp;&amp; yum install -y nginx</span><br></pre></td></tr></table></figure><p>3：启动Nginx</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start nginx.service</span><br></pre></td></tr></table></figure><p>4:新建tcp.d文件夹并在文件夹中创建转发配置文件</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /etc/nginx/tcp.d/</span><br><span class="line">vi /etc/nginx/tcp.d/zf.conf</span><br></pre></td></tr></table></figure><p>5:输入配置信息；示例如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">stream&#123;</span><br><span class="line">    upstream tcpssh &#123;</span><br><span class="line">               server  IP(域名A):端口; </span><br><span class="line">               server  IP(域名B):端口;</span><br><span class="line">               server  IP(域名C):端口; </span><br><span class="line">    &#125;</span><br><span class="line">    server&#123;</span><br><span class="line">        listen NAT/VPS外部端口;</span><br><span class="line">        listen NAT/VPS外部端口 udp;</span><br><span class="line">        proxy_pass tcpssh;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>6：修改Nginx配置文件</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/nginx/</span><br><span class="line">vi nginx.conf</span><br></pre></td></tr></table></figure><p>并在配置文件中添加以下内容</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include /etc/nginx/tcp.d/*.conf;</span><br></pre></td></tr></table></figure><p>7：利用用 nginx -t 命令可以检查配置是否成功</p><p>8：设置开机启动nginx</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> nginx &amp;&amp; systemctl start nginx</span><br></pre></td></tr></table></figure><p>9：查看Nginx运行状态</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ss -ntlp| grep -i nginx</span><br></pre></td></tr></table></figure><p>10：若有需要须重启Nginx运行如下命令</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart nginx</span><br><span class="line">service nginx restart</span><br></pre></td></tr></table></figure><p>11：若要定时重启可添加定时任务<br>执行 crontab -e命令</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 */12 * * * systemctl restart nginx</span><br></pre></td></tr></table></figure><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-免费节点机场"><a href="#星际云网络加速-免费节点机场" class="headerlink" title="星际云网络加速|免费节点机场"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|免费节点机场</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;center&gt;利用Nginx进行流量中转并实现负载均衡-一种解决断流方案&lt;/center&gt;
-
-&lt;p&gt;食用工具：&lt;a href=&quot;https://olvps.com/aff.php?aff=501&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;NAT机&lt;/a&gt;一
       
     
     </summary>
