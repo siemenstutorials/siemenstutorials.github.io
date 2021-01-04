@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="SiemensTutorials">
 <meta property="og:description" content="利用Nginx&#x2F;Haproxy实现V2ray+ws+Tls多落地VPS负载均衡1：准备工具：国外VPS选购三台分别用三个域名进行解析好其IP地址；准备国内NAT或VDS中转机一台； 2:在国外VPS上分别安装V2ray+ws+tls节点:这里直接用wulabing onekey安装： 1wget -N --no-check-certificate -q -O install.sh &quot;https:&#x2F;">
 <meta property="article:published_time" content="2021-01-04T13:36:15.000Z">
-<meta property="article:modified_time" content="2021-01-04T14:15:05.150Z">
+<meta property="article:modified_time" content="2021-01-04T16:57:48.089Z">
 <meta property="article:author" content="SiemensTutorials">
 <meta name="twitter:card" content="summary">
 
@@ -352,7 +352,7 @@
         <h1 id="利用Nginx-Haproxy实现V2ray-ws-Tls多落地VPS负载均衡"><a href="#利用Nginx-Haproxy实现V2ray-ws-Tls多落地VPS负载均衡" class="headerlink" title="利用Nginx/Haproxy实现V2ray+ws+Tls多落地VPS负载均衡"></a><center>利用Nginx/Haproxy实现V2ray+ws+Tls多落地VPS负载均衡</center></h1><p>1：准备工具：国外<a href="https://my.racknerd.com/aff.php?aff=1313&amp;pid=358" target="_blank" rel="noopener">VPS选购</a>三台分别用三个域名进行解析好其IP地址；准备国内NAT或VDS中转机一台；</p>
 <p>2:在国外VPS上分别安装V2ray+ws+tls节点:<br>这里直接用wulabing onekey安装：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate -q -O install.sh <span class="string">"https://raw.githubusercontent.com/wulabing/V2Ray_ws-tls_bash_onekey/master/install.sh"</span> &amp;&amp; chmod +x install.sh &amp;&amp; bash install.sh</span><br></pre></td></tr></table></figure>
-<p>3:安装完成获取配置后对三台国外VPS进行配置修改；原则为UUID、alterID、路径参数皆需一致<br>配置修改时要注意须停止Nginx和V2ray服务<br>3.1修改Nginx配置：vi etc/nginx/conf/conf.d/v2ray.conf<br>将里面的location路径修改成一致<br>3.2修改V2ray配置<br>vi /etc/v2ray/config.json<br>修改里面的path<br>以上修改完成后须重新启动V2ray和Nginx<br>相关启动命令如下：</p>
+<p>3:安装完成获取配置后对三台国外VPS进行配置修改；原则为UUID、alterID、路径参数皆需一致<br>配置修改时要注意须停止Nginx和V2ray服务<br>3.1修改Nginx配置：vi /etc/nginx/conf/conf.d/v2ray.conf<br>将里面的location路径修改成一致<br>3.2修改V2ray配置<br>vi /etc/v2ray/config.json<br>修改里面的path<br>以上修改完成后须重新启动V2ray和Nginx<br>相关启动命令如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start v2ray</span><br><span class="line">systemctl start nginx</span><br></pre></td></tr></table></figure>
 <p> 相关停止命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop nginx</span><br><span class="line">systemctl stop v2ray</span><br></pre></td></tr></table></figure>
