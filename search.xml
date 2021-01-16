@@ -1239,4 +1239,29 @@ CentOS系统:
         <tag>谷歌云</tag>
       </tags>
   </entry>
+  <entry>
+    <title>利用Cloudflare快速创建NAT VPS ddns</title>
+    <url>/posts/10f05b95.html</url>
+    <content><![CDATA[<h1 id="利用Cloudflare快速创建NAT-VPS-ddns"><a href="#利用Cloudflare快速创建NAT-VPS-ddns" class="headerlink" title="利用Cloudflare快速创建NAT VPS ddns"></a><center>利用Cloudflare快速创建NAT VPS ddns</center></h1><p>由于很多NAT VPS是采用动太IP的模式，所以如果只用IP访问的话会随时失联，所以采用DDNS可有效解决动态IP服务器访问问题。<br>在做DDNS之前需要做以下操作<br>方法一：利用脚本创建<br>1：注册cloudflare帐号；</p>
+<p>2：把你的域名接入cloudflare进行解析，然后获取NS；并将NS接入域名服务商中；</p>
+<p>3：登入CF获取Global API Key；<br>4：任意创建一个二级域名，解析IP任意或写成8.8.8.8;切记云朵变灰</p>
+<p>5：下载 DDNS 脚本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl https://raw.githubusercontent.com/aipeach/cloudflare-api-v4-ddns/master/cf-v4-ddns.sh &gt; /root/cf-v4-ddns.sh &amp;&amp; chmod +x /root/cf-v4-ddns.sh</span><br></pre></td></tr></table></figure>
+<p>6:编辑CF配置文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi cf-v4-ddns.sh</span><br></pre></td></tr></table></figure>
+<p>7:配置信息如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># incorrect api-key results in E_UNAUTH error</span></span><br><span class="line"><span class="comment"># 填写 Global API Key</span></span><br><span class="line">CFKEY=</span><br><span class="line"></span><br><span class="line"><span class="comment"># Username, eg: user@example.com</span></span><br><span class="line"><span class="comment"># 填写 CloudFlare 登陆邮箱</span></span><br><span class="line">CFUSER=</span><br><span class="line"></span><br><span class="line"><span class="comment"># Zone name, eg: example.com</span></span><br><span class="line"><span class="comment"># 填写需要用来 DDNS 的一级域名</span></span><br><span class="line">CFZONE_NAME=</span><br><span class="line"></span><br><span class="line"><span class="comment"># Hostname to update, eg: homeserver.example.com</span></span><br><span class="line"><span class="comment"># 填写 DDNS 的二级域名(只需填写前缀)</span></span><br><span class="line">CFRECORD_NAME=</span><br></pre></td></tr></table></figure>
+<p>8:启动ddns更新IP;运行如下命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./cf-v4-ddns.sh</span><br></pre></td></tr></table></figure>
+<p>9:设置定时更新任务：<br>输入crontab -e；然后贴入以下配置：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">*/2 * * * * /root/cf-v4-ddns.sh &gt;/dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+<p>方法二：利用docker方式创建<br>1：接入域名；随意创建A记录IP自定</p>
+<p>2：安装docker</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker version &gt; /dev/null || curl -fsSL get.docker.com | bash</span><br><span class="line">service docker restart</span><br><span class="line">systemctl start docker</span><br><span class="line">systemctl <span class="built_in">enable</span> docker</span><br></pre></td></tr></table></figure>
+<p>3:运行docker</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run -d --name=cf-ddns \</span><br><span class="line">  -e EMAIL=hello@example.com \</span><br><span class="line">  -e API_KEY=xxxxxxx \</span><br><span class="line">  -e ZONE=example.com \</span><br><span class="line">  -e SUBDOMAIN=subdomain \</span><br><span class="line">  --restart=always oznu/cloudflare-ddns</span><br></pre></td></tr></table></figure>
+
+<p>END<br>致谢大神原创<a href="https://github.com/oznu/docker-cloudflare-ddns" target="_blank" rel="noopener">项目地址</a></p>
+<h1 id="TG交流群"><a href="#TG交流群" class="headerlink" title="TG交流群"></a><a href="https://t.me/siemenstutorials" target="_blank" rel="noopener">TG交流群</a></h1><h1 id="年付81元G口VPS"><a href="#年付81元G口VPS" class="headerlink" title="年付81元G口VPS"></a><a href="https://my.racknerd.com/aff.php?aff=1313&amp;pid=316" target="_blank" rel="noopener">年付81元G口VPS</a></h1><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-注册即送50G-免费流量"><a href="#星际云网络加速-注册即送50G-免费流量" class="headerlink" title="星际云网络加速-注册即送50G|免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速-注册即送50G|免费流量</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="踏莎云网络加速-纯V2-4K机场"><a href="#踏莎云网络加速-纯V2-4K机场" class="headerlink" title="踏莎云网络加速|纯V2 4K机场"></a><a href="https://tashacloud.com" target="_blank" rel="noopener">踏莎云网络加速|纯V2 4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
+  </entry>
 </search>
