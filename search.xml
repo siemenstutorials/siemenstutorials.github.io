@@ -1323,4 +1323,17 @@ CentOS系统:
         <tag>BBRPLUS</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Gost一键搭建SSR/V2ray科学上网隧道加密节点</title>
+    <url>/posts/a71ed4e5.html</url>
+    <content><![CDATA[<p>准备工具：国内中转机一台；国外落地VPS一台<br>1：在国内机器上一键安装Gost转发工具<br>主要设置监听的公网端口；落地机器的IP以及落地监听端口；<br>在国内机器运行如下脚本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/siemenstutorials/GostOnekey/master/Gost_OneKey.sh &amp;&amp; chmod +x Gost_OneKey.sh &amp;&amp; bash Gost_OneKey.sh</span><br></pre></td></tr></table></figure>
+<p>然后选择是否更新；直接按回车为不更新<br><img src="/images/gost1.png" alt><br>然后选择1安装GOST 然后使用命令bash Gost_OneKey.sh再次运行GOST 然后选择7 新增Gost转发配置<br><img src="/images/gost2.png" alt><br>转发模式中转机里一般选择1或者2<br>【1】为不加密转<br>【2】为加密转发<br>【3】为国外落地机解密接收</p>
+<p>2:在落地机器上安装SSR或V2ray<br>SSR一键安装脚本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh</span><br><span class="line">chmod +x shadowsocks-all.sh</span><br><span class="line">./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log</span><br></pre></td></tr></table></figure>
+<p>回车后选择2；然后设置密码、端口协议及混淆；最终完成安装</p>
+<p>3：假设转发为1不加密转发；则需要分别设置监听端口、落地机器IP域名及落地机端口（即SSR/V2RAY端口）</p>
+<p>4：打开SSR客户端设置IP 及端口（IP为中转机IP/端口为中转机公网端口）密码与其他参数不变。</p>
+<h1 id="TG交流群"><a href="#TG交流群" class="headerlink" title="TG交流群"></a><a href="https://t.me/siemenstutorials" target="_blank" rel="noopener">TG交流群</a></h1><h1 id="年付81元G口VPS"><a href="#年付81元G口VPS" class="headerlink" title="年付81元G口VPS"></a><a href="https://my.racknerd.com/aff.php?aff=1313&amp;pid=358" target="_blank" rel="noopener">年付81元G口VPS</a></h1><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-4K-SSR"><a href="#星际云网络加速-4K-SSR" class="headerlink" title="星际云网络加速|4K SSR"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速|4K SSR</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="踏莎云网络加速-V2ray-4K机场"><a href="#踏莎云网络加速-V2ray-4K机场" class="headerlink" title="踏莎云网络加速|V2ray 4K机场"></a><a href="https://tashacloud.com" target="_blank" rel="noopener">踏莎云网络加速|V2ray 4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
+  </entry>
 </search>
