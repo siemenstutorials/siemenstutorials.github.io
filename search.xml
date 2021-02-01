@@ -145,11 +145,11 @@ CentOS系统:
     <title>Brook中转一键脚本安装失效|手动安装完美解决方案</title>
     <url>/posts/2460223d.html</url>
     <content><![CDATA[<h1 id="Brook中转一键安装脚本失效解决方法"><a href="#Brook中转一键安装脚本失效解决方法" class="headerlink" title="Brook中转一键安装脚本失效解决方法"></a><center>Brook中转一键安装脚本失效解决方法</center></h1><p><img src="/images/brook.png" alt></p>
-<h1 id="国内中转机下载github源码失效-443连接失败等问题；须更改hosts文件"><a href="#国内中转机下载github源码失效-443连接失败等问题；须更改hosts文件" class="headerlink" title="国内中转机下载github源码失效 443连接失败等问题；须更改hosts文件"></a>国内中转机下载github源码失效 443连接失败等问题；须更改hosts文件</h1><p>1：首先可以前往<a href="https://githubusercontent.com.ipaddress.com/raw.githubusercontent.com" target="_blank" rel="noopener">查询最快的IP地址</a><br>2:然后利用echo写入查询到的最快IP和域名至hosts中<br>如：</p>
+<h1 id="国内中转机下载github源码失效-443连接失败等问题；须更改hosts文件"><a href="#国内中转机下载github源码失效-443连接失败等问题；须更改hosts文件" class="headerlink" title="国内中转机下载github源码失效 443连接失败等问题；须更改hosts文件"></a>国内中转机下载github源码失效 443连接失败等问题；须更改hosts文件</h1><p>1：首先可以前往<a href="https://www.ipaddress.com/" target="_blank" rel="noopener">查询最快的IP地址</a><br>2:然后利用echo写入查询到的最快IP和域名至hosts中<br>如：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"151.101.76.133 raw.githubusercontent.com"</span> &gt;&gt; /etc/hosts</span><br></pre></td></tr></table></figure>
 
 <p>2：下载brook-pf-mod.sh</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -N --no-check-certificate <span class="string">"https://raw.githubusercontent.com/siemenstutorials/brookddns/master/brook-pf-mod.sh"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -N --no-check-certificate https://raw.githubusercontent.com/siemenstutorials/brookddns/master/brook-pf-mod.sh</span><br></pre></td></tr></table></figure>
 <p>3:创建/usr/local/brook-pf目录，切换至该目录并清空里面的文件</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir /usr/<span class="built_in">local</span>/brook-pf;<span class="built_in">cd</span> /usr/<span class="built_in">local</span>/brook-pf;rm -rf /usr/<span class="built_in">local</span>/brook-pf/*</span><br></pre></td></tr></table></figure>
 
