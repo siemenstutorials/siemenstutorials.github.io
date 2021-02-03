@@ -262,8 +262,8 @@ CentOS系统:
     <title>Brook中转一键脚本安装失效|手动安装完美解决方案</title>
     <url>/posts/2460223d.html</url>
     <content><![CDATA[<h1 id="Brook中转一键安装脚本失效解决方法"><a href="#Brook中转一键安装脚本失效解决方法" class="headerlink" title="Brook中转一键安装脚本失效解决方法"></a><center>Brook中转一键安装脚本失效解决方法</center></h1><p><img src="/images/brook.png" alt></p>
-<h1 id="国内中转机下载github源码失效-443连接失败等问题；须更改hosts文件"><a href="#国内中转机下载github源码失效-443连接失败等问题；须更改hosts文件" class="headerlink" title="国内中转机下载github源码失效 443连接失败等问题；须更改hosts文件"></a>国内中转机下载github源码失效 443连接失败等问题；须更改hosts文件</h1><p>1：首先可以前往<a href="https://www.ipaddress.com/" target="_blank" rel="noopener">查询最快的IP地址</a><br>2:然后利用echo写入查询到的最快IP和域名至hosts中<br>如：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"151.101.76.133 raw.githubusercontent.com"</span> &gt;&gt; /etc/hosts</span><br></pre></td></tr></table></figure>
+<h1 id="国内中转机下载github源码失效-443连接失败等问题；须更改hosts文件"><a href="#国内中转机下载github源码失效-443连接失败等问题；须更改hosts文件" class="headerlink" title="国内中转机下载github源码失效 443连接失败等问题；须更改hosts文件"></a>国内中转机下载github源码失效 443连接失败等问题；须更改hosts文件</h1><p>1：首先可以前往<a href="https://www.ipaddress.com/" target="_blank" rel="noopener">查询最快的IP地址</a><br>2:然后利用echo写入查询到的最快IP和并把IP根据对应的域名替换如下echo命令中并运行<br>如：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"151.101.76.133 raw.githubusercontent.com"</span> &gt;&gt; /etc/hosts</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"151.101.76.133 github.com"</span> &gt;&gt; /etc/hosts</span><br></pre></td></tr></table></figure>
 
 <p>2：下载brook-pf-mod.sh</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -N --no-check-certificate https://raw.githubusercontent.com/siemenstutorials/brookddns/master/brook-pf-mod.sh</span><br></pre></td></tr></table></figure>
@@ -397,7 +397,7 @@ CentOS系统:
     <title>Gost一键搭建SSR/V2ray科学上网隧道加密节点</title>
     <url>/posts/a71ed4e5.html</url>
     <content><![CDATA[<p>准备工具：国内中转机一台；国外落地VPS一台<br>1：在国内机器上一键安装Gost转发工具<br>主要设置监听的公网端口；落地机器的IP以及落地监听端口；<br>在国内机器运行如下脚本：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/siemenstutorials/GostOnekey/master/Gost_OneKey.sh &amp;&amp; chmod +x Gost_OneKey.sh &amp;&amp; bash Gost_OneKey.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget --no-check-certificate -O install.sh https://raw.githubusercontent.com/siemenstutorials/onekeygost/master/install.sh &amp;&amp; chmod +x install.sh &amp;&amp; ./install.sh</span><br></pre></td></tr></table></figure>
 <p>然后选择是否更新；直接按回车为不更新<br><img src="/images/gost1.png" alt><br>然后选择1安装GOST 然后使用命令bash Gost_OneKey.sh再次运行GOST 然后选择7 新增Gost转发配置<br><img src="/images/gost2.png" alt><br>转发模式中转机里一般选择1或者2<br>【1】为不加密转<br>【2】为加密转发<br>【3】为国外落地机解密接收</p>
 <p>2:在落地机器上安装SSR或V2ray<br>SSR一键安装脚本</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh</span><br><span class="line">chmod +x shadowsocks-all.sh</span><br><span class="line">./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log</span><br></pre></td></tr></table></figure>

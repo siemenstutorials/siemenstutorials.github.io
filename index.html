@@ -334,8 +334,8 @@
         
           
           Brook中转一键安装脚本失效解决方法
-国内中转机下载github源码失效 443连接失败等问题；须更改hosts文件1：首先可以前往查询最快的IP地址2:然后利用echo写入查询到的最快IP和域名至hosts中如：
-1echo "151.101.76.133 raw.githubuserconte
+国内中转机下载github源码失效 443连接失败等问题；须更改hosts文件1：首先可以前往查询最快的IP地址2:然后利用echo写入查询到的最快IP和并把IP根据对应的域名替换如下echo命令中并运行如：
+12echo "151.101.76.133 ra
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -462,7 +462,7 @@
         
           
           准备工具：国内中转机一台；国外落地VPS一台1：在国内机器上一键安装Gost转发工具主要设置监听的公网端口；落地机器的IP以及落地监听端口；在国内机器运行如下脚本：
-1wget https://raw.githubusercontent.com/siemenstutorials/GostOnekey
+1wget --no-check-certificate -O install.sh https://raw.githubuserco
           ...
           <!--noindex-->
           <div class="post-button text-center">
