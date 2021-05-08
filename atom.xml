@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://siemenstutorials.github.io/"/>
-  <updated>2021-04-03T09:55:43.385Z</updated>
+  <updated>2021-05-08T22:16:09.659Z</updated>
   <id>https://siemenstutorials.github.io/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Linux-vps SOCKS5代理搭建教程</title>
+    <link href="https://siemenstutorials.github.io/posts/fe0478bb.html"/>
+    <id>https://siemenstutorials.github.io/posts/fe0478bb.html</id>
+    <published>2021-05-08T21:57:39.000Z</published>
+    <updated>2021-05-08T22:16:09.659Z</updated>
+    
+    <content type="html"><![CDATA[<p>1:SS5安装</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">yum install -y gcc openldap-devel pam-devel openssl-devel</span><br><span class="line">wget http://jaist.dl.sourceforge.net/project/ss5/ss5/3.8.9-8/ss5-3.8.9-8.tar.gz</span><br><span class="line">tar -vzx -f ss5-3.8.9-8.tar.gz</span><br><span class="line"><span class="built_in">cd</span> ss5-3.8.9/</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line">chmod a+x /etc/init.d/ss5</span><br></pre></td></tr></table></figure><p>2:启动Socks5:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service ss5 restart</span><br></pre></td></tr></table></figure><p>3:配置SS5登陆身份验证</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/opt/ss5/ss5.conf</span><br></pre></td></tr></table></figure><p>找到auth 并将同一行中Authenticationg列的”-“修改成u<br>找到permit并将同一行中的Auth列修改“-”为“u”</p><p>4：配置SS5用户名+访问密码</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/opt/ss5/ss5.passwd</span><br></pre></td></tr></table></figure><p>5:启动SS5</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service ss5 restart</span><br></pre></td></tr></table></figure><p>6:修改SS5默认连接端口<br>修改SS5 端口为1180 (默认端口 1080)<br>修改 /etc/init.d/ss5 并在文件顶部的 #!/bin/sh 之后添加下面的代码:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> SS5_SOCKS_PORT=1180</span><br><span class="line"><span class="built_in">export</span> SS5_SOCKS_USER=root</span><br></pre></td></tr></table></figure><p>（可以使用任何端口，但是请在防火墙中打开）</p><h1 id="付费多IP专用服务器-付费SS5搭建"><a href="#付费多IP专用服务器-付费SS5搭建" class="headerlink" title="付费多IP专用服务器 付费SS5搭建"></a><a href="https://t.me/siemenstutorial" target="_blank" rel="noopener">付费多IP专用服务器 付费SS5搭建</a></h1><h1 id="专用服务器购买"><a href="#专用服务器购买" class="headerlink" title="专用服务器购买"></a><a href="https://my.racknerd.com/aff.php?aff=1313&amp;pid=282" target="_blank" rel="noopener">专用服务器购买</a></h1><h1 id="SSPANEL-MALIO付费技术支持"><a href="#SSPANEL-MALIO付费技术支持" class="headerlink" title="SSPANEL/MALIO付费技术支持"></a><a href="https://t.me/siemenstutorial" target="_blank" rel="noopener">SSPANEL/MALIO付费技术支持</a></h1><h1 id="TG交流群"><a href="#TG交流群" class="headerlink" title="TG交流群"></a><a href="https://t.me/siemenstutorials" target="_blank" rel="noopener">TG交流群</a></h1><h1 id="年付81元G口VPS"><a href="#年付81元G口VPS" class="headerlink" title="年付81元G口VPS"></a><a href="https://my.racknerd.com/aff.php?aff=1313&amp;pid=358" target="_blank" rel="noopener">年付81元G口VPS</a></h1><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-注册即送免费流量"><a href="#星际云网络加速-注册即送免费流量" class="headerlink" title="星际云网络加速-注册即送免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速-注册即送免费流量</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="踏莎云网络加速-纯V2-4K机场"><a href="#踏莎云网络加速-纯V2-4K机场" class="headerlink" title="踏莎云网络加速|纯V2 4K机场"></a><a href="https://tashacloud.com" target="_blank" rel="noopener">踏莎云网络加速|纯V2 4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1:SS5安装&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>SSPANEL+V2ray节点对接含中转</title>
     <link href="https://siemenstutorials.github.io/posts/9037c129.html"/>
     <id>https://siemenstutorials.github.io/posts/9037c129.html</id>
     <published>2021-04-03T09:37:11.000Z</published>
-    <updated>2021-04-03T09:55:43.385Z</updated>
+    <updated>2021-04-03T09:56:02.118Z</updated>
     
     <content type="html"><![CDATA[<p>面板端操作：<br>1:在搭建之前请自行构建好SSPANEL 或Malio面板；然后进入管理员进行创建节点获取Node ID;并记下ID</p><p>2：在节点IP里输入格式如下<br>直连方式</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">服务器IP;端口;2;ws;;path=/index|host=伪装地址</span><br></pre></td></tr></table></figure><p>中转方式</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">服务器IP;端口;2;ws;;path=/index|host=伪装地址|server=中转IP|outside_port=中转端口</span><br></pre></td></tr></table></figure><p>落地服务端操作：<br>安装Docker并设置开机自启动</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://get.docker.com -o get-docker.sh</span><br><span class="line">bash get-docker.sh</span><br><span class="line">systemctl restart docker</span><br><span class="line">systemctl <span class="built_in">enable</span> docker</span><br></pre></td></tr></table></figure><p>运行节点对接：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name=名称随意 \</span><br><span class="line">-e speedtest=0 -e api_port=端口 -e downWithPanel=0 \</span><br><span class="line">-e node_id=节点ID -e usemysql=0  -e sspanel_url=<span class="string">"https://网站地址"</span> -e key=<span class="string">"对接密钥"</span> -e TZ=<span class="string">"Asia/Shanghai"</span>  \</span><br><span class="line">--<span class="built_in">log</span>-opt max-size=10m --<span class="built_in">log</span>-opt max-file=5 \</span><br><span class="line">--network=host --restart=always \</span><br><span class="line">xiaoyiya/free-node:v2ray</span><br></pre></td></tr></table></figure><p>[注：此Docker源自云艺Blog]</p><p>【[适合搭建SSPANEL 面板高性能的VPS清单】</p><p><a href="https://my.losangelesvps.com/aff.php?aff=364&pid=56" target="_blank" rel="noopener">年付19$高性能VPS</a></p><p><a href="https://my.losangelesvps.com/aff.php?aff=364&pid=57" target="_blank" rel="noopener">年付35$高性能VPS</a></p><p><a href="https://my.losangelesvps.com/aff.php?aff=364&pid=58" target="_blank" rel="noopener">年付18.5$高性能VPS</a></p><h1 id="SSPANEL-MALIO付费技术支持"><a href="#SSPANEL-MALIO付费技术支持" class="headerlink" title="SSPANEL/MALIO付费技术支持"></a><a href="https://t.me/siemenstutorial" target="_blank" rel="noopener">SSPANEL/MALIO付费技术支持</a></h1><h1 id="TG交流群"><a href="#TG交流群" class="headerlink" title="TG交流群"></a><a href="https://t.me/siemenstutorials" target="_blank" rel="noopener">TG交流群</a></h1><h1 id="年付81元G口VPS"><a href="#年付81元G口VPS" class="headerlink" title="年付81元G口VPS"></a><a href="https://my.racknerd.com/aff.php?aff=1313&amp;pid=358" target="_blank" rel="noopener">年付81元G口VPS</a></h1><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-注册即送免费流量"><a href="#星际云网络加速-注册即送免费流量" class="headerlink" title="星际云网络加速-注册即送免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速-注册即送免费流量</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="踏莎云网络加速-纯V2-4K机场"><a href="#踏莎云网络加速-纯V2-4K机场" class="headerlink" title="踏莎云网络加速|纯V2 4K机场"></a><a href="https://tashacloud.com" target="_blank" rel="noopener">踏莎云网络加速|纯V2 4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
     
@@ -450,28 +473,6 @@
       
       
         &lt;h1 id=&quot;如何提升国内NAT机拉取镜像速度&quot;&gt;&lt;a href=&quot;#如何提升国内NAT机拉取镜像速度&quot; class=&quot;headerlink&quot; title=&quot;如何提升国内NAT机拉取镜像速度&quot;&gt;&lt;/a&gt;&lt;center&gt;如何提升国内NAT机拉取镜像速度&lt;/center&gt;&lt;/h1&gt;
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>如何利用Linux批量测试SSR/V2RAY订阅节点速度</title>
-    <link href="https://siemenstutorials.github.io/posts/e49a8129.html"/>
-    <id>https://siemenstutorials.github.io/posts/e49a8129.html</id>
-    <published>2020-10-25T06:36:05.000Z</published>
-    <updated>2020-10-25T14:22:00.292Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="如何利用Linux批量测试SSR-V2RAY订阅节点速度"><a href="#如何利用Linux批量测试SSR-V2RAY订阅节点速度" class="headerlink" title="如何利用Linux批量测试SSR/V2RAY订阅节点速度"></a><center>如何利用Linux批量测试SSR/V2RAY订阅节点速度</center></h1><p><a href="https://github.com/tindy2013/stairspeedtest-reborn" target="_blank" rel="noopener">项目地址</a></p><p>1:下载测试最新版本代码</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/tindy2013/stairspeedtest-reborn/releases/download/v0.7.1/stairspeedtest_reborn_linux64.tar.gz</span><br><span class="line">tar -xzvf stairspeedtest_reborn_linux64.tar.gz</span><br></pre></td></tr></table></figure><p>2:运行测速脚本</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./webgui.sh</span><br></pre></td></tr></table></figure><p>3:在浏览器里输入<a href="http://serverip:65430/gui.html" target="_blank" rel="noopener">http://serverip:65430/gui.html</a><br><img src="/images/speedtest.png" alt><br>填入订阅链接测试即可</p><h1 id="TG交流群"><a href="#TG交流群" class="headerlink" title="TG交流群"></a><a href="https://t.me/siemenstutorials" target="_blank" rel="noopener">TG交流群</a></h1><h1 id="年付81元G口VPS"><a href="#年付81元G口VPS" class="headerlink" title="年付81元G口VPS"></a><a href="https://my.racknerd.com/aff.php?aff=1313&amp;pid=316" target="_blank" rel="noopener">年付81元G口VPS</a></h1><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-注册即送50G-免费流量"><a href="#星际云网络加速-注册即送50G-免费流量" class="headerlink" title="星际云网络加速-注册即送50G|免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速-注册即送50G|免费流量</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;如何利用Linux批量测试SSR-V2RAY订阅节点速度&quot;&gt;&lt;a href=&quot;#如何利用Linux批量测试SSR-V2RAY订阅节点速度&quot; class=&quot;headerlink&quot; title=&quot;如何利用Linux批量测试SSR/V2RAY订阅节点速度&quot;&gt;&lt;/a&gt;&lt;c
       
     
     </summary>
