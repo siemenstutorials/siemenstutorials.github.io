@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="SiemensTutorials">
 <meta property="og:description" content="1:SS5安装 12345678yum install -y gcc openldap-devel pam-devel openssl-develwget http:&#x2F;&#x2F;jaist.dl.sourceforge.net&#x2F;project&#x2F;ss5&#x2F;ss5&#x2F;3.8.9-8&#x2F;ss5-3.8.9-8.tar.gztar -vzx -f ss5-3.8.9-8.tar.gzcd ss5-3.8.9&#x2F;.&#x2F;con">
 <meta property="article:published_time" content="2021-05-08T21:57:39.000Z">
-<meta property="article:modified_time" content="2021-05-08T22:16:09.659Z">
+<meta property="article:modified_time" content="2021-05-11T18:55:21.787Z">
 <meta property="article:author" content="SiemensTutorials">
 <meta name="twitter:card" content="summary">
 
@@ -361,6 +361,10 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service ss5 restart</span><br></pre></td></tr></table></figure>
 <p>6:修改SS5默认连接端口<br>修改SS5 端口为1180 (默认端口 1080)<br>修改 /etc/init.d/ss5 并在文件顶部的 #!/bin/sh 之后添加下面的代码:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> SS5_SOCKS_PORT=1180</span><br><span class="line"><span class="built_in">export</span> SS5_SOCKS_USER=root</span><br></pre></td></tr></table></figure>
+<p>7：设置开机自启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">echo &#39;mkdir &#x2F;var&#x2F;run&#x2F;ss5&#x2F;&#39; &gt;&gt; &#x2F;etc&#x2F;rc.d&#x2F;rc.local ;</span><br><span class="line">chmod +x &#x2F;etc&#x2F;rc.d&#x2F;rc.local ;</span><br><span class="line">&#x2F;sbin&#x2F;chkconfig ss5 on </span><br><span class="line">service ss5 start &amp;&amp; service ss5 status</span><br></pre></td></tr></table></figure>
+
+
 <p>（可以使用任何端口，但是请在防火墙中打开）</p>
 <h1 id="付费多IP专用服务器-付费SS5搭建"><a href="#付费多IP专用服务器-付费SS5搭建" class="headerlink" title="付费多IP专用服务器 付费SS5搭建"></a><a href="https://t.me/siemenstutorial" target="_blank" rel="noopener">付费多IP专用服务器 付费SS5搭建</a></h1><h1 id="专用服务器购买"><a href="#专用服务器购买" class="headerlink" title="专用服务器购买"></a><a href="https://my.racknerd.com/aff.php?aff=1313&amp;pid=282" target="_blank" rel="noopener">专用服务器购买</a></h1><h1 id="SSPANEL-MALIO付费技术支持"><a href="#SSPANEL-MALIO付费技术支持" class="headerlink" title="SSPANEL/MALIO付费技术支持"></a><a href="https://t.me/siemenstutorial" target="_blank" rel="noopener">SSPANEL/MALIO付费技术支持</a></h1><h1 id="TG交流群"><a href="#TG交流群" class="headerlink" title="TG交流群"></a><a href="https://t.me/siemenstutorials" target="_blank" rel="noopener">TG交流群</a></h1><h1 id="年付81元G口VPS"><a href="#年付81元G口VPS" class="headerlink" title="年付81元G口VPS"></a><a href="https://my.racknerd.com/aff.php?aff=1313&amp;pid=358" target="_blank" rel="noopener">年付81元G口VPS</a></h1><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-注册即送免费流量"><a href="#星际云网络加速-注册即送免费流量" class="headerlink" title="星际云网络加速-注册即送免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速-注册即送免费流量</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="踏莎云网络加速-纯V2-4K机场"><a href="#踏莎云网络加速-纯V2-4K机场" class="headerlink" title="踏莎云网络加速|纯V2 4K机场"></a><a href="https://tashacloud.com" target="_blank" rel="noopener">踏莎云网络加速|纯V2 4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>
       
