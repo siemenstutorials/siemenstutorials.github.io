@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://siemenstutorials.github.io/"/>
-  <updated>2021-06-12T10:45:56.971Z</updated>
+  <updated>2021-05-11T18:55:21.787Z</updated>
   <id>https://siemenstutorials.github.io/</id>
   
   <author>
@@ -15,21 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>node</title>
-    <link href="https://siemenstutorials.github.io/posts/857fe845.html"/>
-    <id>https://siemenstutorials.github.io/posts/857fe845.html</id>
-    <published>2021-06-12T10:45:56.000Z</published>
-    <updated>2021-06-12T10:45:56.971Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-    
-  </entry>
   
   <entry>
     <title>Linux-vps SOCKS5代理搭建教程</title>
@@ -466,6 +451,28 @@
       
       
         &lt;h1 id=&quot;Malio-SSPANEL主题破解安装&quot;&gt;&lt;a href=&quot;#Malio-SSPANEL主题破解安装&quot; class=&quot;headerlink&quot; title=&quot;Malio SSPANEL主题破解安装&quot;&gt;&lt;/a&gt;&lt;center&gt;Malio SSPANEL主题破解安装&lt;/
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>如何提升国内NAT机拉取镜像速度</title>
+    <link href="https://siemenstutorials.github.io/posts/b9b6c455.html"/>
+    <id>https://siemenstutorials.github.io/posts/b9b6c455.html</id>
+    <published>2020-10-30T12:41:55.000Z</published>
+    <updated>2020-10-30T12:47:01.161Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="如何提升国内NAT机拉取镜像速度"><a href="#如何提升国内NAT机拉取镜像速度" class="headerlink" title="如何提升国内NAT机拉取镜像速度"></a><center>如何提升国内NAT机拉取镜像速度</center></h1><p>因国内的一些特殊原因，NAT机拉取dockerhub代码时会极慢，故可尝试以下方法进行提速</p><p>1：运行以下命令编辑或创建daemon.json</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/docker/daemon.json</span><br></pre></td></tr></table></figure><p>2:输入以下配置文件将镜像源设成国内</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"registry-mirrors"</span>: [<span class="string">"https://docker.mirrors.ustc.edu.cn"</span>, <span class="string">"http://hub-mirror.c.163.com"</span>, <span class="string">"https://registry.docker-cn.com"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>3:重启docker使服务生效</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure><p>END</p><h1 id="TG交流群"><a href="#TG交流群" class="headerlink" title="TG交流群"></a><a href="https://t.me/siemenstutorials" target="_blank" rel="noopener">TG交流群</a></h1><h1 id="年付81元G口VPS"><a href="#年付81元G口VPS" class="headerlink" title="年付81元G口VPS"></a><a href="https://my.racknerd.com/aff.php?aff=1313&amp;pid=316" target="_blank" rel="noopener">年付81元G口VPS</a></h1><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-注册即送50G-免费流量"><a href="#星际云网络加速-注册即送50G-免费流量" class="headerlink" title="星际云网络加速-注册即送50G|免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速-注册即送50G|免费流量</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;如何提升国内NAT机拉取镜像速度&quot;&gt;&lt;a href=&quot;#如何提升国内NAT机拉取镜像速度&quot; class=&quot;headerlink&quot; title=&quot;如何提升国内NAT机拉取镜像速度&quot;&gt;&lt;/a&gt;&lt;center&gt;如何提升国内NAT机拉取镜像速度&lt;/center&gt;&lt;/h1&gt;
       
     
     </summary>
