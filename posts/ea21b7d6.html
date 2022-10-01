@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5926565534384990"
+     crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="SiemensTutorials" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="L2TP VPN搭建教程及Win10设置连接1.准备工具：VPS一台（centos7）年付80元VPS选购地址 2:SSH连接VPS运行以下脚本 12yum install wgetwget https:&#x2F;&#x2F;git.io&#x2F;vpnsetup-centos -O vpnsetup.sh &amp;&amp; sudo sh vpnsetup.sh  2.1:安装完成后取得L2TP登陆信息；样式如下：S">
+<meta property="og:type" content="article">
+<meta property="og:title" content="L2TP VPN搭建教程及Win10设置连接">
+<meta property="og:url" content="https://siemenstutorials.github.io/posts/ea21b7d6.html">
+<meta property="og:site_name" content="SiemensTutorials">
+<meta property="og:description" content="L2TP VPN搭建教程及Win10设置连接1.准备工具：VPS一台（centos7）年付80元VPS选购地址 2:SSH连接VPS运行以下脚本 12yum install wgetwget https:&#x2F;&#x2F;git.io&#x2F;vpnsetup-centos -O vpnsetup.sh &amp;&amp; sudo sh vpnsetup.sh  2.1:安装完成后取得L2TP登陆信息；样式如下：S">
+<meta property="og:image" content="https://siemenstutorials.github.io/images/l2tp1.png">
+<meta property="og:image" content="https://siemenstutorials.github.io/images/l2tp2.png">
+<meta property="og:image" content="https://siemenstutorials.github.io/images/l2tp3.png">
+<meta property="og:image" content="https://siemenstutorials.github.io/images/l2tp4.png">
+<meta property="article:published_time" content="2020-12-22T16:10:38.000Z">
+<meta property="article:modified_time" content="2021-01-26T15:06:46.642Z">
+<meta property="article:author" content="SiemensTutorials">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://siemenstutorials.github.io/images/l2tp1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://siemenstutorials.github.io/posts/ea21b7d6.html"/>
+
+
+
+
+
+
+  <title>L2TP VPN搭建教程及Win10设置连接 | SiemensTutorials</title>
+  
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">SiemensTutorials</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://siemenstutorials.github.io/posts/ea21b7d6.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="SiemensTutorials">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SiemensTutorials">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">L2TP VPN搭建教程及Win10设置连接</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-23T00:10:38+08:00">
+                2020-12-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/ea21b7d6.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/posts/ea21b7d6.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="L2TP-VPN搭建教程及Win10设置连接"><a href="#L2TP-VPN搭建教程及Win10设置连接" class="headerlink" title="L2TP VPN搭建教程及Win10设置连接"></a><center>L2TP VPN搭建教程及Win10设置连接</center></h1><p>1.准备工具：VPS一台（centos7）<br><a href="https://my.racknerd.com/aff.php?aff=1313&pid=358" target="_blank" rel="noopener">年付80元VPS选购地址</a></p>
+<p>2:SSH连接VPS运行以下脚本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install wget</span><br><span class="line">wget https://git.io/vpnsetup-centos -O vpnsetup.sh &amp;&amp; sudo sh vpnsetup.sh</span><br></pre></td></tr></table></figure>
+
+<p>2.1:安装完成后取得L2TP登陆信息；样式如下：<br>Server IP: xxx.xx.xx.xx<br>IPsec PSK: xxxx<br>Username: xxxx<br>Password: xxxx</p>
+<p>2.2 修改修改ipsec配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/ipsec.conf</span><br></pre></td></tr></table></figure>
+<p>在config setup中添加一句：nat_traversal=yes，充许传透nat建立l2tp连接；</p>
+<p>2.3 关闭防火墙</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl mask firewalld</span><br></pre></td></tr></table></figure>
+
+<p>2.4配置iptables</p>
+<p>安装iptables服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">yum install -y iptables</span><br><span class="line">yum install -y iptables-services</span><br><span class="line">iptables -P INPUT ACCEPT</span><br><span class="line">iptables -F</span><br><span class="line">iptables -F</span><br><span class="line">iptables -X</span><br><span class="line">iptables -Z</span><br></pre></td></tr></table></figure>
+<p>保存重启iptables</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service iptables save</span><br><span class="line">systemctl restart iptables</span><br></pre></td></tr></table></figure>
+<p>2.5检查 iptables、ipsec、xl2tpd 三个服务是否是正常开启状态</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl status iptables</span><br><span class="line">systemctl status ipsec</span><br><span class="line">systemctl status xl2tpd</span><br></pre></td></tr></table></figure>
+<p>2.6设置开机自启</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> ipsec</span><br><span class="line">systemctl <span class="built_in">enable</span> xl2tpd</span><br></pre></td></tr></table></figure>
+
+<p> 重启</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart iptables</span><br><span class="line">systemctl restart ipsec</span><br><span class="line">systemctl restart xl2tpd</span><br></pre></td></tr></table></figure>
+
+
+<p>启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl start iptables</span><br><span class="line">systemctl start ipsec</span><br><span class="line">systemctl start xl2tpd</span><br></pre></td></tr></table></figure>
+
+<p>3:Windows设置添加L2TP登陆</p>
+<p>单击开始菜单——择控制面板——进入 网络和Internet 部分——单击 网络与共享中心——单击 设置新的连接或网络——连接到工作区<br>——单击 使用我的Internet连接 (VPN)<br><img src="/images/l2tp1.png" alt></p>
+<p>在 Internet地址 字段中输入你的 VPN 服务器 IP</p>
+<p>在 目标名称 字段中输入任意内容 （我这里输入L2TP）</p>
+<p>4：进入控制面板\网络和 Internet\网络连接<br>找到L2TP——右键属性——安全<br>VPN类型选择使用 IPsec 的第 2 层隧道协议 (L2TP/IPSec)<br>数据加密默认</p>
+<p>身份验证<br>单击 允许使用这些协议。选中 “质询握手身份验证协议 (CHAP)” 复选框<br><img src="/images/l2tp2.png" alt></p>
+<p>5：在安全项里选择高级设置<br><img src="/images/l2tp3.png" alt></p>
+<p>你也可以通过以下方式进行设置：VPN-L2TP-高级选项-编辑<br>详细设置参考下图<br><img src="/images/l2tp4.png" alt></p>
+<p>6：对Win10进行设置相关注册表以确保可连接<br>6.1单击“开始”，单击“运行”，键入“regedit”，然后单击“确定”<br>6.2 找到注册表的几项<br>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\RasMan\Parameters中的</p>
+<p>AllowL2TPWeakCrypto项、AllowPPTPWeakCrypto项、ProhibitIpSec项；</p>
+<p>以及HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PolicyAgent中的</p>
+<p>AssumeUDPEncapsulationContextOnSendRule项，再将所有“数值数据”，改为“1”。</p>
+<p>若没有则“新建”-&gt;“DWORD值”,名字为AssumeUDPEncapsulationContextOnSendRule  在“数值数据”框中，键入“1”</p>
+<p>6.3 单击“开始”，单击“运行”，键入“services.msc”，然后单击“确定”<br>找到Routing and Remote Access服务，并开启，然后建议重启一次电脑</p>
+<p>END</p>
+<h1 id="TG交流群"><a href="#TG交流群" class="headerlink" title="TG交流群"></a><a href="https://t.me/siemenstutorials" target="_blank" rel="noopener">TG交流群</a></h1><h1 id="年付81元G口VPS"><a href="#年付81元G口VPS" class="headerlink" title="年付81元G口VPS"></a><a href="https://my.racknerd.com/aff.php?aff=1313&amp;pid=358" target="_blank" rel="noopener">年付81元G口VPS</a></h1><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-注册即送50G-免费流量"><a href="#星际云网络加速-注册即送50G-免费流量" class="headerlink" title="星际云网络加速-注册即送50G|免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速-注册即送50G|免费流量</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    SiemensTutorials
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://siemenstutorials.github.io/posts/ea21b7d6.html" title="L2TP VPN搭建教程及Win10设置连接">https://siemenstutorials.github.io/posts/ea21b7d6.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/bd222d4d.html" rel="next" title="年度最新高性价比年付VPS-TOP排行榜——【定期更新】">
+                <i class="fa fa-chevron-left"></i> 年度最新高性价比年付VPS-TOP排行榜——【定期更新】
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/d1ba92ed.html" rel="prev" title="利用Nginx/Haproxy实现V2ray+ws+Tls多落地VPS负载均衡">
+                利用Nginx/Haproxy实现V2ray+ws+Tls多落地VPS负载均衡 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/header.jpg"
+                alt="SiemensTutorials" />
+            
+              <p class="site-author-name" itemprop="name">SiemensTutorials</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+            
+                <a href="/archives">
+           
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://t.me/siemenstutorials" target="_blank" title="Telegram">
+                      
+                        <i class="fa fa-fw fa-telegram"></i>Telegram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.youtube.com/SiemensTutorials" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.xjycloud.xyz/" title="星际云网络加速" target="_blank">星际云网络加速</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.youtube.com/SiemensTutorials" title="YouTube" target="_blank">YouTube</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#L2TP-VPN搭建教程及Win10设置连接"><span class="nav-number">1.</span> <span class="nav-text">L2TP VPN搭建教程及Win10设置连接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TG交流群"><span class="nav-number">2.</span> <span class="nav-text">TG交流群</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#年付81元G口VPS"><span class="nav-number">3.</span> <span class="nav-text">年付81元G口VPS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SiemensTutorials"><span class="nav-number">4.</span> <span class="nav-text">SiemensTutorials</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#星际云网络加速-注册即送50G-免费流量"><span class="nav-number">5.</span> <span class="nav-text">星际云网络加速-注册即送50G|免费流量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自由云网络加速-4K机场"><span class="nav-number">6.</span> <span class="nav-text">自由云网络加速|4K机场</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NETFLIX奈飞合租车"><span class="nav-number">7.</span> <span class="nav-text">NETFLIX奈飞合租车</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy;<span itemprop="copyrightYear">2022</span>
+ 
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank"  href="https://www.youtube.com/SiemensTutorials"> | SiemensTutorials</a> 
+</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'siemenstutorials',
+            repo: 'Blog_Dis',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '2cfa1ff85cd01802909c59954c820d065e78be0c',
+            
+                client_id: 'Iv1.24a99207d34a24d0'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

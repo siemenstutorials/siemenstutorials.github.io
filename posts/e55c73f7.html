@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5926565534384990"
+     crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="SiemensTutorials" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="如何有效降低ssr节点被墙机率1:利用caddy反代安装实现SSR+TLS的节点安装，以模拟HTTP&#x2F;HTTPS流量来伪装以降低流量被主动探测的概率。同时也可以自由选择是否搭配网站进行伪装。推荐一个服务端伪装配置： 123&quot;server_port&quot;: 443,&quot;obfs&quot;: &quot;tls1.2_ticket_auth&quot;,  # 客户端混淆插件选择：tls1.2_ticket_auth 或 tls1.2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何有效降低ssr节点被墙机率">
+<meta property="og:url" content="https://siemenstutorials.github.io/posts/e55c73f7.html">
+<meta property="og:site_name" content="SiemensTutorials">
+<meta property="og:description" content="如何有效降低ssr节点被墙机率1:利用caddy反代安装实现SSR+TLS的节点安装，以模拟HTTP&#x2F;HTTPS流量来伪装以降低流量被主动探测的概率。同时也可以自由选择是否搭配网站进行伪装。推荐一个服务端伪装配置： 123&quot;server_port&quot;: 443,&quot;obfs&quot;: &quot;tls1.2_ticket_auth&quot;,  # 客户端混淆插件选择：tls1.2_ticket_auth 或 tls1.2">
+<meta property="article:published_time" content="2021-02-20T12:07:24.000Z">
+<meta property="article:modified_time" content="2021-02-21T14:41:05.488Z">
+<meta property="article:author" content="SiemensTutorials">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://siemenstutorials.github.io/posts/e55c73f7.html"/>
+
+
+
+
+
+
+  <title>如何有效降低ssr节点被墙机率 | SiemensTutorials</title>
+  
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">SiemensTutorials</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://siemenstutorials.github.io/posts/e55c73f7.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="SiemensTutorials">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SiemensTutorials">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">如何有效降低ssr节点被墙机率</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-02-20T20:07:24+08:00">
+                2021-02-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/e55c73f7.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/posts/e55c73f7.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="如何有效降低ssr节点被墙机率"><a href="#如何有效降低ssr节点被墙机率" class="headerlink" title="如何有效降低ssr节点被墙机率"></a><center>如何有效降低ssr节点被墙机率</center></h1><p>1:利用caddy反代安装实现SSR+TLS的节点安装，以模拟HTTP/HTTPS流量来伪装以降低流量被主动探测的概率。同时也可以自由选择是否搭配网站进行伪装。<br>推荐一个服务端伪装配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"server_port"</span>: 443,</span><br><span class="line"><span class="string">"obfs"</span>: <span class="string">"tls1.2_ticket_auth"</span>,  <span class="comment"># 客户端混淆插件选择：tls1.2_ticket_auth 或 tls1.2_ticket_fastauth</span></span><br><span class="line"><span class="string">"redirect"</span>: [<span class="string">"*:443#HK2SCH130083c18593.wns.windows.com:443"</span>],</span><br></pre></td></tr></table></figure>
+<p> 客户端混淆参数填写：HK2SCH130083c18593.wns.windows.com<br>2：对SSR节点选择合理的混淆加密以保证节点安全性能。<br>auth_chain_<em>+none<br>加密<br>如果使用了auth_chain_</em>，加密可以直接使用none，因为auth_chain_a里对数据流已经使用了rc4加密，安全性有待商榷，但对个人使用应该不会有被抓包分析的隐患。</p>
+<p>混淆<br>‘tls1.2_ticket_auth’ 模拟了https的握手过程，目前墙对tls的流量检测似乎做的还不是很完备，用这个可以有效的混淆检测并且可以绕过运营商的QOS</p>
+<p>一种可以防止主动探测的加密配置方式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"server_port"</span>:443, //端口</span><br><span class="line"><span class="string">"password"</span>:<span class="string">"password"</span>, //密码</span><br><span class="line"><span class="string">"protocol"</span>:<span class="string">"auth_chain_*"</span>, //协议插件</span><br><span class="line"><span class="string">"obfs"</span>:<span class="string">"tls1.2_ticket_auth"</span>, //混淆插件-混淆插件随意，不过建议原版 (plain) 或者 兼容原版( _compatible )。</span><br><span class="line"><span class="string">"method"</span>:<span class="string">"none"</span>, //加密方式</span><br></pre></td></tr></table></figure>
+<p>采取以上配置理论上对TCP速度有大幅提升，同时降低了延时。<br>ShadowsocksR Wiki:<br>auth_chain_a（强烈推荐）：对首个包的认证部分进行使用Encrypt-then-MAC模式以真正免疫认证包的CCA攻击，预防各种探测和重防攻击，数据流自带RC4加密，同时此协议支持单端口多用户，不同用户之间无法解密数据，每次加密密钥均不相同，具体设置方法参见breakwa11的博客。</p>
+<p>使用此插件的服务器与客户机的UTC时间差不能超过24小时，即只需要年份日期正确即可，针对UDP部分也有加密及长度混淆。</p>
+<p>使用此插件建议加密使用 none。此插件不能兼容原协议，支持服务端自定义参数，参数为10进制整数，表示最大客户端同时使用数，最小值支持直接设置为 1，此插件能实时响应实际的客户端数量（你的客户端至少有一个连接没有断开才能保证你占用了一个客户端数，否则设置为1时其它客户端一连接别的就一定连不上）。</p>
+<p>推荐使用 auth_chain_a 插件，在以上插件里混淆能力较高，而抗检测能力最高，即使多人使用也难以识别封锁。同时如果要发布公开代理，以上auth插件均可严格限制使用客户端数（要注意的是若为auth_sha1_v4_compatible，那么用户只要使用原协议就没有限制效果），而auth_chain_a协议的限制最为精确。</p>
+<p>3：ShadowsocksR插件介绍<br>plain：表示不混淆，直接使用协议加密后的结果发送数据包</p>
+<p>http_simple：并非完全按照http1.1标准实现，仅仅做了一个头部的GET请求和一个简单的回应，之后依然为原协议流。使用这个混淆后，已在部分地区观察到似乎欺骗了QoS的结果。对于这种混淆，它并非为了减少特征，相反的是提供一种强特征，试图欺骗GFW的协议检测。要注意的是应用范围变大以后因特征明显有可能会被封锁。此插件可以兼容原协议(需要在服务端配置为http_simple_compatible)，延迟与原协议几乎无异（在存在QoS的地区甚至可能更快），除了头部数据包外没有冗余数据包，客户端支持自定义参数，参数为http请求的host</p>
+<p>http_post：与http_simple绝大部分相同，区别是使用POST方式发送数据，符合http规范，欺骗性更好，但只有POST请求这种行为容易被统计分析出异常。此插件可以兼容http_simple，同时也可兼容原协议(需要在服务端配置为http_post_compatible)，参数设置等内容参见http_simple，密切注意如果使用自定义http header，请务必填写boundary。<br>tls1.2_ticket_auth（强烈推荐）:模拟TLS1.2在客户端有session ticket的情况下的握手连接。目前为完整模拟实现，经抓包软件测试完美伪装为TLS1.2。因为有ticket所以没有发送证书等复杂步骤，因而防火墙无法根据证书做判断。同时自带一定的抗重放攻击的能力，以及包长度混淆能力。如遇到重放攻击则会在服务端log里搜索到，可以通过grep “replay attack”搜索，可以用此插件发现你所在地区线路有没有针对TLS的干扰。防火墙对TLS比较无能为力，抗封锁能力应该会较其它插件强，但遇到的干扰也可能不少，不过协议本身会检查出任何干扰，遇到干扰便断开连接，避免长时间等待，让客户端或浏览器自行重连。此插件可以兼容原协议(需要在服务端配置为tls1.2_ticket_auth_compatible)，比原协议多一次握手导致连接时间会长一些，使用C#客户端开启自动重连时比其它插件表现更好。客户端支持自定义参数，参数为SNI，即发送host名称的字段，此功能与TOR的meek插件十分相似，例如设置为cloudfront.net伪装为云服务器请求，可以使用逗号分割多个host如a.com,b.net,c.org，这时会随机使用</p>
+<p>4.协议定义插件<br>auth_aes128_md5或auth_aes128_sha1（均推荐）：对首个包的认证部分进行使用Encrypt-then-MAC模式以真正免疫认证包的CCA攻击，预防各种探测和重防攻击，同时此协议支持单端口多用户，具体设置方法参见breakwa11的博客。使用此插件的服务器与客户机的UTC时间差不能超过24小时，即只需要年份日期正确即可，针对UDP部分也有做简单的校验。此插件不能兼容原协议，支持服务端自定义参数，参数为10进制整数，表示最大客户端同时使用数。</p>
+<p>auth_chain_a（推荐）：对首个包的认证部分进行使用Encrypt-then-MAC模式以真正免疫认证包的CCA攻击，预防各种探测和重防攻击，数据流自带RC4加密，同时此协议支持单端口多用户，不同用户之间无法解密数据，每次加密密钥均不相同，具体设置方法参见breakwa11的博客。使用此插件的服务器与客户机的UTC时间差不能超过24小时，即只需要年份日期正确即可，针对UDP部分也有加密及长度混淆。使用此插件建议加密使用none。此插件不能兼容原协议，支持服务端自定义参数，参数为10进制整数，表示最大客户端同时使用数，最小值支持直接设置为1，此插件能实时响应实际的客户端数量（你的客户端至少有一个连接没有断开才能保证你占用了一个客户端数，否则设置为1时其它客户端一连接别的就一定连不上）。</p>
+<p>auth_chain_b（推荐）：与auth_chain_a几乎一样，但TCP部分采用特定模式的数据包分布（模式由密码决定），使得看起来像一个实实在在的协议，使数据包分布分析和熵分析难以发挥作用。如果你感觉当前的模式可能被识别，那么你只要简单的更换密码就解决问题了。此协议为测试版本协议，不能兼容原协议。</p>
+<p>auth_chain_c（推荐）：与auth_chain_b相比，尽力使得数据包长度分布归属到模式中，让包分布看起来更规整。但此版本与auth_chain_b相比对带宽有更多的浪费。</p>
+<p>auth_chain_d（推荐）：与auth_chain_c相比，在一定程度上增加了各种密码生成的模式的最大适用长度，这样就不需要在极端情况下再临时生成随机数，降低大包传输时的计算量，提高下载极限速度。</p>
+<p>推荐使用auth_chain_<em>系列插件，在以上插件里混淆能力较高，而抗检测能力最高，即使多人使用也难以识别封锁。同时如果要发布公开代理，以上auth插件均可严格限制使用客户端数（要注意的是若为auth_sha1_v4_compatible，那么用户只要使用原协议就没有限制效果），而auth_chain_</em>协议的限制最为精确。</p>
+<h1 id="SSPANEL-MALIO付费技术支持"><a href="#SSPANEL-MALIO付费技术支持" class="headerlink" title="SSPANEL/MALIO付费技术支持"></a><a href="https://t.me/siemenstutorial" target="_blank" rel="noopener">SSPANEL/MALIO付费技术支持</a></h1><h1 id="TG交流群"><a href="#TG交流群" class="headerlink" title="TG交流群"></a><a href="https://t.me/siemenstutorials" target="_blank" rel="noopener">TG交流群</a></h1><h1 id="年付81元G口VPS"><a href="#年付81元G口VPS" class="headerlink" title="年付81元G口VPS"></a><a href="https://my.racknerd.com/aff.php?aff=1313&amp;pid=358" target="_blank" rel="noopener">年付81元G口VPS</a></h1><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-注册即送50G-免费流量"><a href="#星际云网络加速-注册即送50G-免费流量" class="headerlink" title="星际云网络加速-注册即送50G|免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速-注册即送50G|免费流量</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="踏莎云网络加速-纯V2-4K机场"><a href="#踏莎云网络加速-纯V2-4K机场" class="headerlink" title="踏莎云网络加速|纯V2 4K机场"></a><a href="https://tashacloud.com" target="_blank" rel="noopener">踏莎云网络加速|纯V2 4K机场</a></h1><h1 id="NETFLIX奈飞合租车-TG交流群"><a href="#NETFLIX奈飞合租车-TG交流群" class="headerlink" title="NETFLIX奈飞合租车# TG交流群"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a># <a href="https://t.me/siemenstutorials" target="_blank" rel="noopener">TG交流群</a></h1>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    SiemensTutorials
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://siemenstutorials.github.io/posts/e55c73f7.html" title="如何有效降低ssr节点被墙机率">https://siemenstutorials.github.io/posts/e55c73f7.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/1f7d6529.html" rel="next" title="2021年高性能低价VPS及优惠码辑合">
+                <i class="fa fa-chevron-left"></i> 2021年高性能低价VPS及优惠码辑合
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/e3b5dbd7.html" rel="prev" title="Clash使用方法及各平台下载集合">
+                Clash使用方法及各平台下载集合 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/header.jpg"
+                alt="SiemensTutorials" />
+            
+              <p class="site-author-name" itemprop="name">SiemensTutorials</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+            
+                <a href="/archives">
+           
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://t.me/siemenstutorials" target="_blank" title="Telegram">
+                      
+                        <i class="fa fa-fw fa-telegram"></i>Telegram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.youtube.com/SiemensTutorials" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.xjycloud.xyz/" title="星际云网络加速" target="_blank">星际云网络加速</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.youtube.com/SiemensTutorials" title="YouTube" target="_blank">YouTube</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#如何有效降低ssr节点被墙机率"><span class="nav-number">1.</span> <span class="nav-text">如何有效降低ssr节点被墙机率</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SSPANEL-MALIO付费技术支持"><span class="nav-number">2.</span> <span class="nav-text">SSPANEL&#x2F;MALIO付费技术支持</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TG交流群"><span class="nav-number">3.</span> <span class="nav-text">TG交流群</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#年付81元G口VPS"><span class="nav-number">4.</span> <span class="nav-text">年付81元G口VPS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SiemensTutorials"><span class="nav-number">5.</span> <span class="nav-text">SiemensTutorials</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#星际云网络加速-注册即送50G-免费流量"><span class="nav-number">6.</span> <span class="nav-text">星际云网络加速-注册即送50G|免费流量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自由云网络加速-4K机场"><span class="nav-number">7.</span> <span class="nav-text">自由云网络加速|4K机场</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#踏莎云网络加速-纯V2-4K机场"><span class="nav-number">8.</span> <span class="nav-text">踏莎云网络加速|纯V2 4K机场</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NETFLIX奈飞合租车-TG交流群"><span class="nav-number">9.</span> <span class="nav-text">NETFLIX奈飞合租车# TG交流群</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy;<span itemprop="copyrightYear">2022</span>
+ 
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank"  href="https://www.youtube.com/SiemensTutorials"> | SiemensTutorials</a> 
+</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'siemenstutorials',
+            repo: 'Blog_Dis',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '2cfa1ff85cd01802909c59954c820d065e78be0c',
+            
+                client_id: 'Iv1.24a99207d34a24d0'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5926565534384990"
+     crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="SiemensTutorials" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="2020最新V2Fly&#x2F;V2ray web管理面板搭建 视频搭建教程面板项目地址V2Fly项目地址官方推荐方法一：1:安装前准备域名1个；VPS一台(这里用谷歌云);系统镜像:CENTOS72：设定xshell进行root密码登陆，避免SSH经常断连 12sed -i &#39;s&#x2F;PermitRootLogin no&#x2F;PermitRootLogin yes&#x2F;g&#39; &#x2F;etc&#x2F;ssh&#x2F;sshd_config">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2020最新V2Fly&#x2F;V2ray web管理面板搭建">
+<meta property="og:url" content="https://siemenstutorials.github.io/posts/46d8ebb9.html">
+<meta property="og:site_name" content="SiemensTutorials">
+<meta property="og:description" content="2020最新V2Fly&#x2F;V2ray web管理面板搭建 视频搭建教程面板项目地址V2Fly项目地址官方推荐方法一：1:安装前准备域名1个；VPS一台(这里用谷歌云);系统镜像:CENTOS72：设定xshell进行root密码登陆，避免SSH经常断连 12sed -i &#39;s&#x2F;PermitRootLogin no&#x2F;PermitRootLogin yes&#x2F;g&#39; &#x2F;etc&#x2F;ssh&#x2F;sshd_config">
+<meta property="og:image" content="https://siemenstutorials.github.io/images/webmanage.png">
+<meta property="article:published_time" content="2020-09-12T05:50:18.000Z">
+<meta property="article:modified_time" content="2020-10-07T23:37:32.534Z">
+<meta property="article:author" content="SiemensTutorials">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://siemenstutorials.github.io/images/webmanage.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://siemenstutorials.github.io/posts/46d8ebb9.html"/>
+
+
+
+
+
+
+  <title>2020最新V2Fly/V2ray web管理面板搭建 | SiemensTutorials</title>
+  
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">SiemensTutorials</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://siemenstutorials.github.io/posts/46d8ebb9.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="SiemensTutorials">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SiemensTutorials">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2020最新V2Fly/V2ray web管理面板搭建</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-12T13:50:18+08:00">
+                2020-09-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/46d8ebb9.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/posts/46d8ebb9.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="2020最新V2Fly-V2ray-web管理面板搭建"><a href="#2020最新V2Fly-V2ray-web管理面板搭建" class="headerlink" title="2020最新V2Fly/V2ray web管理面板搭建"></a><center>2020最新V2Fly/V2ray web管理面板搭建</center></h1><p><img src="/images/webmanage.png" alt></p>
+<h1 id="视频搭建教程"><a href="#视频搭建教程" class="headerlink" title="视频搭建教程"></a><a href="https://youtu.be/6keREZI1LXw" target="_blank" rel="noopener">视频搭建教程</a></h1><p><a href="https://github.com/master-coder-ll/v2ray-web-manager" target="_blank" rel="noopener">面板项目地址</a><br><a href="https://github.com/v2fly/fhs-install-v2ray" target="_blank" rel="noopener">V2Fly项目地址</a><br>官方推荐方法一：<br>1:安装前准备<br>域名1个；VPS一台(这里用谷歌云);系统镜像:CENTOS7<br>2：设定xshell进行root密码登陆，避免SSH经常断连</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">'s/PermitRootLogin no/PermitRootLogin yes/g'</span> /etc/ssh/sshd_config</span><br><span class="line">sed -i <span class="string">'s/PasswordAuthentication no/PasswordAuthentication yes/g'</span> /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+<p>设定密码<br>passwd root<br>重启sshd服务<br>service sshd restart<br>3：开始安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br><span class="line">yum makecache</span><br><span class="line">yum install epel-release</span><br><span class="line">yum install vim nginx java-1.8.0-openjdk wget unzip -y</span><br></pre></td></tr></table></figure>
+<p><a href="https://github.com/v2fly/fhs-install-v2ray" target="_blank" rel="noopener">安装V2ray</a><br>3:配置Nginx</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/nginx/conf.d</span><br><span class="line">vi v2ray-manager.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">  listen 80;</span><br><span class="line">  server_name 127.0.0.1; <span class="comment">#修改为自己的IP/域名</span></span><br><span class="line">  root /opt/jar/web;</span><br><span class="line">                </span><br><span class="line">  location /api &#123;</span><br><span class="line">    proxy_pass http://127.0.0.1:9091/;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  location /ws/ &#123;</span><br><span class="line">    proxy_redirect off;</span><br><span class="line">    proxy_pass http://127.0.0.1:8081;</span><br><span class="line">    proxy_http_version 1.1;</span><br><span class="line">    proxy_set_header Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">    proxy_set_header Connection <span class="string">"upgrade"</span>;</span><br><span class="line">    proxy_set_header Host <span class="variable">$http_host</span>;</span><br><span class="line">    proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">    proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">  &#125; </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">systemctl start nginx</span><br><span class="line">nginx -s reload</span><br><span class="line">systemctl <span class="built_in">enable</span> nginx</span><br><span class="line">systemctl status nginx.service</span><br><span class="line">````bash</span><br><span class="line">6:创建目录</span><br><span class="line">````bash</span><br><span class="line">mkdir /opt/jar -p</span><br><span class="line"><span class="built_in">cd</span> /opt/jar</span><br></pre></td></tr></table></figure>
+<p>下载releases包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget -c https://glare.now.sh/master-coder-ll/v2ray-web-manager/admin -O admin.jar</span><br><span class="line">wget -c https://glare.now.sh/master-coder-ll/v2ray-manager-console/dist -O dist.zip</span><br><span class="line">wget -c https://glare.now.sh/master-coder-ll/v2ray-web-manager/v2ray-proxy -O v2ray-proxy.jar</span><br></pre></td></tr></table></figure>
+<p>解压前端到web文件夹<br>unzip dist.zip  -d web</p>
+<p>4.下载管理配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget -c --no-check-certificate https://raw.githubusercontent.com/master-coder-ll/v2ray-web-manager/master/conf/admin.yaml</span><br><span class="line">wget -c --no-check-certificate https://raw.githubusercontent.com/master-coder-ll/v2ray-web-manager/master/conf/proxy.yaml</span><br><span class="line">wget -c --no-check-certificate https://raw.githubusercontent.com/master-coder-ll/v2ray-web-manager/master/conf/config.json</span><br></pre></td></tr></table></figure>
+<p>修改admin.yaml与proxy.yaml</p>
+<p>5:配置V2ray</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /opt/jar/config.json /usr/<span class="built_in">local</span>/etc/v2ray/</span><br></pre></td></tr></table></figure>
+<p>重启v2ray</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service v2ray stop</span><br><span class="line">service v2ray start</span><br></pre></td></tr></table></figure>
+<p>6.运行JAVA<br>创建默认数据库目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /opt/jar/db -p</span><br></pre></td></tr></table></figure>
+<p>运行admin</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar -Xms40m -Xmx40m -XX:MaxDirectMemorySize=10M -XX:MaxMetaspaceSize=80m  /opt/jar/admin.jar --spring.config.location=/opt/jar/admin.yaml &gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<p>运行V2ray-proxy</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar -Xms40m -Xmx40m -XX:MaxDirectMemorySize=10M -XX:MaxMetaspaceSize=80m /opt/jar/v2ray-proxy.jar --spring.config.location=/opt/jar/proxy.yaml &gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<p>7.日志查看</p>
+<h1 id="查看admin日志"><a href="#查看admin日志" class="headerlink" title="查看admin日志"></a>查看admin日志</h1><p>tail -100f /opt/jar/logs/admin.log</p>
+<h1 id="查看admin的错误日志-version-gt-v3-1-5"><a href="#查看admin的错误日志-version-gt-v3-1-5" class="headerlink" title="查看admin的错误日志(version &gt; v3.1.5)"></a>查看admin的错误日志(version &gt; v3.1.5)</h1><p>tail -100f /opt/jar/logs/admin.log.ERROR</p>
+<h1 id="查看-v2ray-proxy日志"><a href="#查看-v2ray-proxy日志" class="headerlink" title="查看 v2ray-proxy日志"></a>查看 v2ray-proxy日志</h1><p>tail -100f /opt/jar/logs/v2ray-proxy.log</p>
+<h1 id="查看v2ray-proxy的错误日志-version-gt-v3-1-5"><a href="#查看v2ray-proxy的错误日志-version-gt-v3-1-5" class="headerlink" title="查看v2ray-proxy的错误日志(version &gt; v3.1.5)"></a>查看v2ray-proxy的错误日志(version &gt; v3.1.5)</h1><p>tail -100f /opt/jar/logs/v2ray-proxy.log.ERROR</p>
+<h1 id="ctrl-c-退出查看日志"><a href="#ctrl-c-退出查看日志" class="headerlink" title="ctrl+c 退出查看日志"></a>ctrl+c 退出查看日志</h1><p>布署常见错误解决方案：<br>502报错<br>重新运行以下命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar -Xms100m -Xmx100m -XX:MaxDirectMemorySize=10M -XX:MaxMetaspaceSize=80m  /opt/jar/admin.jar --spring.config.location=/opt/jar/admin.yaml &gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setsebool httpd_can_network_connect 1</span><br></pre></td></tr></table></figure>
+<p>搭建完后节点无法上网请校准时间</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">date -R</span><br><span class="line">timedatectl <span class="built_in">set</span>-local-rtc 1</span><br><span class="line">timedatectl <span class="built_in">set</span>-timezone Asia/Shanghai</span><br></pre></td></tr></table></figure>
+<p>如何设置开机自启JAVA进程<br>1：Create v2panel-start.sh</p>
+<p>vi /opt/jar/v2panel-start.sh</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">nohup java -jar -Xmx40m -XX:MaxDirectMemorySize=8M -XX:MaxMetaspaceSize=80m /opt/jar/admin.jar --spring.config.location=/opt/jar/admin.yaml &gt; /dev/null 2&gt;&amp;1 &amp;</span><br><span class="line"><span class="built_in">echo</span> $! &gt; /var/run/v2ray-admin.pid</span><br><span class="line">nohup java -jar -Xmx40m -XX:MaxDirectMemorySize=8M -XX:MaxMetaspaceSize=48m /opt/jar/v2ray-proxy.jar --spring.config.location=/opt/jar/proxy.yaml &gt; /dev/null 2&gt;&amp;1 &amp;</span><br><span class="line"><span class="built_in">echo</span> $! &gt; /var/run/v2ray-proxy.pid</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x /opt/jar/v2panel-start.sh</span><br></pre></td></tr></table></figure>
+<p>2：Create v2panel-stop.sh<br>vi /opt/jar/v2panel-stop.sh</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">PID1=<span class="variable">$&#123;cat /var/run/v2ray-admin.pid&#125;</span></span><br><span class="line"><span class="built_in">kill</span> -15 <span class="variable">$PID1</span></span><br><span class="line">PID2=<span class="variable">$&#123;cat /var/run/v2ray-proxy.pid&#125;</span></span><br><span class="line"><span class="built_in">kill</span> -15 <span class="variable">$PID2</span></span><br></pre></td></tr></table></figure>
+<p>3：Register v2panel service<br>vi /etc/systemd/system/v2panel.service</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=v2ray-web-manager</span><br><span class="line">After=network.target network-online.target nss-lookup.target mysql.service mariadb.service mysqld.service</span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">StandardError=journal</span><br><span class="line">ExecStart=/opt/jar/v2panel-start.sh</span><br><span class="line">ExecStop=/opt/jar/v2panel-stop.sh</span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<p>4：启动管理脚本<br>Set autostart<br>systemctl enable v2panel<br>Start service<br>systemctl start v2panel<br>Stop service<br>systemctl stop v2panel</p>
+<p>5:SSL证书申请</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install socat -y</span><br><span class="line">curl https://get.acme.sh | sh</span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+<p>证书申请</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash ~/.acme.sh/acme.sh --issue -d 域名 --alpn -k ec-256</span><br></pre></td></tr></table></figure>
+<p>指定安装路径</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /etc/v2ray &amp;&amp; sudo ~/.acme.sh/acme.sh --installcert -d 域名 --fullchainpath /etc/v2ray/v2ray.crt --keypath /etc/v2ray/v2ray.key --ecc</span><br></pre></td></tr></table></figure>
+
+<p>6：配置Nginx配置文件<br>vi /etc/nginx/conf.d/v2ray-manager.conf</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 443 ssl http2;</span><br><span class="line">    server_name 域名;</span><br><span class="line">    root /opt/jar/web;</span><br><span class="line">    ssl_certificate       /etc/v2ray/v2ray.crt;</span><br><span class="line">    ssl_certificate_key   /etc/v2ray/v2ray.key;</span><br><span class="line">    ssl_protocols TLSv1.1 TLSv1.2 TLSv1.3;</span><br><span class="line">    ssl_ciphers TLS13-AES-128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line">location /api &#123;</span><br><span class="line">        proxy_pass http://127.0.0.1:9091/;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location /ws/ &#123;</span><br><span class="line">        proxy_redirect off;</span><br><span class="line">        proxy_pass http://127.0.0.1:8081;</span><br><span class="line">        proxy_http_version 1.1;</span><br><span class="line">        proxy_set_header Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">        proxy_set_header Connection <span class="string">"upgrade"</span>;</span><br><span class="line">        proxy_set_header Host <span class="variable">$http_host</span>;</span><br><span class="line">        proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">        proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line">       </span><br><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name 域名;</span><br><span class="line">    <span class="built_in">return</span> 301 https:///<span class="variable">$http_host</span><span class="variable">$request_uri</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>方法二推荐：</p>
+<h1 id="用宝塔面板搭建"><a href="#用宝塔面板搭建" class="headerlink" title="用宝塔面板搭建"></a>用宝塔面板搭建</h1><p>1：BT安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y wget &amp;&amp; wget -O install.sh http://download.bt.cn/install/install_6.0.sh &amp;&amp; sh install.sh</span><br></pre></td></tr></table></figure>
+<p>2:登陆宝塔安装Nginx</p>
+<p>3:添加网站；添加域名；申请SSL证书并修改配置文件<br>在「设置」——「配置文件」选项，在ssl最后一个}前添加如下代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">location /api &#123;</span><br><span class="line">  proxy_pass http://127.0.0.1:9091/;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">location /ws/ &#123;</span><br><span class="line">  proxy_redirect off;</span><br><span class="line">  proxy_pass http://127.0.0.1:8081;</span><br><span class="line">  proxy_http_version 1.1;</span><br><span class="line">  proxy_set_header Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">  proxy_set_header Connection <span class="string">"upgrade"</span>;</span><br><span class="line">  proxy_set_header Host <span class="variable">$http_host</span>;</span><br><span class="line">  proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">  proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4:安装V2ray<br><a href="https://github.com/v2fly/fhs-install-v2ray" target="_blank" rel="noopener">V2Fly项目地址</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">yum makecache</span><br><span class="line">yum install curl</span><br><span class="line">curl -O https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh</span><br><span class="line">curl -O https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-dat-release.sh</span><br><span class="line">bash install-release.sh</span><br><span class="line">bash install-dat-release.sh</span><br></pre></td></tr></table></figure>
+
+<p>5：编辑V2ray配置文件<br>cd /usr/local/etc/v2ray<br>vi config.json</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"api"</span>: &#123;</span><br><span class="line">    <span class="string">"services"</span>: [</span><br><span class="line">      <span class="string">"HandlerService"</span>,</span><br><span class="line">      <span class="string">"LoggerService"</span>,</span><br><span class="line">      <span class="string">"StatsService"</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="string">"tag"</span>: <span class="string">"api"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"inboundDetour"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"listen"</span>: <span class="string">"127.0.0.1"</span>,</span><br><span class="line">      <span class="string">"port"</span>: 62789,</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"dokodemo-door"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;</span><br><span class="line">        <span class="string">"address"</span>: <span class="string">"127.0.0.1"</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"tag"</span>: <span class="string">"api"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"log"</span>: &#123;</span><br><span class="line">    <span class="string">"loglevel"</span>: <span class="string">"info"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"inbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"listen"</span>: <span class="string">"127.0.0.1"</span>,</span><br><span class="line">      <span class="string">"port"</span>: 6001,</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"vmess"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;</span><br><span class="line">        <span class="string">"clients"</span>: [],</span><br><span class="line">        <span class="string">"disableInsecureEncryption"</span>: <span class="literal">false</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"sniffing"</span>: &#123;</span><br><span class="line">        <span class="string">"destOverride"</span>: [</span><br><span class="line">          <span class="string">"http"</span>,</span><br><span class="line">          <span class="string">"tls"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">"enabled"</span>: <span class="literal">true</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"streamSettings"</span>: &#123;</span><br><span class="line">        <span class="string">"network"</span>: <span class="string">"ws"</span>,</span><br><span class="line">        <span class="string">"security"</span>: <span class="string">"none"</span>,</span><br><span class="line">        <span class="string">"wsSettings"</span>: &#123;</span><br><span class="line">          <span class="string">"headers"</span>: &#123;&#125;,</span><br><span class="line">          <span class="string">"path"</span>: <span class="string">"/ws/"</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">"tag"</span>: <span class="string">"6001"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"outbounds"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"freedom"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"protocol"</span>: <span class="string">"blackhole"</span>,</span><br><span class="line">      <span class="string">"settings"</span>: &#123;&#125;,</span><br><span class="line">      <span class="string">"tag"</span>: <span class="string">"blocked"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"policy"</span>: &#123;</span><br><span class="line">    <span class="string">"system"</span>: &#123;</span><br><span class="line">      <span class="string">"statsInboundDownlink"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="string">"statsInboundUplink"</span>: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"routing"</span>: &#123;</span><br><span class="line">    <span class="string">"rules"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"inboundTag"</span>: [</span><br><span class="line">          <span class="string">"api"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">"outboundTag"</span>: <span class="string">"api"</span>,</span><br><span class="line">        <span class="string">"type"</span>: <span class="string">"field"</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"ip"</span>: [</span><br><span class="line">          <span class="string">"geoip:private"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">"outboundTag"</span>: <span class="string">"blocked"</span>,</span><br><span class="line">        <span class="string">"type"</span>: <span class="string">"field"</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"outboundTag"</span>: <span class="string">"blocked"</span>,</span><br><span class="line">        <span class="string">"protocol"</span>: [</span><br><span class="line">          <span class="string">"bittorrent"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">"type"</span>: <span class="string">"field"</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"stats"</span>: &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>重启V2ray</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service v2ray restart</span><br></pre></td></tr></table></figure>
+<p>其余同第一种方法的第6步开始</p>
+<p>END</p>
+<h1 id="TG交流群"><a href="#TG交流群" class="headerlink" title="TG交流群"></a><a href="https://t.me/siemenstutorials" target="_blank" rel="noopener">TG交流群</a></h1><h1 id="SiemensTutorials"><a href="#SiemensTutorials" class="headerlink" title="SiemensTutorials"></a><a href="https://www.youtube.com/SiemensTutorials" target="_blank" rel="noopener">SiemensTutorials</a></h1><h1 id="星际云网络加速-注册即送50G-免费流量"><a href="#星际云网络加速-注册即送50G-免费流量" class="headerlink" title="星际云网络加速-注册即送50G|免费流量"></a><a href="https://www.xjycloud.xyz" target="_blank" rel="noopener">星际云网络加速-注册即送50G|免费流量</a></h1><h1 id="自由云网络加速-4K机场"><a href="#自由云网络加速-4K机场" class="headerlink" title="自由云网络加速|4K机场"></a><a href="https://www.freecloud.pw" target="_blank" rel="noopener">自由云网络加速|4K机场</a></h1><h1 id="NETFLIX奈飞合租车"><a href="#NETFLIX奈飞合租车" class="headerlink" title="NETFLIX奈飞合租车"></a><a href="https://naifei.pro/m/?rid=23xrl" target="_blank" rel="noopener">NETFLIX奈飞合租车</a></h1>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    SiemensTutorials
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://siemenstutorials.github.io/posts/46d8ebb9.html" title="2020最新V2Fly/V2ray web管理面板搭建">https://siemenstutorials.github.io/posts/46d8ebb9.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/27024d5e.html" rel="next" title="V2Fly/V2ray Docker版官方搭建教程">
+                <i class="fa fa-chevron-left"></i> V2Fly/V2ray Docker版官方搭建教程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/c6a6c322.html" rel="prev" title="V2fly|V2ray+CDN+Nginx+wS+TLS+宝塔共存节点构建">
+                V2fly|V2ray+CDN+Nginx+wS+TLS+宝塔共存节点构建 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/header.jpg"
+                alt="SiemensTutorials" />
+            
+              <p class="site-author-name" itemprop="name">SiemensTutorials</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+            
+                <a href="/archives">
+           
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://t.me/siemenstutorials" target="_blank" title="Telegram">
+                      
+                        <i class="fa fa-fw fa-telegram"></i>Telegram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.youtube.com/SiemensTutorials" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.xjycloud.xyz/" title="星际云网络加速" target="_blank">星际云网络加速</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.youtube.com/SiemensTutorials" title="YouTube" target="_blank">YouTube</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2020最新V2Fly-V2ray-web管理面板搭建"><span class="nav-number">1.</span> <span class="nav-text">2020最新V2Fly&#x2F;V2ray web管理面板搭建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#视频搭建教程"><span class="nav-number">2.</span> <span class="nav-text">视频搭建教程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看admin日志"><span class="nav-number">3.</span> <span class="nav-text">查看admin日志</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看admin的错误日志-version-gt-v3-1-5"><span class="nav-number">4.</span> <span class="nav-text">查看admin的错误日志(version &gt; v3.1.5)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看-v2ray-proxy日志"><span class="nav-number">5.</span> <span class="nav-text">查看 v2ray-proxy日志</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看v2ray-proxy的错误日志-version-gt-v3-1-5"><span class="nav-number">6.</span> <span class="nav-text">查看v2ray-proxy的错误日志(version &gt; v3.1.5)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ctrl-c-退出查看日志"><span class="nav-number">7.</span> <span class="nav-text">ctrl+c 退出查看日志</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用宝塔面板搭建"><span class="nav-number">8.</span> <span class="nav-text">用宝塔面板搭建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TG交流群"><span class="nav-number">9.</span> <span class="nav-text">TG交流群</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SiemensTutorials"><span class="nav-number">10.</span> <span class="nav-text">SiemensTutorials</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#星际云网络加速-注册即送50G-免费流量"><span class="nav-number">11.</span> <span class="nav-text">星际云网络加速-注册即送50G|免费流量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自由云网络加速-4K机场"><span class="nav-number">12.</span> <span class="nav-text">自由云网络加速|4K机场</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NETFLIX奈飞合租车"><span class="nav-number">13.</span> <span class="nav-text">NETFLIX奈飞合租车</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy;<span itemprop="copyrightYear">2022</span>
+ 
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank"  href="https://www.youtube.com/SiemensTutorials"> | SiemensTutorials</a> 
+</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'siemenstutorials',
+            repo: 'Blog_Dis',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '2cfa1ff85cd01802909c59954c820d065e78be0c',
+            
+                client_id: 'Iv1.24a99207d34a24d0'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
